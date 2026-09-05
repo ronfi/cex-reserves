@@ -2,7 +2,7 @@
 
 > Each table heading carries its own read time. Every number can be re-read with `tools/cex_reserves_verify.py` in this repository; the output snapshot is `data/cex_reserves_2026-09-04.json`.
 > Source discipline: **direct on-chain read > official PoR page > public aggregator > media**. The first three go into tables; media is used only as a lead, marked ⚠, and never tabulated.
-> This page makes no verdict ("will it fail"); it gives verifiable facts and the gaps between them.
+> This page makes no judgement about any exchange's solvency; it presents verifiable facts and the differences between sources.
 
 ## 0. Conclusions
 
