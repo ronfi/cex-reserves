@@ -66,8 +66,8 @@ Everything here is a compilation and cross-check of public data. It is **not inv
 
 ## 打赏 / Support
 
-如果这份核查对你有用,打赏地址见 [DONATE.md](DONATE.md)(以 main 分支该文件为唯一权威源)。
-If this check is useful to you, donation addresses are in [DONATE.md](DONATE.md) (the file on the main branch is the only authoritative source).
+如果这些核对帮您省下了自己动手核一遍的时间,欢迎支持本项目持续维护;地址只以 main 分支的 [DONATE.md](DONATE.md) 为准,其他地方看到的地址请勿使用。
+If these checks saved you the work of verifying it yourself, support for the project's continued maintenance is welcome; use only the addresses in [DONATE.md](DONATE.md) on the main branch, and no address seen anywhere else.
 
 ## License
 

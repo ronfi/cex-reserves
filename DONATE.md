@@ -1,6 +1,7 @@
 # 打赏 / Support
 
-> **权威源声明**:打赏地址以本仓库 `main` 分支的本文件为唯一权威版本。任何其他渠道出现的不同地址均为假冒;本文件的全部改动可在 git 提交历史中审计。
+> **权威源声明 / Authoritative source**:打赏地址以本仓库 `main` 分支的本文件为唯一权威版本;请只使用本文件中的地址,在其他任何地方看到的地址,无论看起来多像,都不要使用。本文件的全部改动可在 git 提交历史中审计。
+> The addresses in this file on the `main` branch are the only authoritative ones. Use only the addresses here; do not use any address you see anywhere else, however similar it looks. Every change to this file is auditable in the git history.
 
 | 网络 | 地址 | 说明 |
 |---|---|---|
@@ -34,6 +35,6 @@
 
 > **透明行(发布时链上直查,2026-09-03)**:五地址当前余额合计 ≈ **$0.00**(暂无余额);BTC 链历史累计收到 0 BTC。
 
-这个项目会长期免费、公开地维护下去。如果这些刻度曾帮您在喧嚣的行情里多想了一步,那就是它存在的意义。
+这个项目会长期免费、公开地维护下去。如果这些核对帮您省下了自己动手核一遍的时间,那就是它存在的意义。您的支持是本项目持续维护的动力,无论金额大小,都衷心感谢。
 
-您的打赏是我继续维护它的动力——无论金额大小,都衷心感谢并祝福～
+This project will stay free and public for the long run. If these checks ever saved you the work of verifying it yourself, that is what it is for. Your support keeps it maintained; any amount is sincerely appreciated.
