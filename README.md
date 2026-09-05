@@ -23,6 +23,7 @@ python3 tools/cex_reserves_verify.py --chain all            # 三链全量(约 4
 python3 tools/cex_reserves_verify.py --chain eth --ex htx   # 只读一家
 python3 tools/cex_reserves_verify.py --refresh-addresses    # 重拉 Binance PoR / lockinfo 与 Bitstamp 钱包清单
 python3 tools/por_fetch.py                                  # 各所官方 PoR 自报数(OKX/Bitget/KuCoin/Gate/MEXC 接口,HTX GitHub CSV)→ data/por_<date>.json
+python3 tools/affiliated_liquidity.py                       # 关联币 24h 成交与 ±2% 深度(报告 §8)/ affiliated-token volume and depth (report §8)
 python3 tools/regen_tables.py data/cex_reserves_<date>.json # 重生成中英两稿的 §3.1–3.3 三表
 python3 tools/por_trx_delta.py --since 2026-08-01           # Poloniex TRX 地址逐址:快照 vs 链上(报告 §7.1)
 python3 tools/beacon_validators.py <提款地址…>               # 按提款地址数信标链验证者与余额(报告 §3.2)
@@ -52,6 +53,7 @@ python3 tools/cex_reserves_verify.py --chain all            # all three chains (
 python3 tools/cex_reserves_verify.py --chain eth --ex htx   # one exchange only
 python3 tools/cex_reserves_verify.py --refresh-addresses    # re-pull Binance PoR / lockinfo and Bitstamp wallet lists
 python3 tools/por_fetch.py                                  # official PoR self-reported figures (OKX/Bitget/KuCoin/Gate/MEXC APIs, HTX GitHub CSV) → data/por_<date>.json
+python3 tools/affiliated_liquidity.py                       # 关联币 24h 成交与 ±2% 深度(报告 §8)/ affiliated-token volume and depth (report §8)
 python3 tools/regen_tables.py data/cex_reserves_<date>.json # regenerate §3.1–3.3 tables in both language editions
 python3 tools/por_trx_delta.py --since 2026-08-01           # Poloniex TRX addresses one by one: snapshot vs chain (report §7.1)
 python3 tools/beacon_validators.py <withdrawal addresses…>  # Beacon-chain validators and balances by withdrawal address (report §3.2)
