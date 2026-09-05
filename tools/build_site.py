@@ -10,7 +10,7 @@ DATA_AS_OF = '2026-09-04 22:30 UTC'   # 数据截至(每周刷新时改这里)
 LANG = {
     'zh': dict(
         src='REPORT.md', out='docs/index.html', html_lang='zh-CN', url='https://ronfi.github.io/cex-reserves/',
-        title='CEX Reserves · 头部交易所储备核查',
+        title='头部交易所储备核查 · CEX Reserves(链上直读 + 官方 PoR 对照)', og_title='头部交易所储备核查 · CEX Reserves', og_image='https://ronfi.github.io/cex-reserves/og.png', keywords='交易所储备核查, 储备证明, Proof of Reserves, PoR, 链上直读, 交易所储备, Binance, OKX, HTX, Bitfinex, DefiLlama, 加密货币交易所, 储备率',
         desc='头部加密交易所储备的链上核查:公布地址的 BTC/ETH/Tron 直读、官方 PoR 页面对照、聚合器口径规则;各所异常按同一读法标出并附核验方法。全部数字可用仓库脚本复现。',
         og='读链,不读公告。前 20 名交易所的链上储备核查,每个数字可复现。',
         update='每周一 00:00 UTC(北京时间 08:00)更新', asof='数据截至', repro='复现', source='源码与数据',
@@ -23,7 +23,7 @@ LANG = {
     ),
     'en': dict(
         src='REPORT.en.md', out='docs/en/index.html', html_lang='en', url='https://ronfi.github.io/cex-reserves/en/',
-        title='CEX Reserves · Top Exchange Reserves Check',
+        title='Top Exchange Reserves Check · CEX Reserves (on-chain reads + official PoR)', og_title='Top Exchange Reserves Check · CEX Reserves', og_image='https://ronfi.github.io/cex-reserves/og-en.png', keywords='exchange reserves, proof of reserves, PoR, on-chain verification, crypto exchange reserves, Binance, OKX, HTX, Bitfinex, DefiLlama, reserve ratio',
         desc='On-chain verification of top crypto exchange reserves: direct BTC/ETH/Tron reads of published addresses, official PoR pages side by side, aggregator caliber rules; anomalies flagged by one uniform reading with verification methods. Every number reproducible with the repository scripts.',
         og='Read the chain, not the announcement. On-chain reserve check of the top 20 exchanges, every number reproducible.',
         update='Updated every Monday 00:00 UTC', asof='Data as of', repro='Reproduce', source='Source and data',
@@ -125,11 +125,22 @@ def build(lang):
                     f'<p class="note">{T["support_note"]}</p><div class="donate">{donate_html}</div></div></details>')
     legend = ''.join(f'<div>{k}{v}</div>' for k, v in T['legend'])
     built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
-    other = LANG['en' if lang == 'zh' else 'zh']
+    other = LANG['en' if lang == 'zh' else 'zh']; archived = False
+    import json as _json
+    jsonld = _json.dumps({'@context': 'https://schema.org', '@graph': [
+        {'@type': 'WebSite', 'name': 'CEX Reserves', 'url': LANG['zh']['url'], 'inLanguage': ['zh-CN', 'en']},
+        {'@type': 'Dataset', 'name': T['og_title'], 'description': T['desc'], 'url': T['url'], 'inLanguage': T['html_lang'], 'license': 'https://creativecommons.org/licenses/by-nc-nd/4.0/', 'isAccessibleForFree': True,
+         'dateModified': DATA_AS_OF[:10], 'keywords': [k.strip() for k in T['keywords'].split(',')], 'creator': {'@type': 'Organization', 'name': 'CEX Reserves', 'url': 'https://github.com/ronfi/cex-reserves'},
+         'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'application/json', 'contentUrl': 'https://github.com/ronfi/cex-reserves/tree/main/data'}],
+         'sameAs': 'https://github.com/ronfi/cex-reserves'}]}, ensure_ascii=False)
     html = f"""<!DOCTYPE html><html lang="{T['html_lang']}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{H.escape(T['title'])}</title>
 <meta name="description" content="{H.escape(T['desc'])}">
-<link rel="canonical" href="{T['url']}"><link rel="alternate" hreflang="{T['html_lang']}" href="{T['url']}"><link rel="alternate" hreflang="{other['html_lang']}" href="{other['url']}"><meta property="og:type" content="website"><meta property="og:title" content="{H.escape(T['title'])}"><meta property="og:description" content="{H.escape(T['og'])}"><meta property="og:url" content="{T['url']}">
+<meta name="robots" content="{'noindex,follow' if archived else 'index,follow,max-image-preview:large'}"><meta name="keywords" content="{H.escape(T['keywords'])}">
+<link rel="canonical" href="{T['url']}"><link rel="alternate" hreflang="{T['html_lang']}" href="{T['url']}"><link rel="alternate" hreflang="{other['html_lang']}" href="{other['url']}"><link rel="alternate" hreflang="x-default" href="{LANG['zh']['url']}"><link rel="alternate" type="application/rss+xml" title="CEX Reserves versions" href="https://ronfi.github.io/cex-reserves/feed.xml">
+<meta property="og:type" content="article"><meta property="og:site_name" content="CEX Reserves"><meta property="og:locale" content="{'zh_CN' if lang == 'zh' else 'en_US'}"><meta property="og:title" content="{H.escape(T['og_title'])}"><meta property="og:description" content="{H.escape(T['og'])}"><meta property="og:url" content="{T['url']}"><meta property="og:image" content="{T['og_image']}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:modified_time" content="{DATA_AS_OF[:10]}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{H.escape(T['og_title'])}"><meta name="twitter:description" content="{H.escape(T['og'])}"><meta name="twitter:image" content="{T['og_image']}">
+<script type="application/ld+json">{jsonld}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{FONTS[lang]}&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>{CSS}</style></head><body>
@@ -148,6 +159,7 @@ def build(lang):
         d = DATA_AS_OF[:10]; arch = ROOT / 'docs' / 'archive'; arch.mkdir(exist_ok=True)
         note = f'<div class="archnote">{T["archnote"].format(d=d)} <a href="{LANG["zh"]["url"] if lang == "zh" else LANG["en"]["url"]}">{LANG["zh"]["url"] if lang == "zh" else LANG["en"]["url"]}</a> · <a href="./">{T["archive"]}</a></div>'
         a = html.replace('href="en/"', f'href="{LANG["en"]["url"]}"').replace('href="../"', f'href="{LANG["zh"]["url"]}"').replace(f'href="{T["archive_href"]}"', 'href="./"')
+        a = a.replace('<meta name="robots" content="index,follow,max-image-preview:large">', '<meta name="robots" content="noindex,follow">', 1)
         a = a.replace('<body>', '<body>' + note, 1).replace('</style>', '.archnote{background:var(--mark);color:var(--ink);padding:10px 24px;font-size:13px}</style>', 1)
         (arch / (f'{d}.html' if lang == 'zh' else f'{d}.en.html')).write_text(a, encoding='utf8')
     print(lang, 'built', len(html), 'bytes; toc', len(toc), '; tables', html.count('<table'), '; wrapped', html.count('<div class="tbl"><table'), '; ok', html.count('class="ok"'), '; red', html.count('mark class="r"'))
@@ -163,5 +175,12 @@ if '--archive' in sys.argv:  # 存档目录页(中英同页)
 <div class="arch"><h2>历次版本存档 / Version archive</h2><p>不回改的可信度 = 旧版本的可访问性。每周更新时存一份当时的页面,数据与文字停留在当时。<br>Credibility without retroactive edits = old versions stay reachable. A copy of the page is archived at each weekly update, with the data and text as of then.</p><ul>{items}</ul><p><a href="{LANG['zh']['url']}">← 最新版 / Latest</a></p></div></body></html>""", encoding='utf8')
     print('archive', dates)
 (ROOT / 'docs' / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: https://ronfi.github.io/cex-reserves/sitemap.xml\n')
-(ROOT / 'docs' / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-    + ''.join(f'<url><loc>{LANG[l]["url"]}</loc></url>' for l in LANG) + '</urlset>')
+_lm = DATA_AS_OF[:10]
+(ROOT / 'docs' / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+    + ''.join(f'<url><loc>{LANG[l]["url"]}</loc><lastmod>{_lm}</lastmod><changefreq>weekly</changefreq><priority>{"1.0" if l == "zh" else "0.9"}</priority>'
+              + ''.join(f'<xhtml:link rel="alternate" hreflang="{LANG[m]["html_lang"]}" href="{LANG[m]["url"]}"/>' for m in LANG) + '</url>' for l in LANG)
+    + '<url><loc>https://ronfi.github.io/cex-reserves/archive/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url></urlset>')
+# RSS:每期存档一条
+_arch = sorted({f.name[:10] for f in (ROOT / 'docs' / 'archive').glob('????-??-??.html')}, reverse=True) if (ROOT / 'docs' / 'archive').exists() else []
+_items = ''.join(f'<item><title>CEX Reserves · 数据截至 {d}</title><link>https://ronfi.github.io/cex-reserves/archive/{d}.html</link><guid>https://ronfi.github.io/cex-reserves/archive/{d}.html</guid><pubDate>{datetime.datetime.strptime(d, "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000")}</pubDate><description>头部交易所储备核查,数据截至 {d};最新版 https://ronfi.github.io/cex-reserves/</description></item>' for d in _arch)
+(ROOT / 'docs' / 'feed.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>CEX Reserves · 头部交易所储备核查</title><link>https://ronfi.github.io/cex-reserves/</link><description>每周更新的头部交易所储备链上核查;每期存档一条。</description><language>zh-CN</language>{_items}</channel></rss>', encoding='utf8')
