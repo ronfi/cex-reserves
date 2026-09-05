@@ -464,7 +464,7 @@ footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid va
 <li><strong>十一所全部对上</strong>(差 ≤1.2%),聚合器的 BTC 数可直接引用。</li>
 <li>HTX 的行是DefiLlama-Adapters清单 11 址;其官方 PoR 清单为 7 址,链上 8,072 枚(§6.2)。</li>
 <li>Gate 清单里曾混入 3 个以 <code>3P</code> 开头的字符串,两个 BTC 浏览器均 404;解码后它们不是比特币地址(35 字符、校验失败),而是 DefiLlama-Adapters <code>waves</code> 段里的 Waves 链地址(Waves 主网地址恰以 3P 开头),本报告抽取时按前缀误归为 BTC。已剔除,并在脚本里加入地址合法性校验。</li>
-<li>末两列:各所官方 PoR 页面自报的 BTC(用户负债 / 交易所钱包,含托管;<code>tools/por_fetch.py</code> 抓取,Binance、Bybit 为人工登记),以及直读相对自报钱包的差额(百分比)。差额超过 5% 标红并注明原因:差来自快照日期、地址集(DefiLlama-Adapters地址清单不是页面全部钱包)与口径(HTX 把 BTC-TRC20 与托管计入钱包),不是储备异常的判据。OKX(134,399 / 148,552,08-11)与 KuCoin(7,441 / 7,985,08-31)有自报数但未公布 BTC 地址,不在表内。Bitfinex、Gemini、Bitstamp 没有默克尔 PoR 页面,不自报逐币数;Deribit 自 2026-09-01 起停止发布 PoR(客户资产九成迁至 Coinbase 托管);Crypto.com 有页面但数字由脚本渲染,本报告尚未取快照。</li>
+<li>末两列:各所官方 PoR 页面自报的 BTC(用户负债 / 交易所钱包,含托管;<code>tools/por_fetch.py</code> 抓取,Binance、Bybit 为人工登记),以及直读相对自报钱包的差额(百分比)。差额超过 5% 标红并注明原因:差来自快照日期、地址集(DefiLlama-Adapters地址清单不是页面全部钱包)与口径(HTX 把 BTC-TRC20 与托管计入钱包),不作为储备核查的判据。OKX(134,399 / 148,552,08-11)与 KuCoin(7,441 / 7,985,08-31)有自报数但未公布 BTC 地址,不在表内。Bitfinex、Gemini、Bitstamp 没有默克尔 PoR 页面,不自报逐币数;Deribit 自 2026-09-01 起停止发布 PoR(客户资产九成迁至 Coinbase 托管);Crypto.com 有页面但数字由脚本渲染,本报告尚未取快照。</li>
 </ul>
 <h3 id="3-2-eth-链-blockscout-全资产直读-vs-聚合器-聚合器口径-列剔-usdd-hbtc-aethusdt-覆盖-95-105-绿-90-或-110-红">3.2 ETH 链(Blockscout 全资产直读 vs 聚合器;"聚合器口径"列剔 USDD/HBTC/aEthUSDT;覆盖 95–105% 绿、&lt;90% 或 &gt;110% 红)</h3>
 <div class="tbl"><table>
