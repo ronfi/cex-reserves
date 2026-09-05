@@ -32,7 +32,7 @@ python3 tools/build_site.py --archive                       # 生成中英页面
 
 ### 工程笔记
 
-- [notes/aggregator-cache-fallback.md](notes/aggregator-cache-fallback.md)(英文):聚合器"出错回退缓存"如何把一次 400 变成数月的 9.6 倍错值,以及为什么天真的修法更糟(DefiLlama-Adapters PR #20878 复盘)。
+- [notes/aggregator-cache-fallback.md](notes/aggregator-cache-fallback.md)(英文):聚合器"出错回退缓存"如何让一次 400 变成 9.6 倍的错值,以及为什么天真的修法更糟(DefiLlama-Adapters PR #20878 复盘)。
 
 ### 免责声明
 
@@ -66,7 +66,7 @@ python3 tools/build_site.py --archive                       # build both pages a
 
 ### Engineering notes
 
-- [notes/aggregator-cache-fallback.md](notes/aggregator-cache-fallback.md): how an aggregator's fall-back-to-cache-on-error turned one HTTP 400 into months of 9.6x-wrong data, and why the naive fix is worse (post-mortem of DefiLlama-Adapters PR #20878).
+- [notes/aggregator-cache-fallback.md](notes/aggregator-cache-fallback.md): how an aggregator's fall-back-to-cache-on-error turned one HTTP 400 into 9.6x-wrong data, and why the naive fix is worse (post-mortem of DefiLlama-Adapters PR #20878).
 
 ### Disclaimer
 

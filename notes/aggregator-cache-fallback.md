@@ -1,4 +1,4 @@
-# A cache fallback, an API cap, and months of 9.6x-wrong data
+# Falling back to cache on error made an aggregator report 9.6x-wrong data
 
 A data aggregator I was cross-checking reported that an exchange held **4,180 BTC**. The addresses that exchange publishes held about **40,000**. The gap was not fraud, a definitional dispute, or a missing address list. It was three ordinary pieces of code doing exactly what they were written to do.
 
@@ -33,7 +33,7 @@ So the fetch threw on page 1. Every time.
 
 That is the whole bug. Not the 400 — the 400 is correct behaviour by the upstream API, and an adapter that dies loudly on a 400 gets fixed the same week. The problem is that the failure was converted into a *success* carrying stale data, and the only trace was one `sdk.log` line in a system that produces a great many log lines.
 
-The adapter kept working. It kept producing a number. The number was from an address list that had stopped being updated.
+The adapter kept working. It kept producing a number. The number came from whatever address list had last been cached; how old that was, nothing recorded.
 
 ## Why the obvious fix makes it worse
 
@@ -52,10 +52,12 @@ Replaying the loop against the live endpoint:
 | variant | pages read | bitcoin addresses collected |
 |---|---|---|
 | current code (`perPage=1000`) | 0 — throws on page 1 | falls back to stale cache |
-| page size fixed only | 3 | **0** |
+| page size fixed only | 3–16 (data-dependent) | **0** |
 | page size + empty-page stop | 37 | **507** |
 
 Replays of the "page size fixed only" variant do not stop at the same page every time — 3 pages in one run, 16 in another — because the stop condition depends on page contents that are not stable across calls. The bitcoin count was 0 in every replay: the stop point is data-dependent, the undercount is not.
+
+One limit on what this shows: it is a single-day observation. On the day of the check the adapter could not fetch, and the figure it reported was 9.6x below what the published addresses held. How long that had been true, and whether earlier low readings had the same cause, is not established here.
 
 The minimal fix turns a loud failure into a quiet undercount that reports zero addresses for an entire chain without erroring. It is *strictly worse* than the bug it replaces, because the bug at least left a stale value that looked implausible enough for someone to check.
 
@@ -65,7 +67,7 @@ The actual patch is three lines: request 100, stop when a page comes back with n
 
 ## What I take from it
 
-**"Fall back to cache on error" is a silent-corruption generator unless the staleness is visible downstream.** The pattern is defensible — you would rather serve yesterday's data than nothing — but it needs an age or a freshness flag that reaches whoever consumes the number. Here, nothing distinguished "read from the live endpoint" from "read from a cache that last succeeded months ago". A consumer could not tell, and did not.
+**"Fall back to cache on error" is a silent-corruption generator unless the staleness is visible downstream.** The pattern is defensible — you would rather serve yesterday's data than nothing — but it needs an age or a freshness flag that reaches whoever consumes the number. Here, nothing distinguished "read from the live endpoint" from "read from a cache whose last success is of unknown age". A consumer could not tell, and did not.
 
 **Inferring the end of a paginated collection from data equality is a bug waiting for the data to change.** The endpoint gives no total, no cursor and no explicit terminator, so the loop guessed. The guess was "the same last element twice means we're done." That is only true for a stable, deterministically ordered collection, and nothing promised either.
 
