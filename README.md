@@ -12,7 +12,7 @@
 
 - 报告只使用三类可核验数据:**链上直读**(BTC / ETH / Tron 公共节点与浏览器 API)、**交易所官方储备证明(PoR)页面与地址清单**、**公开聚合器(DefiLlama)**。媒体报道只作线索,标 ⚠,不进入任何表格。
 - 每一张表都能用仓库脚本重新生成;地址清单在 `tools/cex_addresses.json`,本版输出在 `data/`。
-- 报告对每家交易所用同一套读法;凡本方认定的异常,不论哪家,都用红色标出并附核验方法。
+- 报告对每家交易所用同一套读法;与自报口径的差异一律标出并附核验方法,不论哪家。红色只用于表头写明阈值的表(如关联币占储备 >30%),其余用加粗强调。
 - 每周一 00:00 UTC 更新。
 
 ### 复现
@@ -30,6 +30,10 @@ python3 tools/beacon_validators.py <提款地址…>               # 按提款�
 python3 tools/build_site.py --archive                       # 生成中英页面并把本期存入 docs/archive/(不带 --archive 只重建不存档)
 ```
 
+### 工程笔记
+
+- [notes/aggregator-cache-fallback.md](notes/aggregator-cache-fallback.md)(英文):聚合器"出错回退缓存"如何把一次 400 变成数月的 9.6 倍错值,以及为什么天真的修法更糟(DefiLlama-Adapters PR #20878 复盘)。
+
 ### 免责声明
 
 一切内容均为公开数据的整理与核对,**不构成投资建议**,不构成对任何机构偿付能力的断言。交易所负债端(用户资产)只有交易所自己知道;本报告能核的是"公布的地址上有没有那些币"。
@@ -42,7 +46,7 @@ This repository maintains a public **reserves check of the top crypto exchanges*
 
 - The report uses only three kinds of verifiable data: **direct on-chain reads** (BTC / ETH / Tron public nodes and explorer APIs), **each exchange's official proof-of-reserves (PoR) page and address list**, and **the public aggregator DefiLlama**. Media reports are used only as leads, marked ⚠, and never enter a table.
 - Every table can be regenerated with the scripts here; address lists are in `tools/cex_addresses.json`, this edition's output in `data/`.
-- Every exchange is read the same way; whatever this report identifies as an anomaly is marked red, with its verification method, regardless of which exchange it is.
+- Every exchange is read the same way; every discrepancy with self-reported figures is listed with its verification method, whichever exchange it is. Red is used only in tables whose heading states a threshold (e.g. affiliated tokens >30% of reserves); everything else is bold.
 - Updated every Monday 00:00 UTC.
 
 ### Reproduce
@@ -59,6 +63,10 @@ python3 tools/por_trx_delta.py --since 2026-08-01           # Poloniex TRX addre
 python3 tools/beacon_validators.py <withdrawal addresses…>  # Beacon-chain validators and balances by withdrawal address (report §3.2)
 python3 tools/build_site.py --archive                       # build both pages and archive this edition under docs/archive/ (omit --archive to rebuild without archiving)
 ```
+
+### Engineering notes
+
+- [notes/aggregator-cache-fallback.md](notes/aggregator-cache-fallback.md): how an aggregator's fall-back-to-cache-on-error turned one HTTP 400 into months of 9.6x-wrong data, and why the naive fix is worse (post-mortem of DefiLlama-Adapters PR #20878).
 
 ### Disclaimer
 
