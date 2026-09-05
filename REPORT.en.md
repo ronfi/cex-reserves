@@ -138,7 +138,7 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 ### 4.1 What FTX's structural preconditions were (⚠ public reporting, used only as the source of the criteria)
 
-FTX's balance-sheet structure before its November 2022 collapse is where this chapter's criteria come from. Three points:
+FTX's balance-sheet structure before its November 2022 collapse is where this chapter's criteria come from. Note: FTX the exchange never published its own reserve composition; the criteria here come from the balance sheet of its affiliated market maker Alameda, which is not the same basis as the exchange reserve shares in §2 and cannot be compared with them directly. Three points:
 
 - **Its own token was the bulk of assets**: on 2022-11-02 CoinDesk published the balance sheet of Alameda, FTX's affiliated market maker: of $14.6B in assets, $3.66B was FTX's platform token FTT and another $2.16B was "FTT collateral"; FTT-related items exceeded a third of assets (<https://www.coindesk.com/business/2022/11/02/divisions-in-sam-bankman-frieds-crypto-empire-blur-on-his-trading-titan-alamedas-balance-sheet>).
 - **Its own token had no order book**: most of the FTT float sat with FTX and Alameda themselves; market cap was list price times quantity, not money that could be realised. On 11-06 Binance announced it would sell its FTT, and FTT lost 80% over the next three days.

@@ -138,7 +138,7 @@
 
 ### 4.1 FTX 的结构性前提是什么(⚠ 公开报道级,仅作判据来源)
 
-FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三条:
+FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。注意:FTX 交易所自身的储备构成从未公布,本节判据来自其关联做市商 Alameda 的资产负债表,与 §2 的交易所储备占比不是同一口径,不能直接互比。要点三条:
 
 - **自家币是资产主体**:CoinDesk 2022-11-02 披露 FTX 关联做市商 Alameda 的资产负债表,资产 $146 亿中 $36.6 亿是 FTX 平台币 FTT,另有 $21.6 亿 "FTT 抵押品",FTT 相关项超过资产的三分之一(<https://www.coindesk.com/business/2022/11/02/divisions-in-sam-bankman-frieds-crypto-empire-blur-on-his-trading-titan-alamedas-balance-sheet>)。
 - **自家币没有盘口**:FTT 流通盘大部分在 FTX 与 Alameda 自己手里,市值是挂牌价乘以数量,不是能卖出的钱;11-06 Binance 宣布出售所持 FTT,随后三天 FTT 跌去八成。
