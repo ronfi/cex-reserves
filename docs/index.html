@@ -1,0 +1,1527 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CEX Reserves · 头部交易所储备核查</title>
+<meta name="description" content="头部加密交易所储备的链上核查:公布地址的 BTC/ETH/Tron 直读、官方 PoR 页面对照、聚合器口径规则;各所异常按同一读法标出并附核验方法。全部数字可用仓库脚本复现。">
+<link rel="canonical" href="https://ronfi.github.io/cex-reserves/"><link rel="alternate" hreflang="zh-CN" href="https://ronfi.github.io/cex-reserves/"><link rel="alternate" hreflang="en" href="https://ronfi.github.io/cex-reserves/en/"><meta property="og:type" content="website"><meta property="og:title" content="CEX Reserves · 头部交易所储备核查"><meta property="og:description" content="读链,不读公告。前 20 名交易所的链上储备核查,每个数字可复现。"><meta property="og:url" content="https://ronfi.github.io/cex-reserves/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&family=Noto+Sans+SC:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F5F7F4;--paper2:#EDF1EC;--ink:#14201B;--ink2:#5E6B66;--rule:#D6DDD8;--stamp:#1D4E89;--red:#B42318;--redbg:#FBE9E7;--green:#1E7F4F;--greenbg:#E6F4EC;--code:#E9EEE9;--mark:#FFF3C4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#121715;--paper2:#181F1C;--ink:#E7ECE8;--ink2:#9FAAA4;--rule:#2B3531;--stamp:#8DB4E2;--red:#FF8E85;--redbg:#3D1A17;--green:#7BD3A3;--greenbg:#173324;--code:#1E2623;--mark:#4A3F12}}
+:root[data-theme="dark"]{--paper:#121715;--paper2:#181F1C;--ink:#E7ECE8;--ink2:#9FAAA4;--rule:#2B3531;--stamp:#8DB4E2;--red:#FF8E85;--redbg:#3D1A17;--green:#7BD3A3;--greenbg:#173324;--code:#1E2623;--mark:#4A3F12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:15.5px/1.72 "Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+html[lang=en] body{font-family:"Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--stamp);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--stamp) 35%,transparent)}a:hover{border-bottom-color:var(--stamp)}a:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
+.mast{border-bottom:1px solid var(--rule);background:var(--paper2)}
+.mast-in{max-width:1180px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}.mast .meta{flex-basis:100%}
+.mast h1{font:600 26px/1.25 "Noto Serif SC","Songti SC","SimSun",serif;margin:0;letter-spacing:.2px;text-wrap:balance}
+html[lang=en] .mast h1,html[lang=en] h2{font-family:"Noto Serif",Georgia,"Times New Roman",serif}
+.mast .meta{color:var(--ink2);font-size:13px;display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
+.mast .lang{margin-left:auto;display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--paper);font-size:13px;line-height:1}.mast .lang a,.mast .lang span{padding:7px 12px;border:0;font-weight:600;color:var(--ink2)}.mast .lang a:hover{color:var(--stamp);background:var(--paper2)}.mast .lang .on{background:var(--stamp);color:#fff}
+.mast code{font:12.5px/1.4 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:2px 7px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 70px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+nav.toc{position:sticky;top:18px;align-self:start;font-size:13px;line-height:1.5}
+nav.toc .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}nav.toc li a{display:block;padding:4px 0 4px 12px;color:var(--ink2);border:0;margin-left:-1px;border-left:2px solid transparent}nav.toc li a:hover{color:var(--ink);border-left-color:var(--stamp)}
+.legend{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);color:var(--ink2);font-size:12.5px;display:grid;gap:6px}
+.legend span{display:inline-block;padding:0 6px;border-radius:3px;margin-right:6px}
+main{min-width:0}
+main>blockquote:first-child{margin:0 0 26px;padding:14px 18px;border-left:3px solid var(--stamp);background:var(--paper2);color:var(--ink2);font-size:14px}
+main>blockquote:first-child p{margin:.35em 0}
+h2{font:600 21px/1.35 "Noto Serif SC","Songti SC","SimSun",serif;margin:2.2em 0 .7em;padding-top:.6em;border-top:1px solid var(--rule);text-wrap:balance;scroll-margin-top:16px}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:.2em}
+h3{font:600 16px/1.4 "Noto Sans SC",sans-serif;margin:1.6em 0 .5em;color:var(--ink)}html[lang=en] h3{font-family:inherit}
+p,li{max-width:none}main p{margin:.6em 0}ol,ul{padding-left:1.4em}li{margin:.28em 0}li::marker{color:var(--ink2)}
+blockquote{margin:1em 0;padding:10px 16px;border-left:3px solid var(--rule);background:var(--paper2);color:var(--ink)}blockquote p{margin:.35em 0}
+.tbl{overflow-x:auto;margin:.8em 0 1.4em;border:1px solid var(--rule);border-radius:4px;background:var(--paper2)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.5}table.kv th:first-child,table.kv td:first-child{white-space:nowrap;width:1%}
+th{font-weight:600;color:var(--ink2);font-size:12.5px;letter-spacing:.02em;text-align:left;background:var(--paper2);border-bottom:1px solid var(--rule);padding:9px 10px;white-space:nowrap}
+html[lang=en] th{white-space:normal;line-height:1.3;font-size:12px}html[lang=en] table{font-size:13px}html[lang=en] td{padding:7px 8px}html[lang=en] th{padding:8px 8px}
+td{padding:8px 10px;border-top:1px solid var(--rule);vertical-align:top;background:var(--paper)}
+mark.r{background:var(--redbg);color:var(--red);padding:1px 5px;border-radius:3px;font-weight:600}mark.n{background:var(--mark);color:inherit;padding:1px 5px;border-radius:3px;font-weight:600}
+mark{background:var(--mark);color:inherit}
+details.fold{border:1px solid var(--rule);border-radius:6px;background:var(--paper2);margin:40px 0 0}
+details.fold>summary{padding:12px 16px;cursor:pointer;color:var(--stamp);font-weight:600;list-style:none}
+details.fold>summary::before{content:"▸ ";color:var(--ink2)}details.fold[open]>summary::before{content:"▾ "}
+.foldbody{padding:4px 16px 16px}.foldbody p.note{color:var(--ink2);font-size:13px;line-height:1.7;margin:6px 0 12px}
+.donate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.dcard{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:12px;min-width:0}
+.dcard b{font-size:13.5px}.dcard span{color:var(--ink2);font-size:12px;margin-left:8px}
+.dcard code{display:block;margin-top:6px;font-size:11.5px;word-break:break-all;color:var(--stamp);cursor:pointer;background:none;padding:0}
+.dqr summary{color:var(--ink2);font-size:12px;cursor:pointer;margin-top:8px;list-style:none}.dqr summary::before{content:"▸ "}.dqr[open] summary::before{content:"▾ "}
+.dqr svg{display:block;margin-top:8px;width:148px;height:148px}
+.ok{color:var(--green);background:var(--greenbg);padding:0 5px;border-radius:3px;font-weight:600}
+code{font:12.5px/1.5 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:1px 5px;border-radius:3px}
+pre{background:var(--code);padding:12px 14px;border-radius:5px;overflow-x:auto;font-size:12.5px;line-height:1.6}pre code{background:none;padding:0}
+hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid var(--rule);color:var(--ink2);font-size:12.5px;display:flex;flex-wrap:wrap;gap:8px 22px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:18px}nav.toc{position:static}nav.toc ol{display:flex;flex-wrap:wrap;gap:4px 14px;border:0}nav.toc li a{padding:2px 0;border:0}.legend{display:none}}
+</style></head><body>
+<header class="mast"><div class="mast-in"><h1>头部交易所储备核查 · 2026-09</h1><nav class="lang" aria-label="language"><span class="on" lang="zh-CN">中文</span><a href="en/" hreflang="en" lang="en">English</a></nav><div class="meta"><span>数据截至 2026-09-04 22:30 UTC</span><span>每周一 00:00 UTC(北京时间 08:00)更新</span><span>复现 <code>python3 tools/cex_reserves_verify.py --chain all</code></span><span><a href="https://github.com/ronfi/cex-reserves">源码与数据</a></span></div></div></header>
+<div class="wrap">
+<nav class="toc" aria-label="目录"><div class="lbl">目录</div><ol><li><a href="#0-结论">0. 结论</a></li><li><a href="#1-方法-三层数据-只信最底层">1. 方法:三层数据,只信最底层</a></li><li><a href="#2-全景-链上储备前-20-名-defillama-公开地址口径-读取于-2026-09-04-22-30-utc">2. 全景:链上储备前 20 名(DefiLlama 公开地址口径,读取于 2026-09-04 22:30 UTC)</a></li><li><a href="#3-公布地址链上直读对账-本报告主判据">3. 公布地址链上直读对账(本报告主判据)</a></li><li><a href="#4-关联币占储备的比重-ftx-的结构性前提-谁踩着">4. 关联币占储备的比重:FTX 的结构性前提,谁踩着</a></li><li><a href="#5-官方-por-横向-各所页面-2026-08-01-快照">5. 官方 PoR 横向(各所页面,2026-08-01 快照)</a></li><li><a href="#6-异常清单-按所">6. 异常清单(按所)</a></li><li><a href="#7-poloniex-与-btc-trc20-btctron-htx-储备的另一半故事">7. Poloniex 与 BTC-TRC20(BTCTRON):HTX 储备的另一半故事</a></li><li><a href="#8-关联币可变现性-储备中的持仓-盘口深度-2026-09-03-实测">8. 关联币可变现性:储备中的持仓 ÷ 盘口深度(2026-09-03 实测)</a></li><li><a href="#9-复现">9. 复现</a></li><li><a href="#10-监控指标-同一组指标-逐所读">10. 监控指标(同一组指标,逐所读)</a></li></ol>
+<div class="legend"><div><span class="ok">绿</span>与聚合器对上(规则见各表标题)</div><div><mark class="r">红</mark>按同一规则判定的异常,不分交易所</div><div><mark class="n">黄 *</mark>口径差,表下有注</div></div></nav>
+<main>
+<blockquote>
+<p>各表标题另有各自的读取时间。全部数字可用本仓库 <code>tools/cex_reserves_verify.py</code> 重新读取;输出快照在 <code>data/cex_reserves_2026-09-04.json</code>。
+口径纪律:<strong>链上直读 &gt; 官方 PoR 页面 &gt; 公开聚合器 &gt; 媒体</strong>。前三类进表;媒体只作线索,标 ⚠,不进表。
+本页不给结论性判断("会不会倒"),只给可核验的事实与它们之间的差。</p>
+</blockquote>
+<h2 id="0-结论">0. 结论</h2>
+<ol>
+<li>头部交易所里,<strong>只有 HTX 同时踩到四种关联资产</strong>:平台币(HTX 币)、关联稳定币(USDD)、自发包装币(BTC-TRC20、HBTC)、Sun 系生息凭证(stUSDT/jUSDD)。其余各所最多一种(分类与 FTX 三条判据见 §4)。</li>
+<li><mark class="r">HTX 自报储备率"均超 100%",但按链上可核口径:USDT 自有钱包只覆盖负债的 5.8%,BTC 41%,ETH 25.5%;总储备的 19.1% 在不披露身份的"第三方托管",47% 是 TRX 且其中 69% 处于质押。</mark></li>
+<li>Binance / OKX 的储备在 BTC 与 ETH 链上可 99–103% 对上;Bitfinex、Gate、KuCoin、Gemini 亦在 95–101%。<strong>"储备率 &gt;100%"这句话各家都在说,差别在于能不能在链上看见。</strong></li>
+</ol>
+<h2 id="1-方法-三层数据-只信最底层">1. 方法:三层数据,只信最底层</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>是什么</th>
+<th>本报告用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>链上直读</td>
+<td>拿交易所公布的地址,直接读 BTC(mempool.space)、ETH 全部有报价 ERC20(Blockscout)、Tron(trongrid <code>getaccount</code>,含质押)</td>
+<td><strong>主判据</strong>;每地址失败记录在输出 JSON</td>
+</tr>
+<tr>
+<td>官方 PoR 页</td>
+<td>各所储备证明页面(负债、自报储备、托管栏)</td>
+<td>负债端唯一来源;<strong>本报告不能验证负债总额</strong></td>
+</tr>
+<tr>
+<td>聚合器(DefiLlama)</td>
+<td>按其自维护地址集汇总。下文 "DefiLlama-Adapters" 指其开源仓库里每家交易所的抓取脚本与地址清单(<a href="https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/projects">https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/projects</a>)</td>
+<td>全景对比;两条口径规则见下</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>聚合器口径规则</strong></p>
+<ol>
+<li>计平台币,不计交易所自发或关联的稳定币(USDD)、自发包装币(HBTC / BTCTRON)、Aave 存款凭证。</li>
+<li>Binance 行含其为 BSC 锚定代币锁定的抵押储备($12.3B),不是用户资产。</li>
+<li>地址集可与官方 PoR 清单不同(HTX:DefiLlama-Adapters 57 址 vs 官方 11 址)。</li>
+</ol>
+<h2 id="2-全景-链上储备前-20-名-defillama-公开地址口径-读取于-2026-09-04-22-30-utc">2. 全景:链上储备前 20 名(DefiLlama 公开地址口径,读取于 2026-09-04 22:30 UTC)</h2>
+<p>样本规则:<strong>DefiLlama CEX 榜链上资产前 20 名</strong>,不做主观增删;Coinbase / Kraken / Upbit 不公布地址,不在榜内。</p>
+<ul>
+<li>
+<p>自查入口:榜单页 <a href="https://defillama.com/cexs">https://defillama.com/cexs</a>;单所页 <code>https://defillama.com/cex/&lt;slug&gt;</code>(如 <a href="https://defillama.com/cex/htx">https://defillama.com/cex/htx</a>、<a href="https://defillama.com/cex/binance-cex">https://defillama.com/cex/binance-cex</a>);数据接口 <code>https://api.llama.fi/protocol/&lt;slug&gt;</code>(含各链 <code>currentChainTvls</code> 与代币构成);各所DefiLlama-Adapters源码 <a href="https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/projects">https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/projects</a>(地址清单或抓取逻辑在此)。</p>
+</li>
+<li>
+<p>"关联币"= 交易所或其控制人发行的资产;红标规则统一为 <strong>关联币占储备 &gt;30%</strong>。</p>
+</li>
+<li>"1 年净流量"= 储备变动剔除币价效应后的残差(正 = 净流入);币价基准按币安日线:BTC -28.0%、ETH -42.9%、稳定币 0、关联币/其他 −40% 近似。</li>
+<li>⚠ Bitstamp 行为聚合器 09-04 22:30 UTC 读数;本报告直读 39,951 BTC(§3.1)。</li>
+</ul>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>所</th>
+<th>链上储备</th>
+<th>BTC</th>
+<th>ETH</th>
+<th>稳定币</th>
+<th>关联币</th>
+<th>1 年净流量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Binance</td>
+<td>$167.6B</td>
+<td>31%</td>
+<td>11%</td>
+<td>32%</td>
+<td>15%(BNB)</td>
+<td>+13.4%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>OKX</td>
+<td>$30.0B</td>
+<td>38%</td>
+<td>10%</td>
+<td>38%</td>
+<td>4%(OKB)</td>
+<td>+28.6%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bitfinex</td>
+<td>$19.1B</td>
+<td>61%</td>
+<td>3%</td>
+<td>2%</td>
+<td><mark class="r"><strong>32%(LEO)</strong></mark></td>
+<td>+2.3%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bybit</td>
+<td>$16.0B</td>
+<td>29%</td>
+<td>10%</td>
+<td>36%</td>
+<td>4%(MNT)</td>
+<td>-9.7%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Robinhood(经纪商)</td>
+<td>$14.5B</td>
+<td>77%</td>
+<td>21%</td>
+<td>0%</td>
+<td>0%</td>
+<td>-1.0%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Gate</td>
+<td>$6.8B</td>
+<td>22%</td>
+<td>16%</td>
+<td>16%</td>
+<td>14%(GT)</td>
+<td>+12.3%</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Bitget</td>
+<td>$6.0B</td>
+<td>40%</td>
+<td>7%</td>
+<td>18%</td>
+<td>8%(BGB)</td>
+<td>+33.6%</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Gemini</td>
+<td>$5.3B</td>
+<td>85%</td>
+<td>13%</td>
+<td>0%</td>
+<td>0%</td>
+<td>-14.9%</td>
+</tr>
+<tr>
+<td>9</td>
+<td>MEXC</td>
+<td>$5.3B</td>
+<td>18%</td>
+<td>3%</td>
+<td>45%</td>
+<td>11%(MX)</td>
+<td>+51.1%</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Deribit</td>
+<td>$5.1B</td>
+<td>77%</td>
+<td>11%</td>
+<td>11%</td>
+<td>0%</td>
+<td>+28.4%</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Bitstamp</td>
+<td>$4.7B</td>
+<td>69%</td>
+<td>21%</td>
+<td>1%</td>
+<td>0%</td>
+<td>+121.3% ⚠ 非资金流入(见读法)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>HTX</td>
+<td>$3.7B</td>
+<td>18%</td>
+<td>2%</td>
+<td>0%</td>
+<td><mark class="r"><strong>77%(TRX + HT)</strong></mark></td>
+<td>-10.1%</td>
+</tr>
+<tr>
+<td>13</td>
+<td>KuCoin</td>
+<td>$3.2B</td>
+<td>20%</td>
+<td>9%</td>
+<td>30%</td>
+<td>16%(KCS)</td>
+<td>-12.1%</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Crypto.com</td>
+<td>$2.5B</td>
+<td>74%</td>
+<td>7%</td>
+<td>9%</td>
+<td>1%(CRO)</td>
+<td>-7.1%</td>
+</tr>
+<tr>
+<td>15</td>
+<td>HashKey</td>
+<td>$1.7B</td>
+<td>65%</td>
+<td>25%</td>
+<td>5%</td>
+<td>0%</td>
+<td>+30.8%</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Poloniex</td>
+<td>$1.5B</td>
+<td>49%</td>
+<td>39%</td>
+<td>1%</td>
+<td>2%(Sun 系)</td>
+<td>+61.1% ⚠ 非客户流入(见读法与 §7)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Bitkub</td>
+<td>$1.4B</td>
+<td>65%</td>
+<td>14%</td>
+<td>3%</td>
+<td>0%</td>
+<td>+33.6%</td>
+</tr>
+<tr>
+<td>18</td>
+<td>SwissBorg</td>
+<td>$1.0B</td>
+<td>43%</td>
+<td>14%</td>
+<td>6%</td>
+<td>15%(BORG)</td>
+<td>-2.5%</td>
+</tr>
+<tr>
+<td>19</td>
+<td>BitMEX</td>
+<td>$0.8B</td>
+<td>87%</td>
+<td>0%</td>
+<td>13%</td>
+<td>0%</td>
+<td>-60.5%(2026-09-23 自愿关停,清退前提币)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>OSL</td>
+<td>$0.7B</td>
+<td>75%</td>
+<td>19%</td>
+<td>3%</td>
+<td>0%</td>
+<td>+16.1%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li>关联币占储备超过三成的只有两家:<strong>HTX 77%、Bitfinex 32%</strong>。LEO 是 iFinex 2019 年发行的平台币(非稳定币,靠营收回购销毁支撑),与 BNB、OKB、GT、KCS 同类,按同一规则标注。</li>
+<li>Bitfinex 其余 61% 是 BTC。</li>
+<li>Bitstamp +121.3% 不是资金流入:聚合器DefiLlama-Adapters的分页缺陷修复后地址集补全(DefiLlama-Adapters PR #20878,09-04 合并),其 BTC 读数由 4,180 变为 40,167。</li>
+<li>Poloniex +61.1% 不是客户流入:2026-05-30 至 06-04,71,993 stETH、806M sUSDS、1,723 WBTC 经两个 Poloniex 公布地址转入 Poloniex 9(一址占其储备 63%)。stETH 这一路往上可追到 HTX 地址 <code>0x18709E89…</code>(归属核实见 §7);WBTC 1,723 与其中 200M sUSDS 同样追到该地址;另 606M sUSDS 来自一个自行铸造 sUSDS 的未标注枢纽地址,HTX 来源未能在链上确立。逐跳见 §7。</li>
+<li>HTX 其余是 18% BTC(其中一半是 §7.2 的 BTC-TRC20)与 2% ETH;聚合器地址集上没有稳定币。稳定币为 0 的还有 Gemini、Bitstamp、Robinhood,本身不是异常;HTX 官方 PoR 清单自有 USDT 的读数见 §6.2。</li>
+</ul>
+<h2 id="3-公布地址链上直读对账-本报告主判据">3. 公布地址链上直读对账(本报告主判据)</h2>
+<p>§2 是聚合器口径;本节是<strong>本报告自己读链</strong>:拿各所公布的地址(官方 PoR 清单或DefiLlama-Adapters源码,见 <code>tools/cex_addresses.json</code>),逐地址读 BTC / ETH 全资产 / Tron,再与聚合器对账。<strong>表由 <code>tools/make_tables.py</code> 从 <code>data/cex_reserves_2026-09-04.json</code> 生成</strong>,每个地址的读数与失败记录都在该文件里。</p>
+<h3 id="3-1-btc-链-mempool-space-直读-vs-聚合器-差值-1-绿-5-红">3.1 BTC 链(mempool.space 直读 vs 聚合器;差值 ≤1% 绿、&gt;5% 红)</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>公布地址(读到/总)</th>
+<th>直读 BTC</th>
+<th>聚合器 BTC(≈)</th>
+<th>差</th>
+<th>PoR 自报 BTC:用户 / 钱包(快照日)</th>
+<th>直读 − 自报钱包</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>61/61</td>
+<td>640,647</td>
+<td>640,647</td>
+<td><span class="ok">+0.0%</span></td>
+<td>656,644 / 658,293(08-01)</td>
+<td>-2.7%</td>
+</tr>
+<tr>
+<td>Bitfinex</td>
+<td>3/3</td>
+<td>146,853</td>
+<td>146,973</td>
+<td><span class="ok">-0.1%</span></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Bybit</td>
+<td>25/25</td>
+<td>58,141</td>
+<td>58,192</td>
+<td><span class="ok">-0.1%</span></td>
+<td>56,438 / 59,064(07-23)</td>
+<td>-1.6%</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>13/13</td>
+<td>18,704</td>
+<td>19,040</td>
+<td>-1.8%</td>
+<td>22,436 / 27,550(08-19)</td>
+<td><mark class="r">-32.1%</mark>(DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址))</td>
+</tr>
+<tr>
+<td>Bitget</td>
+<td>19/19</td>
+<td>29,579</td>
+<td>29,540</td>
+<td><span class="ok">+0.1%</span></td>
+<td>26,811 / 35,837(08-20)</td>
+<td><mark class="r">-17.5%</mark>(适配器 19 址不是页面全部钱包;页面钱包含 BSC/Lightning 等链 535 枚)</td>
+</tr>
+<tr>
+<td>MEXC</td>
+<td>34/34</td>
+<td>11,732</td>
+<td>11,741</td>
+<td><span class="ok">-0.1%</span></td>
+<td>4,282 / 12,313(08-09)</td>
+<td>-4.7%</td>
+</tr>
+<tr>
+<td>Gemini</td>
+<td>4/4</td>
+<td>56,351</td>
+<td>56,396</td>
+<td><span class="ok">-0.1%</span></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Deribit</td>
+<td>17/17</td>
+<td>49,431</td>
+<td>49,326</td>
+<td><span class="ok">+0.2%</span></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>HTX</td>
+<td>11/11</td>
+<td>8,376</td>
+<td>8,280</td>
+<td>+1.2%</td>
+<td>19,933 / 20,472(08-01)</td>
+<td><mark class="r">-59.1%</mark>(自报钱包含 BTC-TRC20 10,399 + 托管 1,689 + BTC-SOL/jWBTC 175;原生 8,209 vs 直读 +2%)</td>
+</tr>
+<tr>
+<td>Crypto.com</td>
+<td>8/8</td>
+<td>22,722</td>
+<td>22,739</td>
+<td><span class="ok">-0.1%</span></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Bitstamp</td>
+<td>507/507</td>
+<td>39,951</td>
+<td>41,125</td>
+<td>-2.9%</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li><strong>十一所全部对上</strong>(差 ≤1.2%),聚合器的 BTC 数可直接引用。</li>
+<li>HTX 的行是DefiLlama-Adapters清单 11 址;其官方 PoR 清单为 7 址,链上 8,072 枚(§6.2)。</li>
+<li>Gate 清单里曾混入 3 个以 <code>3P</code> 开头的字符串,两个 BTC 浏览器均 404;解码后它们不是比特币地址(35 字符、校验失败),而是 DefiLlama-Adapters <code>waves</code> 段里的 Waves 链地址(Waves 主网地址恰以 3P 开头),本报告抽取时按前缀误归为 BTC。已剔除,并在脚本里加入地址合法性校验。</li>
+<li>末两列:各所官方 PoR 页面自报的 BTC(用户负债 / 交易所钱包,含托管;<code>tools/por_fetch.py</code> 抓取,Binance、Bybit 为人工登记),以及直读相对自报钱包的差额(百分比)。差额超过 5% 标红并注明原因:差来自快照日期、地址集(DefiLlama-Adapters地址清单不是页面全部钱包)与口径(HTX 把 BTC-TRC20 与托管计入钱包),不是储备异常的判据。OKX(134,399 / 148,552,08-11)与 KuCoin(7,441 / 7,985,08-31)有自报数但未公布 BTC 地址,不在表内。Bitfinex、Gemini、Bitstamp 没有默克尔 PoR 页面,不自报逐币数;Deribit 自 2026-09-01 起停止发布 PoR(客户资产九成迁至 Coinbase 托管);Crypto.com 有页面但数字由脚本渲染,本报告尚未取快照。</li>
+</ul>
+<h3 id="3-2-eth-链-blockscout-全资产直读-vs-聚合器-聚合器口径-列剔-usdd-hbtc-aethusdt-覆盖-95-105-绿-90-或-110-红">3.2 ETH 链(Blockscout 全资产直读 vs 聚合器;"聚合器口径"列剔 USDD/HBTC/aEthUSDT;覆盖 95–105% 绿、&lt;90% 或 &gt;110% 红)</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>地址数</th>
+<th>全资产直读</th>
+<th>聚合器口径直读</th>
+<th>聚合器</th>
+<th>覆盖</th>
+<th>失败地址</th>
+<th>PoR 自报 ETH:用户 / 钱包(快照日)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>37 + 锁仓 2</td>
+<td>$68.70B</td>
+<td>$68.69B</td>
+<td>$69.16B</td>
+<td><span class="ok">99%</span></td>
+<td>0</td>
+<td>? / 3,991,221(08-01)</td>
+</tr>
+<tr>
+<td>OKX</td>
+<td>323</td>
+<td>$12.90B</td>
+<td>$12.90B</td>
+<td>$13.52B</td>
+<td><span class="ok">95%</span></td>
+<td>0</td>
+<td>1,725,703 / 1,749,426(Aug 2026)</td>
+</tr>
+<tr>
+<td>Bitfinex</td>
+<td>9</td>
+<td>$7.15B</td>
+<td>$7.15B</td>
+<td>$7.06B</td>
+<td><span class="ok">101%</span></td>
+<td>0</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>91</td>
+<td>$3.03B</td>
+<td>$3.03B</td>
+<td>$3.01B</td>
+<td><span class="ok">101%</span></td>
+<td>0</td>
+<td>375,430 / 458,203(08-19)</td>
+</tr>
+<tr>
+<td>Bitget</td>
+<td>80</td>
+<td>$1.59B</td>
+<td>$1.59B</td>
+<td>$1.65B</td>
+<td><span class="ok">96%</span></td>
+<td>0</td>
+<td>123,688 / 190,090(08-20)</td>
+</tr>
+<tr>
+<td>Gemini</td>
+<td>5</td>
+<td>$0.78B</td>
+<td>$0.78B</td>
+<td>$0.79B</td>
+<td><span class="ok">98%</span></td>
+<td>0</td>
+<td>—</td>
+</tr>
+<tr>
+<td>HTX</td>
+<td>57</td>
+<td>$0.22B</td>
+<td>$0.13B</td>
+<td>$0.12B</td>
+<td>108%</td>
+<td>0</td>
+<td>122,077 / 122,627(08-01)</td>
+</tr>
+<tr>
+<td>KuCoin</td>
+<td>96</td>
+<td>$1.59B</td>
+<td>$1.59B</td>
+<td>$1.60B</td>
+<td><span class="ok">99%</span></td>
+<td>0</td>
+<td>101,664 / 118,497(08-31)</td>
+</tr>
+<tr>
+<td>Bitstamp</td>
+<td>64</td>
+<td>$0.59B</td>
+<td>$0.59B</td>
+<td>$1.15B</td>
+<td><mark class="n">51%*</mark></td>
+<td>0</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li><strong>八所 95–101%</strong>,聚合器可引用。</li>
+<li>HTX 全资产直读 $0.22B 高于聚合器 $0.12B,差额恰为 USDD $45M + HBTC $42M;聚合器不计交易所自发或关联资产(§1 规则),同口径后为 108%。</li>
+<li>* Bitstamp 51%:口径差,不是地址差。DefiLlama 把以 Bitstamp 提款地址为凭证的信标链质押 ETH(≈23.3 万,验证者 8,011 个)全部计入 Bitstamp 储备;本报告不计,原因是质押 ETH 不在任何公布地址的余额上,且四个提款地址里两个不在 Bitstamp 公布的清单内,归属依据只有聚合器自己的地址表。加回这部分后两边对上。独立核法见 <code>tools/beacon_validators.py</code>(§9)。</li>
+<li>Binance 行含锚定代币锁仓 2 址($12.3B),不是用户资产。"锚定代币锁仓"指 Binance 为其在 BNB Chain 上发行的 Binance-Peg 代币(BSC 版 USDT、USDC、ETH 等)在以太坊主网锁定的原生抵押品,负债方是这些锚定币的持有人,而非交易所客户;地址来自 Binance 的 lockinfo 端点,不在其 PoR 清单内;已向聚合器提出拆分提案(DefiLlama-Adapters PR #20885,待维护者处理)。</li>
+<li>"失败地址"全部为 0(OKX 一址补读后清零)。</li>
+<li>末列为各所官方 PoR 自报的 ETH(用户 / 钱包,快照日各异),口径是<strong>全链 ETH</strong>(含 L2、质押凭证与托管),与本表以太坊主网美元读数不是同一口径,只作参照,不算差值。</li>
+</ul>
+<h3 id="3-3-tron-链-trongrid-getaccount-含四项质押-usdt-trc20-直读">3.3 Tron 链(trongrid <code>getaccount</code> 含四项质押 + USDT-TRC20 直读)</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>地址数</th>
+<th>TRX 可用</th>
+<th>TRX 质押中</th>
+<th>USDT-TRC20</th>
+<th>PoR 自报 TRX:用户 / 钱包</th>
+<th>PoR 自报 USDT(全链):用户 / 钱包</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>25</td>
+<td>2,287M</td>
+<td>0M</td>
+<td>897.1M</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>OKX</td>
+<td>23</td>
+<td>107M</td>
+<td>0M</td>
+<td>273.2M</td>
+<td>—</td>
+<td>8,118M / 8,637M(Aug 2026)</td>
+</tr>
+<tr>
+<td>Bitfinex</td>
+<td>2</td>
+<td>28M</td>
+<td>0M</td>
+<td>76.8M</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>11</td>
+<td>15M</td>
+<td>0M</td>
+<td>63.7M</td>
+<td>58M / 179M(08-19)</td>
+<td>660M / 721M(08-19)</td>
+</tr>
+<tr>
+<td>Bitget</td>
+<td>29</td>
+<td>5M</td>
+<td>0M</td>
+<td>254.1M</td>
+<td>—</td>
+<td>1,454M / 1,456M(08-20)</td>
+</tr>
+<tr>
+<td>HTX</td>
+<td>18</td>
+<td>3,046M</td>
+<td>6,646M</td>
+<td>0.0M</td>
+<td>? / 9,376M(08-01)</td>
+<td>926M / 710M(08-01)</td>
+</tr>
+<tr>
+<td>KuCoin</td>
+<td>24</td>
+<td>14M</td>
+<td>0M</td>
+<td>148.7M</td>
+<td>—</td>
+<td>955M / 1,059M(08-31)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li><strong>聚合器不可引用。</strong> 它漏计 USDT-TRC20(Bitget 公布地址持 242M,聚合器记 0),其 <code>eth_getBalance</code> 读法也不含质押中的 TRX。</li>
+<li>Tron 的"冻结"(freeze)是其官方术语,指把 TRX 质押给网络换取带宽、能量与投票权:所有权不变、可随时发起解押、解押后 14 天到账;它不是借贷抵押,也不是被平台或司法冻结。本报告统一写"质押"。质押有四个去处:V1 质押、V2 自持质押、<strong>委托给他址的质押</strong>(TRX 仍归本址)、解押队列;表中"质押中"四项全计。OKX 的 5.2 亿、Poloniex 的 2,400 万都是委托质押,只读 <code>balance + frozenV2</code> 会看不到(§7.1)。</li>
+<li>HTX 表中 18 个 Tron 地址是DefiLlama-Adapters清单里的 TRX 冷钱包,上面没有 USDT 属正常;<strong>HTX 官方 PoR 的 USDT-TRC20 另有 5 个地址</strong>:08-01 快照 13.24M,09-04 链上 <mark class="r">1.91M</mark>(<code>TK86…</code> 的 11.33M 已转空);USDT-ERC20 1 址 1.05M → 0。用户 USDT 负债 926M 的其余部分在"ThirdParty"(§6.2)。</li>
+<li>末两列为各所官方 PoR 自报的 TRX 与 USDT(用户 / 钱包);USDT 是<strong>全链合计</strong>(ERC20 + TRC20 + 其他链),本表 USDT-TRC20 只是其中一条链,故不算差值。HTX 的 TRX 自报钱包 9,376M 与本表 18 址 9,692M(可用 + 质押)同量级;其 USDT 自报钱包 710M 中 656M 在"ThirdParty"(§6.2)。</li>
+</ul>
+<h2 id="4-关联币占储备的比重-ftx-的结构性前提-谁踩着">4. 关联币占储备的比重:FTX 的结构性前提,谁踩着</h2>
+<h3 id="4-1-ftx-的结构性前提是什么-公开报道级-仅作判据来源">4.1 FTX 的结构性前提是什么(⚠ 公开报道级,仅作判据来源)</h3>
+<p>FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三条:</p>
+<ul>
+<li><strong>自家币是资产主体</strong>:CoinDesk 2022-11-02 披露 FTX 关联做市商 Alameda 的资产负债表,资产 $146 亿中 $36.6 亿是 FTX 平台币 FTT,另有 $21.6 亿 "FTT 抵押品",FTT 相关项超过资产的三分之一(<a href="https://www.coindesk.com/business/2022/11/02/divisions-in-sam-bankman-frieds-crypto-empire-blur-on-his-trading-titan-alamedas-balance-sheet">https://www.coindesk.com/business/2022/11/02/divisions-in-sam-bankman-frieds-crypto-empire-blur-on-his-trading-titan-alamedas-balance-sheet</a>)。</li>
+<li><strong>自家币没有盘口</strong>:FTT 流通盘大部分在 FTX 与 Alameda 自己手里,市值是挂牌价乘以数量,不是能卖出的钱;11-06 Binance 宣布出售所持 FTT,随后三天 FTT 跌去八成。</li>
+<li><strong>负债端不透明</strong>:客户存款被挪给 Alameda 使用,外界看不到负债与资产的真实对应;11-08 暂停提币,11-11 申请破产。</li>
+</ul>
+<p>判据:<strong>致命的不是"持有自家币",是三条同时成立</strong> —— ①自家币是储备主体;②自家币无盘口;③负债端不透明。下面按同一套规则逐所对照。</p>
+<h3 id="4-2-按所-关联币占储备-数据同-2-红标规则与-2-相同-关联币占储备-30">4.2 按所:关联币占储备(数据同 §2;红标规则与 §2 相同:关联币占储备 &gt;30%)</h3>
+<p>"硬资产"= BTC + ETH + 稳定币;两者之和不足 100% 的余量是其他币(SOL、XRP 等)。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>关联币</th>
+<th>占储备</th>
+<th>硬资产</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTX</td>
+<td>TRX + HTX 币</td>
+<td><mark class="r"><strong>77%</strong></mark></td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Bitfinex</td>
+<td>LEO</td>
+<td><mark class="r"><strong>32%</strong></mark></td>
+<td>66%</td>
+</tr>
+<tr>
+<td>KuCoin</td>
+<td>KCS</td>
+<td>16%</td>
+<td>59%</td>
+</tr>
+<tr>
+<td>SwissBorg</td>
+<td>BORG</td>
+<td>15%</td>
+<td>63%</td>
+</tr>
+<tr>
+<td>Binance</td>
+<td>BNB</td>
+<td>15%</td>
+<td>74%</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>GT</td>
+<td>14%</td>
+<td>54%</td>
+</tr>
+<tr>
+<td>MEXC</td>
+<td>MX</td>
+<td>11%</td>
+<td>66%</td>
+</tr>
+<tr>
+<td>Bitget</td>
+<td>BGB</td>
+<td>8%</td>
+<td>65%</td>
+</tr>
+<tr>
+<td>OKX</td>
+<td>OKB</td>
+<td>4%</td>
+<td>86%</td>
+</tr>
+<tr>
+<td>Bybit</td>
+<td>MNT</td>
+<td>4%</td>
+<td>75%</td>
+</tr>
+<tr>
+<td>Poloniex</td>
+<td>Sun 系代币</td>
+<td>2%</td>
+<td>89%</td>
+</tr>
+<tr>
+<td>Crypto.com</td>
+<td>CRO</td>
+<td>1%</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>Robinhood、Gemini、Deribit、Bitstamp、HashKey、Bitkub、BitMEX、OSL</td>
+<td>—</td>
+<td>0%</td>
+<td>77–100%</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>超过三成的两家:HTX 77%、Bitfinex 32%。两家的差别在硬资产:Bitfinex 硬资产 66%,是 LEO 的两倍;HTX 硬资产 20%,关联币是它的近四倍。关联币是否超过硬资产,是 §4.4 判据 ① 的口径。</li>
+<li>上表是聚合器口径(只认交易所公布的地址,且剔除自发/关联资产)。按 HTX 官方 PoR 快照的自报口径(§5、§6.2):TRX 占 47%、HTX 币 5.7%,另 BTC 行的 51% 是 Poloniex 发行的 BTC-TRC20(§7)。</li>
+</ul>
+<h3 id="4-3-关联资产按性质分四类">4.3 关联资产按性质分四类</h3>
+<p>上表按"所"排;下面按"东西"排,一类一块。同一家所的关联资产可以横跨四类。</p>
+<p><strong>① 平台币</strong></p>
+<div class="tbl"><table class="kv">
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资产</td>
+<td>BNB、LEO、OKB、GT、KCS、BGB、MX、MNT、CRO、BORG、HTX 币</td>
+</tr>
+<tr>
+<td>发行方 / 机制</td>
+<td>交易所自发,价值 = 交易所自身信用</td>
+</tr>
+<tr>
+<td>规模与持有(一手)</td>
+<td>LEO $6.3B 在 Bitfinex 储备;HTX 币 HTX 自持供给 23%,仅本所有成交(§6.2、§8)</td>
+</tr>
+<tr>
+<td>可核性</td>
+<td>余额可核;<strong>价格取决于自家盘口</strong>(§8)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>② 关联稳定币</strong></p>
+<div class="tbl"><table class="kv">
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资产</td>
+<td>USDD</td>
+</tr>
+<tr>
+<td>发行方 / 机制</td>
+<td>TRON DAO Reserve 2022-05 发行,与 HTX 同一控制人;上线时为算法币,2022-06 脱锚后改称超额抵押,2025 年改为锁 TRX/USDT 铸造(⚠ 沿革为公开报道级)</td>
+</tr>
+<tr>
+<td>规模与持有(一手)</td>
+<td>供给 $1.51B,Tron 为主(<a href="https://defillama.com/stablecoin/usdd">https://defillama.com/stablecoin/usdd</a>);HTX 把它算进 "USDs" 稳定币储备,自有钱包 125M(PoR 页 USDs 明细)</td>
+</tr>
+<tr>
+<td>可核性</td>
+<td>余额可核;<strong>抵押品是 TRX</strong>,与储备主体同一资产</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>③ 自发包装币</strong></p>
+<div class="tbl"><table class="kv">
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资产</td>
+<td>BTC-TRC20(BTCTRON)、HBTC</td>
+</tr>
+<tr>
+<td>发行方 / 机制</td>
+<td>BTCTRON:Poloniex 2020 年在 Tron 发行,声称 1:1 赎回,从未披露抵押地址(<a href="https://tronscan.org/#/token20/TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9">https://tronscan.org/#/token20/TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9</a>);HBTC:火币 2020 年在以太坊发行的包装 BTC,改名 HTX 后停用(<a href="https://etherscan.io/token/0x0316EB71485b0Ab14103307bf65a021042c6d380">https://etherscan.io/token/0x0316EB71485b0Ab14103307bf65a021042c6d380</a>)</td>
+</tr>
+<tr>
+<td>规模与持有(一手)</td>
+<td>BTCTRON 供给 17,545 枚,HTX 持 10,304(58.7%),占其 PoR BTC 行 51%;HBTC 供给仅 969.49 枚,HTX 地址持 ≈540(56%)</td>
+</tr>
+<tr>
+<td>可核性</td>
+<td>余额可核;<strong>BTCTRON 抵押物两端都找不到(§7.2);HBTC 发行方自持过半</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>④ 生息 / 借贷凭证</strong></p>
+<div class="tbl"><table class="kv">
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资产</td>
+<td>stUSDT、jUSDT、jUSDD、sTRX(JustLend);stETH(Lido);WBETH(Binance);aEthUSDT(Aave);sUSDS(Sky)</td>
+</tr>
+<tr>
+<td>发行方 / 机制</td>
+<td>把底层资产存进协议后拿到的份额,按底层币记入储备(stUSDT 记作 USDT、stETH 记作 ETH)</td>
+</tr>
+<tr>
+<td>规模与持有(一手)</td>
+<td>HTX 自有钱包 USDT 中 73% 是 stUSDT(39.55M,§6.2);Poloniex 快照 sUSDS 912.6M、stETH 247.8k(§7);Binance WBETH $8.4B;aEthUSDT 池 09-03 链上:总供给 ≈$29.5 亿、池内现金 $2.36 亿、利用率 92%(<a href="https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a">https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a</a>)</td>
+</tr>
+<tr>
+<td>可核性</td>
+<td>余额可核;<strong>能否即时赎回取决于协议里的现金</strong>,所有存款人排同一条队;JustLend 系凭证(<a href="https://tronscan.org/#/token20/TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3">https://tronscan.org/#/token20/TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3</a>)的底层又在 JustLend 里,而 JustLend 接受 BTCTRON 作抵押(§7.2)</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>四类全占的只有 HTX:平台币 + 关联稳定币 + 自发包装币 + 同一控制人协议的生息凭证。</li>
+<li>聚合器口径剔除 ②③,这正是 §3.2 里 HTX ETH 链"聚合器口径"与"全资产"两列的差额来源。</li>
+<li>四类里只有 ④ 的非关联部分(stETH、WBETH、sUSDS、aEthUSDT)是"别人的信用",其余都是"自己的信用"。</li>
+</ul>
+<h3 id="4-4-三条判据逐所对照-关联币占比-10-的所-及公布逐币负债的所">4.4 三条判据逐所对照(关联币占比 ≥10% 的所,及公布逐币负债的所)</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>① 关联币是储备主体</th>
+<th>② 盘口:储备持仓 ÷ 主场 ±2% 深度(§8)</th>
+<th>③ 负债端(§5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTX</td>
+<td><mark class="r"><strong>是</strong>(77% vs 硬资产 20%)</mark></td>
+<td>TRX ≈180×(十所合计)、HTX 币 ≈880×</td>
+<td>公布逐币负债;<mark class="r">19% 储备在不披露身份的托管方,USDT 自有钱包覆盖负债 5.8%</mark>(§6.2)</td>
+</tr>
+<tr>
+<td>Bitfinex</td>
+<td>否(32% vs 66%)</td>
+<td>LEO ≈90,000×</td>
+<td>无 PoR 页,负债未公布</td>
+</tr>
+<tr>
+<td>KuCoin</td>
+<td>否(16% vs 59%)</td>
+<td>KCS ≈9,800×</td>
+<td>仅公布比率 110%</td>
+</tr>
+<tr>
+<td>SwissBorg</td>
+<td>否(15% vs 63%)</td>
+<td>未测</td>
+<td>无 PoR 页</td>
+</tr>
+<tr>
+<td>Binance</td>
+<td>否(15% vs 74%)</td>
+<td>BNB ≈2,200×</td>
+<td>公布逐币负债,仅自有钱包 ÷ 负债 100.9%</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>否(14% vs 54%)</td>
+<td>GT ≈11,000×</td>
+<td>仅公布比率 127%</td>
+</tr>
+<tr>
+<td>MEXC</td>
+<td>否(11% vs 66%)</td>
+<td>未测</td>
+<td>仅公布比率 141%</td>
+</tr>
+<tr>
+<td>OKX</td>
+<td>否(4% vs 86%)</td>
+<td>未测</td>
+<td>公布逐币负债,103.0%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li>① 只对一家成立。</li>
+<li>② 对所有测过的所都成立:关联币持仓是主场盘口深度的几百到几万倍,本身不区分谁更危险;它的作用是放大 ①,关联币占比越高,按盘口折算后的储备缩水越多。</li>
+<li>③ 公布逐币负债的只有 Binance、OKX、HTX 三家;其余要么只给一个比率,要么没有 PoR 页。</li>
+<li>三条同时成立的组合,前 20 名里只有 HTX 靠近:① 成立,② 成立(TRX 是这些关联币里盘口最好的,仍为 180 倍),③ 公布了负债,但五分之一储备在不披露身份的托管方。与 FTX 的差别是 TRX 有全市场盘口而 FTT 没有,HTX 公布了负债表而 FTX 没有;相同点是储备价值是自家系代币价格的函数。</li>
+</ul>
+<h2 id="5-官方-por-横向-各所页面-2026-08-01-快照">5. 官方 PoR 横向(各所页面,2026-08-01 快照)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>用户负债</th>
+<th>自报储备</th>
+<th>第三方托管占储备</th>
+<th><strong>仅自有钱包 ÷ 负债</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>$127.9B</td>
+<td>$130.3B</td>
+<td>0.9%</td>
+<td>100.9%</td>
+</tr>
+<tr>
+<td>OKX(21 资产)</td>
+<td>$30.8B</td>
+<td>$32.6B</td>
+<td>2.6%</td>
+<td>103.0%</td>
+</tr>
+<tr>
+<td>HTX</td>
+<td>$6.25B</td>
+<td>$6.50B</td>
+<td><mark class="r"><strong>19.1%</strong>(托管方不披露)</mark></td>
+<td><mark class="r"><strong>84.2%</strong></mark></td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>—</td>
+<td>127%</td>
+<td>无托管栏</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Bitget</td>
+<td>—</td>
+<td>120%(USDT 100%,零冗余)</td>
+<td>无托管栏</td>
+<td>—</td>
+</tr>
+<tr>
+<td>KuCoin</td>
+<td>—</td>
+<td>110%</td>
+<td>无托管栏</td>
+<td>—</td>
+</tr>
+<tr>
+<td>MEXC</td>
+<td>—</td>
+<td>141%</td>
+<td>无托管栏</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Kraken</td>
+<td>—</td>
+<td>仅比率</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-异常清单-按所">6. 异常清单(按所)</h2>
+<p>同一套读法用在每家所上;红色为本报告认定的异常,每条附核验方法。</p>
+<h3 id="6-1-binance-poloniex">6.1 Binance / Poloniex</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>异常</th>
+<th>读数</th>
+<th>怎么核</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>聚合器把锚定代币的抵押储备算进"储备"</td>
+<td><mark class="r">DefiLlama $69.1B 中 $12.3B 来自 lockinfo 的 2 个地址</mark>(USDT 9.18B、USDC 1.58B、ETH 45.5 万),不是用户资产;PoR 37 址本身 $56.4B</td>
+<td><code>tools/cex_addresses.json</code> 的 <code>eth_lock</code>;<code>--chain eth --ex binance-cex</code></td>
+</tr>
+<tr>
+<td>Poloniex</td>
+<td>储备构成与集中度</td>
+<td><mark class="r">"USDT" 94% 是 sUSDS,"ETH" 98% 是 stETH,一个地址占储备 63%</mark>;公布 TRX 地址一个月 −18%(§7.1 逐址)</td>
+<td>§7</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="6-2-htx">6.2 HTX</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>异常</th>
+<th>读数</th>
+<th>怎么核</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><mark class="r">USDT 自有钱包只覆盖负债 5.8%,且其中 73% 是 stUSDT</mark></td>
+<td>负债 926.3M;"自有钱包" 53.8M = USDT-TRC20 13.24M + USDT-ERC20 1.05M + <strong>stUSDT 39.55M</strong>(JustLend 凭证);655.9M 在"ThirdParty"(76.6%)。官方 USDT-TRC20 5 址链上现值 09-04:<mark class="r">1.91M</mark>(快照 13.24M);USDT-ERC20 现值 0</td>
+<td>HTX PoR 页 "USDs" 明细;GitHub 快照 CSV;<code>--chain tron --ex htx</code>(<code>tron_por</code> 项)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><mark class="r">19.1% 储备在不披露身份的第三方托管</mark></td>
+<td>2026-06-01 起新设类别,含 USDT 656M、USDC 217M、ETH 91.5k、BTC 1,689;Binance 同口径 0.9%、OKX 2.6%</td>
+<td>HTX PoR 页 "Custodial Wallets" 栏</td>
+</tr>
+<tr>
+<td>3</td>
+<td><mark class="r">BTC 储备 51% 是 Poloniex 发行的 BTC-TRC20,链上找不到抵押物</mark></td>
+<td>自报 BTC 20,472 = 原生 8,209 + BTC-TRC20 10,399 + 托管 1,689 + 其他 175;原生链上现值 8,072 = 用户负债 19,933 的 <strong>41%</strong></td>
+<td><code>--chain btc,tron --ex htx</code>;BTC-TRC20 见 §7.2</td>
+</tr>
+<tr>
+<td>4</td>
+<td><mark class="r">ETH 储备 75% 在托管,链上可核 25.5%</mark></td>
+<td>页面:用户 122,077 / HTX 122,626 / 交易所钱包 31,101 / 托管 91,525;交易所钱包链上现值 29,374(原生 ETH 仅 112,余为 stETH)</td>
+<td><code>--chain eth --ex htx</code>(<code>eth_por</code> 项)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><mark class="r">TRX 占储备 47%,69% 质押中,而全市场盘口装不下它的 1%</mark></td>
+<td>18 址持 9.78B TRX = 供给 10.3%(可用 3.04B + 质押中 6.73B);用户 TRX 负债 8.85B ⇒ 即时可付 34%;十所现货 ±2% 深度合计 $17.6M,HTX 持仓 $3.2B</td>
+<td>trongrid <code>getaccount</code>;各所深度接口</td>
+</tr>
+<tr>
+<td>6</td>
+<td><mark class="r">平台币 HTX 计入储备 5.7%,而 HTX 自持其供给 23%,仅本所有成交</mark></td>
+<td>Tron 主链 totalSupply ≈1,000 万亿枚;HTX 18 址持 2.31 万亿;Binance/OKX 未上市,五家挂牌所日成交 $0–5 万;九所无永续</td>
+<td>Tron JSON-RPC;各所行情接口</td>
+</tr>
+<tr>
+<td>7</td>
+<td><mark class="r">2024-09/10 赎回 95,200 枚 BTC-TRC20,HTX 的真 BTC 不增反减</mark></td>
+<td>HTX 月度快照:09-01 → 11-01 BTC-TRC20 −8,522 枚,原生 BTC −4,762 枚,总 BTC 34,611 → 21,327(−38%);当月 PoR 照报储备率 &gt;100%</td>
+<td>HTX GitHub <code>huobiapi/Tool-Node.js-VerifyAddress</code> 各 commit 的 CSV</td>
+</tr>
+<tr>
+<td>8</td>
+<td><mark class="r">被英国、欧盟列入对俄制裁名单</mark></td>
+<td>英国 FCDO 2026-05-26 列名 Huobi Global S.A.(别名 "HTX (formerly Huobi)"),07-07 更新;欧盟 07 月跟进,08-23 生效;OFAC 未动</td>
+<td>FCDO 制裁名单 CSV(一手)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>页面自洽,但可核部分不到一半</td>
+<td>BTC / ETH 页面四个数与 GitHub 快照逐格对上;储备率 102.7% / 100.45% 中,链上能证明"确实是那个币"的部分分别为 41% / 25.5%</td>
+<td>本报告 §3、§5</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>同一套脚本、同一天读到的对照组</strong></p>
+<ul>
+<li><strong>Binance</strong>:BTC 61 址链上 640,647 枚(0 失败);ETH 37 址 $56.4B;USDT-TRC20 897M。</li>
+<li><strong>OKX</strong>:ETH 323 址 $12.9B,与聚合器 95%(0 失败);USDT-TRC20 273M。</li>
+</ul>
+<h2 id="7-poloniex-与-btc-trc20-btctron-htx-储备的另一半故事">7. Poloniex 与 BTC-TRC20(BTCTRON):HTX 储备的另一半故事</h2>
+<p><strong>Poloniex</strong>(孙宇晨 2019 年起控制;PoR 地址清单公开于 GitHub <code>poloniex/tools-nodejs-address-verify</code>,与 HTX 用同一快照区块高度):</p>
+<div class="tbl"><table class="kv">
+<thead>
+<tr>
+<th>项</th>
+<th>读数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>名义储备(08-01 快照)</td>
+<td>$2.73B</td>
+</tr>
+<tr>
+<td>"USDT" 储备 $968M 的构成</td>
+<td><mark class="r">94% 是 sUSDS</mark>(Sky 储蓄份额,不是 USDT)</td>
+</tr>
+<tr>
+<td>"ETH" 储备 252k 的构成</td>
+<td><mark class="r">98% 是 stETH</mark>,原生 ETH 1,142</td>
+</tr>
+<tr>
+<td>单一地址集中度</td>
+<td><mark class="r"><a href="https://etherscan.io/address/0x176F3DAb24a159341c0509bB36B833E7fdd0a132"><code>0x176F3DAb…0132</code></a> 一址持 sUSDS $1.0B + stETH 243k + WBTC 1,690 ≈ $1.72B = 储备的 63%</mark>(⚠ 该址 2023 年曾被 Etherscan 标为 "Justin Sun 4",媒体级)</td>
+</tr>
+<tr>
+<td>链上对账</td>
+<td>BTC 16 址 10,864 → 10,764 ✅;TRX 公布地址一个月 57.8M → 47.3M(−18%,§7.1 逐址)</td>
+</tr>
+<tr>
+<td>储备的来源(2026-05-30 起)</td>
+<td>71,993 stETH、806M sUSDS、1,723 WBTC 经 Poloniex 公布地址 <code>0x8fCA4adE…</code> → <code>0x29065a4C…</code>(Gnosis Safe)转入 Poloniex 9;stETH 上游为 HTX 地址 <code>0x18709E89…</code>(逐跳见下)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>HTX → Poloniex 的资金路径(链上直读,Blockscout 代币转账记录;可用任一浏览器按地址复核)</strong></p>
+<ul>
+<li>stETH:<a href="https://etherscan.io/address/0x18709E89BD403F470088aBDAcEbE86CC60dda12e"><code>0x18709E89…</code></a>(HTX 地址,归属依据见下)→ <a href="https://etherscan.io/address/0x7C103bbAE0DA51AE929dE97A98633668ddE80d04"><code>0x7C103bbA…</code></a>(无标注中转)→ <a href="https://etherscan.io/address/0x8fCA4adE3a517133fF23ca55CdAea29C78C990b8"><code>0x8fCA4adE…</code></a>(Poloniex PoR 清单内)→ <a href="https://etherscan.io/address/0x29065a4C1f2F20d1E263930088890d6F49Fe715a"><code>0x29065a4C…</code></a>(Gnosis Safe,Poloniex PoR 清单内)→ Poloniex 9,71,993 枚,全部发生在 2026-05-30。</li>
+<li>sUSDS 200M:05-30 由同一 HTX 地址 <code>0x18709E89…</code> → 无标注中转 <a href="https://etherscan.io/address/0x7fed2E5e06CF7B8918bB93158C4E990794da33b8"><code>0x7fed2E5e…</code></a> → <code>0x8fCA…</code> → Safe → Poloniex 9。</li>
+<li>WBTC 1,723:05-30 由 <code>0x18709E89…</code> → 无标注中转 <a href="https://etherscan.io/address/0xeB245796376912af7Fadd4986f73743feEA61e6E"><code>0xeB245796…</code></a> → 同一路径 → Poloniex 9。</li>
+<li>sUSDS 606M:06-04 由无标注中转 <a href="https://etherscan.io/address/0x2cf2679A78771D9f78433D2CdE3690f74e0F6471"><code>0x2cf2679A…</code></a> → <code>0x8fCA…</code> → Safe → Poloniex 9;<code>0x2cf2…</code> 的上游是 <a href="https://etherscan.io/address/0x93904eeC579e5bF7a57C2DD4AfbEA0F1C3e6A1D1"><code>0x93904eeC…</code></a>,一个未标注的枢纽地址,自 2026-01 起自行以 USDS 铸出 18.5 亿 sUSDS;其稳定币来源多头,含 HTX 清单地址 <code>0xa03400E0…</code> 的小额(USDT 50M、USDC 2.5M、DAI 2.7M),大头来自 Spark 储蓄金库与其他未标注地址。这一路的 HTX 来源未能在链上确立。</li>
+<li><code>0x18709E89…</code> 归属 HTX 的依据(四条独立):①DefiLlama-Adapters 的 <code>huobi</code> 项自 2022-11-13 起把它列为 HTX 以太坊地址;②Etherscan 系浏览器在其他 EVM 链(Moonscan、SnowScan)对同一地址的标签为 "Huobi: Recovery";③Hacken 2023-11 对 Heco 桥事件的分析称 HTX 用该地址归集热钱包资金与追回的被盗资金;④链上行为:它向 HTX 官方 PoR 清单里的地址 <code>0x4fb31291…</code> 直接转出 LINK、ONDO、FLOKI(2026-07/08),与 HTX 另一清单地址 <code>0xa03400E0…</code> 往来百余笔。它不在 HTX 官方 PoR 页公布的 11 个 ETH 地址内。</li>
+<li>能核实的:三笔资产进入 Poloniex 9 的时间、金额与路径;stETH 71,993、sUSDS 200M、WBTC 1,723 三路的起点都是 HTX 地址 <code>0x18709E89…</code>。不能确立的:606M sUSDS 的 HTX 来源(Protos 2026-08 报道,⚠ 媒体级),以及 HTX 的"ThirdParty"栏是否包含这些资产(HTX 不披露托管方)。若包含,同一笔资产会同时出现在 HTX 与 Poloniex 两份 PoR 里。</li>
+</ul>
+<h3 id="7-1-poloniex-公布的-trx-地址-快照-vs-链上-逐址-脚本-tools-por_trx_delta-py">7.1 Poloniex 公布的 TRX 地址:快照 vs 链上,逐址(脚本 <code>tools/por_trx_delta.py</code>)</h3>
+<p>Poloniex 08-01 快照列了 7 个 TRX 地址(另有 1 个 sTRX 地址,即其中的 <code>TUgSg…</code>)。地址少,直接逐址列出;表由脚本生成,可重跑。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>地址</th>
+<th>快照 TRX</th>
+<th>可用</th>
+<th>自持质押</th>
+<th>委托质押/解押中</th>
+<th>合计</th>
+<th>变动</th>
+<th>sTRX 现值(快照)</th>
+<th>快照日后 TRX 转出(≥1M)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://tronscan.org/#/address/TWhDfwC8QE6pQyiYy248dNor3uphPEw5M2"><code>TWhDfwC8QE…</code></a></td>
+<td>0.52M</td>
+<td>0.26M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.26M</td>
+<td>-49%</td>
+<td>0.00M(0M)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://tronscan.org/#/address/TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG"><code>TUgSgCQL6p…</code></a></td>
+<td>36.87M</td>
+<td>6.87M</td>
+<td>5.95M</td>
+<td>24.05M</td>
+<td>36.87M</td>
+<td>+0%</td>
+<td>39.23M(50M)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://tronscan.org/#/address/TSzSgxRisS5VBXXDcAezTDvnPGi9CbsXvJ"><code>TSzSgxRisS…</code></a></td>
+<td>20.39M</td>
+<td>10.16M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>10.16M</td>
+<td>-50%</td>
+<td>0.00M(0M)</td>
+<td>TWhDfwC8… 11.4M</td>
+</tr>
+<tr>
+<td><a href="https://tronscan.org/#/address/TECmrmwPAjr2RpDGPd4Axq6JYKCESJEhc5"><code>TECmrmwPAj…</code></a></td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>+0%</td>
+<td>0.00M(0M)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://tronscan.org/#/address/TVNPqyt6h3DV3Pd8N5PmskC96vtbAp863B"><code>TVNPqyt6h3…</code></a></td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>+0%</td>
+<td>0.00M(0M)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://tronscan.org/#/address/TSmgqvsfx95ZpjFRGA2eHhzUFHDhGVzusq"><code>TSmgqvsfx9…</code></a></td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>+0%</td>
+<td>0.00M(0M)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://tronscan.org/#/address/TV7WmJXhYyd4rqRjbWg62eX8e5DoPbyiA3"><code>TV7WmJXhYy…</code></a></td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>0.00M</td>
+<td>+0%</td>
+<td>0.00M(0M)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>57.78M</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>47.30M</strong></td>
+<td><strong>-18%</strong></td>
+<td><strong>39.23M</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li><strong>一个月净变动 −18%(57.78M → 47.30M)。</strong> <code>TUgSg…</code> 上 2,405 万是<strong>委托给他址的质押</strong>(TRX 仍归本址,只是把能量/带宽委托出去;热钱包 <code>TWhDf…</code> 的资源正来自它),计入后该址与快照分毫不差。</li>
+<li>真正减少的是 <code>TSzSg…</code>:20.39M → 10.16M,其中 11.45M 转入热钱包 <code>TWhDf…</code>;热钱包 08-19 以来发出 8,000+ 笔交易(7,162 笔 USDT 合约调用、838 笔 TRX 转账),是<strong>用户提币通道</strong>。</li>
+<li><code>TUgSg…</code> 的 sTRX 由 50.0M 降到 39.2M,而该地址 08-01 以来<strong>没有发出过任何交易</strong> ⇒ 这 10.8M sTRX 是被已授权的合约划转的,去向未查。</li>
+<li>一个月内负债端是否同步下降,要等 Poloniex 的 09-01 快照(截至 09-04 GitHub 仍是 08-01 版)。</li>
+</ul>
+<h3 id="7-2-btc-trc20-btctron-合约-持有与抵押物">7.2 BTC-TRC20(BTCTRON):合约、持有与抵押物</h3>
+<p>BTCTRON 是 Poloniex 2020 年在 Tron 链上发行的 "BTC",HTX 的 PoR 把它记作 BTC-TRC20 并计入 BTC 储备。合约 <a href="https://tronscan.org/#/contract/TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"><code>TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9</code></a>(tronscan)。下表全部为链上读数。</p>
+<div class="tbl"><table class="kv">
+<thead>
+<tr>
+<th>项</th>
+<th>链上读数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>合约类型</td>
+<td>Tether 式:<code>issue / redeem / addBlackList / destroyBlackFunds</code>;owner 为无标签地址</td>
+</tr>
+<tr>
+<td>供给与持有</td>
+<td>17,545 枚;<mark class="r"><a href="https://tronscan.org/#/address/TDToUxX8sH4z6moQpK3ZLAN24eupu2ivA4">HTX 6</a> 持 10,304(58.7%)+ <a href="https://tronscan.org/#/contract/TLeEu311Cbw63BcmMHDgDLu7fnk9fqGcqT">JustLend jBTC 市场</a> 6,577(37.5%)= 96%</mark>;Poloniex 自持 28</td>
+</tr>
+<tr>
+<td>铸造史</td>
+<td>铸 114,000 / 销 96,090 / 黑名单销毁 364(闭合);<mark class="r">2022 年铸 89,000 枚当日全部存入 JustLend,非用户提币</mark></td>
+</tr>
+<tr>
+<td>抵押物</td>
+<td>Poloniex PoR 全部 BTC 12,617 枚已对应自己用户负债 12,603 枚;<mark class="r">没有任何一行标为 BTCTRON 储备;16 个 BTC 地址无签名</mark>;2024-09/10 赎回 95,200 枚时,Poloniex 15 个冷址无 ≥1,000 BTC 流出,HTX 原生 BTC 亦未增加</td>
+</tr>
+<tr>
+<td>2022-08-21</td>
+<td><mark class="r">60,000 枚铸出当日,两个存入地址从 JustLend jUSDC 借出 4 亿 + 6 亿 USDC 转入 Poloniex 签名地址</mark>;jUSDC 池 95% 由借款方关联枢纽供给;2023-07 还清</td>
+</tr>
+<tr>
+<td>今天的额度</td>
+<td>JustLend 预言机按真 BTC 全价($76.8k)认 BTCTRON,抵押率 0.75;<mark class="r">一地址 5,000 枚已登记抵押、借款 0、可借 ≈$2.9 亿;jUSDT 池现金 $68M</mark>;另一地址以 200 枚 + sTRX 抵押借着 $16.2M jUSDT</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-关联币可变现性-储备中的持仓-盘口深度-2026-09-03-实测">8. 关联币可变现性:储备中的持仓 ÷ 盘口深度(2026-09-03 实测)</h2>
+<p>§2 里每家所的"关联币"都按市价计入储备。这一节问同一个问题:<strong>真要卖,盘口接得住多少?</strong> 读法统一:主场 ±2% 盘口深度(挂单可即时成交的美元量)、24h 成交,与储备中该币的持仓相除。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>所</th>
+<th>关联币</th>
+<th>占储备</th>
+<th>储备中持仓</th>
+<th>主场 ±2% 深度</th>
+<th>24h 成交</th>
+<th>持仓 ÷ 深度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>BNB</td>
+<td>15%</td>
+<td>$24.4B</td>
+<td>$10.9M(Binance)</td>
+<td>$128M</td>
+<td>≈2,200×</td>
+</tr>
+<tr>
+<td>Bitfinex</td>
+<td>LEO</td>
+<td>33%</td>
+<td>$6.3B</td>
+<td>$0.07M(Bitfinex)</td>
+<td>$0.2M</td>
+<td>≈90,000×</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>GT</td>
+<td>14%</td>
+<td>$0.88B</td>
+<td>$0.08M(Gate)</td>
+<td>$1.0M</td>
+<td>≈11,000×</td>
+</tr>
+<tr>
+<td>KuCoin</td>
+<td>KCS</td>
+<td>15%</td>
+<td>$0.49B</td>
+<td>$0.05M(KuCoin)</td>
+<td>$1.6M</td>
+<td>≈9,800×</td>
+</tr>
+<tr>
+<td>Bitget</td>
+<td>BGB</td>
+<td>8%</td>
+<td>$0.46B</td>
+<td>$0.51M(Bitget)</td>
+<td>$13.8M</td>
+<td>≈900×</td>
+</tr>
+<tr>
+<td>HTX</td>
+<td>TRX</td>
+<td><mark class="r">47%</mark></td>
+<td>$3.2B(<mark class="r">69% 质押中</mark>)</td>
+<td>$17.6M(十所合计;HTX 自家 $0.38M)</td>
+<td>$57M(十所)</td>
+<td>≈180×</td>
+</tr>
+<tr>
+<td>HTX</td>
+<td>HTX 币</td>
+<td>5.7%</td>
+<td>$0.37B</td>
+<td>$0.42M(六所合计;仅 HTX 有成交)</td>
+<td>$7.8M</td>
+<td>≈880×</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读法</strong></p>
+<ul>
+<li>没有一家的关联币能在盘口上出清:持仓是深度的几百到几万倍。<strong>关联币的"储备价值"是市价乘以数量,不是能变现的钱</strong> —— 这对所有所成立,不只 HTX。</li>
+<li>TRX 反而是这些币里相对最"有盘口"的(全市场十所 ±2% $17.6M,永续持仓量 $238M);HTX 的问题不在 TRX 的流动性,在<strong>它占储备的比例(47% + 5.7%)与 69% 的质押</strong> —— Binance 的 BNB 占 15%,其余 73% 是 BTC、ETH 与稳定币;Bitfinex 的 LEO 占 33%,其余 61% 是 BTC。</li>
+<li>判断一家所压力下的兑付能力,应把关联币按盘口深度而非市价折算后,再看硬资产(BTC / ETH / 稳定币)对负债的覆盖。按此口径(§5 表):Binance、OKX 仍 ≥100%;HTX 的硬资产覆盖不到一半。</li>
+</ul>
+<h2 id="9-复现">9. 复现</h2>
+<pre><code class="language-bash">pip install curl_cffi
+python3 tools/cex_reserves_verify.py --chain all                                    # 三链全量
+python3 tools/cex_reserves_verify.py --chain eth --ex okx --retry-failed data/cex_reserves_2026-09-04.json
+python3 tools/cex_reserves_verify.py --refresh-addresses                            # 重拉官方地址清单
+python3 tools/beacon_validators.py 0x3262f13a39efaca789ae58390441c9ed76bc658a 0xf666814c2ae92ca0e06667f80dac1eb8a97e48ae 0x5c95a672e34b3252482ed9a215f2926d2887845d 0x88a4df73aac310484c60c4c0ac4904cab938c20b   # 按提款地址数信标链验证者(报告 §3.2 Bitstamp)
+python3 tools/por_fetch.py                                                          # 各所官方 PoR 自报数(§3.1 末列;Binance 需人工另存页面登记 data/por_manual.json)
+</code></pre>
+<p>已知坑(脚本内已规避):公共节点对批量 <code>eth_call</code> 静默截断;Tron <code>eth_getBalance</code> 不含质押中的 TRX,必须用 <code>getaccount</code>;trongrid 免费额度 3 rps,过快会静默降质;Blockscout 对平台币无报价,KCS/GT/BGB 改链上直读。</p>
+<h2 id="10-监控指标-同一组指标-逐所读">10. 监控指标(同一组指标,逐所读)</h2>
+<p>下面六个指标对每家所都用同一读法,触发规则相同;读数按 2026-09-03 快照。"—"= 该所无此项(无托管栏、无原生质押币、无关联资产)。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>读法</th>
+<th>触发</th>
+<th>Binance</th>
+<th>OKX</th>
+<th>Bitget</th>
+<th>Gate</th>
+<th>HTX</th>
+<th>Poloniex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第三方托管占储备</td>
+<td>官方 PoR 页托管栏</td>
+<td>&gt;10%</td>
+<td>0.9%</td>
+<td>2.6%</td>
+<td>—</td>
+<td>—</td>
+<td><mark class="r">19.1%</mark></td>
+<td>—</td>
+</tr>
+<tr>
+<td>仅自有钱包 ÷ 用户负债</td>
+<td>官方 PoR 页</td>
+<td>&lt;100%</td>
+<td>100.9%</td>
+<td>103.0%</td>
+<td>≥100%(USDT 恰 100%)</td>
+<td>127%</td>
+<td><mark class="r">84.2%</mark></td>
+<td>≥100%</td>
+</tr>
+<tr>
+<td>稳定币在公布地址上的余额</td>
+<td><code>--chain tron/eth</code>(官方清单)</td>
+<td>主交易稳定币 &lt; 负债 1%</td>
+<td>USDT 1,248M(Tron)+ 28.7B(ETH)</td>
+<td>261M + 7.75B</td>
+<td>242M + 569M</td>
+<td>75M + 372M</td>
+<td><mark class="r">1.9M(Tron)+ 0(ETH)</mark>,另 stUSDT 39.6M</td>
+<td>3.9M + 23M</td>
+</tr>
+<tr>
+<td>原生币质押占比</td>
+<td>trongrid <code>getaccount</code></td>
+<td>&gt;50%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td><mark class="r">69%</mark></td>
+<td>0%(sTRX 另计)</td>
+</tr>
+<tr>
+<td>单一地址占储备</td>
+<td>各链直读</td>
+<td>&gt;50%</td>
+<td>&lt;10%</td>
+<td>&lt;10%</td>
+<td>&lt;10%</td>
+<td>&lt;10%</td>
+<td>32%(TRX 最大址,⚠ 估)</td>
+<td><mark class="r">63%</mark></td>
+</tr>
+<tr>
+<td>关联资产在借贷协议抵押借款</td>
+<td>JustLend <code>borrowBalance</code></td>
+<td>由 0 变非 0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>BTCTRON 抵押地址:0(额度 ≈$2.9 亿)</td>
+<td>同左(发行方)</td>
+</tr>
+<tr>
+<td>主通道提币状态</td>
+<td>各所 <code>currencies</code> 接口</td>
+<td>任一 prohibited</td>
+<td>正常</td>
+<td>正常</td>
+<td>正常</td>
+<td>正常</td>
+<td>正常</td>
+<td>正常</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><strong>来源等级</strong></p>
+<ul>
+<li><strong>一手</strong>:链上直读;官方 PoR 页面与 GitHub 清单;FCDO 制裁名单;各所公开行情接口。</li>
+<li><strong>第三方</strong>:DefiLlama、CoinGecko。</li>
+<li><strong>媒体 ⚠</strong>:Protos、TRM Labs 等报道,仅作线索。</li>
+</ul>
+<hr />
+<p><strong>免责声明</strong></p>
+<p>本页为公开数据的整理与核对,不构成投资建议,不构成对任何机构偿付能力的断言。负债端数字全部来自交易所自报,本报告无法验证。</p>
+<details class="fold"><summary>打赏 / Support</summary><div class="foldbody"><p class="note">这个项目会长期免费、公开地维护下去。如果这些核对曾帮您在看"储备率 &gt;100%"时多想了一步,那就是它存在的意义。您的打赏是我继续维护它的动力,无论金额大小,都衷心感谢。地址以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为唯一权威源,其他渠道出现的不同地址均为假冒。</p><div class="donate"><div class="dcard"><b>EVM</b><span>ETH / L2 / BSC · ETH/USDC/USDT</span><code onclick="navigator.clipboard&&navigator.clipboard.writeText(this.textContent)" title="点击复制">0xcd98738afada22ace19830f2e7bcd1dee89f6869</code><details class="dqr"><summary>展开二维码</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" style="background:#fff;border-radius:4px"><g fill="#0c1116"><rect x="5.16" y="5.16" width="5.16" height="5.16"/><rect x="10.32" y="5.16" width="5.16" height="5.16"/><rect x="15.48" y="5.16" width="5.16" height="5.16"/><rect x="20.65" y="5.16" width="5.16" height="5.16"/><rect x="25.81" y="5.16" width="5.16" height="5.16"/><rect x="30.97" y="5.16" width="5.16" height="5.16"/><rect x="36.13" y="5.16" width="5.16" height="5.16"/><rect x="67.10" y="5.16" width="5.16" height="5.16"/><rect x="72.26" y="5.16" width="5.16" height="5.16"/><rect x="77.42" y="5.16" width="5.16" height="5.16"/><rect x="103.23" y="5.16" width="5.16" height="5.16"/><rect x="118.71" y="5.16" width="5.16" height="5.16"/><rect x="123.87" y="5.16" width="5.16" height="5.16"/><rect x="129.03" y="5.16" width="5.16" height="5.16"/><rect x="134.19" y="5.16" width="5.16" height="5.16"/><rect x="139.35" y="5.16" width="5.16" height="5.16"/><rect x="144.52" y="5.16" width="5.16" height="5.16"/><rect x="149.68" y="5.16" width="5.16" height="5.16"/><rect x="5.16" y="10.32" width="5.16" height="5.16"/><rect x="36.13" y="10.32" width="5.16" height="5.16"/><rect x="51.61" y="10.32" width="5.16" height="5.16"/><rect x="61.94" y="10.32" width="5.16" height="5.16"/><rect x="82.58" y="10.32" width="5.16" height="5.16"/><rect x="92.90" y="10.32" width="5.16" height="5.16"/><rect x="98.06" y="10.32" width="5.16" height="5.16"/><rect x="118.71" y="10.32" width="5.16" height="5.16"/><rect x="149.68" y="10.32" width="5.16" height="5.16"/><rect x="5.16" y="15.48" width="5.16" height="5.16"/><rect x="15.48" y="15.48" width="5.16" height="5.16"/><rect x="20.65" y="15.48" width="5.16" height="5.16"/><rect x="25.81" y="15.48" width="5.16" height="5.16"/><rect x="36.13" y="15.48" width="5.16" height="5.16"/><rect x="46.45" y="15.48" width="5.16" height="5.16"/><rect x="56.77" y="15.48" width="5.16" height="5.16"/><rect x="77.42" y="15.48" width="5.16" height="5.16"/><rect x="82.58" y="15.48" width="5.16" height="5.16"/><rect x="118.71" y="15.48" width="5.16" height="5.16"/><rect x="129.03" y="15.48" width="5.16" height="5.16"/><rect x="134.19" y="15.48" width="5.16" height="5.16"/><rect x="139.35" y="15.48" width="5.16" height="5.16"/><rect x="149.68" y="15.48" width="5.16" height="5.16"/><rect x="5.16" y="20.65" width="5.16" height="5.16"/><rect x="15.48" y="20.65" width="5.16" height="5.16"/><rect x="20.65" y="20.65" width="5.16" height="5.16"/><rect x="25.81" y="20.65" width="5.16" height="5.16"/><rect x="36.13" y="20.65" width="5.16" height="5.16"/><rect x="46.45" y="20.65" width="5.16" height="5.16"/><rect x="51.61" y="20.65" width="5.16" height="5.16"/><rect x="72.26" y="20.65" width="5.16" height="5.16"/><rect x="77.42" y="20.65" width="5.16" height="5.16"/><rect x="87.74" y="20.65" width="5.16" height="5.16"/><rect x="92.90" y="20.65" width="5.16" height="5.16"/><rect x="98.06" y="20.65" width="5.16" height="5.16"/><rect x="103.23" y="20.65" width="5.16" height="5.16"/><rect x="108.39" y="20.65" width="5.16" height="5.16"/><rect x="118.71" y="20.65" width="5.16" height="5.16"/><rect x="129.03" y="20.65" width="5.16" height="5.16"/><rect x="134.19" y="20.65" width="5.16" height="5.16"/><rect x="139.35" y="20.65" width="5.16" height="5.16"/><rect x="149.68" y="20.65" width="5.16" height="5.16"/><rect x="5.16" y="25.81" width="5.16" height="5.16"/><rect x="15.48" y="25.81" width="5.16" height="5.16"/><rect x="20.65" y="25.81" width="5.16" height="5.16"/><rect x="25.81" y="25.81" width="5.16" height="5.16"/><rect x="36.13" y="25.81" width="5.16" height="5.16"/><rect x="46.45" y="25.81" width="5.16" height="5.16"/><rect x="61.94" y="25.81" width="5.16" height="5.16"/><rect x="103.23" y="25.81" width="5.16" height="5.16"/><rect x="118.71" y="25.81" width="5.16" height="5.16"/><rect x="129.03" y="25.81" width="5.16" height="5.16"/><rect x="134.19" y="25.81" width="5.16" height="5.16"/><rect x="139.35" y="25.81" width="5.16" height="5.16"/><rect x="149.68" y="25.81" width="5.16" height="5.16"/><rect x="5.16" y="30.97" width="5.16" height="5.16"/><rect x="36.13" y="30.97" width="5.16" height="5.16"/><rect x="46.45" y="30.97" width="5.16" height="5.16"/><rect x="51.61" y="30.97" width="5.16" height="5.16"/><rect x="67.10" y="30.97" width="5.16" height="5.16"/><rect x="72.26" y="30.97" width="5.16" height="5.16"/><rect x="77.42" y="30.97" width="5.16" height="5.16"/><rect x="82.58" y="30.97" width="5.16" height="5.16"/><rect x="87.74" y="30.97" width="5.16" height="5.16"/><rect x="98.06" y="30.97" width="5.16" height="5.16"/><rect x="108.39" y="30.97" width="5.16" height="5.16"/><rect x="118.71" y="30.97" width="5.16" height="5.16"/><rect x="149.68" y="30.97" width="5.16" height="5.16"/><rect x="5.16" y="36.13" width="5.16" height="5.16"/><rect x="10.32" y="36.13" width="5.16" height="5.16"/><rect x="15.48" y="36.13" width="5.16" height="5.16"/><rect x="20.65" y="36.13" width="5.16" height="5.16"/><rect x="25.81" y="36.13" width="5.16" height="5.16"/><rect x="30.97" y="36.13" width="5.16" height="5.16"/><rect x="36.13" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="36.13" width="5.16" height="5.16"/><rect x="56.77" y="36.13" width="5.16" height="5.16"/><rect x="67.10" y="36.13" width="5.16" height="5.16"/><rect x="77.42" y="36.13" width="5.16" height="5.16"/><rect x="87.74" y="36.13" width="5.16" height="5.16"/><rect x="98.06" y="36.13" width="5.16" height="5.16"/><rect x="108.39" y="36.13" width="5.16" height="5.16"/><rect x="118.71" y="36.13" width="5.16" height="5.16"/><rect x="123.87" y="36.13" width="5.16" height="5.16"/><rect x="129.03" y="36.13" width="5.16" height="5.16"/><rect x="134.19" y="36.13" width="5.16" height="5.16"/><rect x="139.35" y="36.13" width="5.16" height="5.16"/><rect x="144.52" y="36.13" width="5.16" height="5.16"/><rect x="149.68" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="41.29" width="5.16" height="5.16"/><rect x="51.61" y="41.29" width="5.16" height="5.16"/><rect x="67.10" y="41.29" width="5.16" height="5.16"/><rect x="82.58" y="41.29" width="5.16" height="5.16"/><rect x="87.74" y="41.29" width="5.16" height="5.16"/><rect x="98.06" y="41.29" width="5.16" height="5.16"/><rect x="5.16" y="46.45" width="5.16" height="5.16"/><rect x="15.48" y="46.45" width="5.16" height="5.16"/><rect x="20.65" y="46.45" width="5.16" height="5.16"/><rect x="25.81" y="46.45" width="5.16" height="5.16"/><rect x="30.97" y="46.45" width="5.16" height="5.16"/><rect x="36.13" y="46.45" width="5.16" height="5.16"/><rect x="51.61" y="46.45" width="5.16" height="5.16"/><rect x="56.77" y="46.45" width="5.16" height="5.16"/><rect x="61.94" y="46.45" width="5.16" height="5.16"/><rect x="72.26" y="46.45" width="5.16" height="5.16"/><rect x="82.58" y="46.45" width="5.16" height="5.16"/><rect x="92.90" y="46.45" width="5.16" height="5.16"/><rect x="103.23" y="46.45" width="5.16" height="5.16"/><rect x="108.39" y="46.45" width="5.16" height="5.16"/><rect x="118.71" y="46.45" width="5.16" height="5.16"/><rect x="123.87" y="46.45" width="5.16" height="5.16"/><rect x="129.03" y="46.45" width="5.16" height="5.16"/><rect x="134.19" y="46.45" width="5.16" height="5.16"/><rect x="139.35" y="46.45" width="5.16" height="5.16"/><rect x="15.48" y="51.61" width="5.16" height="5.16"/><rect x="30.97" y="51.61" width="5.16" height="5.16"/><rect x="46.45" y="51.61" width="5.16" height="5.16"/><rect x="51.61" y="51.61" width="5.16" height="5.16"/><rect x="56.77" y="51.61" width="5.16" height="5.16"/><rect x="67.10" y="51.61" width="5.16" height="5.16"/><rect x="77.42" y="51.61" width="5.16" height="5.16"/><rect x="87.74" y="51.61" width="5.16" height="5.16"/><rect x="98.06" y="51.61" width="5.16" height="5.16"/><rect x="103.23" y="51.61" width="5.16" height="5.16"/><rect x="113.55" y="51.61" width="5.16" height="5.16"/><rect x="118.71" y="51.61" width="5.16" height="5.16"/><rect x="123.87" y="51.61" width="5.16" height="5.16"/><rect x="129.03" y="51.61" width="5.16" height="5.16"/><rect x="134.19" y="51.61" width="5.16" height="5.16"/><rect x="144.52" y="51.61" width="5.16" height="5.16"/><rect x="149.68" y="51.61" width="5.16" height="5.16"/><rect x="5.16" y="56.77" width="5.16" height="5.16"/><rect x="20.65" y="56.77" width="5.16" height="5.16"/><rect x="25.81" y="56.77" width="5.16" height="5.16"/><rect x="36.13" y="56.77" width="5.16" height="5.16"/><rect x="41.29" y="56.77" width="5.16" height="5.16"/><rect x="51.61" y="56.77" width="5.16" height="5.16"/><rect x="72.26" y="56.77" width="5.16" height="5.16"/><rect x="77.42" y="56.77" width="5.16" height="5.16"/><rect x="82.58" y="56.77" width="5.16" height="5.16"/><rect x="87.74" y="56.77" width="5.16" height="5.16"/><rect x="92.90" y="56.77" width="5.16" height="5.16"/><rect x="108.39" y="56.77" width="5.16" height="5.16"/><rect x="123.87" y="56.77" width="5.16" height="5.16"/><rect x="129.03" y="56.77" width="5.16" height="5.16"/><rect x="25.81" y="61.94" width="5.16" height="5.16"/><rect x="30.97" y="61.94" width="5.16" height="5.16"/><rect x="46.45" y="61.94" width="5.16" height="5.16"/><rect x="56.77" y="61.94" width="5.16" height="5.16"/><rect x="61.94" y="61.94" width="5.16" height="5.16"/><rect x="82.58" y="61.94" width="5.16" height="5.16"/><rect x="87.74" y="61.94" width="5.16" height="5.16"/><rect x="98.06" y="61.94" width="5.16" height="5.16"/><rect x="113.55" y="61.94" width="5.16" height="5.16"/><rect x="129.03" y="61.94" width="5.16" height="5.16"/><rect x="149.68" y="61.94" width="5.16" height="5.16"/><rect x="5.16" y="67.10" width="5.16" height="5.16"/><rect x="10.32" y="67.10" width="5.16" height="5.16"/><rect x="25.81" y="67.10" width="5.16" height="5.16"/><rect x="30.97" y="67.10" width="5.16" height="5.16"/><rect x="36.13" y="67.10" width="5.16" height="5.16"/><rect x="46.45" y="67.10" width="5.16" height="5.16"/><rect x="51.61" y="67.10" width="5.16" height="5.16"/><rect x="72.26" y="67.10" width="5.16" height="5.16"/><rect x="82.58" y="67.10" width="5.16" height="5.16"/><rect x="92.90" y="67.10" width="5.16" height="5.16"/><rect x="98.06" y="67.10" width="5.16" height="5.16"/><rect x="108.39" y="67.10" width="5.16" height="5.16"/><rect x="134.19" y="67.10" width="5.16" height="5.16"/><rect x="139.35" y="67.10" width="5.16" height="5.16"/><rect x="144.52" y="67.10" width="5.16" height="5.16"/><rect x="15.48" y="72.26" width="5.16" height="5.16"/><rect x="20.65" y="72.26" width="5.16" height="5.16"/><rect x="46.45" y="72.26" width="5.16" height="5.16"/><rect x="56.77" y="72.26" width="5.16" height="5.16"/><rect x="61.94" y="72.26" width="5.16" height="5.16"/><rect x="67.10" y="72.26" width="5.16" height="5.16"/><rect x="72.26" y="72.26" width="5.16" height="5.16"/><rect x="77.42" y="72.26" width="5.16" height="5.16"/><rect x="87.74" y="72.26" width="5.16" height="5.16"/><rect x="103.23" y="72.26" width="5.16" height="5.16"/><rect x="113.55" y="72.26" width="5.16" height="5.16"/><rect x="118.71" y="72.26" width="5.16" height="5.16"/><rect x="123.87" y="72.26" width="5.16" height="5.16"/><rect x="129.03" y="72.26" width="5.16" height="5.16"/><rect x="139.35" y="72.26" width="5.16" height="5.16"/><rect x="144.52" y="72.26" width="5.16" height="5.16"/><rect x="149.68" y="72.26" width="5.16" height="5.16"/><rect x="5.16" y="77.42" width="5.16" height="5.16"/><rect x="15.48" y="77.42" width="5.16" height="5.16"/><rect x="36.13" y="77.42" width="5.16" height="5.16"/><rect x="46.45" y="77.42" width="5.16" height="5.16"/><rect x="51.61" y="77.42" width="5.16" height="5.16"/><rect x="82.58" y="77.42" width="5.16" height="5.16"/><rect x="92.90" y="77.42" width="5.16" height="5.16"/><rect x="98.06" y="77.42" width="5.16" height="5.16"/><rect x="108.39" y="77.42" width="5.16" height="5.16"/><rect x="113.55" y="77.42" width="5.16" height="5.16"/><rect x="134.19" y="77.42" width="5.16" height="5.16"/><rect x="5.16" y="82.58" width="5.16" height="5.16"/><rect x="10.32" y="82.58" width="5.16" height="5.16"/><rect x="20.65" y="82.58" width="5.16" height="5.16"/><rect x="46.45" y="82.58" width="5.16" height="5.16"/><rect x="51.61" y="82.58" width="5.16" height="5.16"/><rect x="56.77" y="82.58" width="5.16" height="5.16"/><rect x="61.94" y="82.58" width="5.16" height="5.16"/><rect x="82.58" y="82.58" width="5.16" height="5.16"/><rect x="87.74" y="82.58" width="5.16" height="5.16"/><rect x="98.06" y="82.58" width="5.16" height="5.16"/><rect x="108.39" y="82.58" width="5.16" height="5.16"/><rect x="123.87" y="82.58" width="5.16" height="5.16"/><rect x="129.03" y="82.58" width="5.16" height="5.16"/><rect x="144.52" y="82.58" width="5.16" height="5.16"/><rect x="5.16" y="87.74" width="5.16" height="5.16"/><rect x="10.32" y="87.74" width="5.16" height="5.16"/><rect x="15.48" y="87.74" width="5.16" height="5.16"/><rect x="25.81" y="87.74" width="5.16" height="5.16"/><rect x="36.13" y="87.74" width="5.16" height="5.16"/><rect x="61.94" y="87.74" width="5.16" height="5.16"/><rect x="67.10" y="87.74" width="5.16" height="5.16"/><rect x="72.26" y="87.74" width="5.16" height="5.16"/><rect x="82.58" y="87.74" width="5.16" height="5.16"/><rect x="92.90" y="87.74" width="5.16" height="5.16"/><rect x="113.55" y="87.74" width="5.16" height="5.16"/><rect x="134.19" y="87.74" width="5.16" height="5.16"/><rect x="139.35" y="87.74" width="5.16" height="5.16"/><rect x="144.52" y="87.74" width="5.16" height="5.16"/><rect x="149.68" y="87.74" width="5.16" height="5.16"/><rect x="5.16" y="92.90" width="5.16" height="5.16"/><rect x="41.29" y="92.90" width="5.16" height="5.16"/><rect x="77.42" y="92.90" width="5.16" height="5.16"/><rect x="87.74" y="92.90" width="5.16" height="5.16"/><rect x="98.06" y="92.90" width="5.16" height="5.16"/><rect x="103.23" y="92.90" width="5.16" height="5.16"/><rect x="108.39" y="92.90" width="5.16" height="5.16"/><rect x="118.71" y="92.90" width="5.16" height="5.16"/><rect x="123.87" y="92.90" width="5.16" height="5.16"/><rect x="129.03" y="92.90" width="5.16" height="5.16"/><rect x="139.35" y="92.90" width="5.16" height="5.16"/><rect x="149.68" y="92.90" width="5.16" height="5.16"/><rect x="5.16" y="98.06" width="5.16" height="5.16"/><rect x="15.48" y="98.06" width="5.16" height="5.16"/><rect x="25.81" y="98.06" width="5.16" height="5.16"/><rect x="30.97" y="98.06" width="5.16" height="5.16"/><rect x="36.13" y="98.06" width="5.16" height="5.16"/><rect x="46.45" y="98.06" width="5.16" height="5.16"/><rect x="61.94" y="98.06" width="5.16" height="5.16"/><rect x="67.10" y="98.06" width="5.16" height="5.16"/><rect x="72.26" y="98.06" width="5.16" height="5.16"/><rect x="77.42" y="98.06" width="5.16" height="5.16"/><rect x="82.58" y="98.06" width="5.16" height="5.16"/><rect x="87.74" y="98.06" width="5.16" height="5.16"/><rect x="108.39" y="98.06" width="5.16" height="5.16"/><rect x="113.55" y="98.06" width="5.16" height="5.16"/><rect x="123.87" y="98.06" width="5.16" height="5.16"/><rect x="129.03" y="98.06" width="5.16" height="5.16"/><rect x="5.16" y="103.23" width="5.16" height="5.16"/><rect x="20.65" y="103.23" width="5.16" height="5.16"/><rect x="25.81" y="103.23" width="5.16" height="5.16"/><rect x="30.97" y="103.23" width="5.16" height="5.16"/><rect x="51.61" y="103.23" width="5.16" height="5.16"/><rect x="61.94" y="103.23" width="5.16" height="5.16"/><rect x="67.10" y="103.23" width="5.16" height="5.16"/><rect x="82.58" y="103.23" width="5.16" height="5.16"/><rect x="103.23" y="103.23" width="5.16" height="5.16"/><rect x="113.55" y="103.23" width="5.16" height="5.16"/><rect x="118.71" y="103.23" width="5.16" height="5.16"/><rect x="129.03" y="103.23" width="5.16" height="5.16"/><rect x="144.52" y="103.23" width="5.16" height="5.16"/><rect x="5.16" y="108.39" width="5.16" height="5.16"/><rect x="20.65" y="108.39" width="5.16" height="5.16"/><rect x="25.81" y="108.39" width="5.16" height="5.16"/><rect x="36.13" y="108.39" width="5.16" height="5.16"/><rect x="67.10" y="108.39" width="5.16" height="5.16"/><rect x="72.26" y="108.39" width="5.16" height="5.16"/><rect x="82.58" y="108.39" width="5.16" height="5.16"/><rect x="87.74" y="108.39" width="5.16" height="5.16"/><rect x="92.90" y="108.39" width="5.16" height="5.16"/><rect x="98.06" y="108.39" width="5.16" height="5.16"/><rect x="108.39" y="108.39" width="5.16" height="5.16"/><rect x="113.55" y="108.39" width="5.16" height="5.16"/><rect x="118.71" y="108.39" width="5.16" height="5.16"/><rect x="123.87" y="108.39" width="5.16" height="5.16"/><rect x="129.03" y="108.39" width="5.16" height="5.16"/><rect x="134.19" y="108.39" width="5.16" height="5.16"/><rect x="139.35" y="108.39" width="5.16" height="5.16"/><rect x="144.52" y="108.39" width="5.16" height="5.16"/><rect x="46.45" y="113.55" width="5.16" height="5.16"/><rect x="56.77" y="113.55" width="5.16" height="5.16"/><rect x="61.94" y="113.55" width="5.16" height="5.16"/><rect x="72.26" y="113.55" width="5.16" height="5.16"/><rect x="77.42" y="113.55" width="5.16" height="5.16"/><rect x="108.39" y="113.55" width="5.16" height="5.16"/><rect x="129.03" y="113.55" width="5.16" height="5.16"/><rect x="134.19" y="113.55" width="5.16" height="5.16"/><rect x="149.68" y="113.55" width="5.16" height="5.16"/><rect x="5.16" y="118.71" width="5.16" height="5.16"/><rect x="10.32" y="118.71" width="5.16" height="5.16"/><rect x="15.48" y="118.71" width="5.16" height="5.16"/><rect x="20.65" y="118.71" width="5.16" height="5.16"/><rect x="25.81" y="118.71" width="5.16" height="5.16"/><rect x="30.97" y="118.71" width="5.16" height="5.16"/><rect x="36.13" y="118.71" width="5.16" height="5.16"/><rect x="51.61" y="118.71" width="5.16" height="5.16"/><rect x="61.94" y="118.71" width="5.16" height="5.16"/><rect x="82.58" y="118.71" width="5.16" height="5.16"/><rect x="92.90" y="118.71" width="5.16" height="5.16"/><rect x="103.23" y="118.71" width="5.16" height="5.16"/><rect x="108.39" y="118.71" width="5.16" height="5.16"/><rect x="118.71" y="118.71" width="5.16" height="5.16"/><rect x="129.03" y="118.71" width="5.16" height="5.16"/><rect x="134.19" y="118.71" width="5.16" height="5.16"/><rect x="139.35" y="118.71" width="5.16" height="5.16"/><rect x="144.52" y="118.71" width="5.16" height="5.16"/><rect x="5.16" y="123.87" width="5.16" height="5.16"/><rect x="36.13" y="123.87" width="5.16" height="5.16"/><rect x="46.45" y="123.87" width="5.16" height="5.16"/><rect x="61.94" y="123.87" width="5.16" height="5.16"/><rect x="67.10" y="123.87" width="5.16" height="5.16"/><rect x="77.42" y="123.87" width="5.16" height="5.16"/><rect x="82.58" y="123.87" width="5.16" height="5.16"/><rect x="87.74" y="123.87" width="5.16" height="5.16"/><rect x="103.23" y="123.87" width="5.16" height="5.16"/><rect x="108.39" y="123.87" width="5.16" height="5.16"/><rect x="129.03" y="123.87" width="5.16" height="5.16"/><rect x="144.52" y="123.87" width="5.16" height="5.16"/><rect x="149.68" y="123.87" width="5.16" height="5.16"/><rect x="5.16" y="129.03" width="5.16" height="5.16"/><rect x="15.48" y="129.03" width="5.16" height="5.16"/><rect x="20.65" y="129.03" width="5.16" height="5.16"/><rect x="25.81" y="129.03" width="5.16" height="5.16"/><rect x="36.13" y="129.03" width="5.16" height="5.16"/><rect x="46.45" y="129.03" width="5.16" height="5.16"/><rect x="56.77" y="129.03" width="5.16" height="5.16"/><rect x="61.94" y="129.03" width="5.16" height="5.16"/><rect x="82.58" y="129.03" width="5.16" height="5.16"/><rect x="92.90" y="129.03" width="5.16" height="5.16"/><rect x="108.39" y="129.03" width="5.16" height="5.16"/><rect x="113.55" y="129.03" width="5.16" height="5.16"/><rect x="118.71" y="129.03" width="5.16" height="5.16"/><rect x="123.87" y="129.03" width="5.16" height="5.16"/><rect x="129.03" y="129.03" width="5.16" height="5.16"/><rect x="134.19" y="129.03" width="5.16" height="5.16"/><rect x="139.35" y="129.03" width="5.16" height="5.16"/><rect x="144.52" y="129.03" width="5.16" height="5.16"/><rect x="149.68" y="129.03" width="5.16" height="5.16"/><rect x="5.16" y="134.19" width="5.16" height="5.16"/><rect x="15.48" y="134.19" width="5.16" height="5.16"/><rect x="20.65" y="134.19" width="5.16" height="5.16"/><rect x="25.81" y="134.19" width="5.16" height="5.16"/><rect x="36.13" y="134.19" width="5.16" height="5.16"/><rect x="46.45" y="134.19" width="5.16" height="5.16"/><rect x="56.77" y="134.19" width="5.16" height="5.16"/><rect x="61.94" y="134.19" width="5.16" height="5.16"/><rect x="67.10" y="134.19" width="5.16" height="5.16"/><rect x="87.74" y="134.19" width="5.16" height="5.16"/><rect x="98.06" y="134.19" width="5.16" height="5.16"/><rect x="103.23" y="134.19" width="5.16" height="5.16"/><rect x="113.55" y="134.19" width="5.16" height="5.16"/><rect x="144.52" y="134.19" width="5.16" height="5.16"/><rect x="149.68" y="134.19" width="5.16" height="5.16"/><rect x="5.16" y="139.35" width="5.16" height="5.16"/><rect x="15.48" y="139.35" width="5.16" height="5.16"/><rect x="20.65" y="139.35" width="5.16" height="5.16"/><rect x="25.81" y="139.35" width="5.16" height="5.16"/><rect x="36.13" y="139.35" width="5.16" height="5.16"/><rect x="46.45" y="139.35" width="5.16" height="5.16"/><rect x="51.61" y="139.35" width="5.16" height="5.16"/><rect x="61.94" y="139.35" width="5.16" height="5.16"/><rect x="82.58" y="139.35" width="5.16" height="5.16"/><rect x="87.74" y="139.35" width="5.16" height="5.16"/><rect x="92.90" y="139.35" width="5.16" height="5.16"/><rect x="98.06" y="139.35" width="5.16" height="5.16"/><rect x="118.71" y="139.35" width="5.16" height="5.16"/><rect x="123.87" y="139.35" width="5.16" height="5.16"/><rect x="129.03" y="139.35" width="5.16" height="5.16"/><rect x="134.19" y="139.35" width="5.16" height="5.16"/><rect x="139.35" y="139.35" width="5.16" height="5.16"/><rect x="144.52" y="139.35" width="5.16" height="5.16"/><rect x="5.16" y="144.52" width="5.16" height="5.16"/><rect x="36.13" y="144.52" width="5.16" height="5.16"/><rect x="56.77" y="144.52" width="5.16" height="5.16"/><rect x="77.42" y="144.52" width="5.16" height="5.16"/><rect x="98.06" y="144.52" width="5.16" height="5.16"/><rect x="108.39" y="144.52" width="5.16" height="5.16"/><rect x="113.55" y="144.52" width="5.16" height="5.16"/><rect x="129.03" y="144.52" width="5.16" height="5.16"/><rect x="144.52" y="144.52" width="5.16" height="5.16"/><rect x="5.16" y="149.68" width="5.16" height="5.16"/><rect x="10.32" y="149.68" width="5.16" height="5.16"/><rect x="15.48" y="149.68" width="5.16" height="5.16"/><rect x="20.65" y="149.68" width="5.16" height="5.16"/><rect x="25.81" y="149.68" width="5.16" height="5.16"/><rect x="30.97" y="149.68" width="5.16" height="5.16"/><rect x="36.13" y="149.68" width="5.16" height="5.16"/><rect x="46.45" y="149.68" width="5.16" height="5.16"/><rect x="61.94" y="149.68" width="5.16" height="5.16"/><rect x="72.26" y="149.68" width="5.16" height="5.16"/><rect x="82.58" y="149.68" width="5.16" height="5.16"/><rect x="92.90" y="149.68" width="5.16" height="5.16"/><rect x="103.23" y="149.68" width="5.16" height="5.16"/><rect x="113.55" y="149.68" width="5.16" height="5.16"/><rect x="118.71" y="149.68" width="5.16" height="5.16"/><rect x="134.19" y="149.68" width="5.16" height="5.16"/><rect x="139.35" y="149.68" width="5.16" height="5.16"/></g></svg></details></div><div class="dcard"><b>TRON</b><span>USDT-TRC20</span><code onclick="navigator.clipboard&&navigator.clipboard.writeText(this.textContent)" title="点击复制">TSjurosohn1psMKg5xV4L2ELCiLJTzcPMD</code><details class="dqr"><summary>展开二维码</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" style="background:#fff;border-radius:4px"><g fill="#0c1116"><rect x="5.16" y="5.16" width="5.16" height="5.16"/><rect x="10.32" y="5.16" width="5.16" height="5.16"/><rect x="15.48" y="5.16" width="5.16" height="5.16"/><rect x="20.65" y="5.16" width="5.16" height="5.16"/><rect x="25.81" y="5.16" width="5.16" height="5.16"/><rect x="30.97" y="5.16" width="5.16" height="5.16"/><rect x="36.13" y="5.16" width="5.16" height="5.16"/><rect x="46.45" y="5.16" width="5.16" height="5.16"/><rect x="51.61" y="5.16" width="5.16" height="5.16"/><rect x="61.94" y="5.16" width="5.16" height="5.16"/><rect x="67.10" y="5.16" width="5.16" height="5.16"/><rect x="72.26" y="5.16" width="5.16" height="5.16"/><rect x="77.42" y="5.16" width="5.16" height="5.16"/><rect x="82.58" y="5.16" width="5.16" height="5.16"/><rect x="98.06" y="5.16" width="5.16" height="5.16"/><rect x="108.39" y="5.16" width="5.16" height="5.16"/><rect x="118.71" y="5.16" width="5.16" height="5.16"/><rect x="123.87" y="5.16" width="5.16" height="5.16"/><rect x="129.03" y="5.16" width="5.16" height="5.16"/><rect x="134.19" y="5.16" width="5.16" height="5.16"/><rect x="139.35" y="5.16" width="5.16" height="5.16"/><rect x="144.52" y="5.16" width="5.16" height="5.16"/><rect x="149.68" y="5.16" width="5.16" height="5.16"/><rect x="5.16" y="10.32" width="5.16" height="5.16"/><rect x="36.13" y="10.32" width="5.16" height="5.16"/><rect x="46.45" y="10.32" width="5.16" height="5.16"/><rect x="51.61" y="10.32" width="5.16" height="5.16"/><rect x="61.94" y="10.32" width="5.16" height="5.16"/><rect x="72.26" y="10.32" width="5.16" height="5.16"/><rect x="87.74" y="10.32" width="5.16" height="5.16"/><rect x="92.90" y="10.32" width="5.16" height="5.16"/><rect x="98.06" y="10.32" width="5.16" height="5.16"/><rect x="108.39" y="10.32" width="5.16" height="5.16"/><rect x="118.71" y="10.32" width="5.16" height="5.16"/><rect x="149.68" y="10.32" width="5.16" height="5.16"/><rect x="5.16" y="15.48" width="5.16" height="5.16"/><rect x="15.48" y="15.48" width="5.16" height="5.16"/><rect x="20.65" y="15.48" width="5.16" height="5.16"/><rect x="25.81" y="15.48" width="5.16" height="5.16"/><rect x="36.13" y="15.48" width="5.16" height="5.16"/><rect x="51.61" y="15.48" width="5.16" height="5.16"/><rect x="61.94" y="15.48" width="5.16" height="5.16"/><rect x="87.74" y="15.48" width="5.16" height="5.16"/><rect x="98.06" y="15.48" width="5.16" height="5.16"/><rect x="118.71" y="15.48" width="5.16" height="5.16"/><rect x="129.03" y="15.48" width="5.16" height="5.16"/><rect x="134.19" y="15.48" width="5.16" height="5.16"/><rect x="139.35" y="15.48" width="5.16" height="5.16"/><rect x="149.68" y="15.48" width="5.16" height="5.16"/><rect x="5.16" y="20.65" width="5.16" height="5.16"/><rect x="15.48" y="20.65" width="5.16" height="5.16"/><rect x="20.65" y="20.65" width="5.16" height="5.16"/><rect x="25.81" y="20.65" width="5.16" height="5.16"/><rect x="36.13" y="20.65" width="5.16" height="5.16"/><rect x="46.45" y="20.65" width="5.16" height="5.16"/><rect x="51.61" y="20.65" width="5.16" height="5.16"/><rect x="56.77" y="20.65" width="5.16" height="5.16"/><rect x="67.10" y="20.65" width="5.16" height="5.16"/><rect x="77.42" y="20.65" width="5.16" height="5.16"/><rect x="82.58" y="20.65" width="5.16" height="5.16"/><rect x="108.39" y="20.65" width="5.16" height="5.16"/><rect x="118.71" y="20.65" width="5.16" height="5.16"/><rect x="129.03" y="20.65" width="5.16" height="5.16"/><rect x="134.19" y="20.65" width="5.16" height="5.16"/><rect x="139.35" y="20.65" width="5.16" height="5.16"/><rect x="149.68" y="20.65" width="5.16" height="5.16"/><rect x="5.16" y="25.81" width="5.16" height="5.16"/><rect x="15.48" y="25.81" width="5.16" height="5.16"/><rect x="20.65" y="25.81" width="5.16" height="5.16"/><rect x="25.81" y="25.81" width="5.16" height="5.16"/><rect x="36.13" y="25.81" width="5.16" height="5.16"/><rect x="77.42" y="25.81" width="5.16" height="5.16"/><rect x="87.74" y="25.81" width="5.16" height="5.16"/><rect x="103.23" y="25.81" width="5.16" height="5.16"/><rect x="108.39" y="25.81" width="5.16" height="5.16"/><rect x="118.71" y="25.81" width="5.16" height="5.16"/><rect x="129.03" y="25.81" width="5.16" height="5.16"/><rect x="134.19" y="25.81" width="5.16" height="5.16"/><rect x="139.35" y="25.81" width="5.16" height="5.16"/><rect x="149.68" y="25.81" width="5.16" height="5.16"/><rect x="5.16" y="30.97" width="5.16" height="5.16"/><rect x="36.13" y="30.97" width="5.16" height="5.16"/><rect x="51.61" y="30.97" width="5.16" height="5.16"/><rect x="67.10" y="30.97" width="5.16" height="5.16"/><rect x="72.26" y="30.97" width="5.16" height="5.16"/><rect x="82.58" y="30.97" width="5.16" height="5.16"/><rect x="87.74" y="30.97" width="5.16" height="5.16"/><rect x="98.06" y="30.97" width="5.16" height="5.16"/><rect x="103.23" y="30.97" width="5.16" height="5.16"/><rect x="118.71" y="30.97" width="5.16" height="5.16"/><rect x="149.68" y="30.97" width="5.16" height="5.16"/><rect x="5.16" y="36.13" width="5.16" height="5.16"/><rect x="10.32" y="36.13" width="5.16" height="5.16"/><rect x="15.48" y="36.13" width="5.16" height="5.16"/><rect x="20.65" y="36.13" width="5.16" height="5.16"/><rect x="25.81" y="36.13" width="5.16" height="5.16"/><rect x="30.97" y="36.13" width="5.16" height="5.16"/><rect x="36.13" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="36.13" width="5.16" height="5.16"/><rect x="56.77" y="36.13" width="5.16" height="5.16"/><rect x="67.10" y="36.13" width="5.16" height="5.16"/><rect x="77.42" y="36.13" width="5.16" height="5.16"/><rect x="87.74" y="36.13" width="5.16" height="5.16"/><rect x="98.06" y="36.13" width="5.16" height="5.16"/><rect x="108.39" y="36.13" width="5.16" height="5.16"/><rect x="118.71" y="36.13" width="5.16" height="5.16"/><rect x="123.87" y="36.13" width="5.16" height="5.16"/><rect x="129.03" y="36.13" width="5.16" height="5.16"/><rect x="134.19" y="36.13" width="5.16" height="5.16"/><rect x="139.35" y="36.13" width="5.16" height="5.16"/><rect x="144.52" y="36.13" width="5.16" height="5.16"/><rect x="149.68" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="41.29" width="5.16" height="5.16"/><rect x="51.61" y="41.29" width="5.16" height="5.16"/><rect x="56.77" y="41.29" width="5.16" height="5.16"/><rect x="82.58" y="41.29" width="5.16" height="5.16"/><rect x="87.74" y="41.29" width="5.16" height="5.16"/><rect x="92.90" y="41.29" width="5.16" height="5.16"/><rect x="5.16" y="46.45" width="5.16" height="5.16"/><rect x="15.48" y="46.45" width="5.16" height="5.16"/><rect x="20.65" y="46.45" width="5.16" height="5.16"/><rect x="30.97" y="46.45" width="5.16" height="5.16"/><rect x="36.13" y="46.45" width="5.16" height="5.16"/><rect x="41.29" y="46.45" width="5.16" height="5.16"/><rect x="56.77" y="46.45" width="5.16" height="5.16"/><rect x="61.94" y="46.45" width="5.16" height="5.16"/><rect x="67.10" y="46.45" width="5.16" height="5.16"/><rect x="72.26" y="46.45" width="5.16" height="5.16"/><rect x="82.58" y="46.45" width="5.16" height="5.16"/><rect x="87.74" y="46.45" width="5.16" height="5.16"/><rect x="98.06" y="46.45" width="5.16" height="5.16"/><rect x="118.71" y="46.45" width="5.16" height="5.16"/><rect x="134.19" y="46.45" width="5.16" height="5.16"/><rect x="144.52" y="46.45" width="5.16" height="5.16"/><rect x="149.68" y="46.45" width="5.16" height="5.16"/><rect x="15.48" y="51.61" width="5.16" height="5.16"/><rect x="20.65" y="51.61" width="5.16" height="5.16"/><rect x="30.97" y="51.61" width="5.16" height="5.16"/><rect x="41.29" y="51.61" width="5.16" height="5.16"/><rect x="46.45" y="51.61" width="5.16" height="5.16"/><rect x="61.94" y="51.61" width="5.16" height="5.16"/><rect x="72.26" y="51.61" width="5.16" height="5.16"/><rect x="77.42" y="51.61" width="5.16" height="5.16"/><rect x="82.58" y="51.61" width="5.16" height="5.16"/><rect x="98.06" y="51.61" width="5.16" height="5.16"/><rect x="108.39" y="51.61" width="5.16" height="5.16"/><rect x="118.71" y="51.61" width="5.16" height="5.16"/><rect x="123.87" y="51.61" width="5.16" height="5.16"/><rect x="129.03" y="51.61" width="5.16" height="5.16"/><rect x="134.19" y="51.61" width="5.16" height="5.16"/><rect x="149.68" y="51.61" width="5.16" height="5.16"/><rect x="10.32" y="56.77" width="5.16" height="5.16"/><rect x="20.65" y="56.77" width="5.16" height="5.16"/><rect x="30.97" y="56.77" width="5.16" height="5.16"/><rect x="36.13" y="56.77" width="5.16" height="5.16"/><rect x="46.45" y="56.77" width="5.16" height="5.16"/><rect x="56.77" y="56.77" width="5.16" height="5.16"/><rect x="67.10" y="56.77" width="5.16" height="5.16"/><rect x="72.26" y="56.77" width="5.16" height="5.16"/><rect x="108.39" y="56.77" width="5.16" height="5.16"/><rect x="123.87" y="56.77" width="5.16" height="5.16"/><rect x="134.19" y="56.77" width="5.16" height="5.16"/><rect x="139.35" y="56.77" width="5.16" height="5.16"/><rect x="144.52" y="56.77" width="5.16" height="5.16"/><rect x="10.32" y="61.94" width="5.16" height="5.16"/><rect x="41.29" y="61.94" width="5.16" height="5.16"/><rect x="46.45" y="61.94" width="5.16" height="5.16"/><rect x="51.61" y="61.94" width="5.16" height="5.16"/><rect x="56.77" y="61.94" width="5.16" height="5.16"/><rect x="61.94" y="61.94" width="5.16" height="5.16"/><rect x="67.10" y="61.94" width="5.16" height="5.16"/><rect x="98.06" y="61.94" width="5.16" height="5.16"/><rect x="103.23" y="61.94" width="5.16" height="5.16"/><rect x="108.39" y="61.94" width="5.16" height="5.16"/><rect x="113.55" y="61.94" width="5.16" height="5.16"/><rect x="20.65" y="67.10" width="5.16" height="5.16"/><rect x="36.13" y="67.10" width="5.16" height="5.16"/><rect x="56.77" y="67.10" width="5.16" height="5.16"/><rect x="77.42" y="67.10" width="5.16" height="5.16"/><rect x="82.58" y="67.10" width="5.16" height="5.16"/><rect x="92.90" y="67.10" width="5.16" height="5.16"/><rect x="108.39" y="67.10" width="5.16" height="5.16"/><rect x="123.87" y="67.10" width="5.16" height="5.16"/><rect x="134.19" y="67.10" width="5.16" height="5.16"/><rect x="139.35" y="67.10" width="5.16" height="5.16"/><rect x="144.52" y="67.10" width="5.16" height="5.16"/><rect x="149.68" y="67.10" width="5.16" height="5.16"/><rect x="5.16" y="72.26" width="5.16" height="5.16"/><rect x="41.29" y="72.26" width="5.16" height="5.16"/><rect x="56.77" y="72.26" width="5.16" height="5.16"/><rect x="77.42" y="72.26" width="5.16" height="5.16"/><rect x="87.74" y="72.26" width="5.16" height="5.16"/><rect x="103.23" y="72.26" width="5.16" height="5.16"/><rect x="108.39" y="72.26" width="5.16" height="5.16"/><rect x="139.35" y="72.26" width="5.16" height="5.16"/><rect x="149.68" y="72.26" width="5.16" height="5.16"/><rect x="5.16" y="77.42" width="5.16" height="5.16"/><rect x="20.65" y="77.42" width="5.16" height="5.16"/><rect x="25.81" y="77.42" width="5.16" height="5.16"/><rect x="36.13" y="77.42" width="5.16" height="5.16"/><rect x="51.61" y="77.42" width="5.16" height="5.16"/><rect x="72.26" y="77.42" width="5.16" height="5.16"/><rect x="103.23" y="77.42" width="5.16" height="5.16"/><rect x="113.55" y="77.42" width="5.16" height="5.16"/><rect x="123.87" y="77.42" width="5.16" height="5.16"/><rect x="134.19" y="77.42" width="5.16" height="5.16"/><rect x="139.35" y="77.42" width="5.16" height="5.16"/><rect x="144.52" y="77.42" width="5.16" height="5.16"/><rect x="149.68" y="77.42" width="5.16" height="5.16"/><rect x="5.16" y="82.58" width="5.16" height="5.16"/><rect x="15.48" y="82.58" width="5.16" height="5.16"/><rect x="20.65" y="82.58" width="5.16" height="5.16"/><rect x="25.81" y="82.58" width="5.16" height="5.16"/><rect x="30.97" y="82.58" width="5.16" height="5.16"/><rect x="41.29" y="82.58" width="5.16" height="5.16"/><rect x="46.45" y="82.58" width="5.16" height="5.16"/><rect x="61.94" y="82.58" width="5.16" height="5.16"/><rect x="77.42" y="82.58" width="5.16" height="5.16"/><rect x="82.58" y="82.58" width="5.16" height="5.16"/><rect x="87.74" y="82.58" width="5.16" height="5.16"/><rect x="103.23" y="82.58" width="5.16" height="5.16"/><rect x="108.39" y="82.58" width="5.16" height="5.16"/><rect x="129.03" y="82.58" width="5.16" height="5.16"/><rect x="134.19" y="82.58" width="5.16" height="5.16"/><rect x="149.68" y="82.58" width="5.16" height="5.16"/><rect x="5.16" y="87.74" width="5.16" height="5.16"/><rect x="25.81" y="87.74" width="5.16" height="5.16"/><rect x="36.13" y="87.74" width="5.16" height="5.16"/><rect x="41.29" y="87.74" width="5.16" height="5.16"/><rect x="56.77" y="87.74" width="5.16" height="5.16"/><rect x="61.94" y="87.74" width="5.16" height="5.16"/><rect x="77.42" y="87.74" width="5.16" height="5.16"/><rect x="82.58" y="87.74" width="5.16" height="5.16"/><rect x="92.90" y="87.74" width="5.16" height="5.16"/><rect x="98.06" y="87.74" width="5.16" height="5.16"/><rect x="113.55" y="87.74" width="5.16" height="5.16"/><rect x="129.03" y="87.74" width="5.16" height="5.16"/><rect x="10.32" y="92.90" width="5.16" height="5.16"/><rect x="15.48" y="92.90" width="5.16" height="5.16"/><rect x="25.81" y="92.90" width="5.16" height="5.16"/><rect x="41.29" y="92.90" width="5.16" height="5.16"/><rect x="46.45" y="92.90" width="5.16" height="5.16"/><rect x="61.94" y="92.90" width="5.16" height="5.16"/><rect x="77.42" y="92.90" width="5.16" height="5.16"/><rect x="92.90" y="92.90" width="5.16" height="5.16"/><rect x="103.23" y="92.90" width="5.16" height="5.16"/><rect x="108.39" y="92.90" width="5.16" height="5.16"/><rect x="118.71" y="92.90" width="5.16" height="5.16"/><rect x="139.35" y="92.90" width="5.16" height="5.16"/><rect x="144.52" y="92.90" width="5.16" height="5.16"/><rect x="149.68" y="92.90" width="5.16" height="5.16"/><rect x="5.16" y="98.06" width="5.16" height="5.16"/><rect x="20.65" y="98.06" width="5.16" height="5.16"/><rect x="25.81" y="98.06" width="5.16" height="5.16"/><rect x="36.13" y="98.06" width="5.16" height="5.16"/><rect x="41.29" y="98.06" width="5.16" height="5.16"/><rect x="51.61" y="98.06" width="5.16" height="5.16"/><rect x="67.10" y="98.06" width="5.16" height="5.16"/><rect x="72.26" y="98.06" width="5.16" height="5.16"/><rect x="77.42" y="98.06" width="5.16" height="5.16"/><rect x="82.58" y="98.06" width="5.16" height="5.16"/><rect x="113.55" y="98.06" width="5.16" height="5.16"/><rect x="118.71" y="98.06" width="5.16" height="5.16"/><rect x="134.19" y="98.06" width="5.16" height="5.16"/><rect x="139.35" y="98.06" width="5.16" height="5.16"/><rect x="15.48" y="103.23" width="5.16" height="5.16"/><rect x="30.97" y="103.23" width="5.16" height="5.16"/><rect x="51.61" y="103.23" width="5.16" height="5.16"/><rect x="61.94" y="103.23" width="5.16" height="5.16"/><rect x="67.10" y="103.23" width="5.16" height="5.16"/><rect x="72.26" y="103.23" width="5.16" height="5.16"/><rect x="77.42" y="103.23" width="5.16" height="5.16"/><rect x="92.90" y="103.23" width="5.16" height="5.16"/><rect x="108.39" y="103.23" width="5.16" height="5.16"/><rect x="113.55" y="103.23" width="5.16" height="5.16"/><rect x="118.71" y="103.23" width="5.16" height="5.16"/><rect x="129.03" y="103.23" width="5.16" height="5.16"/><rect x="134.19" y="103.23" width="5.16" height="5.16"/><rect x="139.35" y="103.23" width="5.16" height="5.16"/><rect x="10.32" y="108.39" width="5.16" height="5.16"/><rect x="15.48" y="108.39" width="5.16" height="5.16"/><rect x="20.65" y="108.39" width="5.16" height="5.16"/><rect x="30.97" y="108.39" width="5.16" height="5.16"/><rect x="36.13" y="108.39" width="5.16" height="5.16"/><rect x="51.61" y="108.39" width="5.16" height="5.16"/><rect x="61.94" y="108.39" width="5.16" height="5.16"/><rect x="72.26" y="108.39" width="5.16" height="5.16"/><rect x="77.42" y="108.39" width="5.16" height="5.16"/><rect x="98.06" y="108.39" width="5.16" height="5.16"/><rect x="108.39" y="108.39" width="5.16" height="5.16"/><rect x="113.55" y="108.39" width="5.16" height="5.16"/><rect x="118.71" y="108.39" width="5.16" height="5.16"/><rect x="123.87" y="108.39" width="5.16" height="5.16"/><rect x="129.03" y="108.39" width="5.16" height="5.16"/><rect x="139.35" y="108.39" width="5.16" height="5.16"/><rect x="144.52" y="108.39" width="5.16" height="5.16"/><rect x="149.68" y="108.39" width="5.16" height="5.16"/><rect x="46.45" y="113.55" width="5.16" height="5.16"/><rect x="51.61" y="113.55" width="5.16" height="5.16"/><rect x="82.58" y="113.55" width="5.16" height="5.16"/><rect x="87.74" y="113.55" width="5.16" height="5.16"/><rect x="92.90" y="113.55" width="5.16" height="5.16"/><rect x="98.06" y="113.55" width="5.16" height="5.16"/><rect x="103.23" y="113.55" width="5.16" height="5.16"/><rect x="108.39" y="113.55" width="5.16" height="5.16"/><rect x="129.03" y="113.55" width="5.16" height="5.16"/><rect x="5.16" y="118.71" width="5.16" height="5.16"/><rect x="10.32" y="118.71" width="5.16" height="5.16"/><rect x="15.48" y="118.71" width="5.16" height="5.16"/><rect x="20.65" y="118.71" width="5.16" height="5.16"/><rect x="25.81" y="118.71" width="5.16" height="5.16"/><rect x="30.97" y="118.71" width="5.16" height="5.16"/><rect x="36.13" y="118.71" width="5.16" height="5.16"/><rect x="46.45" y="118.71" width="5.16" height="5.16"/><rect x="51.61" y="118.71" width="5.16" height="5.16"/><rect x="61.94" y="118.71" width="5.16" height="5.16"/><rect x="67.10" y="118.71" width="5.16" height="5.16"/><rect x="77.42" y="118.71" width="5.16" height="5.16"/><rect x="87.74" y="118.71" width="5.16" height="5.16"/><rect x="103.23" y="118.71" width="5.16" height="5.16"/><rect x="108.39" y="118.71" width="5.16" height="5.16"/><rect x="118.71" y="118.71" width="5.16" height="5.16"/><rect x="129.03" y="118.71" width="5.16" height="5.16"/><rect x="134.19" y="118.71" width="5.16" height="5.16"/><rect x="144.52" y="118.71" width="5.16" height="5.16"/><rect x="5.16" y="123.87" width="5.16" height="5.16"/><rect x="36.13" y="123.87" width="5.16" height="5.16"/><rect x="46.45" y="123.87" width="5.16" height="5.16"/><rect x="61.94" y="123.87" width="5.16" height="5.16"/><rect x="72.26" y="123.87" width="5.16" height="5.16"/><rect x="77.42" y="123.87" width="5.16" height="5.16"/><rect x="82.58" y="123.87" width="5.16" height="5.16"/><rect x="87.74" y="123.87" width="5.16" height="5.16"/><rect x="108.39" y="123.87" width="5.16" height="5.16"/><rect x="129.03" y="123.87" width="5.16" height="5.16"/><rect x="5.16" y="129.03" width="5.16" height="5.16"/><rect x="15.48" y="129.03" width="5.16" height="5.16"/><rect x="20.65" y="129.03" width="5.16" height="5.16"/><rect x="25.81" y="129.03" width="5.16" height="5.16"/><rect x="36.13" y="129.03" width="5.16" height="5.16"/><rect x="56.77" y="129.03" width="5.16" height="5.16"/><rect x="61.94" y="129.03" width="5.16" height="5.16"/><rect x="82.58" y="129.03" width="5.16" height="5.16"/><rect x="108.39" y="129.03" width="5.16" height="5.16"/><rect x="113.55" y="129.03" width="5.16" height="5.16"/><rect x="118.71" y="129.03" width="5.16" height="5.16"/><rect x="123.87" y="129.03" width="5.16" height="5.16"/><rect x="129.03" y="129.03" width="5.16" height="5.16"/><rect x="139.35" y="129.03" width="5.16" height="5.16"/><rect x="144.52" y="129.03" width="5.16" height="5.16"/><rect x="5.16" y="134.19" width="5.16" height="5.16"/><rect x="15.48" y="134.19" width="5.16" height="5.16"/><rect x="20.65" y="134.19" width="5.16" height="5.16"/><rect x="25.81" y="134.19" width="5.16" height="5.16"/><rect x="36.13" y="134.19" width="5.16" height="5.16"/><rect x="46.45" y="134.19" width="5.16" height="5.16"/><rect x="51.61" y="134.19" width="5.16" height="5.16"/><rect x="67.10" y="134.19" width="5.16" height="5.16"/><rect x="72.26" y="134.19" width="5.16" height="5.16"/><rect x="82.58" y="134.19" width="5.16" height="5.16"/><rect x="87.74" y="134.19" width="5.16" height="5.16"/><rect x="92.90" y="134.19" width="5.16" height="5.16"/><rect x="98.06" y="134.19" width="5.16" height="5.16"/><rect x="103.23" y="134.19" width="5.16" height="5.16"/><rect x="108.39" y="134.19" width="5.16" height="5.16"/><rect x="113.55" y="134.19" width="5.16" height="5.16"/><rect x="123.87" y="134.19" width="5.16" height="5.16"/><rect x="129.03" y="134.19" width="5.16" height="5.16"/><rect x="134.19" y="134.19" width="5.16" height="5.16"/><rect x="149.68" y="134.19" width="5.16" height="5.16"/><rect x="5.16" y="139.35" width="5.16" height="5.16"/><rect x="15.48" y="139.35" width="5.16" height="5.16"/><rect x="20.65" y="139.35" width="5.16" height="5.16"/><rect x="25.81" y="139.35" width="5.16" height="5.16"/><rect x="36.13" y="139.35" width="5.16" height="5.16"/><rect x="46.45" y="139.35" width="5.16" height="5.16"/><rect x="51.61" y="139.35" width="5.16" height="5.16"/><rect x="77.42" y="139.35" width="5.16" height="5.16"/><rect x="87.74" y="139.35" width="5.16" height="5.16"/><rect x="98.06" y="139.35" width="5.16" height="5.16"/><rect x="123.87" y="139.35" width="5.16" height="5.16"/><rect x="139.35" y="139.35" width="5.16" height="5.16"/><rect x="149.68" y="139.35" width="5.16" height="5.16"/><rect x="5.16" y="144.52" width="5.16" height="5.16"/><rect x="36.13" y="144.52" width="5.16" height="5.16"/><rect x="56.77" y="144.52" width="5.16" height="5.16"/><rect x="98.06" y="144.52" width="5.16" height="5.16"/><rect x="103.23" y="144.52" width="5.16" height="5.16"/><rect x="108.39" y="144.52" width="5.16" height="5.16"/><rect x="129.03" y="144.52" width="5.16" height="5.16"/><rect x="134.19" y="144.52" width="5.16" height="5.16"/><rect x="144.52" y="144.52" width="5.16" height="5.16"/><rect x="5.16" y="149.68" width="5.16" height="5.16"/><rect x="10.32" y="149.68" width="5.16" height="5.16"/><rect x="15.48" y="149.68" width="5.16" height="5.16"/><rect x="20.65" y="149.68" width="5.16" height="5.16"/><rect x="25.81" y="149.68" width="5.16" height="5.16"/><rect x="30.97" y="149.68" width="5.16" height="5.16"/><rect x="36.13" y="149.68" width="5.16" height="5.16"/><rect x="46.45" y="149.68" width="5.16" height="5.16"/><rect x="67.10" y="149.68" width="5.16" height="5.16"/><rect x="82.58" y="149.68" width="5.16" height="5.16"/><rect x="87.74" y="149.68" width="5.16" height="5.16"/><rect x="98.06" y="149.68" width="5.16" height="5.16"/><rect x="108.39" y="149.68" width="5.16" height="5.16"/><rect x="113.55" y="149.68" width="5.16" height="5.16"/><rect x="118.71" y="149.68" width="5.16" height="5.16"/><rect x="123.87" y="149.68" width="5.16" height="5.16"/><rect x="129.03" y="149.68" width="5.16" height="5.16"/><rect x="144.52" y="149.68" width="5.16" height="5.16"/></g></svg></details></div><div class="dcard"><b>Solana</b><span>SOL / SPL</span><code onclick="navigator.clipboard&&navigator.clipboard.writeText(this.textContent)" title="点击复制">6LWiGPToGAjgYVwsYgqv5QAKfGm38jnhyDALbZYK3weC</code><details class="dqr"><summary>展开二维码</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" style="background:#fff;border-radius:4px"><g fill="#0c1116"><rect x="4.57" y="4.57" width="4.57" height="4.57"/><rect x="9.14" y="4.57" width="4.57" height="4.57"/><rect x="13.71" y="4.57" width="4.57" height="4.57"/><rect x="18.29" y="4.57" width="4.57" height="4.57"/><rect x="22.86" y="4.57" width="4.57" height="4.57"/><rect x="27.43" y="4.57" width="4.57" height="4.57"/><rect x="32.00" y="4.57" width="4.57" height="4.57"/><rect x="50.29" y="4.57" width="4.57" height="4.57"/><rect x="54.86" y="4.57" width="4.57" height="4.57"/><rect x="64.00" y="4.57" width="4.57" height="4.57"/><rect x="68.57" y="4.57" width="4.57" height="4.57"/><rect x="73.14" y="4.57" width="4.57" height="4.57"/><rect x="82.29" y="4.57" width="4.57" height="4.57"/><rect x="100.57" y="4.57" width="4.57" height="4.57"/><rect x="123.43" y="4.57" width="4.57" height="4.57"/><rect x="128.00" y="4.57" width="4.57" height="4.57"/><rect x="132.57" y="4.57" width="4.57" height="4.57"/><rect x="137.14" y="4.57" width="4.57" height="4.57"/><rect x="141.71" y="4.57" width="4.57" height="4.57"/><rect x="146.29" y="4.57" width="4.57" height="4.57"/><rect x="150.86" y="4.57" width="4.57" height="4.57"/><rect x="4.57" y="9.14" width="4.57" height="4.57"/><rect x="32.00" y="9.14" width="4.57" height="4.57"/><rect x="50.29" y="9.14" width="4.57" height="4.57"/><rect x="64.00" y="9.14" width="4.57" height="4.57"/><rect x="68.57" y="9.14" width="4.57" height="4.57"/><rect x="73.14" y="9.14" width="4.57" height="4.57"/><rect x="77.71" y="9.14" width="4.57" height="4.57"/><rect x="86.86" y="9.14" width="4.57" height="4.57"/><rect x="96.00" y="9.14" width="4.57" height="4.57"/><rect x="109.71" y="9.14" width="4.57" height="4.57"/><rect x="114.29" y="9.14" width="4.57" height="4.57"/><rect x="123.43" y="9.14" width="4.57" height="4.57"/><rect x="150.86" y="9.14" width="4.57" height="4.57"/><rect x="4.57" y="13.71" width="4.57" height="4.57"/><rect x="13.71" y="13.71" width="4.57" height="4.57"/><rect x="18.29" y="13.71" width="4.57" height="4.57"/><rect x="22.86" y="13.71" width="4.57" height="4.57"/><rect x="32.00" y="13.71" width="4.57" height="4.57"/><rect x="45.71" y="13.71" width="4.57" height="4.57"/><rect x="54.86" y="13.71" width="4.57" height="4.57"/><rect x="64.00" y="13.71" width="4.57" height="4.57"/><rect x="77.71" y="13.71" width="4.57" height="4.57"/><rect x="86.86" y="13.71" width="4.57" height="4.57"/><rect x="96.00" y="13.71" width="4.57" height="4.57"/><rect x="100.57" y="13.71" width="4.57" height="4.57"/><rect x="105.14" y="13.71" width="4.57" height="4.57"/><rect x="109.71" y="13.71" width="4.57" height="4.57"/><rect x="114.29" y="13.71" width="4.57" height="4.57"/><rect x="123.43" y="13.71" width="4.57" height="4.57"/><rect x="132.57" y="13.71" width="4.57" height="4.57"/><rect x="137.14" y="13.71" width="4.57" height="4.57"/><rect x="141.71" y="13.71" width="4.57" height="4.57"/><rect x="150.86" y="13.71" width="4.57" height="4.57"/><rect x="4.57" y="18.29" width="4.57" height="4.57"/><rect x="13.71" y="18.29" width="4.57" height="4.57"/><rect x="18.29" y="18.29" width="4.57" height="4.57"/><rect x="22.86" y="18.29" width="4.57" height="4.57"/><rect x="32.00" y="18.29" width="4.57" height="4.57"/><rect x="45.71" y="18.29" width="4.57" height="4.57"/><rect x="50.29" y="18.29" width="4.57" height="4.57"/><rect x="59.43" y="18.29" width="4.57" height="4.57"/><rect x="64.00" y="18.29" width="4.57" height="4.57"/><rect x="68.57" y="18.29" width="4.57" height="4.57"/><rect x="77.71" y="18.29" width="4.57" height="4.57"/><rect x="82.29" y="18.29" width="4.57" height="4.57"/><rect x="86.86" y="18.29" width="4.57" height="4.57"/><rect x="91.43" y="18.29" width="4.57" height="4.57"/><rect x="96.00" y="18.29" width="4.57" height="4.57"/><rect x="100.57" y="18.29" width="4.57" height="4.57"/><rect x="105.14" y="18.29" width="4.57" height="4.57"/><rect x="123.43" y="18.29" width="4.57" height="4.57"/><rect x="132.57" y="18.29" width="4.57" height="4.57"/><rect x="137.14" y="18.29" width="4.57" height="4.57"/><rect x="141.71" y="18.29" width="4.57" height="4.57"/><rect x="150.86" y="18.29" width="4.57" height="4.57"/><rect x="4.57" y="22.86" width="4.57" height="4.57"/><rect x="13.71" y="22.86" width="4.57" height="4.57"/><rect x="18.29" y="22.86" width="4.57" height="4.57"/><rect x="22.86" y="22.86" width="4.57" height="4.57"/><rect x="32.00" y="22.86" width="4.57" height="4.57"/><rect x="45.71" y="22.86" width="4.57" height="4.57"/><rect x="54.86" y="22.86" width="4.57" height="4.57"/><rect x="68.57" y="22.86" width="4.57" height="4.57"/><rect x="86.86" y="22.86" width="4.57" height="4.57"/><rect x="91.43" y="22.86" width="4.57" height="4.57"/><rect x="96.00" y="22.86" width="4.57" height="4.57"/><rect x="114.29" y="22.86" width="4.57" height="4.57"/><rect x="123.43" y="22.86" width="4.57" height="4.57"/><rect x="132.57" y="22.86" width="4.57" height="4.57"/><rect x="137.14" y="22.86" width="4.57" height="4.57"/><rect x="141.71" y="22.86" width="4.57" height="4.57"/><rect x="150.86" y="22.86" width="4.57" height="4.57"/><rect x="4.57" y="27.43" width="4.57" height="4.57"/><rect x="32.00" y="27.43" width="4.57" height="4.57"/><rect x="41.14" y="27.43" width="4.57" height="4.57"/><rect x="54.86" y="27.43" width="4.57" height="4.57"/><rect x="68.57" y="27.43" width="4.57" height="4.57"/><rect x="73.14" y="27.43" width="4.57" height="4.57"/><rect x="77.71" y="27.43" width="4.57" height="4.57"/><rect x="91.43" y="27.43" width="4.57" height="4.57"/><rect x="105.14" y="27.43" width="4.57" height="4.57"/><rect x="114.29" y="27.43" width="4.57" height="4.57"/><rect x="123.43" y="27.43" width="4.57" height="4.57"/><rect x="150.86" y="27.43" width="4.57" height="4.57"/><rect x="4.57" y="32.00" width="4.57" height="4.57"/><rect x="9.14" y="32.00" width="4.57" height="4.57"/><rect x="13.71" y="32.00" width="4.57" height="4.57"/><rect x="18.29" y="32.00" width="4.57" height="4.57"/><rect x="22.86" y="32.00" width="4.57" height="4.57"/><rect x="27.43" y="32.00" width="4.57" height="4.57"/><rect x="32.00" y="32.00" width="4.57" height="4.57"/><rect x="41.14" y="32.00" width="4.57" height="4.57"/><rect x="50.29" y="32.00" width="4.57" height="4.57"/><rect x="59.43" y="32.00" width="4.57" height="4.57"/><rect x="68.57" y="32.00" width="4.57" height="4.57"/><rect x="77.71" y="32.00" width="4.57" height="4.57"/><rect x="86.86" y="32.00" width="4.57" height="4.57"/><rect x="96.00" y="32.00" width="4.57" height="4.57"/><rect x="105.14" y="32.00" width="4.57" height="4.57"/><rect x="114.29" y="32.00" width="4.57" height="4.57"/><rect x="123.43" y="32.00" width="4.57" height="4.57"/><rect x="128.00" y="32.00" width="4.57" height="4.57"/><rect x="132.57" y="32.00" width="4.57" height="4.57"/><rect x="137.14" y="32.00" width="4.57" height="4.57"/><rect x="141.71" y="32.00" width="4.57" height="4.57"/><rect x="146.29" y="32.00" width="4.57" height="4.57"/><rect x="150.86" y="32.00" width="4.57" height="4.57"/><rect x="50.29" y="36.57" width="4.57" height="4.57"/><rect x="59.43" y="36.57" width="4.57" height="4.57"/><rect x="73.14" y="36.57" width="4.57" height="4.57"/><rect x="77.71" y="36.57" width="4.57" height="4.57"/><rect x="82.29" y="36.57" width="4.57" height="4.57"/><rect x="86.86" y="36.57" width="4.57" height="4.57"/><rect x="100.57" y="36.57" width="4.57" height="4.57"/><rect x="105.14" y="36.57" width="4.57" height="4.57"/><rect x="4.57" y="41.14" width="4.57" height="4.57"/><rect x="18.29" y="41.14" width="4.57" height="4.57"/><rect x="27.43" y="41.14" width="4.57" height="4.57"/><rect x="32.00" y="41.14" width="4.57" height="4.57"/><rect x="41.14" y="41.14" width="4.57" height="4.57"/><rect x="45.71" y="41.14" width="4.57" height="4.57"/><rect x="50.29" y="41.14" width="4.57" height="4.57"/><rect x="59.43" y="41.14" width="4.57" height="4.57"/><rect x="64.00" y="41.14" width="4.57" height="4.57"/><rect x="68.57" y="41.14" width="4.57" height="4.57"/><rect x="82.29" y="41.14" width="4.57" height="4.57"/><rect x="96.00" y="41.14" width="4.57" height="4.57"/><rect x="100.57" y="41.14" width="4.57" height="4.57"/><rect x="109.71" y="41.14" width="4.57" height="4.57"/><rect x="118.86" y="41.14" width="4.57" height="4.57"/><rect x="128.00" y="41.14" width="4.57" height="4.57"/><rect x="18.29" y="45.71" width="4.57" height="4.57"/><rect x="27.43" y="45.71" width="4.57" height="4.57"/><rect x="41.14" y="45.71" width="4.57" height="4.57"/><rect x="54.86" y="45.71" width="4.57" height="4.57"/><rect x="59.43" y="45.71" width="4.57" height="4.57"/><rect x="64.00" y="45.71" width="4.57" height="4.57"/><rect x="82.29" y="45.71" width="4.57" height="4.57"/><rect x="100.57" y="45.71" width="4.57" height="4.57"/><rect x="105.14" y="45.71" width="4.57" height="4.57"/><rect x="109.71" y="45.71" width="4.57" height="4.57"/><rect x="114.29" y="45.71" width="4.57" height="4.57"/><rect x="118.86" y="45.71" width="4.57" height="4.57"/><rect x="123.43" y="45.71" width="4.57" height="4.57"/><rect x="141.71" y="45.71" width="4.57" height="4.57"/><rect x="146.29" y="45.71" width="4.57" height="4.57"/><rect x="9.14" y="50.29" width="4.57" height="4.57"/><rect x="13.71" y="50.29" width="4.57" height="4.57"/><rect x="22.86" y="50.29" width="4.57" height="4.57"/><rect x="32.00" y="50.29" width="4.57" height="4.57"/><rect x="36.57" y="50.29" width="4.57" height="4.57"/><rect x="50.29" y="50.29" width="4.57" height="4.57"/><rect x="54.86" y="50.29" width="4.57" height="4.57"/><rect x="59.43" y="50.29" width="4.57" height="4.57"/><rect x="64.00" y="50.29" width="4.57" height="4.57"/><rect x="68.57" y="50.29" width="4.57" height="4.57"/><rect x="77.71" y="50.29" width="4.57" height="4.57"/><rect x="86.86" y="50.29" width="4.57" height="4.57"/><rect x="91.43" y="50.29" width="4.57" height="4.57"/><rect x="96.00" y="50.29" width="4.57" height="4.57"/><rect x="118.86" y="50.29" width="4.57" height="4.57"/><rect x="141.71" y="50.29" width="4.57" height="4.57"/><rect x="150.86" y="50.29" width="4.57" height="4.57"/><rect x="4.57" y="54.86" width="4.57" height="4.57"/><rect x="41.14" y="54.86" width="4.57" height="4.57"/><rect x="64.00" y="54.86" width="4.57" height="4.57"/><rect x="86.86" y="54.86" width="4.57" height="4.57"/><rect x="100.57" y="54.86" width="4.57" height="4.57"/><rect x="105.14" y="54.86" width="4.57" height="4.57"/><rect x="109.71" y="54.86" width="4.57" height="4.57"/><rect x="114.29" y="54.86" width="4.57" height="4.57"/><rect x="123.43" y="54.86" width="4.57" height="4.57"/><rect x="137.14" y="54.86" width="4.57" height="4.57"/><rect x="150.86" y="54.86" width="4.57" height="4.57"/><rect x="9.14" y="59.43" width="4.57" height="4.57"/><rect x="18.29" y="59.43" width="4.57" height="4.57"/><rect x="22.86" y="59.43" width="4.57" height="4.57"/><rect x="32.00" y="59.43" width="4.57" height="4.57"/><rect x="36.57" y="59.43" width="4.57" height="4.57"/><rect x="50.29" y="59.43" width="4.57" height="4.57"/><rect x="68.57" y="59.43" width="4.57" height="4.57"/><rect x="77.71" y="59.43" width="4.57" height="4.57"/><rect x="86.86" y="59.43" width="4.57" height="4.57"/><rect x="96.00" y="59.43" width="4.57" height="4.57"/><rect x="105.14" y="59.43" width="4.57" height="4.57"/><rect x="114.29" y="59.43" width="4.57" height="4.57"/><rect x="118.86" y="59.43" width="4.57" height="4.57"/><rect x="123.43" y="59.43" width="4.57" height="4.57"/><rect x="128.00" y="59.43" width="4.57" height="4.57"/><rect x="132.57" y="59.43" width="4.57" height="4.57"/><rect x="137.14" y="59.43" width="4.57" height="4.57"/><rect x="141.71" y="59.43" width="4.57" height="4.57"/><rect x="9.14" y="64.00" width="4.57" height="4.57"/><rect x="13.71" y="64.00" width="4.57" height="4.57"/><rect x="18.29" y="64.00" width="4.57" height="4.57"/><rect x="22.86" y="64.00" width="4.57" height="4.57"/><rect x="27.43" y="64.00" width="4.57" height="4.57"/><rect x="59.43" y="64.00" width="4.57" height="4.57"/><rect x="64.00" y="64.00" width="4.57" height="4.57"/><rect x="68.57" y="64.00" width="4.57" height="4.57"/><rect x="73.14" y="64.00" width="4.57" height="4.57"/><rect x="82.29" y="64.00" width="4.57" height="4.57"/><rect x="86.86" y="64.00" width="4.57" height="4.57"/><rect x="96.00" y="64.00" width="4.57" height="4.57"/><rect x="100.57" y="64.00" width="4.57" height="4.57"/><rect x="109.71" y="64.00" width="4.57" height="4.57"/><rect x="114.29" y="64.00" width="4.57" height="4.57"/><rect x="132.57" y="64.00" width="4.57" height="4.57"/><rect x="4.57" y="68.57" width="4.57" height="4.57"/><rect x="13.71" y="68.57" width="4.57" height="4.57"/><rect x="18.29" y="68.57" width="4.57" height="4.57"/><rect x="27.43" y="68.57" width="4.57" height="4.57"/><rect x="32.00" y="68.57" width="4.57" height="4.57"/><rect x="41.14" y="68.57" width="4.57" height="4.57"/><rect x="50.29" y="68.57" width="4.57" height="4.57"/><rect x="59.43" y="68.57" width="4.57" height="4.57"/><rect x="68.57" y="68.57" width="4.57" height="4.57"/><rect x="73.14" y="68.57" width="4.57" height="4.57"/><rect x="77.71" y="68.57" width="4.57" height="4.57"/><rect x="82.29" y="68.57" width="4.57" height="4.57"/><rect x="86.86" y="68.57" width="4.57" height="4.57"/><rect x="91.43" y="68.57" width="4.57" height="4.57"/><rect x="100.57" y="68.57" width="4.57" height="4.57"/><rect x="109.71" y="68.57" width="4.57" height="4.57"/><rect x="118.86" y="68.57" width="4.57" height="4.57"/><rect x="123.43" y="68.57" width="4.57" height="4.57"/><rect x="137.14" y="68.57" width="4.57" height="4.57"/><rect x="141.71" y="68.57" width="4.57" height="4.57"/><rect x="146.29" y="68.57" width="4.57" height="4.57"/><rect x="9.14" y="73.14" width="4.57" height="4.57"/><rect x="13.71" y="73.14" width="4.57" height="4.57"/><rect x="27.43" y="73.14" width="4.57" height="4.57"/><rect x="36.57" y="73.14" width="4.57" height="4.57"/><rect x="41.14" y="73.14" width="4.57" height="4.57"/><rect x="50.29" y="73.14" width="4.57" height="4.57"/><rect x="54.86" y="73.14" width="4.57" height="4.57"/><rect x="59.43" y="73.14" width="4.57" height="4.57"/><rect x="64.00" y="73.14" width="4.57" height="4.57"/><rect x="68.57" y="73.14" width="4.57" height="4.57"/><rect x="77.71" y="73.14" width="4.57" height="4.57"/><rect x="82.29" y="73.14" width="4.57" height="4.57"/><rect x="86.86" y="73.14" width="4.57" height="4.57"/><rect x="96.00" y="73.14" width="4.57" height="4.57"/><rect x="100.57" y="73.14" width="4.57" height="4.57"/><rect x="105.14" y="73.14" width="4.57" height="4.57"/><rect x="109.71" y="73.14" width="4.57" height="4.57"/><rect x="114.29" y="73.14" width="4.57" height="4.57"/><rect x="123.43" y="73.14" width="4.57" height="4.57"/><rect x="128.00" y="73.14" width="4.57" height="4.57"/><rect x="132.57" y="73.14" width="4.57" height="4.57"/><rect x="146.29" y="73.14" width="4.57" height="4.57"/><rect x="150.86" y="73.14" width="4.57" height="4.57"/><rect x="4.57" y="77.71" width="4.57" height="4.57"/><rect x="9.14" y="77.71" width="4.57" height="4.57"/><rect x="27.43" y="77.71" width="4.57" height="4.57"/><rect x="32.00" y="77.71" width="4.57" height="4.57"/><rect x="41.14" y="77.71" width="4.57" height="4.57"/><rect x="50.29" y="77.71" width="4.57" height="4.57"/><rect x="64.00" y="77.71" width="4.57" height="4.57"/><rect x="68.57" y="77.71" width="4.57" height="4.57"/><rect x="73.14" y="77.71" width="4.57" height="4.57"/><rect x="77.71" y="77.71" width="4.57" height="4.57"/><rect x="100.57" y="77.71" width="4.57" height="4.57"/><rect x="105.14" y="77.71" width="4.57" height="4.57"/><rect x="114.29" y="77.71" width="4.57" height="4.57"/><rect x="123.43" y="77.71" width="4.57" height="4.57"/><rect x="128.00" y="77.71" width="4.57" height="4.57"/><rect x="141.71" y="77.71" width="4.57" height="4.57"/><rect x="150.86" y="77.71" width="4.57" height="4.57"/><rect x="13.71" y="82.29" width="4.57" height="4.57"/><rect x="18.29" y="82.29" width="4.57" height="4.57"/><rect x="22.86" y="82.29" width="4.57" height="4.57"/><rect x="27.43" y="82.29" width="4.57" height="4.57"/><rect x="36.57" y="82.29" width="4.57" height="4.57"/><rect x="50.29" y="82.29" width="4.57" height="4.57"/><rect x="59.43" y="82.29" width="4.57" height="4.57"/><rect x="64.00" y="82.29" width="4.57" height="4.57"/><rect x="82.29" y="82.29" width="4.57" height="4.57"/><rect x="105.14" y="82.29" width="4.57" height="4.57"/><rect x="109.71" y="82.29" width="4.57" height="4.57"/><rect x="114.29" y="82.29" width="4.57" height="4.57"/><rect x="118.86" y="82.29" width="4.57" height="4.57"/><rect x="123.43" y="82.29" width="4.57" height="4.57"/><rect x="137.14" y="82.29" width="4.57" height="4.57"/><rect x="4.57" y="86.86" width="4.57" height="4.57"/><rect x="22.86" y="86.86" width="4.57" height="4.57"/><rect x="27.43" y="86.86" width="4.57" height="4.57"/><rect x="32.00" y="86.86" width="4.57" height="4.57"/><rect x="36.57" y="86.86" width="4.57" height="4.57"/><rect x="50.29" y="86.86" width="4.57" height="4.57"/><rect x="54.86" y="86.86" width="4.57" height="4.57"/><rect x="82.29" y="86.86" width="4.57" height="4.57"/><rect x="100.57" y="86.86" width="4.57" height="4.57"/><rect x="114.29" y="86.86" width="4.57" height="4.57"/><rect x="132.57" y="86.86" width="4.57" height="4.57"/><rect x="137.14" y="86.86" width="4.57" height="4.57"/><rect x="146.29" y="86.86" width="4.57" height="4.57"/><rect x="150.86" y="86.86" width="4.57" height="4.57"/><rect x="4.57" y="91.43" width="4.57" height="4.57"/><rect x="9.14" y="91.43" width="4.57" height="4.57"/><rect x="27.43" y="91.43" width="4.57" height="4.57"/><rect x="45.71" y="91.43" width="4.57" height="4.57"/><rect x="64.00" y="91.43" width="4.57" height="4.57"/><rect x="73.14" y="91.43" width="4.57" height="4.57"/><rect x="105.14" y="91.43" width="4.57" height="4.57"/><rect x="118.86" y="91.43" width="4.57" height="4.57"/><rect x="123.43" y="91.43" width="4.57" height="4.57"/><rect x="128.00" y="91.43" width="4.57" height="4.57"/><rect x="132.57" y="91.43" width="4.57" height="4.57"/><rect x="9.14" y="96.00" width="4.57" height="4.57"/><rect x="22.86" y="96.00" width="4.57" height="4.57"/><rect x="32.00" y="96.00" width="4.57" height="4.57"/><rect x="50.29" y="96.00" width="4.57" height="4.57"/><rect x="59.43" y="96.00" width="4.57" height="4.57"/><rect x="64.00" y="96.00" width="4.57" height="4.57"/><rect x="68.57" y="96.00" width="4.57" height="4.57"/><rect x="73.14" y="96.00" width="4.57" height="4.57"/><rect x="82.29" y="96.00" width="4.57" height="4.57"/><rect x="96.00" y="96.00" width="4.57" height="4.57"/><rect x="114.29" y="96.00" width="4.57" height="4.57"/><rect x="128.00" y="96.00" width="4.57" height="4.57"/><rect x="132.57" y="96.00" width="4.57" height="4.57"/><rect x="137.14" y="96.00" width="4.57" height="4.57"/><rect x="150.86" y="96.00" width="4.57" height="4.57"/><rect x="13.71" y="100.57" width="4.57" height="4.57"/><rect x="18.29" y="100.57" width="4.57" height="4.57"/><rect x="27.43" y="100.57" width="4.57" height="4.57"/><rect x="36.57" y="100.57" width="4.57" height="4.57"/><rect x="45.71" y="100.57" width="4.57" height="4.57"/><rect x="54.86" y="100.57" width="4.57" height="4.57"/><rect x="59.43" y="100.57" width="4.57" height="4.57"/><rect x="68.57" y="100.57" width="4.57" height="4.57"/><rect x="73.14" y="100.57" width="4.57" height="4.57"/><rect x="91.43" y="100.57" width="4.57" height="4.57"/><rect x="100.57" y="100.57" width="4.57" height="4.57"/><rect x="114.29" y="100.57" width="4.57" height="4.57"/><rect x="123.43" y="100.57" width="4.57" height="4.57"/><rect x="137.14" y="100.57" width="4.57" height="4.57"/><rect x="150.86" y="100.57" width="4.57" height="4.57"/><rect x="4.57" y="105.14" width="4.57" height="4.57"/><rect x="9.14" y="105.14" width="4.57" height="4.57"/><rect x="13.71" y="105.14" width="4.57" height="4.57"/><rect x="18.29" y="105.14" width="4.57" height="4.57"/><rect x="22.86" y="105.14" width="4.57" height="4.57"/><rect x="32.00" y="105.14" width="4.57" height="4.57"/><rect x="41.14" y="105.14" width="4.57" height="4.57"/><rect x="54.86" y="105.14" width="4.57" height="4.57"/><rect x="68.57" y="105.14" width="4.57" height="4.57"/><rect x="77.71" y="105.14" width="4.57" height="4.57"/><rect x="82.29" y="105.14" width="4.57" height="4.57"/><rect x="86.86" y="105.14" width="4.57" height="4.57"/><rect x="91.43" y="105.14" width="4.57" height="4.57"/><rect x="100.57" y="105.14" width="4.57" height="4.57"/><rect x="123.43" y="105.14" width="4.57" height="4.57"/><rect x="132.57" y="105.14" width="4.57" height="4.57"/><rect x="137.14" y="105.14" width="4.57" height="4.57"/><rect x="141.71" y="105.14" width="4.57" height="4.57"/><rect x="146.29" y="105.14" width="4.57" height="4.57"/><rect x="150.86" y="105.14" width="4.57" height="4.57"/><rect x="9.14" y="109.71" width="4.57" height="4.57"/><rect x="18.29" y="109.71" width="4.57" height="4.57"/><rect x="27.43" y="109.71" width="4.57" height="4.57"/><rect x="41.14" y="109.71" width="4.57" height="4.57"/><rect x="45.71" y="109.71" width="4.57" height="4.57"/><rect x="50.29" y="109.71" width="4.57" height="4.57"/><rect x="59.43" y="109.71" width="4.57" height="4.57"/><rect x="73.14" y="109.71" width="4.57" height="4.57"/><rect x="86.86" y="109.71" width="4.57" height="4.57"/><rect x="91.43" y="109.71" width="4.57" height="4.57"/><rect x="96.00" y="109.71" width="4.57" height="4.57"/><rect x="100.57" y="109.71" width="4.57" height="4.57"/><rect x="105.14" y="109.71" width="4.57" height="4.57"/><rect x="109.71" y="109.71" width="4.57" height="4.57"/><rect x="114.29" y="109.71" width="4.57" height="4.57"/><rect x="128.00" y="109.71" width="4.57" height="4.57"/><rect x="137.14" y="109.71" width="4.57" height="4.57"/><rect x="146.29" y="109.71" width="4.57" height="4.57"/><rect x="150.86" y="109.71" width="4.57" height="4.57"/><rect x="4.57" y="114.29" width="4.57" height="4.57"/><rect x="22.86" y="114.29" width="4.57" height="4.57"/><rect x="27.43" y="114.29" width="4.57" height="4.57"/><rect x="32.00" y="114.29" width="4.57" height="4.57"/><rect x="36.57" y="114.29" width="4.57" height="4.57"/><rect x="45.71" y="114.29" width="4.57" height="4.57"/><rect x="54.86" y="114.29" width="4.57" height="4.57"/><rect x="59.43" y="114.29" width="4.57" height="4.57"/><rect x="68.57" y="114.29" width="4.57" height="4.57"/><rect x="77.71" y="114.29" width="4.57" height="4.57"/><rect x="82.29" y="114.29" width="4.57" height="4.57"/><rect x="114.29" y="114.29" width="4.57" height="4.57"/><rect x="118.86" y="114.29" width="4.57" height="4.57"/><rect x="123.43" y="114.29" width="4.57" height="4.57"/><rect x="128.00" y="114.29" width="4.57" height="4.57"/><rect x="132.57" y="114.29" width="4.57" height="4.57"/><rect x="141.71" y="114.29" width="4.57" height="4.57"/><rect x="146.29" y="114.29" width="4.57" height="4.57"/><rect x="41.14" y="118.86" width="4.57" height="4.57"/><rect x="50.29" y="118.86" width="4.57" height="4.57"/><rect x="59.43" y="118.86" width="4.57" height="4.57"/><rect x="64.00" y="118.86" width="4.57" height="4.57"/><rect x="68.57" y="118.86" width="4.57" height="4.57"/><rect x="82.29" y="118.86" width="4.57" height="4.57"/><rect x="91.43" y="118.86" width="4.57" height="4.57"/><rect x="96.00" y="118.86" width="4.57" height="4.57"/><rect x="100.57" y="118.86" width="4.57" height="4.57"/><rect x="109.71" y="118.86" width="4.57" height="4.57"/><rect x="114.29" y="118.86" width="4.57" height="4.57"/><rect x="132.57" y="118.86" width="4.57" height="4.57"/><rect x="137.14" y="118.86" width="4.57" height="4.57"/><rect x="141.71" y="118.86" width="4.57" height="4.57"/><rect x="150.86" y="118.86" width="4.57" height="4.57"/><rect x="4.57" y="123.43" width="4.57" height="4.57"/><rect x="9.14" y="123.43" width="4.57" height="4.57"/><rect x="13.71" y="123.43" width="4.57" height="4.57"/><rect x="18.29" y="123.43" width="4.57" height="4.57"/><rect x="22.86" y="123.43" width="4.57" height="4.57"/><rect x="27.43" y="123.43" width="4.57" height="4.57"/><rect x="32.00" y="123.43" width="4.57" height="4.57"/><rect x="45.71" y="123.43" width="4.57" height="4.57"/><rect x="59.43" y="123.43" width="4.57" height="4.57"/><rect x="64.00" y="123.43" width="4.57" height="4.57"/><rect x="82.29" y="123.43" width="4.57" height="4.57"/><rect x="86.86" y="123.43" width="4.57" height="4.57"/><rect x="96.00" y="123.43" width="4.57" height="4.57"/><rect x="105.14" y="123.43" width="4.57" height="4.57"/><rect x="114.29" y="123.43" width="4.57" height="4.57"/><rect x="123.43" y="123.43" width="4.57" height="4.57"/><rect x="132.57" y="123.43" width="4.57" height="4.57"/><rect x="141.71" y="123.43" width="4.57" height="4.57"/><rect x="146.29" y="123.43" width="4.57" height="4.57"/><rect x="4.57" y="128.00" width="4.57" height="4.57"/><rect x="32.00" y="128.00" width="4.57" height="4.57"/><rect x="41.14" y="128.00" width="4.57" height="4.57"/><rect x="45.71" y="128.00" width="4.57" height="4.57"/><rect x="50.29" y="128.00" width="4.57" height="4.57"/><rect x="54.86" y="128.00" width="4.57" height="4.57"/><rect x="64.00" y="128.00" width="4.57" height="4.57"/><rect x="77.71" y="128.00" width="4.57" height="4.57"/><rect x="82.29" y="128.00" width="4.57" height="4.57"/><rect x="86.86" y="128.00" width="4.57" height="4.57"/><rect x="96.00" y="128.00" width="4.57" height="4.57"/><rect x="100.57" y="128.00" width="4.57" height="4.57"/><rect x="105.14" y="128.00" width="4.57" height="4.57"/><rect x="114.29" y="128.00" width="4.57" height="4.57"/><rect x="132.57" y="128.00" width="4.57" height="4.57"/><rect x="146.29" y="128.00" width="4.57" height="4.57"/><rect x="150.86" y="128.00" width="4.57" height="4.57"/><rect x="4.57" y="132.57" width="4.57" height="4.57"/><rect x="13.71" y="132.57" width="4.57" height="4.57"/><rect x="18.29" y="132.57" width="4.57" height="4.57"/><rect x="22.86" y="132.57" width="4.57" height="4.57"/><rect x="32.00" y="132.57" width="4.57" height="4.57"/><rect x="45.71" y="132.57" width="4.57" height="4.57"/><rect x="50.29" y="132.57" width="4.57" height="4.57"/><rect x="54.86" y="132.57" width="4.57" height="4.57"/><rect x="86.86" y="132.57" width="4.57" height="4.57"/><rect x="91.43" y="132.57" width="4.57" height="4.57"/><rect x="96.00" y="132.57" width="4.57" height="4.57"/><rect x="114.29" y="132.57" width="4.57" height="4.57"/><rect x="118.86" y="132.57" width="4.57" height="4.57"/><rect x="123.43" y="132.57" width="4.57" height="4.57"/><rect x="128.00" y="132.57" width="4.57" height="4.57"/><rect x="132.57" y="132.57" width="4.57" height="4.57"/><rect x="141.71" y="132.57" width="4.57" height="4.57"/><rect x="4.57" y="137.14" width="4.57" height="4.57"/><rect x="13.71" y="137.14" width="4.57" height="4.57"/><rect x="18.29" y="137.14" width="4.57" height="4.57"/><rect x="22.86" y="137.14" width="4.57" height="4.57"/><rect x="32.00" y="137.14" width="4.57" height="4.57"/><rect x="41.14" y="137.14" width="4.57" height="4.57"/><rect x="54.86" y="137.14" width="4.57" height="4.57"/><rect x="59.43" y="137.14" width="4.57" height="4.57"/><rect x="73.14" y="137.14" width="4.57" height="4.57"/><rect x="77.71" y="137.14" width="4.57" height="4.57"/><rect x="86.86" y="137.14" width="4.57" height="4.57"/><rect x="91.43" y="137.14" width="4.57" height="4.57"/><rect x="105.14" y="137.14" width="4.57" height="4.57"/><rect x="109.71" y="137.14" width="4.57" height="4.57"/><rect x="123.43" y="137.14" width="4.57" height="4.57"/><rect x="137.14" y="137.14" width="4.57" height="4.57"/><rect x="141.71" y="137.14" width="4.57" height="4.57"/><rect x="146.29" y="137.14" width="4.57" height="4.57"/><rect x="4.57" y="141.71" width="4.57" height="4.57"/><rect x="13.71" y="141.71" width="4.57" height="4.57"/><rect x="18.29" y="141.71" width="4.57" height="4.57"/><rect x="22.86" y="141.71" width="4.57" height="4.57"/><rect x="32.00" y="141.71" width="4.57" height="4.57"/><rect x="45.71" y="141.71" width="4.57" height="4.57"/><rect x="59.43" y="141.71" width="4.57" height="4.57"/><rect x="64.00" y="141.71" width="4.57" height="4.57"/><rect x="73.14" y="141.71" width="4.57" height="4.57"/><rect x="77.71" y="141.71" width="4.57" height="4.57"/><rect x="82.29" y="141.71" width="4.57" height="4.57"/><rect x="91.43" y="141.71" width="4.57" height="4.57"/><rect x="96.00" y="141.71" width="4.57" height="4.57"/><rect x="105.14" y="141.71" width="4.57" height="4.57"/><rect x="114.29" y="141.71" width="4.57" height="4.57"/><rect x="123.43" y="141.71" width="4.57" height="4.57"/><rect x="128.00" y="141.71" width="4.57" height="4.57"/><rect x="132.57" y="141.71" width="4.57" height="4.57"/><rect x="141.71" y="141.71" width="4.57" height="4.57"/><rect x="150.86" y="141.71" width="4.57" height="4.57"/><rect x="4.57" y="146.29" width="4.57" height="4.57"/><rect x="32.00" y="146.29" width="4.57" height="4.57"/><rect x="45.71" y="146.29" width="4.57" height="4.57"/><rect x="59.43" y="146.29" width="4.57" height="4.57"/><rect x="64.00" y="146.29" width="4.57" height="4.57"/><rect x="68.57" y="146.29" width="4.57" height="4.57"/><rect x="82.29" y="146.29" width="4.57" height="4.57"/><rect x="91.43" y="146.29" width="4.57" height="4.57"/><rect x="96.00" y="146.29" width="4.57" height="4.57"/><rect x="100.57" y="146.29" width="4.57" height="4.57"/><rect x="114.29" y="146.29" width="4.57" height="4.57"/><rect x="4.57" y="150.86" width="4.57" height="4.57"/><rect x="9.14" y="150.86" width="4.57" height="4.57"/><rect x="13.71" y="150.86" width="4.57" height="4.57"/><rect x="18.29" y="150.86" width="4.57" height="4.57"/><rect x="22.86" y="150.86" width="4.57" height="4.57"/><rect x="27.43" y="150.86" width="4.57" height="4.57"/><rect x="32.00" y="150.86" width="4.57" height="4.57"/><rect x="41.14" y="150.86" width="4.57" height="4.57"/><rect x="50.29" y="150.86" width="4.57" height="4.57"/><rect x="64.00" y="150.86" width="4.57" height="4.57"/><rect x="68.57" y="150.86" width="4.57" height="4.57"/><rect x="73.14" y="150.86" width="4.57" height="4.57"/><rect x="77.71" y="150.86" width="4.57" height="4.57"/><rect x="82.29" y="150.86" width="4.57" height="4.57"/><rect x="91.43" y="150.86" width="4.57" height="4.57"/><rect x="100.57" y="150.86" width="4.57" height="4.57"/><rect x="114.29" y="150.86" width="4.57" height="4.57"/><rect x="118.86" y="150.86" width="4.57" height="4.57"/><rect x="123.43" y="150.86" width="4.57" height="4.57"/><rect x="128.00" y="150.86" width="4.57" height="4.57"/><rect x="132.57" y="150.86" width="4.57" height="4.57"/><rect x="137.14" y="150.86" width="4.57" height="4.57"/><rect x="146.29" y="150.86" width="4.57" height="4.57"/></g></svg></details></div><div class="dcard"><b>Bitcoin</b><span>Native SegWit(推荐)</span><code onclick="navigator.clipboard&&navigator.clipboard.writeText(this.textContent)" title="点击复制">bc1qtpxutlz9ttve7z7mnvt87w95njeejmeallvwyg</code><details class="dqr"><summary>展开二维码</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" style="background:#fff;border-radius:4px"><g fill="#0c1116"><rect x="5.16" y="5.16" width="5.16" height="5.16"/><rect x="10.32" y="5.16" width="5.16" height="5.16"/><rect x="15.48" y="5.16" width="5.16" height="5.16"/><rect x="20.65" y="5.16" width="5.16" height="5.16"/><rect x="25.81" y="5.16" width="5.16" height="5.16"/><rect x="30.97" y="5.16" width="5.16" height="5.16"/><rect x="36.13" y="5.16" width="5.16" height="5.16"/><rect x="51.61" y="5.16" width="5.16" height="5.16"/><rect x="56.77" y="5.16" width="5.16" height="5.16"/><rect x="72.26" y="5.16" width="5.16" height="5.16"/><rect x="77.42" y="5.16" width="5.16" height="5.16"/><rect x="82.58" y="5.16" width="5.16" height="5.16"/><rect x="103.23" y="5.16" width="5.16" height="5.16"/><rect x="118.71" y="5.16" width="5.16" height="5.16"/><rect x="123.87" y="5.16" width="5.16" height="5.16"/><rect x="129.03" y="5.16" width="5.16" height="5.16"/><rect x="134.19" y="5.16" width="5.16" height="5.16"/><rect x="139.35" y="5.16" width="5.16" height="5.16"/><rect x="144.52" y="5.16" width="5.16" height="5.16"/><rect x="149.68" y="5.16" width="5.16" height="5.16"/><rect x="5.16" y="10.32" width="5.16" height="5.16"/><rect x="36.13" y="10.32" width="5.16" height="5.16"/><rect x="61.94" y="10.32" width="5.16" height="5.16"/><rect x="77.42" y="10.32" width="5.16" height="5.16"/><rect x="82.58" y="10.32" width="5.16" height="5.16"/><rect x="92.90" y="10.32" width="5.16" height="5.16"/><rect x="98.06" y="10.32" width="5.16" height="5.16"/><rect x="118.71" y="10.32" width="5.16" height="5.16"/><rect x="149.68" y="10.32" width="5.16" height="5.16"/><rect x="5.16" y="15.48" width="5.16" height="5.16"/><rect x="15.48" y="15.48" width="5.16" height="5.16"/><rect x="20.65" y="15.48" width="5.16" height="5.16"/><rect x="25.81" y="15.48" width="5.16" height="5.16"/><rect x="36.13" y="15.48" width="5.16" height="5.16"/><rect x="51.61" y="15.48" width="5.16" height="5.16"/><rect x="56.77" y="15.48" width="5.16" height="5.16"/><rect x="61.94" y="15.48" width="5.16" height="5.16"/><rect x="67.10" y="15.48" width="5.16" height="5.16"/><rect x="87.74" y="15.48" width="5.16" height="5.16"/><rect x="92.90" y="15.48" width="5.16" height="5.16"/><rect x="98.06" y="15.48" width="5.16" height="5.16"/><rect x="103.23" y="15.48" width="5.16" height="5.16"/><rect x="108.39" y="15.48" width="5.16" height="5.16"/><rect x="118.71" y="15.48" width="5.16" height="5.16"/><rect x="129.03" y="15.48" width="5.16" height="5.16"/><rect x="134.19" y="15.48" width="5.16" height="5.16"/><rect x="139.35" y="15.48" width="5.16" height="5.16"/><rect x="149.68" y="15.48" width="5.16" height="5.16"/><rect x="5.16" y="20.65" width="5.16" height="5.16"/><rect x="15.48" y="20.65" width="5.16" height="5.16"/><rect x="20.65" y="20.65" width="5.16" height="5.16"/><rect x="25.81" y="20.65" width="5.16" height="5.16"/><rect x="36.13" y="20.65" width="5.16" height="5.16"/><rect x="56.77" y="20.65" width="5.16" height="5.16"/><rect x="67.10" y="20.65" width="5.16" height="5.16"/><rect x="77.42" y="20.65" width="5.16" height="5.16"/><rect x="82.58" y="20.65" width="5.16" height="5.16"/><rect x="103.23" y="20.65" width="5.16" height="5.16"/><rect x="108.39" y="20.65" width="5.16" height="5.16"/><rect x="118.71" y="20.65" width="5.16" height="5.16"/><rect x="129.03" y="20.65" width="5.16" height="5.16"/><rect x="134.19" y="20.65" width="5.16" height="5.16"/><rect x="139.35" y="20.65" width="5.16" height="5.16"/><rect x="149.68" y="20.65" width="5.16" height="5.16"/><rect x="5.16" y="25.81" width="5.16" height="5.16"/><rect x="15.48" y="25.81" width="5.16" height="5.16"/><rect x="20.65" y="25.81" width="5.16" height="5.16"/><rect x="25.81" y="25.81" width="5.16" height="5.16"/><rect x="36.13" y="25.81" width="5.16" height="5.16"/><rect x="51.61" y="25.81" width="5.16" height="5.16"/><rect x="56.77" y="25.81" width="5.16" height="5.16"/><rect x="61.94" y="25.81" width="5.16" height="5.16"/><rect x="77.42" y="25.81" width="5.16" height="5.16"/><rect x="82.58" y="25.81" width="5.16" height="5.16"/><rect x="87.74" y="25.81" width="5.16" height="5.16"/><rect x="92.90" y="25.81" width="5.16" height="5.16"/><rect x="118.71" y="25.81" width="5.16" height="5.16"/><rect x="129.03" y="25.81" width="5.16" height="5.16"/><rect x="134.19" y="25.81" width="5.16" height="5.16"/><rect x="139.35" y="25.81" width="5.16" height="5.16"/><rect x="149.68" y="25.81" width="5.16" height="5.16"/><rect x="5.16" y="30.97" width="5.16" height="5.16"/><rect x="36.13" y="30.97" width="5.16" height="5.16"/><rect x="46.45" y="30.97" width="5.16" height="5.16"/><rect x="56.77" y="30.97" width="5.16" height="5.16"/><rect x="61.94" y="30.97" width="5.16" height="5.16"/><rect x="72.26" y="30.97" width="5.16" height="5.16"/><rect x="82.58" y="30.97" width="5.16" height="5.16"/><rect x="87.74" y="30.97" width="5.16" height="5.16"/><rect x="103.23" y="30.97" width="5.16" height="5.16"/><rect x="108.39" y="30.97" width="5.16" height="5.16"/><rect x="118.71" y="30.97" width="5.16" height="5.16"/><rect x="149.68" y="30.97" width="5.16" height="5.16"/><rect x="5.16" y="36.13" width="5.16" height="5.16"/><rect x="10.32" y="36.13" width="5.16" height="5.16"/><rect x="15.48" y="36.13" width="5.16" height="5.16"/><rect x="20.65" y="36.13" width="5.16" height="5.16"/><rect x="25.81" y="36.13" width="5.16" height="5.16"/><rect x="30.97" y="36.13" width="5.16" height="5.16"/><rect x="36.13" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="36.13" width="5.16" height="5.16"/><rect x="56.77" y="36.13" width="5.16" height="5.16"/><rect x="67.10" y="36.13" width="5.16" height="5.16"/><rect x="77.42" y="36.13" width="5.16" height="5.16"/><rect x="87.74" y="36.13" width="5.16" height="5.16"/><rect x="98.06" y="36.13" width="5.16" height="5.16"/><rect x="108.39" y="36.13" width="5.16" height="5.16"/><rect x="118.71" y="36.13" width="5.16" height="5.16"/><rect x="123.87" y="36.13" width="5.16" height="5.16"/><rect x="129.03" y="36.13" width="5.16" height="5.16"/><rect x="134.19" y="36.13" width="5.16" height="5.16"/><rect x="139.35" y="36.13" width="5.16" height="5.16"/><rect x="144.52" y="36.13" width="5.16" height="5.16"/><rect x="149.68" y="36.13" width="5.16" height="5.16"/><rect x="51.61" y="41.29" width="5.16" height="5.16"/><rect x="61.94" y="41.29" width="5.16" height="5.16"/><rect x="67.10" y="41.29" width="5.16" height="5.16"/><rect x="82.58" y="41.29" width="5.16" height="5.16"/><rect x="92.90" y="41.29" width="5.16" height="5.16"/><rect x="103.23" y="41.29" width="5.16" height="5.16"/><rect x="108.39" y="41.29" width="5.16" height="5.16"/><rect x="5.16" y="46.45" width="5.16" height="5.16"/><rect x="20.65" y="46.45" width="5.16" height="5.16"/><rect x="30.97" y="46.45" width="5.16" height="5.16"/><rect x="36.13" y="46.45" width="5.16" height="5.16"/><rect x="46.45" y="46.45" width="5.16" height="5.16"/><rect x="56.77" y="46.45" width="5.16" height="5.16"/><rect x="61.94" y="46.45" width="5.16" height="5.16"/><rect x="72.26" y="46.45" width="5.16" height="5.16"/><rect x="77.42" y="46.45" width="5.16" height="5.16"/><rect x="87.74" y="46.45" width="5.16" height="5.16"/><rect x="98.06" y="46.45" width="5.16" height="5.16"/><rect x="103.23" y="46.45" width="5.16" height="5.16"/><rect x="113.55" y="46.45" width="5.16" height="5.16"/><rect x="123.87" y="46.45" width="5.16" height="5.16"/><rect x="10.32" y="51.61" width="5.16" height="5.16"/><rect x="15.48" y="51.61" width="5.16" height="5.16"/><rect x="20.65" y="51.61" width="5.16" height="5.16"/><rect x="25.81" y="51.61" width="5.16" height="5.16"/><rect x="46.45" y="51.61" width="5.16" height="5.16"/><rect x="56.77" y="51.61" width="5.16" height="5.16"/><rect x="67.10" y="51.61" width="5.16" height="5.16"/><rect x="72.26" y="51.61" width="5.16" height="5.16"/><rect x="77.42" y="51.61" width="5.16" height="5.16"/><rect x="87.74" y="51.61" width="5.16" height="5.16"/><rect x="92.90" y="51.61" width="5.16" height="5.16"/><rect x="98.06" y="51.61" width="5.16" height="5.16"/><rect x="108.39" y="51.61" width="5.16" height="5.16"/><rect x="118.71" y="51.61" width="5.16" height="5.16"/><rect x="134.19" y="51.61" width="5.16" height="5.16"/><rect x="149.68" y="51.61" width="5.16" height="5.16"/><rect x="5.16" y="56.77" width="5.16" height="5.16"/><rect x="15.48" y="56.77" width="5.16" height="5.16"/><rect x="25.81" y="56.77" width="5.16" height="5.16"/><rect x="30.97" y="56.77" width="5.16" height="5.16"/><rect x="36.13" y="56.77" width="5.16" height="5.16"/><rect x="41.29" y="56.77" width="5.16" height="5.16"/><rect x="56.77" y="56.77" width="5.16" height="5.16"/><rect x="61.94" y="56.77" width="5.16" height="5.16"/><rect x="67.10" y="56.77" width="5.16" height="5.16"/><rect x="87.74" y="56.77" width="5.16" height="5.16"/><rect x="92.90" y="56.77" width="5.16" height="5.16"/><rect x="103.23" y="56.77" width="5.16" height="5.16"/><rect x="113.55" y="56.77" width="5.16" height="5.16"/><rect x="123.87" y="56.77" width="5.16" height="5.16"/><rect x="129.03" y="56.77" width="5.16" height="5.16"/><rect x="139.35" y="56.77" width="5.16" height="5.16"/><rect x="144.52" y="56.77" width="5.16" height="5.16"/><rect x="10.32" y="61.94" width="5.16" height="5.16"/><rect x="15.48" y="61.94" width="5.16" height="5.16"/><rect x="25.81" y="61.94" width="5.16" height="5.16"/><rect x="41.29" y="61.94" width="5.16" height="5.16"/><rect x="51.61" y="61.94" width="5.16" height="5.16"/><rect x="67.10" y="61.94" width="5.16" height="5.16"/><rect x="72.26" y="61.94" width="5.16" height="5.16"/><rect x="77.42" y="61.94" width="5.16" height="5.16"/><rect x="82.58" y="61.94" width="5.16" height="5.16"/><rect x="87.74" y="61.94" width="5.16" height="5.16"/><rect x="98.06" y="61.94" width="5.16" height="5.16"/><rect x="103.23" y="61.94" width="5.16" height="5.16"/><rect x="113.55" y="61.94" width="5.16" height="5.16"/><rect x="129.03" y="61.94" width="5.16" height="5.16"/><rect x="139.35" y="61.94" width="5.16" height="5.16"/><rect x="15.48" y="67.10" width="5.16" height="5.16"/><rect x="20.65" y="67.10" width="5.16" height="5.16"/><rect x="25.81" y="67.10" width="5.16" height="5.16"/><rect x="30.97" y="67.10" width="5.16" height="5.16"/><rect x="36.13" y="67.10" width="5.16" height="5.16"/><rect x="41.29" y="67.10" width="5.16" height="5.16"/><rect x="51.61" y="67.10" width="5.16" height="5.16"/><rect x="56.77" y="67.10" width="5.16" height="5.16"/><rect x="67.10" y="67.10" width="5.16" height="5.16"/><rect x="72.26" y="67.10" width="5.16" height="5.16"/><rect x="82.58" y="67.10" width="5.16" height="5.16"/><rect x="87.74" y="67.10" width="5.16" height="5.16"/><rect x="92.90" y="67.10" width="5.16" height="5.16"/><rect x="103.23" y="67.10" width="5.16" height="5.16"/><rect x="108.39" y="67.10" width="5.16" height="5.16"/><rect x="113.55" y="67.10" width="5.16" height="5.16"/><rect x="118.71" y="67.10" width="5.16" height="5.16"/><rect x="123.87" y="67.10" width="5.16" height="5.16"/><rect x="134.19" y="67.10" width="5.16" height="5.16"/><rect x="149.68" y="67.10" width="5.16" height="5.16"/><rect x="5.16" y="72.26" width="5.16" height="5.16"/><rect x="30.97" y="72.26" width="5.16" height="5.16"/><rect x="46.45" y="72.26" width="5.16" height="5.16"/><rect x="61.94" y="72.26" width="5.16" height="5.16"/><rect x="77.42" y="72.26" width="5.16" height="5.16"/><rect x="92.90" y="72.26" width="5.16" height="5.16"/><rect x="98.06" y="72.26" width="5.16" height="5.16"/><rect x="103.23" y="72.26" width="5.16" height="5.16"/><rect x="108.39" y="72.26" width="5.16" height="5.16"/><rect x="123.87" y="72.26" width="5.16" height="5.16"/><rect x="134.19" y="72.26" width="5.16" height="5.16"/><rect x="20.65" y="77.42" width="5.16" height="5.16"/><rect x="25.81" y="77.42" width="5.16" height="5.16"/><rect x="36.13" y="77.42" width="5.16" height="5.16"/><rect x="41.29" y="77.42" width="5.16" height="5.16"/><rect x="46.45" y="77.42" width="5.16" height="5.16"/><rect x="61.94" y="77.42" width="5.16" height="5.16"/><rect x="72.26" y="77.42" width="5.16" height="5.16"/><rect x="77.42" y="77.42" width="5.16" height="5.16"/><rect x="87.74" y="77.42" width="5.16" height="5.16"/><rect x="108.39" y="77.42" width="5.16" height="5.16"/><rect x="113.55" y="77.42" width="5.16" height="5.16"/><rect x="118.71" y="77.42" width="5.16" height="5.16"/><rect x="123.87" y="77.42" width="5.16" height="5.16"/><rect x="149.68" y="77.42" width="5.16" height="5.16"/><rect x="10.32" y="82.58" width="5.16" height="5.16"/><rect x="15.48" y="82.58" width="5.16" height="5.16"/><rect x="30.97" y="82.58" width="5.16" height="5.16"/><rect x="46.45" y="82.58" width="5.16" height="5.16"/><rect x="56.77" y="82.58" width="5.16" height="5.16"/><rect x="61.94" y="82.58" width="5.16" height="5.16"/><rect x="72.26" y="82.58" width="5.16" height="5.16"/><rect x="77.42" y="82.58" width="5.16" height="5.16"/><rect x="92.90" y="82.58" width="5.16" height="5.16"/><rect x="98.06" y="82.58" width="5.16" height="5.16"/><rect x="108.39" y="82.58" width="5.16" height="5.16"/><rect x="113.55" y="82.58" width="5.16" height="5.16"/><rect x="123.87" y="82.58" width="5.16" height="5.16"/><rect x="129.03" y="82.58" width="5.16" height="5.16"/><rect x="149.68" y="82.58" width="5.16" height="5.16"/><rect x="10.32" y="87.74" width="5.16" height="5.16"/><rect x="20.65" y="87.74" width="5.16" height="5.16"/><rect x="30.97" y="87.74" width="5.16" height="5.16"/><rect x="36.13" y="87.74" width="5.16" height="5.16"/><rect x="46.45" y="87.74" width="5.16" height="5.16"/><rect x="56.77" y="87.74" width="5.16" height="5.16"/><rect x="67.10" y="87.74" width="5.16" height="5.16"/><rect x="82.58" y="87.74" width="5.16" height="5.16"/><rect x="92.90" y="87.74" width="5.16" height="5.16"/><rect x="98.06" y="87.74" width="5.16" height="5.16"/><rect x="103.23" y="87.74" width="5.16" height="5.16"/><rect x="113.55" y="87.74" width="5.16" height="5.16"/><rect x="123.87" y="87.74" width="5.16" height="5.16"/><rect x="15.48" y="92.90" width="5.16" height="5.16"/><rect x="20.65" y="92.90" width="5.16" height="5.16"/><rect x="51.61" y="92.90" width="5.16" height="5.16"/><rect x="87.74" y="92.90" width="5.16" height="5.16"/><rect x="92.90" y="92.90" width="5.16" height="5.16"/><rect x="98.06" y="92.90" width="5.16" height="5.16"/><rect x="108.39" y="92.90" width="5.16" height="5.16"/><rect x="118.71" y="92.90" width="5.16" height="5.16"/><rect x="123.87" y="92.90" width="5.16" height="5.16"/><rect x="134.19" y="92.90" width="5.16" height="5.16"/><rect x="139.35" y="92.90" width="5.16" height="5.16"/><rect x="144.52" y="92.90" width="5.16" height="5.16"/><rect x="149.68" y="92.90" width="5.16" height="5.16"/><rect x="5.16" y="98.06" width="5.16" height="5.16"/><rect x="15.48" y="98.06" width="5.16" height="5.16"/><rect x="25.81" y="98.06" width="5.16" height="5.16"/><rect x="36.13" y="98.06" width="5.16" height="5.16"/><rect x="51.61" y="98.06" width="5.16" height="5.16"/><rect x="77.42" y="98.06" width="5.16" height="5.16"/><rect x="98.06" y="98.06" width="5.16" height="5.16"/><rect x="108.39" y="98.06" width="5.16" height="5.16"/><rect x="113.55" y="98.06" width="5.16" height="5.16"/><rect x="118.71" y="98.06" width="5.16" height="5.16"/><rect x="129.03" y="98.06" width="5.16" height="5.16"/><rect x="139.35" y="98.06" width="5.16" height="5.16"/><rect x="144.52" y="98.06" width="5.16" height="5.16"/><rect x="149.68" y="98.06" width="5.16" height="5.16"/><rect x="15.48" y="103.23" width="5.16" height="5.16"/><rect x="30.97" y="103.23" width="5.16" height="5.16"/><rect x="46.45" y="103.23" width="5.16" height="5.16"/><rect x="61.94" y="103.23" width="5.16" height="5.16"/><rect x="67.10" y="103.23" width="5.16" height="5.16"/><rect x="77.42" y="103.23" width="5.16" height="5.16"/><rect x="82.58" y="103.23" width="5.16" height="5.16"/><rect x="92.90" y="103.23" width="5.16" height="5.16"/><rect x="98.06" y="103.23" width="5.16" height="5.16"/><rect x="103.23" y="103.23" width="5.16" height="5.16"/><rect x="113.55" y="103.23" width="5.16" height="5.16"/><rect x="129.03" y="103.23" width="5.16" height="5.16"/><rect x="134.19" y="103.23" width="5.16" height="5.16"/><rect x="144.52" y="103.23" width="5.16" height="5.16"/><rect x="5.16" y="108.39" width="5.16" height="5.16"/><rect x="20.65" y="108.39" width="5.16" height="5.16"/><rect x="25.81" y="108.39" width="5.16" height="5.16"/><rect x="36.13" y="108.39" width="5.16" height="5.16"/><rect x="51.61" y="108.39" width="5.16" height="5.16"/><rect x="61.94" y="108.39" width="5.16" height="5.16"/><rect x="72.26" y="108.39" width="5.16" height="5.16"/><rect x="77.42" y="108.39" width="5.16" height="5.16"/><rect x="87.74" y="108.39" width="5.16" height="5.16"/><rect x="98.06" y="108.39" width="5.16" height="5.16"/><rect x="103.23" y="108.39" width="5.16" height="5.16"/><rect x="108.39" y="108.39" width="5.16" height="5.16"/><rect x="113.55" y="108.39" width="5.16" height="5.16"/><rect x="118.71" y="108.39" width="5.16" height="5.16"/><rect x="123.87" y="108.39" width="5.16" height="5.16"/><rect x="129.03" y="108.39" width="5.16" height="5.16"/><rect x="134.19" y="108.39" width="5.16" height="5.16"/><rect x="139.35" y="108.39" width="5.16" height="5.16"/><rect x="149.68" y="108.39" width="5.16" height="5.16"/><rect x="46.45" y="113.55" width="5.16" height="5.16"/><rect x="72.26" y="113.55" width="5.16" height="5.16"/><rect x="87.74" y="113.55" width="5.16" height="5.16"/><rect x="92.90" y="113.55" width="5.16" height="5.16"/><rect x="98.06" y="113.55" width="5.16" height="5.16"/><rect x="108.39" y="113.55" width="5.16" height="5.16"/><rect x="129.03" y="113.55" width="5.16" height="5.16"/><rect x="134.19" y="113.55" width="5.16" height="5.16"/><rect x="139.35" y="113.55" width="5.16" height="5.16"/><rect x="144.52" y="113.55" width="5.16" height="5.16"/><rect x="149.68" y="113.55" width="5.16" height="5.16"/><rect x="5.16" y="118.71" width="5.16" height="5.16"/><rect x="10.32" y="118.71" width="5.16" height="5.16"/><rect x="15.48" y="118.71" width="5.16" height="5.16"/><rect x="20.65" y="118.71" width="5.16" height="5.16"/><rect x="25.81" y="118.71" width="5.16" height="5.16"/><rect x="30.97" y="118.71" width="5.16" height="5.16"/><rect x="36.13" y="118.71" width="5.16" height="5.16"/><rect x="87.74" y="118.71" width="5.16" height="5.16"/><rect x="108.39" y="118.71" width="5.16" height="5.16"/><rect x="118.71" y="118.71" width="5.16" height="5.16"/><rect x="129.03" y="118.71" width="5.16" height="5.16"/><rect x="134.19" y="118.71" width="5.16" height="5.16"/><rect x="139.35" y="118.71" width="5.16" height="5.16"/><rect x="144.52" y="118.71" width="5.16" height="5.16"/><rect x="5.16" y="123.87" width="5.16" height="5.16"/><rect x="36.13" y="123.87" width="5.16" height="5.16"/><rect x="46.45" y="123.87" width="5.16" height="5.16"/><rect x="56.77" y="123.87" width="5.16" height="5.16"/><rect x="61.94" y="123.87" width="5.16" height="5.16"/><rect x="72.26" y="123.87" width="5.16" height="5.16"/><rect x="82.58" y="123.87" width="5.16" height="5.16"/><rect x="87.74" y="123.87" width="5.16" height="5.16"/><rect x="98.06" y="123.87" width="5.16" height="5.16"/><rect x="108.39" y="123.87" width="5.16" height="5.16"/><rect x="129.03" y="123.87" width="5.16" height="5.16"/><rect x="139.35" y="123.87" width="5.16" height="5.16"/><rect x="144.52" y="123.87" width="5.16" height="5.16"/><rect x="149.68" y="123.87" width="5.16" height="5.16"/><rect x="5.16" y="129.03" width="5.16" height="5.16"/><rect x="15.48" y="129.03" width="5.16" height="5.16"/><rect x="20.65" y="129.03" width="5.16" height="5.16"/><rect x="25.81" y="129.03" width="5.16" height="5.16"/><rect x="36.13" y="129.03" width="5.16" height="5.16"/><rect x="51.61" y="129.03" width="5.16" height="5.16"/><rect x="56.77" y="129.03" width="5.16" height="5.16"/><rect x="67.10" y="129.03" width="5.16" height="5.16"/><rect x="77.42" y="129.03" width="5.16" height="5.16"/><rect x="87.74" y="129.03" width="5.16" height="5.16"/><rect x="92.90" y="129.03" width="5.16" height="5.16"/><rect x="108.39" y="129.03" width="5.16" height="5.16"/><rect x="113.55" y="129.03" width="5.16" height="5.16"/><rect x="118.71" y="129.03" width="5.16" height="5.16"/><rect x="123.87" y="129.03" width="5.16" height="5.16"/><rect x="129.03" y="129.03" width="5.16" height="5.16"/><rect x="134.19" y="129.03" width="5.16" height="5.16"/><rect x="5.16" y="134.19" width="5.16" height="5.16"/><rect x="15.48" y="134.19" width="5.16" height="5.16"/><rect x="20.65" y="134.19" width="5.16" height="5.16"/><rect x="25.81" y="134.19" width="5.16" height="5.16"/><rect x="36.13" y="134.19" width="5.16" height="5.16"/><rect x="46.45" y="134.19" width="5.16" height="5.16"/><rect x="56.77" y="134.19" width="5.16" height="5.16"/><rect x="61.94" y="134.19" width="5.16" height="5.16"/><rect x="103.23" y="134.19" width="5.16" height="5.16"/><rect x="108.39" y="134.19" width="5.16" height="5.16"/><rect x="118.71" y="134.19" width="5.16" height="5.16"/><rect x="123.87" y="134.19" width="5.16" height="5.16"/><rect x="129.03" y="134.19" width="5.16" height="5.16"/><rect x="134.19" y="134.19" width="5.16" height="5.16"/><rect x="144.52" y="134.19" width="5.16" height="5.16"/><rect x="5.16" y="139.35" width="5.16" height="5.16"/><rect x="15.48" y="139.35" width="5.16" height="5.16"/><rect x="20.65" y="139.35" width="5.16" height="5.16"/><rect x="25.81" y="139.35" width="5.16" height="5.16"/><rect x="36.13" y="139.35" width="5.16" height="5.16"/><rect x="51.61" y="139.35" width="5.16" height="5.16"/><rect x="72.26" y="139.35" width="5.16" height="5.16"/><rect x="87.74" y="139.35" width="5.16" height="5.16"/><rect x="103.23" y="139.35" width="5.16" height="5.16"/><rect x="129.03" y="139.35" width="5.16" height="5.16"/><rect x="134.19" y="139.35" width="5.16" height="5.16"/><rect x="149.68" y="139.35" width="5.16" height="5.16"/><rect x="5.16" y="144.52" width="5.16" height="5.16"/><rect x="36.13" y="144.52" width="5.16" height="5.16"/><rect x="56.77" y="144.52" width="5.16" height="5.16"/><rect x="92.90" y="144.52" width="5.16" height="5.16"/><rect x="108.39" y="144.52" width="5.16" height="5.16"/><rect x="123.87" y="144.52" width="5.16" height="5.16"/><rect x="144.52" y="144.52" width="5.16" height="5.16"/><rect x="5.16" y="149.68" width="5.16" height="5.16"/><rect x="10.32" y="149.68" width="5.16" height="5.16"/><rect x="15.48" y="149.68" width="5.16" height="5.16"/><rect x="20.65" y="149.68" width="5.16" height="5.16"/><rect x="25.81" y="149.68" width="5.16" height="5.16"/><rect x="30.97" y="149.68" width="5.16" height="5.16"/><rect x="36.13" y="149.68" width="5.16" height="5.16"/><rect x="46.45" y="149.68" width="5.16" height="5.16"/><rect x="51.61" y="149.68" width="5.16" height="5.16"/><rect x="56.77" y="149.68" width="5.16" height="5.16"/><rect x="72.26" y="149.68" width="5.16" height="5.16"/><rect x="77.42" y="149.68" width="5.16" height="5.16"/><rect x="82.58" y="149.68" width="5.16" height="5.16"/><rect x="92.90" y="149.68" width="5.16" height="5.16"/><rect x="103.23" y="149.68" width="5.16" height="5.16"/><rect x="108.39" y="149.68" width="5.16" height="5.16"/><rect x="113.55" y="149.68" width="5.16" height="5.16"/><rect x="123.87" y="149.68" width="5.16" height="5.16"/><rect x="129.03" y="149.68" width="5.16" height="5.16"/><rect x="144.52" y="149.68" width="5.16" height="5.16"/></g></svg></details></div><div class="dcard"><b>Bitcoin · Legacy</b><span>兼容旧钱包</span><code onclick="navigator.clipboard&&navigator.clipboard.writeText(this.textContent)" title="点击复制">132v6ZpuZEFVCrkoRbUfKGCBayy31gWZnj</code><details class="dqr"><summary>展开二维码</summary><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" style="background:#fff;border-radius:4px"><g fill="#0c1116"><rect x="5.16" y="5.16" width="5.16" height="5.16"/><rect x="10.32" y="5.16" width="5.16" height="5.16"/><rect x="15.48" y="5.16" width="5.16" height="5.16"/><rect x="20.65" y="5.16" width="5.16" height="5.16"/><rect x="25.81" y="5.16" width="5.16" height="5.16"/><rect x="30.97" y="5.16" width="5.16" height="5.16"/><rect x="36.13" y="5.16" width="5.16" height="5.16"/><rect x="51.61" y="5.16" width="5.16" height="5.16"/><rect x="56.77" y="5.16" width="5.16" height="5.16"/><rect x="82.58" y="5.16" width="5.16" height="5.16"/><rect x="87.74" y="5.16" width="5.16" height="5.16"/><rect x="92.90" y="5.16" width="5.16" height="5.16"/><rect x="98.06" y="5.16" width="5.16" height="5.16"/><rect x="103.23" y="5.16" width="5.16" height="5.16"/><rect x="118.71" y="5.16" width="5.16" height="5.16"/><rect x="123.87" y="5.16" width="5.16" height="5.16"/><rect x="129.03" y="5.16" width="5.16" height="5.16"/><rect x="134.19" y="5.16" width="5.16" height="5.16"/><rect x="139.35" y="5.16" width="5.16" height="5.16"/><rect x="144.52" y="5.16" width="5.16" height="5.16"/><rect x="149.68" y="5.16" width="5.16" height="5.16"/><rect x="5.16" y="10.32" width="5.16" height="5.16"/><rect x="36.13" y="10.32" width="5.16" height="5.16"/><rect x="46.45" y="10.32" width="5.16" height="5.16"/><rect x="61.94" y="10.32" width="5.16" height="5.16"/><rect x="72.26" y="10.32" width="5.16" height="5.16"/><rect x="77.42" y="10.32" width="5.16" height="5.16"/><rect x="87.74" y="10.32" width="5.16" height="5.16"/><rect x="92.90" y="10.32" width="5.16" height="5.16"/><rect x="98.06" y="10.32" width="5.16" height="5.16"/><rect x="108.39" y="10.32" width="5.16" height="5.16"/><rect x="118.71" y="10.32" width="5.16" height="5.16"/><rect x="149.68" y="10.32" width="5.16" height="5.16"/><rect x="5.16" y="15.48" width="5.16" height="5.16"/><rect x="15.48" y="15.48" width="5.16" height="5.16"/><rect x="20.65" y="15.48" width="5.16" height="5.16"/><rect x="25.81" y="15.48" width="5.16" height="5.16"/><rect x="36.13" y="15.48" width="5.16" height="5.16"/><rect x="46.45" y="15.48" width="5.16" height="5.16"/><rect x="51.61" y="15.48" width="5.16" height="5.16"/><rect x="61.94" y="15.48" width="5.16" height="5.16"/><rect x="72.26" y="15.48" width="5.16" height="5.16"/><rect x="82.58" y="15.48" width="5.16" height="5.16"/><rect x="103.23" y="15.48" width="5.16" height="5.16"/><rect x="108.39" y="15.48" width="5.16" height="5.16"/><rect x="118.71" y="15.48" width="5.16" height="5.16"/><rect x="129.03" y="15.48" width="5.16" height="5.16"/><rect x="134.19" y="15.48" width="5.16" height="5.16"/><rect x="139.35" y="15.48" width="5.16" height="5.16"/><rect x="149.68" y="15.48" width="5.16" height="5.16"/><rect x="5.16" y="20.65" width="5.16" height="5.16"/><rect x="15.48" y="20.65" width="5.16" height="5.16"/><rect x="20.65" y="20.65" width="5.16" height="5.16"/><rect x="25.81" y="20.65" width="5.16" height="5.16"/><rect x="36.13" y="20.65" width="5.16" height="5.16"/><rect x="46.45" y="20.65" width="5.16" height="5.16"/><rect x="51.61" y="20.65" width="5.16" height="5.16"/><rect x="56.77" y="20.65" width="5.16" height="5.16"/><rect x="61.94" y="20.65" width="5.16" height="5.16"/><rect x="67.10" y="20.65" width="5.16" height="5.16"/><rect x="87.74" y="20.65" width="5.16" height="5.16"/><rect x="108.39" y="20.65" width="5.16" height="5.16"/><rect x="118.71" y="20.65" width="5.16" height="5.16"/><rect x="129.03" y="20.65" width="5.16" height="5.16"/><rect x="134.19" y="20.65" width="5.16" height="5.16"/><rect x="139.35" y="20.65" width="5.16" height="5.16"/><rect x="149.68" y="20.65" width="5.16" height="5.16"/><rect x="5.16" y="25.81" width="5.16" height="5.16"/><rect x="15.48" y="25.81" width="5.16" height="5.16"/><rect x="20.65" y="25.81" width="5.16" height="5.16"/><rect x="25.81" y="25.81" width="5.16" height="5.16"/><rect x="36.13" y="25.81" width="5.16" height="5.16"/><rect x="51.61" y="25.81" width="5.16" height="5.16"/><rect x="61.94" y="25.81" width="5.16" height="5.16"/><rect x="82.58" y="25.81" width="5.16" height="5.16"/><rect x="87.74" y="25.81" width="5.16" height="5.16"/><rect x="98.06" y="25.81" width="5.16" height="5.16"/><rect x="108.39" y="25.81" width="5.16" height="5.16"/><rect x="118.71" y="25.81" width="5.16" height="5.16"/><rect x="129.03" y="25.81" width="5.16" height="5.16"/><rect x="134.19" y="25.81" width="5.16" height="5.16"/><rect x="139.35" y="25.81" width="5.16" height="5.16"/><rect x="149.68" y="25.81" width="5.16" height="5.16"/><rect x="5.16" y="30.97" width="5.16" height="5.16"/><rect x="36.13" y="30.97" width="5.16" height="5.16"/><rect x="51.61" y="30.97" width="5.16" height="5.16"/><rect x="67.10" y="30.97" width="5.16" height="5.16"/><rect x="82.58" y="30.97" width="5.16" height="5.16"/><rect x="92.90" y="30.97" width="5.16" height="5.16"/><rect x="98.06" y="30.97" width="5.16" height="5.16"/><rect x="108.39" y="30.97" width="5.16" height="5.16"/><rect x="118.71" y="30.97" width="5.16" height="5.16"/><rect x="149.68" y="30.97" width="5.16" height="5.16"/><rect x="5.16" y="36.13" width="5.16" height="5.16"/><rect x="10.32" y="36.13" width="5.16" height="5.16"/><rect x="15.48" y="36.13" width="5.16" height="5.16"/><rect x="20.65" y="36.13" width="5.16" height="5.16"/><rect x="25.81" y="36.13" width="5.16" height="5.16"/><rect x="30.97" y="36.13" width="5.16" height="5.16"/><rect x="36.13" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="36.13" width="5.16" height="5.16"/><rect x="56.77" y="36.13" width="5.16" height="5.16"/><rect x="67.10" y="36.13" width="5.16" height="5.16"/><rect x="77.42" y="36.13" width="5.16" height="5.16"/><rect x="87.74" y="36.13" width="5.16" height="5.16"/><rect x="98.06" y="36.13" width="5.16" height="5.16"/><rect x="108.39" y="36.13" width="5.16" height="5.16"/><rect x="118.71" y="36.13" width="5.16" height="5.16"/><rect x="123.87" y="36.13" width="5.16" height="5.16"/><rect x="129.03" y="36.13" width="5.16" height="5.16"/><rect x="134.19" y="36.13" width="5.16" height="5.16"/><rect x="139.35" y="36.13" width="5.16" height="5.16"/><rect x="144.52" y="36.13" width="5.16" height="5.16"/><rect x="149.68" y="36.13" width="5.16" height="5.16"/><rect x="46.45" y="41.29" width="5.16" height="5.16"/><rect x="56.77" y="41.29" width="5.16" height="5.16"/><rect x="61.94" y="41.29" width="5.16" height="5.16"/><rect x="67.10" y="41.29" width="5.16" height="5.16"/><rect x="77.42" y="41.29" width="5.16" height="5.16"/><rect x="82.58" y="41.29" width="5.16" height="5.16"/><rect x="87.74" y="41.29" width="5.16" height="5.16"/><rect x="98.06" y="41.29" width="5.16" height="5.16"/><rect x="103.23" y="41.29" width="5.16" height="5.16"/><rect x="5.16" y="46.45" width="5.16" height="5.16"/><rect x="36.13" y="46.45" width="5.16" height="5.16"/><rect x="46.45" y="46.45" width="5.16" height="5.16"/><rect x="51.61" y="46.45" width="5.16" height="5.16"/><rect x="92.90" y="46.45" width="5.16" height="5.16"/><rect x="103.23" y="46.45" width="5.16" height="5.16"/><rect x="113.55" y="46.45" width="5.16" height="5.16"/><rect x="118.71" y="46.45" width="5.16" height="5.16"/><rect x="134.19" y="46.45" width="5.16" height="5.16"/><rect x="139.35" y="46.45" width="5.16" height="5.16"/><rect x="144.52" y="46.45" width="5.16" height="5.16"/><rect x="5.16" y="51.61" width="5.16" height="5.16"/><rect x="10.32" y="51.61" width="5.16" height="5.16"/><rect x="25.81" y="51.61" width="5.16" height="5.16"/><rect x="41.29" y="51.61" width="5.16" height="5.16"/><rect x="51.61" y="51.61" width="5.16" height="5.16"/><rect x="56.77" y="51.61" width="5.16" height="5.16"/><rect x="61.94" y="51.61" width="5.16" height="5.16"/><rect x="67.10" y="51.61" width="5.16" height="5.16"/><rect x="72.26" y="51.61" width="5.16" height="5.16"/><rect x="87.74" y="51.61" width="5.16" height="5.16"/><rect x="98.06" y="51.61" width="5.16" height="5.16"/><rect x="118.71" y="51.61" width="5.16" height="5.16"/><rect x="123.87" y="51.61" width="5.16" height="5.16"/><rect x="129.03" y="51.61" width="5.16" height="5.16"/><rect x="134.19" y="51.61" width="5.16" height="5.16"/><rect x="139.35" y="51.61" width="5.16" height="5.16"/><rect x="144.52" y="51.61" width="5.16" height="5.16"/><rect x="5.16" y="56.77" width="5.16" height="5.16"/><rect x="10.32" y="56.77" width="5.16" height="5.16"/><rect x="15.48" y="56.77" width="5.16" height="5.16"/><rect x="20.65" y="56.77" width="5.16" height="5.16"/><rect x="30.97" y="56.77" width="5.16" height="5.16"/><rect x="36.13" y="56.77" width="5.16" height="5.16"/><rect x="41.29" y="56.77" width="5.16" height="5.16"/><rect x="51.61" y="56.77" width="5.16" height="5.16"/><rect x="56.77" y="56.77" width="5.16" height="5.16"/><rect x="67.10" y="56.77" width="5.16" height="5.16"/><rect x="72.26" y="56.77" width="5.16" height="5.16"/><rect x="77.42" y="56.77" width="5.16" height="5.16"/><rect x="82.58" y="56.77" width="5.16" height="5.16"/><rect x="98.06" y="56.77" width="5.16" height="5.16"/><rect x="113.55" y="56.77" width="5.16" height="5.16"/><rect x="139.35" y="56.77" width="5.16" height="5.16"/><rect x="15.48" y="61.94" width="5.16" height="5.16"/><rect x="20.65" y="61.94" width="5.16" height="5.16"/><rect x="30.97" y="61.94" width="5.16" height="5.16"/><rect x="41.29" y="61.94" width="5.16" height="5.16"/><rect x="46.45" y="61.94" width="5.16" height="5.16"/><rect x="51.61" y="61.94" width="5.16" height="5.16"/><rect x="56.77" y="61.94" width="5.16" height="5.16"/><rect x="67.10" y="61.94" width="5.16" height="5.16"/><rect x="72.26" y="61.94" width="5.16" height="5.16"/><rect x="82.58" y="61.94" width="5.16" height="5.16"/><rect x="103.23" y="61.94" width="5.16" height="5.16"/><rect x="108.39" y="61.94" width="5.16" height="5.16"/><rect x="113.55" y="61.94" width="5.16" height="5.16"/><rect x="118.71" y="61.94" width="5.16" height="5.16"/><rect x="123.87" y="61.94" width="5.16" height="5.16"/><rect x="129.03" y="61.94" width="5.16" height="5.16"/><rect x="149.68" y="61.94" width="5.16" height="5.16"/><rect x="10.32" y="67.10" width="5.16" height="5.16"/><rect x="15.48" y="67.10" width="5.16" height="5.16"/><rect x="36.13" y="67.10" width="5.16" height="5.16"/><rect x="41.29" y="67.10" width="5.16" height="5.16"/><rect x="61.94" y="67.10" width="5.16" height="5.16"/><rect x="72.26" y="67.10" width="5.16" height="5.16"/><rect x="87.74" y="67.10" width="5.16" height="5.16"/><rect x="103.23" y="67.10" width="5.16" height="5.16"/><rect x="108.39" y="67.10" width="5.16" height="5.16"/><rect x="118.71" y="67.10" width="5.16" height="5.16"/><rect x="129.03" y="67.10" width="5.16" height="5.16"/><rect x="144.52" y="67.10" width="5.16" height="5.16"/><rect x="149.68" y="67.10" width="5.16" height="5.16"/><rect x="5.16" y="72.26" width="5.16" height="5.16"/><rect x="10.32" y="72.26" width="5.16" height="5.16"/><rect x="15.48" y="72.26" width="5.16" height="5.16"/><rect x="20.65" y="72.26" width="5.16" height="5.16"/><rect x="41.29" y="72.26" width="5.16" height="5.16"/><rect x="51.61" y="72.26" width="5.16" height="5.16"/><rect x="56.77" y="72.26" width="5.16" height="5.16"/><rect x="61.94" y="72.26" width="5.16" height="5.16"/><rect x="82.58" y="72.26" width="5.16" height="5.16"/><rect x="87.74" y="72.26" width="5.16" height="5.16"/><rect x="92.90" y="72.26" width="5.16" height="5.16"/><rect x="103.23" y="72.26" width="5.16" height="5.16"/><rect x="108.39" y="72.26" width="5.16" height="5.16"/><rect x="113.55" y="72.26" width="5.16" height="5.16"/><rect x="118.71" y="72.26" width="5.16" height="5.16"/><rect x="123.87" y="72.26" width="5.16" height="5.16"/><rect x="129.03" y="72.26" width="5.16" height="5.16"/><rect x="134.19" y="72.26" width="5.16" height="5.16"/><rect x="144.52" y="72.26" width="5.16" height="5.16"/><rect x="149.68" y="72.26" width="5.16" height="5.16"/><rect x="5.16" y="77.42" width="5.16" height="5.16"/><rect x="20.65" y="77.42" width="5.16" height="5.16"/><rect x="36.13" y="77.42" width="5.16" height="5.16"/><rect x="41.29" y="77.42" width="5.16" height="5.16"/><rect x="46.45" y="77.42" width="5.16" height="5.16"/><rect x="51.61" y="77.42" width="5.16" height="5.16"/><rect x="56.77" y="77.42" width="5.16" height="5.16"/><rect x="82.58" y="77.42" width="5.16" height="5.16"/><rect x="98.06" y="77.42" width="5.16" height="5.16"/><rect x="108.39" y="77.42" width="5.16" height="5.16"/><rect x="113.55" y="77.42" width="5.16" height="5.16"/><rect x="139.35" y="77.42" width="5.16" height="5.16"/><rect x="144.52" y="77.42" width="5.16" height="5.16"/><rect x="10.32" y="82.58" width="5.16" height="5.16"/><rect x="15.48" y="82.58" width="5.16" height="5.16"/><rect x="30.97" y="82.58" width="5.16" height="5.16"/><rect x="41.29" y="82.58" width="5.16" height="5.16"/><rect x="56.77" y="82.58" width="5.16" height="5.16"/><rect x="61.94" y="82.58" width="5.16" height="5.16"/><rect x="82.58" y="82.58" width="5.16" height="5.16"/><rect x="123.87" y="82.58" width="5.16" height="5.16"/><rect x="129.03" y="82.58" width="5.16" height="5.16"/><rect x="134.19" y="82.58" width="5.16" height="5.16"/><rect x="139.35" y="82.58" width="5.16" height="5.16"/><rect x="144.52" y="82.58" width="5.16" height="5.16"/><rect x="5.16" y="87.74" width="5.16" height="5.16"/><rect x="10.32" y="87.74" width="5.16" height="5.16"/><rect x="15.48" y="87.74" width="5.16" height="5.16"/><rect x="25.81" y="87.74" width="5.16" height="5.16"/><rect x="30.97" y="87.74" width="5.16" height="5.16"/><rect x="36.13" y="87.74" width="5.16" height="5.16"/><rect x="51.61" y="87.74" width="5.16" height="5.16"/><rect x="92.90" y="87.74" width="5.16" height="5.16"/><rect x="108.39" y="87.74" width="5.16" height="5.16"/><rect x="129.03" y="87.74" width="5.16" height="5.16"/><rect x="134.19" y="87.74" width="5.16" height="5.16"/><rect x="144.52" y="87.74" width="5.16" height="5.16"/><rect x="5.16" y="92.90" width="5.16" height="5.16"/><rect x="10.32" y="92.90" width="5.16" height="5.16"/><rect x="15.48" y="92.90" width="5.16" height="5.16"/><rect x="20.65" y="92.90" width="5.16" height="5.16"/><rect x="25.81" y="92.90" width="5.16" height="5.16"/><rect x="30.97" y="92.90" width="5.16" height="5.16"/><rect x="41.29" y="92.90" width="5.16" height="5.16"/><rect x="72.26" y="92.90" width="5.16" height="5.16"/><rect x="77.42" y="92.90" width="5.16" height="5.16"/><rect x="82.58" y="92.90" width="5.16" height="5.16"/><rect x="87.74" y="92.90" width="5.16" height="5.16"/><rect x="92.90" y="92.90" width="5.16" height="5.16"/><rect x="108.39" y="92.90" width="5.16" height="5.16"/><rect x="118.71" y="92.90" width="5.16" height="5.16"/><rect x="123.87" y="92.90" width="5.16" height="5.16"/><rect x="129.03" y="92.90" width="5.16" height="5.16"/><rect x="139.35" y="92.90" width="5.16" height="5.16"/><rect x="144.52" y="92.90" width="5.16" height="5.16"/><rect x="149.68" y="92.90" width="5.16" height="5.16"/><rect x="5.16" y="98.06" width="5.16" height="5.16"/><rect x="10.32" y="98.06" width="5.16" height="5.16"/><rect x="15.48" y="98.06" width="5.16" height="5.16"/><rect x="20.65" y="98.06" width="5.16" height="5.16"/><rect x="36.13" y="98.06" width="5.16" height="5.16"/><rect x="46.45" y="98.06" width="5.16" height="5.16"/><rect x="61.94" y="98.06" width="5.16" height="5.16"/><rect x="82.58" y="98.06" width="5.16" height="5.16"/><rect x="87.74" y="98.06" width="5.16" height="5.16"/><rect x="92.90" y="98.06" width="5.16" height="5.16"/><rect x="98.06" y="98.06" width="5.16" height="5.16"/><rect x="103.23" y="98.06" width="5.16" height="5.16"/><rect x="108.39" y="98.06" width="5.16" height="5.16"/><rect x="113.55" y="98.06" width="5.16" height="5.16"/><rect x="129.03" y="98.06" width="5.16" height="5.16"/><rect x="134.19" y="98.06" width="5.16" height="5.16"/><rect x="144.52" y="98.06" width="5.16" height="5.16"/><rect x="149.68" y="98.06" width="5.16" height="5.16"/><rect x="5.16" y="103.23" width="5.16" height="5.16"/><rect x="15.48" y="103.23" width="5.16" height="5.16"/><rect x="56.77" y="103.23" width="5.16" height="5.16"/><rect x="61.94" y="103.23" width="5.16" height="5.16"/><rect x="67.10" y="103.23" width="5.16" height="5.16"/><rect x="72.26" y="103.23" width="5.16" height="5.16"/><rect x="82.58" y="103.23" width="5.16" height="5.16"/><rect x="103.23" y="103.23" width="5.16" height="5.16"/><rect x="113.55" y="103.23" width="5.16" height="5.16"/><rect x="118.71" y="103.23" width="5.16" height="5.16"/><rect x="123.87" y="103.23" width="5.16" height="5.16"/><rect x="129.03" y="103.23" width="5.16" height="5.16"/><rect x="134.19" y="103.23" width="5.16" height="5.16"/><rect x="144.52" y="103.23" width="5.16" height="5.16"/><rect x="5.16" y="108.39" width="5.16" height="5.16"/><rect x="30.97" y="108.39" width="5.16" height="5.16"/><rect x="36.13" y="108.39" width="5.16" height="5.16"/><rect x="41.29" y="108.39" width="5.16" height="5.16"/><rect x="46.45" y="108.39" width="5.16" height="5.16"/><rect x="51.61" y="108.39" width="5.16" height="5.16"/><rect x="56.77" y="108.39" width="5.16" height="5.16"/><rect x="67.10" y="108.39" width="5.16" height="5.16"/><rect x="77.42" y="108.39" width="5.16" height="5.16"/><rect x="87.74" y="108.39" width="5.16" height="5.16"/><rect x="92.90" y="108.39" width="5.16" height="5.16"/><rect x="98.06" y="108.39" width="5.16" height="5.16"/><rect x="108.39" y="108.39" width="5.16" height="5.16"/><rect x="113.55" y="108.39" width="5.16" height="5.16"/><rect x="118.71" y="108.39" width="5.16" height="5.16"/><rect x="123.87" y="108.39" width="5.16" height="5.16"/><rect x="129.03" y="108.39" width="5.16" height="5.16"/><rect x="134.19" y="108.39" width="5.16" height="5.16"/><rect x="139.35" y="108.39" width="5.16" height="5.16"/><rect x="144.52" y="108.39" width="5.16" height="5.16"/><rect x="46.45" y="113.55" width="5.16" height="5.16"/><rect x="61.94" y="113.55" width="5.16" height="5.16"/><rect x="77.42" y="113.55" width="5.16" height="5.16"/><rect x="108.39" y="113.55" width="5.16" height="5.16"/><rect x="129.03" y="113.55" width="5.16" height="5.16"/><rect x="139.35" y="113.55" width="5.16" height="5.16"/><rect x="144.52" y="113.55" width="5.16" height="5.16"/><rect x="5.16" y="118.71" width="5.16" height="5.16"/><rect x="10.32" y="118.71" width="5.16" height="5.16"/><rect x="15.48" y="118.71" width="5.16" height="5.16"/><rect x="20.65" y="118.71" width="5.16" height="5.16"/><rect x="25.81" y="118.71" width="5.16" height="5.16"/><rect x="30.97" y="118.71" width="5.16" height="5.16"/><rect x="36.13" y="118.71" width="5.16" height="5.16"/><rect x="51.61" y="118.71" width="5.16" height="5.16"/><rect x="56.77" y="118.71" width="5.16" height="5.16"/><rect x="67.10" y="118.71" width="5.16" height="5.16"/><rect x="82.58" y="118.71" width="5.16" height="5.16"/><rect x="87.74" y="118.71" width="5.16" height="5.16"/><rect x="92.90" y="118.71" width="5.16" height="5.16"/><rect x="98.06" y="118.71" width="5.16" height="5.16"/><rect x="103.23" y="118.71" width="5.16" height="5.16"/><rect x="108.39" y="118.71" width="5.16" height="5.16"/><rect x="118.71" y="118.71" width="5.16" height="5.16"/><rect x="129.03" y="118.71" width="5.16" height="5.16"/><rect x="144.52" y="118.71" width="5.16" height="5.16"/><rect x="5.16" y="123.87" width="5.16" height="5.16"/><rect x="36.13" y="123.87" width="5.16" height="5.16"/><rect x="51.61" y="123.87" width="5.16" height="5.16"/><rect x="56.77" y="123.87" width="5.16" height="5.16"/><rect x="61.94" y="123.87" width="5.16" height="5.16"/><rect x="67.10" y="123.87" width="5.16" height="5.16"/><rect x="77.42" y="123.87" width="5.16" height="5.16"/><rect x="82.58" y="123.87" width="5.16" height="5.16"/><rect x="87.74" y="123.87" width="5.16" height="5.16"/><rect x="103.23" y="123.87" width="5.16" height="5.16"/><rect x="108.39" y="123.87" width="5.16" height="5.16"/><rect x="129.03" y="123.87" width="5.16" height="5.16"/><rect x="134.19" y="123.87" width="5.16" height="5.16"/><rect x="149.68" y="123.87" width="5.16" height="5.16"/><rect x="5.16" y="129.03" width="5.16" height="5.16"/><rect x="15.48" y="129.03" width="5.16" height="5.16"/><rect x="20.65" y="129.03" width="5.16" height="5.16"/><rect x="25.81" y="129.03" width="5.16" height="5.16"/><rect x="36.13" y="129.03" width="5.16" height="5.16"/><rect x="51.61" y="129.03" width="5.16" height="5.16"/><rect x="56.77" y="129.03" width="5.16" height="5.16"/><rect x="67.10" y="129.03" width="5.16" height="5.16"/><rect x="72.26" y="129.03" width="5.16" height="5.16"/><rect x="77.42" y="129.03" width="5.16" height="5.16"/><rect x="82.58" y="129.03" width="5.16" height="5.16"/><rect x="98.06" y="129.03" width="5.16" height="5.16"/><rect x="103.23" y="129.03" width="5.16" height="5.16"/><rect x="108.39" y="129.03" width="5.16" height="5.16"/><rect x="113.55" y="129.03" width="5.16" height="5.16"/><rect x="118.71" y="129.03" width="5.16" height="5.16"/><rect x="123.87" y="129.03" width="5.16" height="5.16"/><rect x="129.03" y="129.03" width="5.16" height="5.16"/><rect x="144.52" y="129.03" width="5.16" height="5.16"/><rect x="149.68" y="129.03" width="5.16" height="5.16"/><rect x="5.16" y="134.19" width="5.16" height="5.16"/><rect x="15.48" y="134.19" width="5.16" height="5.16"/><rect x="20.65" y="134.19" width="5.16" height="5.16"/><rect x="25.81" y="134.19" width="5.16" height="5.16"/><rect x="36.13" y="134.19" width="5.16" height="5.16"/><rect x="56.77" y="134.19" width="5.16" height="5.16"/><rect x="61.94" y="134.19" width="5.16" height="5.16"/><rect x="72.26" y="134.19" width="5.16" height="5.16"/><rect x="77.42" y="134.19" width="5.16" height="5.16"/><rect x="87.74" y="134.19" width="5.16" height="5.16"/><rect x="108.39" y="134.19" width="5.16" height="5.16"/><rect x="113.55" y="134.19" width="5.16" height="5.16"/><rect x="129.03" y="134.19" width="5.16" height="5.16"/><rect x="134.19" y="134.19" width="5.16" height="5.16"/><rect x="149.68" y="134.19" width="5.16" height="5.16"/><rect x="5.16" y="139.35" width="5.16" height="5.16"/><rect x="15.48" y="139.35" width="5.16" height="5.16"/><rect x="20.65" y="139.35" width="5.16" height="5.16"/><rect x="25.81" y="139.35" width="5.16" height="5.16"/><rect x="36.13" y="139.35" width="5.16" height="5.16"/><rect x="51.61" y="139.35" width="5.16" height="5.16"/><rect x="61.94" y="139.35" width="5.16" height="5.16"/><rect x="67.10" y="139.35" width="5.16" height="5.16"/><rect x="82.58" y="139.35" width="5.16" height="5.16"/><rect x="87.74" y="139.35" width="5.16" height="5.16"/><rect x="98.06" y="139.35" width="5.16" height="5.16"/><rect x="113.55" y="139.35" width="5.16" height="5.16"/><rect x="118.71" y="139.35" width="5.16" height="5.16"/><rect x="123.87" y="139.35" width="5.16" height="5.16"/><rect x="129.03" y="139.35" width="5.16" height="5.16"/><rect x="134.19" y="139.35" width="5.16" height="5.16"/><rect x="144.52" y="139.35" width="5.16" height="5.16"/><rect x="5.16" y="144.52" width="5.16" height="5.16"/><rect x="36.13" y="144.52" width="5.16" height="5.16"/><rect x="56.77" y="144.52" width="5.16" height="5.16"/><rect x="67.10" y="144.52" width="5.16" height="5.16"/><rect x="72.26" y="144.52" width="5.16" height="5.16"/><rect x="82.58" y="144.52" width="5.16" height="5.16"/><rect x="103.23" y="144.52" width="5.16" height="5.16"/><rect x="108.39" y="144.52" width="5.16" height="5.16"/><rect x="113.55" y="144.52" width="5.16" height="5.16"/><rect x="134.19" y="144.52" width="5.16" height="5.16"/><rect x="139.35" y="144.52" width="5.16" height="5.16"/><rect x="149.68" y="144.52" width="5.16" height="5.16"/><rect x="5.16" y="149.68" width="5.16" height="5.16"/><rect x="10.32" y="149.68" width="5.16" height="5.16"/><rect x="15.48" y="149.68" width="5.16" height="5.16"/><rect x="20.65" y="149.68" width="5.16" height="5.16"/><rect x="25.81" y="149.68" width="5.16" height="5.16"/><rect x="30.97" y="149.68" width="5.16" height="5.16"/><rect x="36.13" y="149.68" width="5.16" height="5.16"/><rect x="46.45" y="149.68" width="5.16" height="5.16"/><rect x="51.61" y="149.68" width="5.16" height="5.16"/><rect x="56.77" y="149.68" width="5.16" height="5.16"/><rect x="67.10" y="149.68" width="5.16" height="5.16"/><rect x="82.58" y="149.68" width="5.16" height="5.16"/><rect x="92.90" y="149.68" width="5.16" height="5.16"/><rect x="103.23" y="149.68" width="5.16" height="5.16"/><rect x="118.71" y="149.68" width="5.16" height="5.16"/><rect x="134.19" y="149.68" width="5.16" height="5.16"/></g></svg></details></div></div></div></details>
+</main>
+<footer><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="archive/">历次版本存档</a></span><span>页面生成 2026-09-05 03:08 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次</span></footer>
+</div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

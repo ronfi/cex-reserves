@@ -1,0 +1,5 @@
+{
+ "binance": {"source": "官方 PoR 页面另存快照(页面有反爬挑战,接口未公开,需人工另存)", "snapshot": "2026-08-01T00:00:00Z", "coins": {"BTC": {"users": 656644.187, "wallet": 658293.119, "exchange": 652719.342, "custody": 5573.777}, "ETH": {"users": null, "wallet": 3991221}}},
+ "htx_liabilities": {"source": "官方 PoR 页面另存快照(负债侧只在页面;储备侧由 GitHub CSV 自动取)", "snapshot": "2026-08-01T00:00:00Z", "coins": {"BTC": {"users": 19933}, "ETH": {"users": 122077}, "USDT": {"users": 926300000}}},
+ "bybit": {"source": "Bybit 月度 PoR 新闻稿(prnewswire,2026-07-23;页面接口未找到)", "snapshot": "2026-07-23(press)", "coins": {"BTC": {"users": 56438, "wallet": 59064}}}
+}
