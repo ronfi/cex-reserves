@@ -6,6 +6,7 @@ from pathlib import Path
 import markdown
 ROOT = Path(__file__).resolve().parent.parent
 DATA_AS_OF = '2026-09-04 22:30 UTC'   # 数据截至(每周刷新时改这里)
+SUPPORT_ON_PAGE = False   # 页面是否展示打赏折叠区;False 时页脚只留一行指向 DONATE.md(防假冒提示保留)
 
 LANG = {
     'zh': dict(
@@ -18,7 +19,7 @@ LANG = {
         legend=[('<span class="ok">绿</span>', '与聚合器对上(规则见各表标题)'), ('<mark class="r">红</mark>', '超过各表标题声明的阈值'), ('<mark class="n">黄 *</mark>', '口径差,表下有注')],
         kv_head='项', support='打赏 / Support',
         support_note='这个项目会长期免费、公开地维护下去。如果这些核对帮您省下了自己动手核一遍的时间,那就是它存在的意义。您的支持是本项目持续维护的动力,无论金额大小,都衷心感谢。请只使用 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>中的地址;在其他任何地方看到的地址,无论看起来多像,都不要使用。',
-        copy='点击复制', qr='展开二维码', built='页面生成', license='内容 CC BY-NC-ND 4.0 · 脚本 MIT', archive='历次版本存档', archive_href='archive/', pv='本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)', archnote='这是 {d} 的存档版本,数据与文字停留在当时;最新版见',
+        copy='点击复制', qr='展开二维码', built='页面生成', support_footer='支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用', license='内容 CC BY-NC-ND 4.0 · 脚本 MIT', archive='历次版本存档', archive_href='archive/', pv='本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)', archnote='这是 {d} 的存档版本,数据与文字停留在当时;最新版见',
         donate_desc={'evm': 'ETH / L2 / BSC · ETH/USDC/USDT', 'tron': 'USDT-TRC20', 'sol': 'SOL / SPL', 'btc-segwit': 'Native SegWit(推荐)', 'btc-legacy': '兼容旧钱包'},
     ),
     'en': dict(
@@ -31,7 +32,7 @@ LANG = {
         legend=[('<span class="ok">green</span>', 'reconciles with the aggregator (rule in each table heading)'), ('<mark class="r">red</mark>', 'above the threshold stated in the table heading'), ('<mark class="n">yellow *</mark>', 'caliber difference, note under the table')],
         kv_head='Item', support='Support',
         support_note='This project will stay free and public for the long run. If these checks ever saved you the work of verifying it yourself, that is what it is for. Your support keeps it maintained; any amount is sincerely appreciated. Use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md on the main branch</a>; do not use any address you see anywhere else, however similar it looks.',
-        copy='click to copy', qr='show QR code', built='Page built', license='Content CC BY-NC-ND 4.0 · scripts MIT', archive='Version archive', archive_href='../archive/', pv='<span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)', archnote='This is the archived {d} edition; data and text are as of then. Latest:',
+        copy='click to copy', qr='show QR code', built='Page built', support_footer='Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else', license='Content CC BY-NC-ND 4.0 · scripts MIT', archive='Version archive', archive_href='../archive/', pv='<span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)', archnote='This is the archived {d} edition; data and text are as of then. Latest:',
         donate_desc={'evm': 'ETH / L2 / BSC · ETH/USDC/USDT', 'tron': 'USDT-TRC20', 'sol': 'SOL / SPL', 'btc-segwit': 'Native SegWit (recommended)', 'btc-legacy': 'legacy wallets'},
     ),
 }
@@ -122,7 +123,8 @@ def build(lang):
         f'<code onclick="navigator.clipboard&&navigator.clipboard.writeText(this.textContent)" title="{T["copy"]}">{addr}</code>'
         f'<details class="dqr"><summary>{T["qr"]}</summary>{_qr(q)}</details></div>' for net, addr, q in DONATE)
     support_html = (f'<details class="fold"><summary>{T["support"]}</summary><div class="foldbody">'
-                    f'<p class="note">{T["support_note"]}</p><div class="donate">{donate_html}</div></div></details>')
+                    f'<p class="note">{T["support_note"]}</p><div class="donate">{donate_html}</div></div></details>') if SUPPORT_ON_PAGE else ''
+    support_line = ('' if SUPPORT_ON_PAGE else f'<span>{T["support_footer"]}</span>')
     legend = ''.join(f'<div>{k}{v}</div>' for k, v in T['legend'])
     built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
     other = LANG['en' if lang == 'zh' else 'zh']; archived = False
@@ -152,7 +154,7 @@ def build(lang):
 {body}
 {support_html}
 </main>
-<footer><span>{T['source']}: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="{T['archive_href']}">{T['archive']}</a></span><span>{T['built']} {built}</span><span>{T['license']}</span><span id="busuanzi_container_page_pv" style="display:none">{T['pv']}</span></footer>
+<footer><span>{T['source']}: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="{T['archive_href']}">{T['archive']}</a></span><span>{T['built']} {built}</span><span>{T['license']}</span>{support_line}<span id="busuanzi_container_page_pv" style="display:none">{T['pv']}</span></footer>
 </div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>"""
     out = ROOT / T['out']; out.parent.mkdir(parents=True, exist_ok=True); out.write_text(html, encoding='utf8')
     if '--archive' in sys.argv:
