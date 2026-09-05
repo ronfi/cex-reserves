@@ -63,7 +63,7 @@
 - Bitfinex 其余 61% 是 BTC。
 - Bitstamp +121.3% 不是资金流入:聚合器DefiLlama-Adapters的分页缺陷修复后地址集补全(DefiLlama-Adapters PR #20878,09-04 合并),其 BTC 读数由 4,180 变为 40,167。
 - Poloniex +61.1% 不是客户流入:2026-05-30 至 06-04,71,993 stETH、806M sUSDS、1,723 WBTC 经两个 Poloniex 公布地址转入 Poloniex 9(一址占其储备 63%)。stETH 这一路往上可追到 HTX 地址 `0x18709E89…`(归属核实见 §7);WBTC 1,723 与其中 200M sUSDS 同样追到该地址;另 606M sUSDS 来自一个自行铸造 sUSDS 的未标注枢纽地址,HTX 来源未能在链上确立。逐跳见 §7。
-- HTX 其余是 18% BTC(其中一半是 §7.2 的 BTC-TRC20)与 2% ETH;聚合器地址集上没有稳定币。稳定币为 0 的还有 Gemini、Bitstamp、Robinhood,本身不是异常;HTX 官方 PoR 清单自有 USDT 的读数见 §6.2。
+- HTX 其余是 18% BTC(其中一半是 §7.2 的 BTC-TRC20)与 2% ETH;聚合器地址集上没有稳定币。稳定币为 0 的还有 Gemini、Bitstamp、Robinhood,本身不构成差异项;HTX 官方 PoR 清单自有 USDT 的读数见 §6.2。
 
 ## 3. 公布地址链上直读对账(本报告主判据)
 
