@@ -4,11 +4,11 @@
 > Source discipline: **direct on-chain read > official PoR page > public aggregator > media**. The first three go into tables; media is used only as a lead, marked ⚠, and never tabulated.
 > This page makes no judgement about any exchange's solvency; it presents verifiable facts and the differences between sources.
 
-## 0. Conclusions
+## 0. Summary
 
-1. Among top exchanges, **only HTX carries all four kinds of affiliated assets at once**: a platform token (HTX token), an affiliated stablecoin (USDD), self-issued wrapped coins (BTC-TRC20, HBTC), and Sun-system yield receipts (stUSDT/jUSDD). Every other exchange has at most one kind (classification and the three FTX criteria in §4).
-2. <mark class="r">HTX reports reserve ratios "all above 100%", but on the on-chain-verifiable basis: own-wallet USDT covers only 5.8% of liabilities, BTC 41%, ETH 25.5%; 19.1% of total reserves sit with an undisclosed "third-party custodian", and 47% is TRX, 69% of which is staked.</mark>
-3. Binance / OKX reserves reconcile on the BTC and ETH chains at 99–103%; Bitfinex, Gate, KuCoin and Gemini at 95–101%. **Everyone says "reserve ratio >100%"; the difference is whether it can be seen on chain.**
+1. Among top exchanges, **HTX is the only one holding all four kinds of affiliated assets**: a platform token (HTX token), an affiliated stablecoin (USDD), self-issued wrapped coins (BTC-TRC20, HBTC), and JustLend yield receipts (stUSDT/jUSDD). Every other exchange has at most one kind (classification and the three FTX criteria in §4).
+2. **HTX reports reserve ratios "all above 100%", but on the on-chain-verifiable basis: own-wallet USDT covers only 5.8% of liabilities, BTC 41%, ETH 25.5%; 19.1% of total reserves sit with an undisclosed "third-party custodian", and 47% is TRX, 69% of which is staked.**
+3. Binance / OKX reserves reconcile on the BTC and ETH chains at 99–103%; Bitfinex, Gate, KuCoin and Gemini at 95–101%. Every exchange self-reports a reserve ratio above 100%; this report can only verify the part that is readable on chain, and each exchange's verifiable share is in §3.
 
 ## 1. Method: three data layers, trust only the bottom one
 
@@ -51,7 +51,7 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 | 13 | KuCoin | $3.2B | 20% | 9% | 30% | 16% (KCS) | -12.1% |
 | 14 | Crypto.com | $2.5B | 74% | 7% | 9% | 1% (CRO) | -7.1% |
 | 15 | HashKey | $1.7B | 65% | 25% | 5% | 0% | +30.8% |
-| 16 | Poloniex | $1.5B | 49% | 39% | 1% | 2% (Sun system) | +61.1% ⚠ not customer inflow (see reading and §7) |
+| 16 | Poloniex | $1.5B | 49% | 39% | 1% | 2% (affiliated-group tokens) | +61.1% ⚠ not customer inflow (see reading and §7) |
 | 17 | Bitkub | $1.4B | 65% | 14% | 3% | 0% | +33.6% |
 | 18 | SwissBorg | $1.0B | 43% | 14% | 6% | 15% (BORG) | -2.5% |
 | 19 | BitMEX | $0.8B | 87% | 0% | 13% | 0% | -60.5% (voluntary shutdown 2026-09-23, withdraw before wind-down) |
@@ -131,10 +131,10 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 - **The aggregator cannot be cited here.** It misses USDT-TRC20 (Bitget's published addresses hold 242M, the aggregator records 0), and its `eth_getBalance` read excludes staked TRX.
 - Tron's "freeze" is its official term for staking TRX with the network in exchange for bandwidth, energy and votes: ownership is unchanged, unstaking can be started at any time and lands 14 days later; it is neither loan collateral nor a platform or judicial freeze. This report says "staked" throughout. Staked TRX can be in four places: V1 stake, V2 self-held stake, **stake delegated to other addresses** (the TRX still belongs to the address), and the unstaking queue; the "TRX staked" column counts all four. OKX's 520M and Poloniex's 24M are delegated stake, invisible if you only read `balance + frozenV2` (§7.1).
-- HTX's 18 Tron addresses in the table are the DefiLlama-Adapters's TRX cold wallets; holding no USDT there is normal. **HTX's official PoR has 5 separate USDT-TRC20 addresses**: 13.24M in the 08-01 snapshot, <mark class="r">1.91M</mark> on chain on 09-04 (the 11.33M on `TK86…` has been emptied); the single USDT-ERC20 address went 1.05M → 0. The rest of the 926M user USDT liability sits in "ThirdParty" (§6.2).
+- HTX's 18 Tron addresses in the table are the DefiLlama-Adapters's TRX cold wallets; holding no USDT there is normal. **HTX's official PoR has 5 separate USDT-TRC20 addresses**: 13.24M in the 08-01 snapshot, <mark class="r">1.91M</mark> on chain on 09-04 (below 1% of the user USDT liability, the §10 rule; the 11.33M on `TK86…` has been emptied); the single USDT-ERC20 address went 1.05M → 0. The rest of the 926M user USDT liability sits in "ThirdParty" (§6.2).
 - The last two columns are each exchange's self-reported TRX and USDT (users / wallets); USDT is the **all-chain total** (ERC20 + TRC20 + others) while this table's USDT-TRC20 is one chain, so no difference is computed. HTX's reported TRX wallets of 9,376M are in the same range as this table's 9,692M across 18 addresses (available + staked); of its reported 710M USDT wallets, 656M sit in "ThirdParty" (§6.2).
 
-## 4. Affiliated tokens as a share of reserves: FTX's structural preconditions, and who meets them
+## 4. Affiliated tokens as a share of reserves: FTX's three structural preconditions, exchange by exchange
 
 ### 4.1 What FTX's structural preconditions were (⚠ public reporting, used only as the source of the criteria)
 
@@ -162,7 +162,7 @@ The criterion: **what is fatal is not "holding your own token", it is all three 
 | Bitget | BGB | 8% | 65% |
 | OKX | OKB | 4% | 86% |
 | Bybit | MNT | 4% | 75% |
-| Poloniex | Sun-system tokens | 2% | 89% |
+| Poloniex | Affiliated-group tokens | 2% | 89% |
 | Crypto.com | CRO | 1% | 90% |
 | Robinhood, Gemini, Deribit, Bitstamp, HashKey, Bitkub, BitMEX, OSL | — | 0% | 77–100% |
 
@@ -187,7 +187,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | Item | Detail |
 |---|---|
 | Assets | USDD |
-| Issuer / mechanism | Issued 2022-05 by TRON DAO Reserve, same controller as HTX; launched as an algorithmic coin, restyled "over-collateralised" after the 2022-06 depeg, and in 2025 changed to minting against locked TRX/USDT (⚠ history from public reporting) |
+| Issuer / mechanism | Issued 2022-05 by TRON DAO Reserve (⚠ public reporting describes it as under the same controller as HTX); launched as an algorithmic coin, restyled "over-collateralised" after the 2022-06 depeg, and in 2025 changed to minting against locked TRX/USDT (⚠ history from public reporting) |
 | Size and holdings (primary) | Supply $1.51B, mostly on Tron (<https://defillama.com/stablecoin/usdd>); HTX counts it in its "USDs" stablecoin reserves, 125M in own wallets (PoR page USDs breakdown) |
 | Verifiability | Balances verifiable; **the collateral is TRX**, the same asset as the bulk of the reserves |
 
@@ -198,7 +198,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | Assets | BTC-TRC20 (BTCTRON), HBTC |
 | Issuer / mechanism | BTCTRON: issued by Poloniex on Tron in 2020, claims 1:1 redemption, has never disclosed a collateral address (<https://tronscan.org/#/token20/TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9>); HBTC: wrapped BTC issued by Huobi on Ethereum in 2020, discontinued after the rebrand to HTX (<https://etherscan.io/token/0x0316EB71485b0Ab14103307bf65a021042c6d380>) |
 | Size and holdings (primary) | BTCTRON supply 17,545, HTX holds 10,304 (58.7%), 51% of its PoR BTC line; HBTC supply only 969.49, HTX addresses hold ≈540 (56%) |
-| Verifiability | Balances verifiable; **BTCTRON collateral cannot be found at either end (§7.2); the HBTC issuer holds more than half of it itself** |
+| Verifiability | Balances verifiable; **we could not locate BTCTRON collateral in the published addresses at either end (§7.2; on-chain search cannot rule it out); the HBTC issuer holds more than half of it itself** |
 
 **④ Yield / lending receipts**
 
@@ -209,7 +209,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | Size and holdings (primary) | 73% of HTX's own-wallet USDT is stUSDT (39.55M, §6.2); Poloniex snapshot sUSDS 912.6M, stETH 247.8k (§7); Binance WBETH $8.4B; the aEthUSDT pool on chain 09-03: total supply ≈$2.95B, cash in pool $236M, utilisation 92% (<https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a>) |
 | Verifiability | Balances verifiable; **instant redemption depends on the cash in the protocol**, and every depositor stands in the same queue; the underlying of JustLend receipts (<https://tronscan.org/#/token20/TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3>) is itself inside JustLend, and JustLend accepts BTCTRON as collateral (§7.2) |
 
-- Only HTX has all four kinds: platform token + affiliated stablecoin + self-issued wrapped coins + yield receipts from a protocol under the same controller.
+- Only HTX has all four kinds: platform token + affiliated stablecoin + self-issued wrapped coins + yield receipts from an affiliated protocol.
 - The aggregator's basis excludes ② and ③, which is exactly the gap between the "aggregator-caliber" and "all-asset" columns for HTX's ETH chain in §3.2.
 - Of the four kinds, only the non-affiliated part of ④ (stETH, WBETH, sUSDS, aEthUSDT) is "someone else's credit"; everything else is "own credit".
 
@@ -217,7 +217,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 
 | Exchange | ① Affiliated = bulk of reserves | ② Holding ÷ home-venue ±2% depth (§8) | ③ Liability side (§5) |
 |---|---|---|---|
-| HTX | <mark class="r">**Yes** (77% vs hard assets 20%)</mark> | TRX ≈180× (ten venues combined), HTX token ≈880× | Publishes per-coin liabilities; <mark class="r">19% of reserves with an undisclosed custodian, own-wallet USDT covers 5.8% of liabilities</mark> (§6.2) |
+| HTX | <mark class="r">**Yes** (77% vs hard assets 20%)</mark> | TRX ≈180× (ten venues combined), HTX token ≈880× | Publishes per-coin liabilities; **19% of reserves with a custodian not disclosed on the page, own-wallet USDT covers 5.8% of liabilities** (§6.2) |
 | Bitfinex | No (32% vs 66%) | LEO ≈90,000× | No PoR page, liabilities unpublished |
 | KuCoin | No (16% vs 59%) | KCS ≈9,800× | Ratio only, 110% |
 | SwissBorg | No (15% vs 63%) | Not measured | No PoR page |
@@ -231,9 +231,9 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 - ① holds for one exchange only.
 - ② holds for every exchange measured: affiliated holdings are hundreds to tens of thousands of times the home-venue depth. On its own it does not rank danger; its role is to amplify ①. The higher the affiliated share, the more the reserves shrink once marked to order-book depth.
 - ③ Only Binance, OKX and HTX publish per-coin liabilities; the rest either give a single ratio or have no PoR page.
-- Of the top 20, only HTX comes close to all three at once: ① holds, ② holds (TRX has the best order book of these tokens, still 180×), ③ liabilities are published but a fifth of reserves sit with an undisclosed custodian. The differences from FTX: TRX has a market-wide order book and FTT did not; HTX publishes a liability sheet and FTX did not. The similarity: reserve value is a function of the price of its own family of tokens.
+- No exchange in the top 20 meets all three at once; the closest is HTX: ① holds, ② holds (TRX has the best order book of these tokens, still 180×), ③ liabilities are published but a fifth of reserves sit with a custodian not disclosed on the page. The differences from FTX: TRX has a market-wide order book and FTT did not; HTX publishes a liability sheet and FTX did not. The similarity: reserve value is a function of the price of its own family of tokens.
 
-## 5. Official PoR side by side (each exchange's page, 2026-08-01 snapshot)
+## 5. Official PoR side by side (each exchange's page, 2026-08-01 snapshot; red = third-party custody >10% of reserves or own wallets ÷ liabilities <100%, the §10 trigger rules)
 
 | Exchange | User liabilities | Reported reserves | Third-party custody share | **Own wallets ÷ liabilities** |
 |---|---|---|---|---|
@@ -246,47 +246,48 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | MEXC | — | 141% | no custody column | — |
 | Kraken | — | ratio only | — | — |
 
-## 6. Anomaly list (by exchange)
+## 6. Discrepancies with self-reported figures (by exchange)
 
-The same reading is applied to every exchange; red marks what this report identifies as an anomaly, each with its verification method.
+The same reading is applied to every exchange. This section lists the differences between what this report reads and what each exchange reports, each with its verification method; it sets no thresholds, so it uses no colour, only bold for the item.
 
 ### 6.1 Binance / Poloniex
 
-| Exchange | Anomaly | Reading | How to verify |
+| Exchange | Discrepancy | Reading | How to verify |
 |---|---|---|---|
-| Binance | The aggregator counts pegged-token collateral as "reserves" | <mark class="r">$12.3B of DefiLlama's $69.1B comes from 2 lockinfo addresses</mark> (USDT 9.18B, USDC 1.58B, ETH 455k), not customer assets; the 37 PoR addresses alone hold $56.4B | `eth_lock` in `tools/cex_addresses.json`; `--chain eth --ex binance-cex` |
-| Poloniex | Reserve composition and concentration | <mark class="r">94% of "USDT" is sUSDS, 98% of "ETH" is stETH, one address holds 63% of reserves</mark>; published TRX addresses −18% in a month (§7.1 per address) | §7 |
+| Binance | The aggregator counts pegged-token collateral as "reserves" | **$12.3B of DefiLlama's $69.1B comes from 2 lockinfo addresses** (USDT 9.18B, USDC 1.58B, ETH 455k), not customer assets; the 37 PoR addresses alone hold $56.4B | `eth_lock` in `tools/cex_addresses.json`; `--chain eth --ex binance-cex` |
+| Poloniex | Reserve composition and concentration | **94% of "USDT" is sUSDS, 98% of "ETH" is stETH, one address holds 63% of reserves**; published TRX addresses −18% in a month (§7.1 per address) | §7 |
 
 ### 6.2 HTX
 
 
-| # | Anomaly | Reading | How to verify |
+| # | Discrepancy | Reading | How to verify |
 |---|---|---|---|
-| 1 | <mark class="r">Own-wallet USDT covers only 5.8% of liabilities, and 73% of that is stUSDT</mark> | Liabilities 926.3M; "own wallets" 53.8M = USDT-TRC20 13.24M + USDT-ERC20 1.05M + **stUSDT 39.55M** (JustLend receipt); 655.9M in "ThirdParty" (76.6%). The 5 official USDT-TRC20 addresses on chain 09-04: <mark class="r">1.91M</mark> (snapshot 13.24M); USDT-ERC20 now 0 | HTX PoR page "USDs" breakdown; GitHub snapshot CSV; `--chain tron --ex htx` (`tron_por` item) |
-| 2 | <mark class="r">19.1% of reserves in third-party custody with undisclosed identity</mark> | Category added 2026-06-01, holding USDT 656M, USDC 217M, ETH 91.5k, BTC 1,689; Binance 0.9% and OKX 2.6% on the same basis | HTX PoR page "Custodial Wallets" column |
-| 3 | <mark class="r">51% of BTC reserves is Poloniex-issued BTC-TRC20, with no collateral found on chain</mark> | Reported BTC 20,472 = native 8,209 + BTC-TRC20 10,399 + custody 1,689 + other 175; native on chain now 8,072 = **41%** of the 19,933 user liability | `--chain btc,tron --ex htx`; BTC-TRC20 in §7.2 |
-| 4 | <mark class="r">75% of ETH reserves in custody, 25.5% verifiable on chain</mark> | Page: users 122,077 / HTX 122,626 / exchange wallets 31,101 / custody 91,525; exchange wallets on chain now 29,374 (native ETH only 112, the rest stETH) | `--chain eth --ex htx` (`eth_por` item) |
-| 5 | <mark class="r">TRX is 47% of reserves, 69% staked, and the whole market's order book cannot absorb 1% of it</mark> | 18 addresses hold 9.78B TRX = 10.3% of supply (3.04B available + 6.73B staked); user TRX liability 8.85B ⇒ 34% payable at once; ±2% spot depth across ten venues $17.6M in total, HTX holding $3.2B | trongrid `getaccount`; each venue's depth API |
-| 6 | <mark class="r">The HTX platform token is 5.7% of reserves, while HTX holds 23% of its supply and it trades only on HTX</mark> | Tron mainnet totalSupply ≈1,000 trillion; HTX's 18 addresses hold 2.31 trillion; not listed on Binance/OKX, daily volume on the five listing venues $0–50k; no perpetuals on nine venues | Tron JSON-RPC; each venue's market API |
-| 7 | <mark class="r">95,200 BTC-TRC20 redeemed in 2024-09/10, yet HTX's real BTC fell rather than rose</mark> | HTX monthly snapshots 09-01 → 11-01: BTC-TRC20 −8,522, native BTC −4,762, total BTC 34,611 → 21,327 (−38%); that month's PoR still reported a ratio >100% | CSVs in each commit of HTX's GitHub `huobiapi/Tool-Node.js-VerifyAddress` |
-| 8 | <mark class="r">Listed on UK and EU Russia-related sanctions lists</mark> | UK FCDO listed Huobi Global S.A. (alias "HTX (formerly Huobi)") on 2026-05-26, updated 07-07; the EU followed in July, effective 08-23; OFAC has not acted | FCDO sanctions list CSV (primary) |
-| 9 | Page is internally consistent, but less than half is verifiable | The four BTC / ETH figures on the page match the GitHub snapshot cell by cell; of the reported 102.7% / 100.45% ratios, the share provably "that coin" on chain is 41% / 25.5% | §3 and §5 of this report |
+| 1 | **Own-wallet USDT covers only 5.8% of liabilities, and 73% of that is stUSDT** | Liabilities 926.3M; "own wallets" 53.8M = USDT-TRC20 13.24M + USDT-ERC20 1.05M + **stUSDT 39.55M** (JustLend receipt); 655.9M in "ThirdParty" (76.6%). The 5 official USDT-TRC20 addresses on chain 09-04: **1.91M** (snapshot 13.24M); USDT-ERC20 now 0 | HTX PoR page "USDs" breakdown; GitHub snapshot CSV; `--chain tron --ex htx` (`tron_por` item) |
+| 2 | **19.1% of reserves in third-party custody whose custodian is not disclosed on the page** | Category added 2026-06-01, holding USDT 656M, USDC 217M, ETH 91.5k, BTC 1,689; Binance 0.9% and OKX 2.6% on the same basis | HTX PoR page "Custodial Wallets" column |
+| 3 | **51% of BTC reserves is Poloniex-issued BTC-TRC20, with no corresponding collateral found in the published addresses or the PoR page (on-chain search cannot rule it out)** | Reported BTC 20,472 = native 8,209 + BTC-TRC20 10,399 + custody 1,689 + other 175; native on chain now 8,072 = **41%** of the 19,933 user liability | `--chain btc,tron --ex htx`; BTC-TRC20 in §7.2 |
+| 4 | **75% of ETH reserves in custody, 25.5% verifiable on chain** | Page: users 122,077 / HTX 122,626 / exchange wallets 31,101 / custody 91,525; exchange wallets on chain now 29,374 (native ETH only 112, the rest stETH) | `--chain eth --ex htx` (`eth_por` item) |
+| 5 | **TRX is 47% of reserves, 69% staked, and the whole market's order book cannot absorb 1% of it** | 18 addresses hold 9.78B TRX = 10.3% of supply (3.04B available + 6.73B staked); user TRX liability 8.85B ⇒ 34% payable at once; ±2% spot depth across ten venues $17.6M in total, HTX holding $3.2B | trongrid `getaccount`; each venue's depth API |
+| 6 | **The HTX platform token is 5.7% of reserves, while HTX holds 23% of its supply and it trades only on HTX** | Tron mainnet totalSupply ≈1,000 trillion; HTX's 18 addresses hold 2.31 trillion; not listed on Binance/OKX, daily volume on the five listing venues $0–50k; no perpetuals on nine venues | Tron JSON-RPC; each venue's market API |
+| 7 | **95,200 BTC-TRC20 redeemed in 2024-09/10, yet HTX's real BTC fell rather than rose** | HTX monthly snapshots 09-01 → 11-01: BTC-TRC20 −8,522, native BTC −4,762, total BTC 34,611 → 21,327 (−38%); that month's PoR still reported a ratio >100% | CSVs in each commit of HTX's GitHub `huobiapi/Tool-Node.js-VerifyAddress` |
+| 8 | Page is internally consistent, but less than half is verifiable | The four BTC / ETH figures on the page match the GitHub snapshot cell by cell; of the reported 102.7% / 100.45% ratios, the share provably "that coin" on chain is 41% / 25.5% | §3 and §5 of this report |
+
+**Regulatory status (public record; not a reserve-check finding)**: UK FCDO listed Huobi Global S.A. (alias "HTX (formerly Huobi)") on 2026-05-26, updated 07-07; the EU followed in July, effective 08-23; OFAC has not acted. Source: FCDO sanctions list CSV (primary).
 
 **Control group read with the same scripts on the same day**
 
 - **Binance**: 61 BTC addresses, 640,647 BTC on chain (0 failures); 37 ETH addresses $56.4B; USDT-TRC20 897M.
 - **OKX**: 323 ETH addresses $12.9B, 95% of the aggregator (0 failures); USDT-TRC20 273M.
 
-## 7. Poloniex and BTC-TRC20 (BTCTRON): the other half of the HTX reserve story
+## 7. Poloniex and BTC-TRC20 (BTCTRON): the Poloniex-linked part of HTX reserves
 
-**Poloniex** (controlled by Justin Sun since 2019; PoR address list published on GitHub `poloniex/tools-nodejs-address-verify`, same snapshot block height as HTX):
+**Poloniex** (⚠ public reporting: acquired from Circle in 2019 by an investment group associated with Justin Sun; PoR address list published on GitHub `poloniex/tools-nodejs-address-verify`, same snapshot block height as HTX):
 
 | Item | Reading |
 |---|---|
 | Nominal reserves (08-01 snapshot) | $2.73B |
-| Composition of the $968M "USDT" reserve | <mark class="r">94% is sUSDS</mark> (Sky savings shares, not USDT) |
-| Composition of the 252k "ETH" reserve | <mark class="r">98% is stETH</mark>, native ETH 1,142 |
-| Single-address concentration | <mark class="r">[`0x176F3DAb…0132`](https://etherscan.io/address/0x176F3DAb24a159341c0509bB36B833E7fdd0a132) alone holds sUSDS $1.0B + stETH 243k + WBTC 1,690 ≈ $1.72B = 63% of reserves</mark> (⚠ Etherscan labelled this address "Justin Sun 4" in 2023; media grade) |
+| Composition of the $968M "USDT" reserve | **94% is sUSDS** (Sky savings shares, not USDT) |
+| Composition of the 252k "ETH" reserve | **98% is stETH**, native ETH 1,142 |
+| Single-address concentration | **[`0x176F3DAb…0132`](https://etherscan.io/address/0x176F3DAb24a159341c0509bB36B833E7fdd0a132) alone holds sUSDS $1.0B + stETH 243k + WBTC 1,690 ≈ $1.72B = 63% of reserves** |
 | On-chain reconciliation | BTC 16 addresses 10,864 → 10,764 ✅; published TRX addresses 57.8M → 47.3M in a month (−18%, §7.1 per address) |
 | Where the reserves came from (from 2026-05-30) | 71,993 stETH, 806M sUSDS and 1,723 WBTC entered Poloniex 9 via the Poloniex-published addresses `0x8fCA4adE…` → `0x29065a4C…` (Gnosis Safe); the stETH originates from HTX address `0x18709E89…` (hops below) |
 
@@ -328,13 +329,15 @@ BTCTRON is the "BTC" Poloniex issued on Tron in 2020; HTX's PoR books it as BTC-
 | Item | On-chain reading |
 |---|---|
 | Contract type | Tether-style: `issue / redeem / addBlackList / destroyBlackFunds`; owner is an unlabelled address |
-| Supply and holders | 17,545; <mark class="r">[HTX 6](https://tronscan.org/#/address/TDToUxX8sH4z6moQpK3ZLAN24eupu2ivA4) holds 10,304 (58.7%) + [JustLend jBTC market](https://tronscan.org/#/contract/TLeEu311Cbw63BcmMHDgDLu7fnk9fqGcqT) 6,577 (37.5%) = 96%</mark>; Poloniex itself holds 28 |
-| Mint history | Minted 114,000 / redeemed 96,090 / blacklist-burned 364 (closes); <mark class="r">the 89,000 minted in 2022 went straight into JustLend the same day, not to user withdrawals</mark> |
-| Collateral | All 12,617 BTC in Poloniex's PoR already correspond to its own 12,603 user liability; <mark class="r">no line is marked as BTCTRON reserve; the 16 BTC addresses carry no signature</mark>; when 95,200 were redeemed in 2024-09/10, none of Poloniex's 15 cold addresses showed an outflow ≥1,000 BTC and HTX's native BTC did not rise |
-| 2022-08-21 | <mark class="r">The day 60,000 were minted, the two deposit addresses borrowed 400M + 600M USDC from JustLend jUSDC and sent it to a Poloniex signing address</mark>; 95% of the jUSDC pool was supplied by hubs affiliated with the borrower; repaid 2023-07 |
-| Today's credit line | The JustLend oracle prices BTCTRON at full real-BTC price ($76.8k), collateral factor 0.75; <mark class="r">one address has 5,000 registered as collateral, borrow 0, borrowable ≈$290M; jUSDT pool cash $68M</mark>; another address borrows $16.2M jUSDT against 200 + sTRX |
+| Supply and holders | 17,545; **[HTX 6](https://tronscan.org/#/address/TDToUxX8sH4z6moQpK3ZLAN24eupu2ivA4) holds 10,304 (58.7%) + [JustLend jBTC market](https://tronscan.org/#/contract/TLeEu311Cbw63BcmMHDgDLu7fnk9fqGcqT) 6,577 (37.5%) = 96%**; Poloniex itself holds 28 |
+| Mint history | Minted 114,000 / redeemed 96,090 / blacklist-burned 364 (closes); **the 89,000 minted in 2022 went straight into JustLend the same day, not to user withdrawals** |
+| Collateral | All 12,617 BTC in Poloniex's PoR already correspond to its own 12,603 user liability; **no line is marked as BTCTRON reserve; the 16 BTC addresses carry no signature**; when 95,200 were redeemed in 2024-09/10, none of Poloniex's 15 cold addresses showed an outflow ≥1,000 BTC and HTX's native BTC did not rise |
+| 2022-08-21 | **The day 60,000 were minted, the two deposit addresses borrowed 400M + 600M USDC from JustLend jUSDC and sent it to a Poloniex signing address**; 95% of the jUSDC pool was supplied by hubs affiliated with the borrower; repaid 2023-07 |
+| Current credit line | The JustLend oracle prices BTCTRON at full real-BTC price ($76.8k), collateral factor 0.75; **one address has 5,000 registered as collateral, borrow 0, borrowable ≈$290M; jUSDT pool cash $68M**; another address borrows $16.2M jUSDT against 200 + sTRX |
 
-## 8. Realisability of affiliated tokens: reserve holdings ÷ order-book depth (measured 2026-09-03)
+The above records what we could **not find** on Poloniex\'s published addresses and PoR page: no asset marked as BTCTRON reserve. Collateral may exist in undisclosed addresses; on-chain search cannot rule that out.
+
+## 8. Realisability of affiliated tokens: reserve holdings ÷ order-book depth (measured 2026-09-03; red = affiliated share >30% or staked share >50%, the §2/§10 rules)
 
 In §2 every exchange's "affiliated token" enters reserves at market price. This section asks the same question of each: **if it had to be sold, how much could the order book take?** Uniform reading: home-venue ±2% depth (dollar amount fillable at once), 24h volume, divided into the reserve holding of that token.
 

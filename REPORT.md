@@ -4,11 +4,11 @@
 > 口径纪律:**链上直读 > 官方 PoR 页面 > 公开聚合器 > 媒体**。前三类进表;媒体只作线索,标 ⚠,不进表。
 > 本页不对任何交易所的偿付能力作判断,只呈现可核验的事实,以及各来源之间的差异。
 
-## 0. 结论
+## 0. 摘要
 
-1. 头部交易所里,**只有 HTX 同时踩到四种关联资产**:平台币(HTX 币)、关联稳定币(USDD)、自发包装币(BTC-TRC20、HBTC)、Sun 系生息凭证(stUSDT/jUSDD)。其余各所最多一种(分类与 FTX 三条判据见 §4)。
-2. <mark class="r">HTX 自报储备率"均超 100%",但按链上可核口径:USDT 自有钱包只覆盖负债的 5.8%,BTC 41%,ETH 25.5%;总储备的 19.1% 在不披露身份的"第三方托管",47% 是 TRX 且其中 69% 处于质押。</mark>
-3. Binance / OKX 的储备在 BTC 与 ETH 链上可 99–103% 对上;Bitfinex、Gate、KuCoin、Gemini 亦在 95–101%。**"储备率 >100%"这句话各家都在说,差别在于能不能在链上看见。**
+1. 头部交易所里,**同时具备四类关联资产的只有 HTX**:平台币(HTX 币)、关联稳定币(USDD)、自发包装币(BTC-TRC20、HBTC)、JustLend 生息凭证(stUSDT/jUSDD)。其余各所最多一种(分类与 FTX 三条判据见 §4)。
+2. **HTX 自报储备率"均超 100%",但按链上可核口径:USDT 自有钱包只覆盖负债的 5.8%,BTC 41%,ETH 25.5%;总储备的 19.1% 在不披露身份的"第三方托管",47% 是 TRX 且其中 69% 处于质押。**
+3. Binance / OKX 的储备在 BTC 与 ETH 链上可 99–103% 对上;Bitfinex、Gate、KuCoin、Gemini 亦在 95–101%。各所均自报储备率 >100%;本报告只能核验其中可在链上读到的部分,各所可核比例见 §3。
 
 ## 1. 方法:三层数据,只信最底层
 
@@ -51,7 +51,7 @@
 | 13 | KuCoin | $3.2B | 20% | 9% | 30% | 16%(KCS) | -12.1% |
 | 14 | Crypto.com | $2.5B | 74% | 7% | 9% | 1%(CRO) | -7.1% |
 | 15 | HashKey | $1.7B | 65% | 25% | 5% | 0% | +30.8% |
-| 16 | Poloniex | $1.5B | 49% | 39% | 1% | 2%(Sun 系) | +61.1% ⚠ 非客户流入(见读法与 §7) |
+| 16 | Poloniex | $1.5B | 49% | 39% | 1% | 2%(关联体系代币) | +61.1% ⚠ 非客户流入(见读法与 §7) |
 | 17 | Bitkub | $1.4B | 65% | 14% | 3% | 0% | +33.6% |
 | 18 | SwissBorg | $1.0B | 43% | 14% | 6% | 15%(BORG) | -2.5% |
 | 19 | BitMEX | $0.8B | 87% | 0% | 13% | 0% | -60.5%(2026-09-23 自愿关停,清退前提币) |
@@ -131,10 +131,10 @@
 
 - **聚合器不可引用。** 它漏计 USDT-TRC20(Bitget 公布地址持 242M,聚合器记 0),其 `eth_getBalance` 读法也不含质押中的 TRX。
 - Tron 的"冻结"(freeze)是其官方术语,指把 TRX 质押给网络换取带宽、能量与投票权:所有权不变、可随时发起解押、解押后 14 天到账;它不是借贷抵押,也不是被平台或司法冻结。本报告统一写"质押"。质押有四个去处:V1 质押、V2 自持质押、**委托给他址的质押**(TRX 仍归本址)、解押队列;表中"质押中"四项全计。OKX 的 5.2 亿、Poloniex 的 2,400 万都是委托质押,只读 `balance + frozenV2` 会看不到(§7.1)。
-- HTX 表中 18 个 Tron 地址是DefiLlama-Adapters清单里的 TRX 冷钱包,上面没有 USDT 属正常;**HTX 官方 PoR 的 USDT-TRC20 另有 5 个地址**:08-01 快照 13.24M,09-04 链上 <mark class="r">1.91M</mark>(`TK86…` 的 11.33M 已转空);USDT-ERC20 1 址 1.05M → 0。用户 USDT 负债 926M 的其余部分在"ThirdParty"(§6.2)。
+- HTX 表中 18 个 Tron 地址是DefiLlama-Adapters清单里的 TRX 冷钱包,上面没有 USDT 属正常;**HTX 官方 PoR 的 USDT-TRC20 另有 5 个地址**:08-01 快照 13.24M,09-04 链上 <mark class="r">1.91M</mark>(低于用户 USDT 负债的 1%,§10 规则;`TK86…` 的 11.33M 已转空);USDT-ERC20 1 址 1.05M → 0。用户 USDT 负债 926M 的其余部分在"ThirdParty"(§6.2)。
 - 末两列为各所官方 PoR 自报的 TRX 与 USDT(用户 / 钱包);USDT 是**全链合计**(ERC20 + TRC20 + 其他链),本表 USDT-TRC20 只是其中一条链,故不算差值。HTX 的 TRX 自报钱包 9,376M 与本表 18 址 9,692M(可用 + 质押)同量级;其 USDT 自报钱包 710M 中 656M 在"ThirdParty"(§6.2)。
 
-## 4. 关联币占储备的比重:FTX 的结构性前提,谁踩着
+## 4. 关联币占储备的比重:FTX 的三项结构性前提与各所对照
 
 ### 4.1 FTX 的结构性前提是什么(⚠ 公开报道级,仅作判据来源)
 
@@ -162,7 +162,7 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 | Bitget | BGB | 8% | 65% |
 | OKX | OKB | 4% | 86% |
 | Bybit | MNT | 4% | 75% |
-| Poloniex | Sun 系代币 | 2% | 89% |
+| Poloniex | 关联体系代币 | 2% | 89% |
 | Crypto.com | CRO | 1% | 90% |
 | Robinhood、Gemini、Deribit、Bitstamp、HashKey、Bitkub、BitMEX、OSL | — | 0% | 77–100% |
 
@@ -187,7 +187,7 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 | 项 | 内容 |
 |---|---|
 | 资产 | USDD |
-| 发行方 / 机制 | TRON DAO Reserve 2022-05 发行,与 HTX 同一控制人;上线时为算法币,2022-06 脱锚后改称超额抵押,2025 年改为锁 TRX/USDT 铸造(⚠ 沿革为公开报道级) |
+| 发行方 / 机制 | TRON DAO Reserve 2022-05 发行(⚠ 公开报道称其与 HTX 同一控制人);上线时为算法币,2022-06 脱锚后改称超额抵押,2025 年改为锁 TRX/USDT 铸造(⚠ 沿革为公开报道级) |
 | 规模与持有(一手) | 供给 $1.51B,Tron 为主(<https://defillama.com/stablecoin/usdd>);HTX 把它算进 "USDs" 稳定币储备,自有钱包 125M(PoR 页 USDs 明细) |
 | 可核性 | 余额可核;**抵押品是 TRX**,与储备主体同一资产 |
 
@@ -198,7 +198,7 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 | 资产 | BTC-TRC20(BTCTRON)、HBTC |
 | 发行方 / 机制 | BTCTRON:Poloniex 2020 年在 Tron 发行,声称 1:1 赎回,从未披露抵押地址(<https://tronscan.org/#/token20/TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9>);HBTC:火币 2020 年在以太坊发行的包装 BTC,改名 HTX 后停用(<https://etherscan.io/token/0x0316EB71485b0Ab14103307bf65a021042c6d380>) |
 | 规模与持有(一手) | BTCTRON 供给 17,545 枚,HTX 持 10,304(58.7%),占其 PoR BTC 行 51%;HBTC 供给仅 969.49 枚,HTX 地址持 ≈540(56%) |
-| 可核性 | 余额可核;**BTCTRON 抵押物两端都找不到(§7.2);HBTC 发行方自持过半** |
+| 可核性 | 余额可核;**在两端的公布地址上均未发现 BTCTRON 抵押物(§7.2,链上检索不能证否);HBTC 发行方自持过半** |
 
 **④ 生息 / 借贷凭证**
 
@@ -209,7 +209,7 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 | 规模与持有(一手) | HTX 自有钱包 USDT 中 73% 是 stUSDT(39.55M,§6.2);Poloniex 快照 sUSDS 912.6M、stETH 247.8k(§7);Binance WBETH $8.4B;aEthUSDT 池 09-03 链上:总供给 ≈$29.5 亿、池内现金 $2.36 亿、利用率 92%(<https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a>) |
 | 可核性 | 余额可核;**能否即时赎回取决于协议里的现金**,所有存款人排同一条队;JustLend 系凭证(<https://tronscan.org/#/token20/TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3>)的底层又在 JustLend 里,而 JustLend 接受 BTCTRON 作抵押(§7.2) |
 
-- 四类全占的只有 HTX:平台币 + 关联稳定币 + 自发包装币 + 同一控制人协议的生息凭证。
+- 四类全占的只有 HTX:平台币 + 关联稳定币 + 自发包装币 + 关联协议的生息凭证。
 - 聚合器口径剔除 ②③,这正是 §3.2 里 HTX ETH 链"聚合器口径"与"全资产"两列的差额来源。
 - 四类里只有 ④ 的非关联部分(stETH、WBETH、sUSDS、aEthUSDT)是"别人的信用",其余都是"自己的信用"。
 
@@ -217,7 +217,7 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 
 | 所 | ① 关联币是储备主体 | ② 盘口:储备持仓 ÷ 主场 ±2% 深度(§8) | ③ 负债端(§5) |
 |---|---|---|---|
-| HTX | <mark class="r">**是**(77% vs 硬资产 20%)</mark> | TRX ≈180×(十所合计)、HTX 币 ≈880× | 公布逐币负债;<mark class="r">19% 储备在不披露身份的托管方,USDT 自有钱包覆盖负债 5.8%</mark>(§6.2) |
+| HTX | <mark class="r">**是**(77% vs 硬资产 20%)</mark> | TRX ≈180×(十所合计)、HTX 币 ≈880× | 公布逐币负债;**19% 储备在托管方未在页面披露,USDT 自有钱包覆盖负债 5.8%**(§6.2) |
 | Bitfinex | 否(32% vs 66%) | LEO ≈90,000× | 无 PoR 页,负债未公布 |
 | KuCoin | 否(16% vs 59%) | KCS ≈9,800× | 仅公布比率 110% |
 | SwissBorg | 否(15% vs 63%) | 未测 | 无 PoR 页 |
@@ -231,9 +231,9 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 - ① 只对一家成立。
 - ② 对所有测过的所都成立:关联币持仓是主场盘口深度的几百到几万倍,本身不区分谁更危险;它的作用是放大 ①,关联币占比越高,按盘口折算后的储备缩水越多。
 - ③ 公布逐币负债的只有 Binance、OKX、HTX 三家;其余要么只给一个比率,要么没有 PoR 页。
-- 三条同时成立的组合,前 20 名里只有 HTX 靠近:① 成立,② 成立(TRX 是这些关联币里盘口最好的,仍为 180 倍),③ 公布了负债,但五分之一储备在不披露身份的托管方。与 FTX 的差别是 TRX 有全市场盘口而 FTT 没有,HTX 公布了负债表而 FTX 没有;相同点是储备价值是自家系代币价格的函数。
+- 三条同时成立的所,前 20 名里没有;最接近的是 HTX:① 成立,② 成立(TRX 是这些关联币里盘口最好的,仍为 180 倍),③ 公布了负债,但五分之一储备在托管方未在页面披露。与 FTX 的差别是 TRX 有全市场盘口而 FTT 没有,HTX 公布了负债表而 FTX 没有;相同点是储备价值是自家系代币价格的函数。
 
-## 5. 官方 PoR 横向(各所页面,2026-08-01 快照)
+## 5. 官方 PoR 横向(各所页面,2026-08-01 快照;第三方托管占储备 >10%、仅自有钱包 ÷ 负债 <100% 标红,与 §10 触发规则一致)
 
 | 所 | 用户负债 | 自报储备 | 第三方托管占储备 | **仅自有钱包 ÷ 负债** |
 |---|---|---|---|---|
@@ -246,47 +246,48 @@ FTX 2022-11 倒闭前的资产负债结构是本章判据的来源。要点三�
 | MEXC | — | 141% | 无托管栏 | — |
 | Kraken | — | 仅比率 | — | — |
 
-## 6. 异常清单(按所)
+## 6. 与自报口径的差异(按所)
 
-同一套读法用在每家所上;红色为本报告认定的异常,每条附核验方法。
+同一套读法用在每家所上。本节列的是本报告读到的数与各所自报口径之间的差异,每条附核验方法;本节不设阈值,故不用颜色标注,只加粗差异项。
 
 ### 6.1 Binance / Poloniex
 
-| 所 | 异常 | 读数 | 怎么核 |
+| 所 | 差异项 | 读数 | 怎么核 |
 |---|---|---|---|
-| Binance | 聚合器把锚定代币的抵押储备算进"储备" | <mark class="r">DefiLlama $69.1B 中 $12.3B 来自 lockinfo 的 2 个地址</mark>(USDT 9.18B、USDC 1.58B、ETH 45.5 万),不是用户资产;PoR 37 址本身 $56.4B | `tools/cex_addresses.json` 的 `eth_lock`;`--chain eth --ex binance-cex` |
-| Poloniex | 储备构成与集中度 | <mark class="r">"USDT" 94% 是 sUSDS,"ETH" 98% 是 stETH,一个地址占储备 63%</mark>;公布 TRX 地址一个月 −18%(§7.1 逐址) | §7 |
+| Binance | 聚合器把锚定代币的抵押储备算进"储备" | **DefiLlama $69.1B 中 $12.3B 来自 lockinfo 的 2 个地址**(USDT 9.18B、USDC 1.58B、ETH 45.5 万),不是用户资产;PoR 37 址本身 $56.4B | `tools/cex_addresses.json` 的 `eth_lock`;`--chain eth --ex binance-cex` |
+| Poloniex | 储备构成与集中度 | **"USDT" 94% 是 sUSDS,"ETH" 98% 是 stETH,一个地址占储备 63%**;公布 TRX 地址一个月 −18%(§7.1 逐址) | §7 |
 
 ### 6.2 HTX
 
 
-| # | 异常 | 读数 | 怎么核 |
+| # | 差异项 | 读数 | 怎么核 |
 |---|---|---|---|
-| 1 | <mark class="r">USDT 自有钱包只覆盖负债 5.8%,且其中 73% 是 stUSDT</mark> | 负债 926.3M;"自有钱包" 53.8M = USDT-TRC20 13.24M + USDT-ERC20 1.05M + **stUSDT 39.55M**(JustLend 凭证);655.9M 在"ThirdParty"(76.6%)。官方 USDT-TRC20 5 址链上现值 09-04:<mark class="r">1.91M</mark>(快照 13.24M);USDT-ERC20 现值 0 | HTX PoR 页 "USDs" 明细;GitHub 快照 CSV;`--chain tron --ex htx`(`tron_por` 项) |
-| 2 | <mark class="r">19.1% 储备在不披露身份的第三方托管</mark> | 2026-06-01 起新设类别,含 USDT 656M、USDC 217M、ETH 91.5k、BTC 1,689;Binance 同口径 0.9%、OKX 2.6% | HTX PoR 页 "Custodial Wallets" 栏 |
-| 3 | <mark class="r">BTC 储备 51% 是 Poloniex 发行的 BTC-TRC20,链上找不到抵押物</mark> | 自报 BTC 20,472 = 原生 8,209 + BTC-TRC20 10,399 + 托管 1,689 + 其他 175;原生链上现值 8,072 = 用户负债 19,933 的 **41%** | `--chain btc,tron --ex htx`;BTC-TRC20 见 §7.2 |
-| 4 | <mark class="r">ETH 储备 75% 在托管,链上可核 25.5%</mark> | 页面:用户 122,077 / HTX 122,626 / 交易所钱包 31,101 / 托管 91,525;交易所钱包链上现值 29,374(原生 ETH 仅 112,余为 stETH) | `--chain eth --ex htx`(`eth_por` 项) |
-| 5 | <mark class="r">TRX 占储备 47%,69% 质押中,而全市场盘口装不下它的 1%</mark> | 18 址持 9.78B TRX = 供给 10.3%(可用 3.04B + 质押中 6.73B);用户 TRX 负债 8.85B ⇒ 即时可付 34%;十所现货 ±2% 深度合计 $17.6M,HTX 持仓 $3.2B | trongrid `getaccount`;各所深度接口 |
-| 6 | <mark class="r">平台币 HTX 计入储备 5.7%,而 HTX 自持其供给 23%,仅本所有成交</mark> | Tron 主链 totalSupply ≈1,000 万亿枚;HTX 18 址持 2.31 万亿;Binance/OKX 未上市,五家挂牌所日成交 $0–5 万;九所无永续 | Tron JSON-RPC;各所行情接口 |
-| 7 | <mark class="r">2024-09/10 赎回 95,200 枚 BTC-TRC20,HTX 的真 BTC 不增反减</mark> | HTX 月度快照:09-01 → 11-01 BTC-TRC20 −8,522 枚,原生 BTC −4,762 枚,总 BTC 34,611 → 21,327(−38%);当月 PoR 照报储备率 >100% | HTX GitHub `huobiapi/Tool-Node.js-VerifyAddress` 各 commit 的 CSV |
-| 8 | <mark class="r">被英国、欧盟列入对俄制裁名单</mark> | 英国 FCDO 2026-05-26 列名 Huobi Global S.A.(别名 "HTX (formerly Huobi)"),07-07 更新;欧盟 07 月跟进,08-23 生效;OFAC 未动 | FCDO 制裁名单 CSV(一手) |
-| 9 | 页面自洽,但可核部分不到一半 | BTC / ETH 页面四个数与 GitHub 快照逐格对上;储备率 102.7% / 100.45% 中,链上能证明"确实是那个币"的部分分别为 41% / 25.5% | 本报告 §3、§5 |
+| 1 | **USDT 自有钱包只覆盖负债 5.8%,且其中 73% 是 stUSDT** | 负债 926.3M;"自有钱包" 53.8M = USDT-TRC20 13.24M + USDT-ERC20 1.05M + **stUSDT 39.55M**(JustLend 凭证);655.9M 在"ThirdParty"(76.6%)。官方 USDT-TRC20 5 址链上现值 09-04:**1.91M**(快照 13.24M);USDT-ERC20 现值 0 | HTX PoR 页 "USDs" 明细;GitHub 快照 CSV;`--chain tron --ex htx`(`tron_por` 项) |
+| 2 | **19.1% 储备在托管方未在页面披露的第三方托管** | 2026-06-01 起新设类别,含 USDT 656M、USDC 217M、ETH 91.5k、BTC 1,689;Binance 同口径 0.9%、OKX 2.6% | HTX PoR 页 "Custodial Wallets" 栏 |
+| 3 | **BTC 储备 51% 是 Poloniex 发行的 BTC-TRC20,公布地址与 PoR 页面上未发现对应抵押物(链上检索不能证否)** | 自报 BTC 20,472 = 原生 8,209 + BTC-TRC20 10,399 + 托管 1,689 + 其他 175;原生链上现值 8,072 = 用户负债 19,933 的 **41%** | `--chain btc,tron --ex htx`;BTC-TRC20 见 §7.2 |
+| 4 | **ETH 储备 75% 在托管,链上可核 25.5%** | 页面:用户 122,077 / HTX 122,626 / 交易所钱包 31,101 / 托管 91,525;交易所钱包链上现值 29,374(原生 ETH 仅 112,余为 stETH) | `--chain eth --ex htx`(`eth_por` 项) |
+| 5 | **TRX 占储备 47%,69% 质押中,而全市场盘口装不下它的 1%** | 18 址持 9.78B TRX = 供给 10.3%(可用 3.04B + 质押中 6.73B);用户 TRX 负债 8.85B ⇒ 即时可付 34%;十所现货 ±2% 深度合计 $17.6M,HTX 持仓 $3.2B | trongrid `getaccount`;各所深度接口 |
+| 6 | **平台币 HTX 计入储备 5.7%,而 HTX 自持其供给 23%,仅本所有成交** | Tron 主链 totalSupply ≈1,000 万亿枚;HTX 18 址持 2.31 万亿;Binance/OKX 未上市,五家挂牌所日成交 $0–5 万;九所无永续 | Tron JSON-RPC;各所行情接口 |
+| 7 | **2024-09/10 赎回 95,200 枚 BTC-TRC20,HTX 的真 BTC 不增反减** | HTX 月度快照:09-01 → 11-01 BTC-TRC20 −8,522 枚,原生 BTC −4,762 枚,总 BTC 34,611 → 21,327(−38%);当月 PoR 照报储备率 >100% | HTX GitHub `huobiapi/Tool-Node.js-VerifyAddress` 各 commit 的 CSV |
+| 8 | 页面自洽,但可核部分不到一半 | BTC / ETH 页面四个数与 GitHub 快照逐格对上;储备率 102.7% / 100.45% 中,链上能证明"确实是那个币"的部分分别为 41% / 25.5% | 本报告 §3、§5 |
+
+**监管状态(公开记录,不属储备核查的发现)**:英国 FCDO 2026-05-26 列名 Huobi Global S.A.(别名 "HTX (formerly Huobi)"),07-07 更新;欧盟 07 月跟进,08-23 生效;OFAC 未动。来源:FCDO 制裁名单 CSV(一手)。
 
 **同一套脚本、同一天读到的对照组**
 
 - **Binance**:BTC 61 址链上 640,647 枚(0 失败);ETH 37 址 $56.4B;USDT-TRC20 897M。
 - **OKX**:ETH 323 址 $12.9B,与聚合器 95%(0 失败);USDT-TRC20 273M。
 
-## 7. Poloniex 与 BTC-TRC20(BTCTRON):HTX 储备的另一半故事
+## 7. Poloniex 与 BTC-TRC20(BTCTRON):HTX 储备中与 Poloniex 关联的部分
 
-**Poloniex**(孙宇晨 2019 年起控制;PoR 地址清单公开于 GitHub `poloniex/tools-nodejs-address-verify`,与 HTX 用同一快照区块高度):
+**Poloniex**(⚠ 公开报道称 2019 年由与孙宇晨关联的投资团体从 Circle 收购;PoR 地址清单公开于 GitHub `poloniex/tools-nodejs-address-verify`,与 HTX 用同一快照区块高度):
 
 | 项 | 读数 |
 |---|---|
 | 名义储备(08-01 快照) | $2.73B |
-| "USDT" 储备 $968M 的构成 | <mark class="r">94% 是 sUSDS</mark>(Sky 储蓄份额,不是 USDT) |
-| "ETH" 储备 252k 的构成 | <mark class="r">98% 是 stETH</mark>,原生 ETH 1,142 |
-| 单一地址集中度 | <mark class="r">[`0x176F3DAb…0132`](https://etherscan.io/address/0x176F3DAb24a159341c0509bB36B833E7fdd0a132) 一址持 sUSDS $1.0B + stETH 243k + WBTC 1,690 ≈ $1.72B = 储备的 63%</mark>(⚠ 该址 2023 年曾被 Etherscan 标为 "Justin Sun 4",媒体级) |
+| "USDT" 储备 $968M 的构成 | **94% 是 sUSDS**(Sky 储蓄份额,不是 USDT) |
+| "ETH" 储备 252k 的构成 | **98% 是 stETH**,原生 ETH 1,142 |
+| 单一地址集中度 | **[`0x176F3DAb…0132`](https://etherscan.io/address/0x176F3DAb24a159341c0509bB36B833E7fdd0a132) 一址持 sUSDS $1.0B + stETH 243k + WBTC 1,690 ≈ $1.72B = 储备的 63%** |
 | 链上对账 | BTC 16 址 10,864 → 10,764 ✅;TRX 公布地址一个月 57.8M → 47.3M(−18%,§7.1 逐址) |
 | 储备的来源(2026-05-30 起) | 71,993 stETH、806M sUSDS、1,723 WBTC 经 Poloniex 公布地址 `0x8fCA4adE…` → `0x29065a4C…`(Gnosis Safe)转入 Poloniex 9;stETH 上游为 HTX 地址 `0x18709E89…`(逐跳见下) |
 
@@ -328,13 +329,15 @@ BTCTRON 是 Poloniex 2020 年在 Tron 链上发行的 "BTC",HTX 的 PoR 把它�
 | 项 | 链上读数 |
 |---|---|
 | 合约类型 | Tether 式:`issue / redeem / addBlackList / destroyBlackFunds`;owner 为无标签地址 |
-| 供给与持有 | 17,545 枚;<mark class="r">[HTX 6](https://tronscan.org/#/address/TDToUxX8sH4z6moQpK3ZLAN24eupu2ivA4) 持 10,304(58.7%)+ [JustLend jBTC 市场](https://tronscan.org/#/contract/TLeEu311Cbw63BcmMHDgDLu7fnk9fqGcqT) 6,577(37.5%)= 96%</mark>;Poloniex 自持 28 |
-| 铸造史 | 铸 114,000 / 销 96,090 / 黑名单销毁 364(闭合);<mark class="r">2022 年铸 89,000 枚当日全部存入 JustLend,非用户提币</mark> |
-| 抵押物 | Poloniex PoR 全部 BTC 12,617 枚已对应自己用户负债 12,603 枚;<mark class="r">没有任何一行标为 BTCTRON 储备;16 个 BTC 地址无签名</mark>;2024-09/10 赎回 95,200 枚时,Poloniex 15 个冷址无 ≥1,000 BTC 流出,HTX 原生 BTC 亦未增加 |
-| 2022-08-21 | <mark class="r">60,000 枚铸出当日,两个存入地址从 JustLend jUSDC 借出 4 亿 + 6 亿 USDC 转入 Poloniex 签名地址</mark>;jUSDC 池 95% 由借款方关联枢纽供给;2023-07 还清 |
-| 今天的额度 | JustLend 预言机按真 BTC 全价($76.8k)认 BTCTRON,抵押率 0.75;<mark class="r">一地址 5,000 枚已登记抵押、借款 0、可借 ≈$2.9 亿;jUSDT 池现金 $68M</mark>;另一地址以 200 枚 + sTRX 抵押借着 $16.2M jUSDT |
+| 供给与持有 | 17,545 枚;**[HTX 6](https://tronscan.org/#/address/TDToUxX8sH4z6moQpK3ZLAN24eupu2ivA4) 持 10,304(58.7%)+ [JustLend jBTC 市场](https://tronscan.org/#/contract/TLeEu311Cbw63BcmMHDgDLu7fnk9fqGcqT) 6,577(37.5%)= 96%**;Poloniex 自持 28 |
+| 铸造史 | 铸 114,000 / 销 96,090 / 黑名单销毁 364(闭合);**2022 年铸 89,000 枚当日全部存入 JustLend,非用户提币** |
+| 抵押物 | Poloniex PoR 全部 BTC 12,617 枚已对应自己用户负债 12,603 枚;**没有任何一行标为 BTCTRON 储备;16 个 BTC 地址无签名**;2024-09/10 赎回 95,200 枚时,Poloniex 15 个冷址无 ≥1,000 BTC 流出,HTX 原生 BTC 亦未增加 |
+| 2022-08-21 | **60,000 枚铸出当日,两个存入地址从 JustLend jUSDC 借出 4 亿 + 6 亿 USDC 转入 Poloniex 签名地址**;jUSDC 池 95% 由借款方关联枢纽供给;2023-07 还清 |
+| 当前的借款额度 | JustLend 预言机按真 BTC 全价($76.8k)认 BTCTRON,抵押率 0.75;**一地址 5,000 枚已登记抵押、借款 0、可借 ≈$2.9 亿;jUSDT 池现金 $68M**;另一地址以 200 枚 + sTRX 抵押借着 $16.2M jUSDT |
 
-## 8. 关联币可变现性:储备中的持仓 ÷ 盘口深度(2026-09-03 实测)
+以上为在 Poloniex 公布地址与其 PoR 页面上**未发现**标记为 BTCTRON 储备的资产。抵押物可能存在于未公布的地址,链上检索无法证否。
+
+## 8. 关联币可变现性:储备中的持仓 ÷ 盘口深度(2026-09-03 实测;关联币占储备 >30%、质押占比 >50% 标红,与 §2/§10 规则一致)
 
 §2 里每家所的"关联币"都按市价计入储备。这一节问同一个问题:**真要卖,盘口接得住多少?** 读法统一:主场 ±2% 盘口深度(挂单可即时成交的美元量)、24h 成交,与储备中该币的持仓相除。
 
