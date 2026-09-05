@@ -94,17 +94,17 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 ### 3.2 ETH chain (Blockscout all-asset direct read vs aggregator; the "aggregator-caliber" column excludes USDD/HBTC/aEthUSDT; coverage 95–105% green, <90% or >110% red)
 
-| Exchange | Addresses | All-asset read | Aggregator-caliber read | Aggregator | Coverage | Failed | PoR ETH: users / wallets (snapshot) |
-|---|---|---|---|---|---|---|---|
-| Binance | 37 + lock 2 | $68.70B | $68.69B | $69.16B | <span class="ok">99%</span> | 0 | ? / 3,991,221(08-01) |
-| OKX | 323 | $12.90B | $12.90B | $13.52B | <span class="ok">95%</span> | 0 | 1,725,703 / 1,749,426(Aug 2026) |
-| Bitfinex | 9 | $7.15B | $7.15B | $7.06B | <span class="ok">101%</span> | 0 | — |
-| Gate | 91 | $3.03B | $3.03B | $3.01B | <span class="ok">101%</span> | 0 | 375,430 / 458,203(08-19) |
-| Bitget | 80 | $1.59B | $1.59B | $1.65B | <span class="ok">96%</span> | 0 | 123,688 / 190,090(08-20) |
-| Gemini | 5 | $0.78B | $0.78B | $0.79B | <span class="ok">98%</span> | 0 | — |
-| HTX | 57 | $0.22B | $0.13B | $0.12B | 108% | 0 | 122,077 / 122,627(08-01) |
-| KuCoin | 96 | $1.59B | $1.59B | $1.60B | <span class="ok">99%</span> | 0 | 101,664 / 118,497(08-31) |
-| Bitstamp | 64 | $0.59B | $0.59B | $1.15B | <mark class="n">51%*</mark> | 0 | — |
+| Exchange | Addresses | All-asset read | Aggregator-caliber read | Aggregator | Coverage | Failed | Direct native ETH | PoR ETH: users / wallets (snapshot) | Direct native − PoR wallets |
+|---|---|---|---|---|---|---|---|---|---|
+| Binance | 37 + lock 2 | $68.70B | $68.69B | $69.16B | <span class="ok">99%</span> | 0 | 3,267,293 | ? / 3,991,221(08-01) | -18% |
+| OKX | 323 | $12.90B | $12.90B | $13.52B | <span class="ok">95%</span> | 0 | 1,018,290 | 1,725,703 / 1,749,426(2026-08) | -42% |
+| Bitfinex | 9 | $7.15B | $7.15B | $7.06B | <span class="ok">101%</span> | 0 | 215,917 | — | — |
+| Gate | 91 | $3.03B | $3.03B | $3.01B | <span class="ok">101%</span> | 0 | 177,144 | 375,430 / 458,203(08-19) | -61% |
+| Bitget | 80 | $1.59B | $1.59B | $1.65B | <span class="ok">96%</span> | 0 | 120,153 | 123,688 / 190,090(08-20) | -37% |
+| Gemini | 5 | $0.78B | $0.78B | $0.79B | <span class="ok">98%</span> | 0 | 286,158 | — | — |
+| HTX | 57 | $0.22B | $0.13B | $0.12B | 108% | 0 | 11,118 | 122,077 / 122,627(08-01) | -91% |
+| KuCoin | 96 | $1.59B | $1.59B | $1.60B | <span class="ok">99%</span> | 0 | 90,606 | 101,664 / 118,497(08-31) | -24% |
+| Bitstamp | 64 | $0.59B | $0.59B | $1.15B | <mark class="n">51%*</mark> | 0 | 168,637 | — | — |
 
 **How to read**
 
@@ -114,18 +114,19 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 - The Binance row includes 2 pegged-token lock addresses ($12.3B), not customer assets. "Pegged-token lock" means the native collateral Binance locks on Ethereum mainnet for the Binance-Peg tokens it issues on BNB Chain (BSC versions of USDT, USDC, ETH, etc.); the liability side is the holders of those pegged tokens, not exchange customers. The addresses come from Binance's lockinfo endpoint and are not on its PoR list; a proposal to split them out has been filed with the aggregator (DefiLlama-Adapters PR #20885, pending maintainers).
 - "Failed addresses" are all 0 (one OKX address cleared after a retry).
 - The last column is each exchange's self-reported ETH (users / wallets, snapshot dates vary). Its caliber is **ETH across all chains** (L2s, staking receipts and custody included), not the same as this table's Ethereum-mainnet dollar read, so it is shown for reference only and no difference is computed.
+- The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script `tools/eth_native_units.py`, read 09-05; the PoR ETH wallet figure is **all-chain** (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 122,627 wallet ETH, 91,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,118 read directly; Binance −18% and OKX −42% mostly reflect multi-chain pages and differing address sets.
 
 ### 3.3 Tron chain (trongrid `getaccount` with four staking buckets + direct USDT-TRC20 read)
 
-| Exchange | Addresses | TRX available | TRX staked | USDT-TRC20 | PoR TRX: users / wallets | PoR USDT (all chains): users / wallets |
-|---|---|---|---|---|---|---|
-| Binance | 25 | 2,287M | 0M | 897.1M | — | — |
-| OKX | 23 | 107M | 0M | 273.2M | — | 8,118M / 8,637M(Aug 2026) |
-| Bitfinex | 2 | 28M | 0M | 76.8M | — | — |
-| Gate | 11 | 15M | 0M | 63.7M | 58M / 179M(08-19) | 660M / 721M(08-19) |
-| Bitget | 29 | 5M | 0M | 254.1M | — | 1,454M / 1,456M(08-20) |
-| HTX | 18 | 3,046M | 6,646M | 0.0M | ? / 9,376M(08-01) | 926M / 710M(08-01) |
-| KuCoin | 24 | 14M | 0M | 148.7M | — | 955M / 1,059M(08-31) |
+| Exchange | Addresses | TRX available | TRX staked | USDT-TRC20 | PoR TRX: users / wallets | Direct TRX − PoR wallets | PoR USDT (all chains): users / wallets |
+|---|---|---|---|---|---|---|---|
+| Binance | 25 | 2,287M | 0M | 897.1M | — | — | — |
+| OKX | 23 | 107M | 0M | 273.2M | — | — | 8,118M / 8,637M(2026-08) |
+| Bitfinex | 2 | 28M | 0M | 76.8M | — | — | — |
+| Gate | 11 | 15M | 0M | 63.7M | 58M / 179M(08-19) | <mark class="r">-91.9%</mark>(the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)) | 660M / 721M(08-19) |
+| Bitget | 29 | 5M | 0M | 254.1M | — | — | 1,454M / 1,456M(08-20) |
+| HTX | 18 | 3,046M | 6,646M | 0.0M | ? / 9,376M(08-01) | +3.4% | 926M / 710M(08-01) |
+| KuCoin | 24 | 14M | 0M | 148.7M | — | — | 955M / 1,059M(08-31) |
 
 **How to read**
 
@@ -133,6 +134,7 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 - Tron's "freeze" is its official term for staking TRX with the network in exchange for bandwidth, energy and votes: ownership is unchanged, unstaking can be started at any time and lands 14 days later; it is neither loan collateral nor a platform or judicial freeze. This report says "staked" throughout. Staked TRX can be in four places: V1 stake, V2 self-held stake, **stake delegated to other addresses** (the TRX still belongs to the address), and the unstaking queue; the "TRX staked" column counts all four. OKX's 520M and Poloniex's 24M are delegated stake, invisible if you only read `balance + frozenV2` (§7.1).
 - HTX's 18 Tron addresses in the table are the DefiLlama-Adapters's TRX cold wallets; holding no USDT there is normal. **HTX's official PoR has 5 separate USDT-TRC20 addresses**: 13.24M in the 08-01 snapshot, <mark class="r">1.91M</mark> on chain on 09-04 (below 1% of the user USDT liability, the §10 rule; the 11.33M on `TK86…` has been emptied); the single USDT-ERC20 address went 1.05M → 0. The rest of the 926M user USDT liability sits in "ThirdParty" (§6.2).
 - The last two columns are each exchange's self-reported TRX and USDT (users / wallets); USDT is the **all-chain total** (ERC20 + TRC20 + others) while this table's USDT-TRC20 is one chain, so no difference is computed. HTX's reported TRX wallets of 9,376M are in the same range as this table's 9,692M across 18 addresses (available + staked); of its reported 710M USDT wallets, 656M sit in "ThirdParty" (§6.2).
+- "Direct TRX − PoR wallets": direct TRX (available + staked) and the reported TRX wallet are the same chain and caliber, so they compare directly; over 5% is red with the reason, as in §3.1. Gate −92% is an address-set difference (the 11-address DefiLlama-Adapters list; Gate publishes no TRX addresses); HTX +3.4%. No difference is computed for USDT because the reported figure is all-chain.
 
 ## 4. Affiliated tokens as a share of reserves: FTX's three structural preconditions, exchange by exchange
 

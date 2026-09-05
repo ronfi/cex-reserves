@@ -481,7 +481,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <th>Aggregator</th>
 <th>Coverage</th>
 <th>Failed</th>
+<th>Direct native ETH</th>
 <th>PoR ETH: users / wallets (snapshot)</th>
+<th>Direct native − PoR wallets</th>
 </tr>
 </thead>
 <tbody>
@@ -493,7 +495,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$69.16B</td>
 <td><span class="ok">99%</span></td>
 <td>0</td>
+<td>3,267,293</td>
 <td>? / 3,991,221(08-01)</td>
+<td>-18%</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -503,7 +507,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$13.52B</td>
 <td><span class="ok">95%</span></td>
 <td>0</td>
-<td>1,725,703 / 1,749,426(Aug 2026)</td>
+<td>1,018,290</td>
+<td>1,725,703 / 1,749,426(2026-08)</td>
+<td>-42%</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
@@ -513,6 +519,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$7.06B</td>
 <td><span class="ok">101%</span></td>
 <td>0</td>
+<td>215,917</td>
+<td>—</td>
 <td>—</td>
 </tr>
 <tr>
@@ -523,7 +531,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$3.01B</td>
 <td><span class="ok">101%</span></td>
 <td>0</td>
+<td>177,144</td>
 <td>375,430 / 458,203(08-19)</td>
+<td>-61%</td>
 </tr>
 <tr>
 <td>Bitget</td>
@@ -533,7 +543,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$1.65B</td>
 <td><span class="ok">96%</span></td>
 <td>0</td>
+<td>120,153</td>
 <td>123,688 / 190,090(08-20)</td>
+<td>-37%</td>
 </tr>
 <tr>
 <td>Gemini</td>
@@ -543,6 +555,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$0.79B</td>
 <td><span class="ok">98%</span></td>
 <td>0</td>
+<td>286,158</td>
+<td>—</td>
 <td>—</td>
 </tr>
 <tr>
@@ -553,7 +567,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$0.12B</td>
 <td>108%</td>
 <td>0</td>
+<td>11,118</td>
 <td>122,077 / 122,627(08-01)</td>
+<td>-91%</td>
 </tr>
 <tr>
 <td>KuCoin</td>
@@ -563,7 +579,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$1.60B</td>
 <td><span class="ok">99%</span></td>
 <td>0</td>
+<td>90,606</td>
 <td>101,664 / 118,497(08-31)</td>
+<td>-24%</td>
 </tr>
 <tr>
 <td>Bitstamp</td>
@@ -573,6 +591,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>$1.15B</td>
 <td><mark class="n">51%*</mark></td>
 <td>0</td>
+<td>168,637</td>
+<td>—</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -585,6 +605,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <li>The Binance row includes 2 pegged-token lock addresses ($12.3B), not customer assets. "Pegged-token lock" means the native collateral Binance locks on Ethereum mainnet for the Binance-Peg tokens it issues on BNB Chain (BSC versions of USDT, USDC, ETH, etc.); the liability side is the holders of those pegged tokens, not exchange customers. The addresses come from Binance's lockinfo endpoint and are not on its PoR list; a proposal to split them out has been filed with the aggregator (DefiLlama-Adapters PR #20885, pending maintainers).</li>
 <li>"Failed addresses" are all 0 (one OKX address cleared after a retry).</li>
 <li>The last column is each exchange's self-reported ETH (users / wallets, snapshot dates vary). Its caliber is <strong>ETH across all chains</strong> (L2s, staking receipts and custody included), not the same as this table's Ethereum-mainnet dollar read, so it is shown for reference only and no difference is computed.</li>
+<li>The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script <code>tools/eth_native_units.py</code>, read 09-05; the PoR ETH wallet figure is <strong>all-chain</strong> (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 122,627 wallet ETH, 91,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,118 read directly; Binance −18% and OKX −42% mostly reflect multi-chain pages and differing address sets.</li>
 </ul>
 <h3 id="3-3-tron-chain-trongrid-getaccount-with-four-staking-buckets-direct-usdt-trc20-read">3.3 Tron chain (trongrid <code>getaccount</code> with four staking buckets + direct USDT-TRC20 read)</h3>
 <div class="tbl"><table>
@@ -596,6 +617,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <th>TRX staked</th>
 <th>USDT-TRC20</th>
 <th>PoR TRX: users / wallets</th>
+<th>Direct TRX − PoR wallets</th>
 <th>PoR USDT (all chains): users / wallets</th>
 </tr>
 </thead>
@@ -608,6 +630,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>897.1M</td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -616,7 +639,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>0M</td>
 <td>273.2M</td>
 <td>—</td>
-<td>8,118M / 8,637M(Aug 2026)</td>
+<td>—</td>
+<td>8,118M / 8,637M(2026-08)</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
@@ -624,6 +648,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>28M</td>
 <td>0M</td>
 <td>76.8M</td>
+<td>—</td>
 <td>—</td>
 <td>—</td>
 </tr>
@@ -634,6 +659,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>0M</td>
 <td>63.7M</td>
 <td>58M / 179M(08-19)</td>
+<td><mark class="r">-91.9%</mark>(the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses))</td>
 <td>660M / 721M(08-19)</td>
 </tr>
 <tr>
@@ -642,6 +668,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>5M</td>
 <td>0M</td>
 <td>254.1M</td>
+<td>—</td>
 <td>—</td>
 <td>1,454M / 1,456M(08-20)</td>
 </tr>
@@ -652,6 +679,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>6,646M</td>
 <td>0.0M</td>
 <td>? / 9,376M(08-01)</td>
+<td>+3.4%</td>
 <td>926M / 710M(08-01)</td>
 </tr>
 <tr>
@@ -660,6 +688,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>14M</td>
 <td>0M</td>
 <td>148.7M</td>
+<td>—</td>
 <td>—</td>
 <td>955M / 1,059M(08-31)</td>
 </tr>
@@ -671,6 +700,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <li>Tron's "freeze" is its official term for staking TRX with the network in exchange for bandwidth, energy and votes: ownership is unchanged, unstaking can be started at any time and lands 14 days later; it is neither loan collateral nor a platform or judicial freeze. This report says "staked" throughout. Staked TRX can be in four places: V1 stake, V2 self-held stake, <strong>stake delegated to other addresses</strong> (the TRX still belongs to the address), and the unstaking queue; the "TRX staked" column counts all four. OKX's 520M and Poloniex's 24M are delegated stake, invisible if you only read <code>balance + frozenV2</code> (§7.1).</li>
 <li>HTX's 18 Tron addresses in the table are the DefiLlama-Adapters's TRX cold wallets; holding no USDT there is normal. <strong>HTX's official PoR has 5 separate USDT-TRC20 addresses</strong>: 13.24M in the 08-01 snapshot, <mark class="r">1.91M</mark> on chain on 09-04 (below 1% of the user USDT liability, the §10 rule; the 11.33M on <code>TK86…</code> has been emptied); the single USDT-ERC20 address went 1.05M → 0. The rest of the 926M user USDT liability sits in "ThirdParty" (§6.2).</li>
 <li>The last two columns are each exchange's self-reported TRX and USDT (users / wallets); USDT is the <strong>all-chain total</strong> (ERC20 + TRC20 + others) while this table's USDT-TRC20 is one chain, so no difference is computed. HTX's reported TRX wallets of 9,376M are in the same range as this table's 9,692M across 18 addresses (available + staked); of its reported 710M USDT wallets, 656M sit in "ThirdParty" (§6.2).</li>
+<li>"Direct TRX − PoR wallets": direct TRX (available + staked) and the reported TRX wallet are the same chain and caliber, so they compare directly; over 5% is red with the reason, as in §3.1. Gate −92% is an address-set difference (the 11-address DefiLlama-Adapters list; Gate publishes no TRX addresses); HTX +3.4%. No difference is computed for USDT because the reported figure is all-chain.</li>
 </ul>
 <h2 id="4-affiliated-tokens-as-a-share-of-reserves-ftx-s-three-structural-preconditions-exchange-by-exchange">4. Affiliated tokens as a share of reserves: FTX's three structural preconditions, exchange by exchange</h2>
 <h3 id="4-1-what-ftx-s-structural-preconditions-were-public-reporting-used-only-as-the-source-of-the-criteria">4.1 What FTX's structural preconditions were (⚠ public reporting, used only as the source of the criteria)</h3>
@@ -1531,5 +1561,5 @@ python3 tools/por_fetch.py                                                      
 <p>This page is a compilation and cross-check of public data. It is not investment advice and makes no claim about any institution's solvency. All liability-side figures are self-reported by the exchanges and cannot be verified by this report. Every statement here is limited to publicly verifiable data; not finding an asset on the published addresses does not mean the asset does not exist.</p>
 
 </main>
-<footer><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="../archive/">Version archive</a></span><span>Page built 2026-09-05 05:06 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></footer>
+<footer><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="../archive/">Version archive</a></span><span>Page built 2026-09-05 10:41 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></footer>
 </div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

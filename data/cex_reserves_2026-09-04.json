@@ -795,7 +795,10 @@
     "HBTC": 3081355.25916218,
     "AUSDT": 9.98903e-07
    },
-   "total_usd_llama_caliber": 56381614287.43229
+   "total_usd_llama_caliber": 56381614287.43229,
+   "native_eth": 3267292.767098432,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:35:13Z"
   },
   "eth_lock": {
    "n": 2,
@@ -3598,7 +3601,10 @@
     "HBTC": 168349.12605112,
     "AUSDT": 570.7818434377709
    },
-   "total_usd_llama_caliber": 12896961765.873335
+   "total_usd_llama_caliber": 12896961765.873335,
+   "native_eth": 1018289.7506640151,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:37:34Z"
   },
   "tron": {
    "n": 23,
@@ -5513,7 +5519,10 @@
     "AUSDT": 251253.33600881876,
     "HBTC": 1635.160174855881
    },
-   "total_usd_llama_caliber": 3032545397.095971
+   "total_usd_llama_caliber": 3032545397.095971,
+   "native_eth": 177144.04692529468,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:38:13Z"
   },
   "btc": {
    "n": 13,
@@ -6785,7 +6794,10 @@
    "excluded_for_llama": {
     "USDD": 525243.9062527375
    },
-   "total_usd_llama_caliber": 1591637474.6587899
+   "total_usd_llama_caliber": 1591637474.6587899,
+   "native_eth": 90605.82187945538,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:38:56Z"
   },
   "tron": {
    "n": 24,
@@ -7677,7 +7689,10 @@
     "HBTC": 41736837.077738255,
     "AUSDT": 17.667675275434
    },
-   "total_usd_llama_caliber": 131701354.52966239
+   "total_usd_llama_caliber": 131701354.52966239,
+   "native_eth": 11118.13524354475,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:39:19Z"
   },
   "btc": {
    "n": 11,
@@ -9375,7 +9390,10 @@
    "excluded_for_llama": {
     "HBTC": 5.3627
    },
-   "total_usd_llama_caliber": 1585579997.5383348
+   "total_usd_llama_caliber": 1585579997.5383348,
+   "native_eth": 120152.74285284971,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:40:00Z"
   },
   "btc": {
    "n": 19,
@@ -9869,7 +9887,10 @@
    "excluded_for_llama": {
     "AUSDT": 7129.848804515613
    },
-   "total_usd_llama_caliber": 7152035514.205718
+   "total_usd_llama_caliber": 7152035514.205718,
+   "native_eth": 215916.7018214873,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:40:08Z"
   },
   "btc": {
    "n": 3,
@@ -10064,7 +10085,10 @@
     }
    },
    "excluded_for_llama": {},
-   "total_usd_llama_caliber": 780309195.760896
+   "total_usd_llama_caliber": 780309195.760896,
+   "native_eth": 286158.25666104857,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:40:10Z"
   },
   "btc": {
    "n": 4,
@@ -10660,7 +10684,10 @@
      "tokens_usd": 0,
      "unpriced": 0
     }
-   }
+   },
+   "native_eth": 168636.77748233173,
+   "native_failed": [],
+   "native_read_at": "2026-09-05T10:40:51Z"
   },
   "btc": {
    "n": 507,

@@ -83,7 +83,7 @@ def read_eth_address(a):
         return None
     nat = 0.0
     try:
-        nat = int(j.get('coin_balance') or 0) / 1e18 * float(j.get('exchange_rate') or 0)
+        units = int(j.get('coin_balance') or 0) / 1e18; px = float(j.get('exchange_rate') or 0); nat = units * px
     except Exception:
         pass
     tb = get_json(f'{BS}/addresses/{a}/token-balances')
@@ -118,7 +118,7 @@ def read_eth(ex, addrs, prev_failed=None, sleep=0.15):
             agg['ETH'] += nat
             for s, v in toks.items():
                 agg[s] += v
-            per[a] = {'native_usd': nat, 'tokens_usd': sum(toks.values()), 'unpriced': unp}
+            per[a] = {'native_usd': nat, 'native_units': units, 'eth_price': px, 'tokens_usd': sum(toks.values()), 'unpriced': unp}
         if (i + 1) % 25 == 0:
             log(f'  {ex} {i+1}/{len(todo)} cum ${sum(agg.values())/1e9:.2f}B failed {len(failed)}')
         time.sleep(sleep)
@@ -138,7 +138,7 @@ def read_eth(ex, addrs, prev_failed=None, sleep=0.15):
         plat[sym] = {'units': units, 'price': px, 'usd': units * px, 'miss': miss, 'blockscout_usd': agg.get(sym, 0.0)}
         agg[sym] = units * px  # 以直读替换 Blockscout 估值
     total = sum(agg.values()); excl = {k: v for k, v in agg.items() if k.upper() in {x.upper() for x in LLAMA_EXCLUDE}}
-    return {'n': len(addrs), 'total_usd': total, 'total_usd_llama_caliber': total - sum(excl.values()), 'excluded_for_llama': excl, 'by_token': dict(sorted(agg.items(), key=lambda x: -x[1])), 'platform_direct': plat, 'failed': failed, 'per_address': per}
+    return {'n': len(addrs), 'total_usd': total, 'native_eth': sum(v.get('native_units', 0) for v in per.values()), 'total_usd_llama_caliber': total - sum(excl.values()), 'excluded_for_llama': excl, 'by_token': dict(sorted(agg.items(), key=lambda x: -x[1])), 'platform_direct': plat, 'failed': failed, 'per_address': per}
 
 # ---------------- BTC ----------------
 def read_btc(ex, addrs, sleep=0.35):
