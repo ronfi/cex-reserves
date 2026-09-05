@@ -396,4 +396,4 @@ The six indicators below are read the same way for every exchange, with the same
 
 **Disclaimer**
 
-This page is a compilation and cross-check of public data. It is not investment advice and makes no claim about any institution's solvency. All liability-side figures are self-reported by the exchanges and cannot be verified by this report.
+This page is a compilation and cross-check of public data. It is not investment advice and makes no claim about any institution's solvency. All liability-side figures are self-reported by the exchanges and cannot be verified by this report. Every statement here is limited to publicly verifiable data; not finding an asset on the published addresses does not mean the asset does not exist.

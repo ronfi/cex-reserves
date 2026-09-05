@@ -17,8 +17,8 @@ LANG = {
         switch='<span class="on" lang="zh-CN">中文</span><a href="en/" hreflang="en" lang="en">English</a>', toc='目录',
         legend=[('<span class="ok">绿</span>', '与聚合器对上(规则见各表标题)'), ('<mark class="r">红</mark>', '超过各表标题声明的阈值,不分交易所'), ('<mark class="n">黄 *</mark>', '口径差,表下有注')],
         kv_head='项', support='打赏 / Support',
-        support_note='这个项目会长期免费、公开地维护下去。如果这些核对曾帮您在看"储备率 &gt;100%"时多想了一步,那就是它存在的意义。您的打赏是我继续维护它的动力,无论金额大小,都衷心感谢。地址以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为唯一权威源,其他渠道出现的不同地址均为假冒。',
-        copy='点击复制', qr='展开二维码', built='页面生成', license='内容 CC BY-NC-ND 4.0 · 脚本 MIT', archive='历次版本存档', archive_href='archive/', pv='本页访问 <span id="busuanzi_value_page_pv"></span> 次', archnote='这是 {d} 的存档版本,数据与文字停留在当时;最新版见',
+        support_note='这个项目会长期免费、公开地维护下去。如果这些核对帮您省下了自己动手核一遍的时间,那就是它存在的意义。您的支持是本项目持续维护的动力,无论金额大小,都衷心感谢。请只使用 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>中的地址;在其他任何地方看到的地址,无论看起来多像,都不要使用。',
+        copy='点击复制', qr='展开二维码', built='页面生成', license='内容 CC BY-NC-ND 4.0 · 脚本 MIT', archive='历次版本存档', archive_href='archive/', pv='本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)', archnote='这是 {d} 的存档版本,数据与文字停留在当时;最新版见',
         donate_desc={'evm': 'ETH / L2 / BSC · ETH/USDC/USDT', 'tron': 'USDT-TRC20', 'sol': 'SOL / SPL', 'btc-segwit': 'Native SegWit(推荐)', 'btc-legacy': '兼容旧钱包'},
     ),
     'en': dict(
@@ -30,8 +30,8 @@ LANG = {
         switch='<a href="../" hreflang="zh-CN" lang="zh-CN">中文</a><span class="on" lang="en">English</span>', toc='Contents',
         legend=[('<span class="ok">green</span>', 'reconciles with the aggregator (rule in each table heading)'), ('<mark class="r">red</mark>', 'above the threshold stated in the table heading, regardless of exchange'), ('<mark class="n">yellow *</mark>', 'caliber difference, note under the table')],
         kv_head='Item', support='Support',
-        support_note='This project will stay free and public for the long run. If these checks ever made you think one step further when you saw "reserve ratio &gt;100%", that is what it is for. Your support keeps it maintained; any amount is sincerely appreciated. Addresses are authoritative only in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md on the main branch</a>; any different address seen elsewhere is fake.',
-        copy='click to copy', qr='show QR code', built='Page built', license='Content CC BY-NC-ND 4.0 · scripts MIT', archive='Version archive', archive_href='../archive/', pv='<span id="busuanzi_value_page_pv"></span> page views', archnote='This is the archived {d} edition; data and text are as of then. Latest:',
+        support_note='This project will stay free and public for the long run. If these checks ever saved you the work of verifying it yourself, that is what it is for. Your support keeps it maintained; any amount is sincerely appreciated. Use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md on the main branch</a>; do not use any address you see anywhere else, however similar it looks.',
+        copy='click to copy', qr='show QR code', built='Page built', license='Content CC BY-NC-ND 4.0 · scripts MIT', archive='Version archive', archive_href='../archive/', pv='<span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)', archnote='This is the archived {d} edition; data and text are as of then. Latest:',
         donate_desc={'evm': 'ETH / L2 / BSC · ETH/USDC/USDT', 'tron': 'USDT-TRC20', 'sol': 'SOL / SPL', 'btc-segwit': 'Native SegWit (recommended)', 'btc-legacy': 'legacy wallets'},
     ),
 }
