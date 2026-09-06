@@ -63,7 +63,7 @@ footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid va
 </style></head><body>
 <header class="mast"><div class="mast-in"><h1>Top Exchange Reserves Check · 2026-09</h1><nav class="lang" aria-label="language"><a href="../" hreflang="zh-CN" lang="zh-CN">中文</a><span class="on" lang="en">English</span></nav><div class="meta"><span>Data as of 2026-09-04 22:30 UTC</span><span>Updated every Monday 00:00 UTC</span><span>Reproduce <code>python3 tools/cex_reserves_verify.py --chain all</code></span><span><a href="https://github.com/ronfi/cex-reserves">Source and data</a></span></div></div></header>
 <div class="wrap">
-<nav class="toc" aria-label="Contents"><div class="lbl">Contents</div><ol><li><a href="#0-summary">0. Summary</a></li><li><a href="#1-method-three-data-layers-trust-only-the-bottom-one">1. Method: three data layers, trust only the bottom one</a></li><li><a href="#2-panorama-top-20-by-on-chain-reserves-defillama-public-address-basis-read-2026-09-04-22-30-utc">2. Panorama: top 20 by on-chain reserves (DefiLlama public-address basis, read 2026-09-04 22:30 UTC)</a></li><li><a href="#3-direct-on-chain-reconciliation-of-published-addresses-primary-evidence">3. Direct on-chain reconciliation of published addresses (primary evidence)</a></li><li><a href="#4-affiliated-tokens-as-a-share-of-reserves-ftx-s-three-structural-preconditions-exchange-by-exchange">4. Affiliated tokens as a share of reserves: FTX's three structural preconditions, exchange by exchange</a></li><li><a href="#5-official-por-side-by-side-each-exchange-s-page-2026-08-01-snapshot-red-third-party-custody-10-of-reserves-or-own-wallets-liabilities-100-the-10-trigger-rules">5. Official PoR side by side (each exchange's page, 2026-08-01 snapshot; red = third-party custody &gt;10% of reserves or own wallets ÷ liabilities &lt;100%, the §10 trigger rules)</a></li><li><a href="#6-discrepancies-with-self-reported-figures-by-exchange">6. Discrepancies with self-reported figures (by exchange)</a></li><li><a href="#7-poloniex-and-btc-trc20-btctron-the-poloniex-linked-part-of-htx-reserves">7. Poloniex and BTC-TRC20 (BTCTRON): the Poloniex-linked part of HTX reserves</a></li><li><a href="#8-realisability-of-affiliated-tokens-reserve-holdings-24h-volume-measured-2026-09-05-red-affiliated-share-30-or-staked-share-50-the-2-10-rules">8. Realisability of affiliated tokens: reserve holdings ÷ 24h volume (measured 2026-09-05; red = affiliated share &gt;30% or staked share &gt;50%, the §2/§10 rules)</a></li><li><a href="#9-reproduce">9. Reproduce</a></li><li><a href="#10-monitoring-indicators-one-set-read-per-exchange">10. Monitoring indicators (one set, read per exchange)</a></li></ol>
+<nav class="toc" aria-label="Contents"><div class="lbl">Contents</div><ol><li><a href="#0-summary">0. Summary</a></li><li><a href="#1-method-three-data-layers-trust-only-the-bottom-one">1. Method: three data layers, trust only the bottom one</a></li><li><a href="#2-panorama-top-20-by-on-chain-reserves-defillama-public-address-basis-read-2026-09-04-22-30-utc">2. Panorama: top 20 by on-chain reserves (DefiLlama public-address basis, read 2026-09-04 22:30 UTC)</a></li><li><a href="#3-direct-on-chain-reconciliation-of-published-addresses-primary-evidence">3. Direct on-chain reconciliation of published addresses (primary evidence)</a></li><li><a href="#4-affiliated-tokens-as-a-share-of-reserves-ftx-s-three-structural-preconditions-exchange-by-exchange">4. Affiliated tokens as a share of reserves: FTX's three structural preconditions, exchange by exchange</a></li><li><a href="#5-official-por-side-by-side-each-exchange-s-page-2026-08-01-snapshot-red-third-party-custody-10-of-reserves-or-own-wallets-liabilities-100-the-10-trigger-rules">5. Official PoR side by side (each exchange's page, 2026-08-01 snapshot; red = third-party custody &gt;10% of reserves or own wallets ÷ liabilities &lt;100%, the §10 trigger rules)</a></li><li><a href="#6-discrepancies-with-self-reported-figures-by-exchange">6. Discrepancies with self-reported figures (by exchange)</a></li><li><a href="#7-poloniex-and-btc-trc20-btctron-the-poloniex-linked-part-of-htx-reserves">7. Poloniex and BTC-TRC20 (BTCTRON): the Poloniex-linked part of HTX reserves</a></li><li><a href="#8-realisability-of-affiliated-tokens-reserve-holdings-30-day-average-daily-volume-measured-2026-09-06-red-affiliated-share-30-or-staked-share-50-the-2-10-rules">8. Realisability of affiliated tokens: reserve holdings ÷ 30-day average daily volume (measured 2026-09-06; red = affiliated share &gt;30% or staked share &gt;50%, the §2/§10 rules)</a></li><li><a href="#9-reproduce">9. Reproduce</a></li><li><a href="#10-monitoring-indicators-one-set-read-per-exchange">10. Monitoring indicators (one set, read per exchange)</a></li></ol>
 <div class="legend"><div><span class="ok">green</span>reconciles with the aggregator (rule in each table heading)</div><div><mark class="r">red</mark>above the threshold stated in the table heading</div><div><mark class="n">yellow *</mark>caliber difference, note under the table</div></div></nav>
 <main>
 <blockquote>
@@ -928,7 +928,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <tr>
 <th>Exchange</th>
 <th>① Affiliated = bulk of reserves</th>
-<th>② Holding ÷ market-wide 24h volume (days to sell all, §8)</th>
+<th>② Holding ÷ major-venue 30-day avg volume (days to sell all, §8)</th>
 <th>③ Liability side (§5)</th>
 </tr>
 </thead>
@@ -936,7 +936,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <tr>
 <td>HTX</td>
 <td><mark class="r"><strong>Yes</strong> (77% vs hard assets 20%)</mark></td>
-<td>TRX ≈8 days, HTX token ≈26 days</td>
+<td>TRX ≈44 days, HTX token ≈14 days</td>
 <td>Publishes per-coin liabilities; <strong>19% of reserves with a custodian not disclosed on the page, own-wallet USDT covers 5.8% of liabilities</strong> (§6.2)</td>
 </tr>
 <tr>
@@ -948,7 +948,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <tr>
 <td>KuCoin</td>
 <td>No (16% vs 59%)</td>
-<td>KCS ≈175 days</td>
+<td>KCS ≈94 days</td>
 <td>Ratio only, 110%</td>
 </tr>
 <tr>
@@ -960,13 +960,13 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <tr>
 <td>Binance</td>
 <td>No (15% vs 74%)</td>
-<td>BNB ≈25 days</td>
+<td>BNB ≈164 days</td>
 <td>Publishes per-coin liabilities; own wallets ÷ liabilities 100.9%</td>
 </tr>
 <tr>
 <td>Gate</td>
 <td>No (14% vs 54%)</td>
-<td>GT ≈550 days</td>
+<td>GT ≈1,260 days</td>
 <td>Ratio only, 127%</td>
 </tr>
 <tr>
@@ -986,9 +986,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <p><strong>How to read</strong></p>
 <ul>
 <li>① holds for one exchange only.</li>
-<li>② on its own does not rank danger: days-to-sell runs from single digits to tens of thousands and must be read with ①; the higher the affiliated share and the thinner the volume, the more the reserves shrink once marked to tradable volume.</li>
+<li>② on its own does not rank danger: days-to-sell runs from a couple of weeks to tens of thousands of days and must be read with ①; the higher the affiliated share and the thinner the volume, the more the reserves shrink once marked to tradable volume.</li>
 <li>③ Only Binance, OKX and HTX publish per-coin liabilities; the rest either give a single ratio or have no PoR page.</li>
-<li>No exchange in the top 20 meets all three at once; the closest is HTX: ① holds, ② about 8 days to sell (TRX is the most actively traded of these tokens), ③ liabilities are published but a fifth of reserves sit with a custodian not disclosed on the page. The differences from FTX: TRX has a market-wide order book and FTT did not; HTX publishes a liability sheet and FTX did not. The similarity: reserve value is a function of the price of its own family of tokens.</li>
+<li>No exchange in the top 20 meets all three at once; the closest is HTX: ① holds, ② about 44 days to sell (TRX is the most actively traded of these tokens), ③ liabilities are published but a fifth of reserves sit with a custodian not disclosed on the page. The differences from FTX: TRX has a market-wide order book and FTT did not; HTX publishes a liability sheet and FTX did not. The similarity: reserve value is a function of the price of its own family of tokens.</li>
 </ul>
 <h2 id="5-official-por-side-by-side-each-exchange-s-page-2026-08-01-snapshot-red-third-party-custody-10-of-reserves-or-own-wallets-liabilities-100-the-10-trigger-rules">5. Official PoR side by side (each exchange's page, 2026-08-01 snapshot; red = third-party custody &gt;10% of reserves or own wallets ÷ liabilities &lt;100%, the §10 trigger rules)</h2>
 <div class="tbl"><table>
@@ -1350,8 +1350,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 </tbody>
 </table></div>
 <p>The above records what we could <strong>not find</strong> on Poloniex\'s published addresses and PoR page: no asset marked as BTCTRON reserve. Collateral may exist in undisclosed addresses; on-chain search cannot rule that out.</p>
-<h2 id="8-realisability-of-affiliated-tokens-reserve-holdings-24h-volume-measured-2026-09-05-red-affiliated-share-30-or-staked-share-50-the-2-10-rules">8. Realisability of affiliated tokens: reserve holdings ÷ 24h volume (measured 2026-09-05; red = affiliated share &gt;30% or staked share &gt;50%, the §2/§10 rules)</h2>
-<p>In §2 every exchange's "affiliated token" enters reserves at market price. This section asks the same question of each: <strong>if it had to be sold, how much can the market absorb per day?</strong> Uniform reading: the reserve holding of the token divided by 24h volume, giving the number of days needed to sell it all at the current daily volume. Volume is given on two bases: <strong>home / sampled venues</strong> = the spot pair's 24h volume from each venue's public market API (primary; one home pair for platform tokens, ten venues summed for TRX, six for the HTX token), and <strong>market-wide</strong> = the token's volume across all listed venues as recorded by CoinGecko (⚠ third party, includes venues suspected of wash trading); days are computed on the market-wide basis and are therefore an optimistic lower bound. ±2% depth (dollar amount fillable at once) is listed for reference. Script <code>tools/affiliated_liquidity.py</code>, readings in <code>data/affiliated_liquidity_2026-09-05.json</code>; holdings are the §2 reads of 09-04.</p>
+<h2 id="8-realisability-of-affiliated-tokens-reserve-holdings-30-day-average-daily-volume-measured-2026-09-06-red-affiliated-share-30-or-staked-share-50-the-2-10-rules">8. Realisability of affiliated tokens: reserve holdings ÷ 30-day average daily volume (measured 2026-09-06; red = affiliated share &gt;30% or staked share &gt;50%, the §2/§10 rules)</h2>
+<p>In §2 every exchange's "affiliated token" enters reserves at market price. This section asks the same question of each: <strong>if it had to be sold, how much can the market absorb per day?</strong> Uniform reading: the reserve holding of the token divided by the <strong>average daily volume over the last 30 complete days</strong> (single-day volume swings widely; the 30-day average is steadier), giving the days needed to sell it all at that pace. Volume is given on two bases: <strong>major venues</strong> = the spot pair's daily klines summed across whichever of Binance, OKX, Bybit, KuCoin, Gate, Bitget, Kraken, HTX, MEXC and Bitfinex list the pair (primary; venue count in the table); <strong>market-wide</strong> = the token's volume across all listed venues as recorded by CoinGecko (⚠ third party, venues not individually checked). Days are computed on the major-venue basis; the market-wide figure is reference only, because its bulk usually comes from venues outside the major ten (see reading). ±2% depth (dollar amount fillable at once) is listed for reference. Script <code>tools/affiliated_liquidity.py</code>, readings in <code>data/affiliated_liquidity_2026-09-06.json</code>; holdings are the §2 reads of 09-04.</p>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -1359,10 +1359,10 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <th>Token</th>
 <th>Share</th>
 <th>Reserve holding</th>
-<th>Home / sampled-venue 24h volume</th>
-<th>Market-wide 24h volume (CoinGecko ⚠)</th>
-<th>±2% depth (sampled venues)</th>
-<th>Holding ÷ market-wide 24h volume (days to sell all)</th>
+<th>Major-venue 30-day avg daily volume (venues)</th>
+<th>CoinGecko market-wide 30-day avg (⚠)</th>
+<th>±2% depth (major venues)</th>
+<th>Holding ÷ major-venue 30-day avg (days to sell all)</th>
 </tr>
 </thead>
 <tbody>
@@ -1371,19 +1371,19 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>BNB</td>
 <td>15%</td>
 <td>$24.4B</td>
-<td>$100.3M (Binance)</td>
-<td>$978.9M</td>
-<td>$10.7M</td>
-<td>≈25 days</td>
+<td>$148.9M (8 venues)</td>
+<td>$904.8M</td>
+<td>$19.4M</td>
+<td>≈164 days</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
 <td>LEO</td>
 <td><mark class="r">33%</mark></td>
 <td>$6.3B</td>
-<td>$0.09M (Bitfinex)</td>
-<td>$0.2M</td>
-<td>$0.07M</td>
+<td>$0.2M (2 venues)</td>
+<td>$0.3M</td>
+<td>$0.45M</td>
 <td>≈31,500 days</td>
 </tr>
 <tr>
@@ -1391,57 +1391,57 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>GT</td>
 <td>14%</td>
 <td>$0.88B</td>
-<td>$0.84M (Gate)</td>
-<td>$1.6M</td>
-<td>$0.10M</td>
-<td>≈550 days</td>
+<td>$0.7M (1 venue)</td>
+<td>$1.9M</td>
+<td>$0.07M</td>
+<td>≈1,260 days</td>
 </tr>
 <tr>
 <td>KuCoin</td>
 <td>KCS</td>
 <td>15%</td>
 <td>$0.49B</td>
-<td>$0.50M (KuCoin)</td>
-<td>$2.8M</td>
-<td>$0.05M</td>
-<td>≈175 days</td>
+<td>$5.2M (2 venues)</td>
+<td>$12.8M</td>
+<td>$0.06M</td>
+<td>≈94 days</td>
 </tr>
 <tr>
 <td>Bitget</td>
 <td>BGB</td>
 <td>8%</td>
 <td>$0.46B</td>
-<td>$7.5M (Bitget)</td>
-<td>$8.2M</td>
-<td>$0.39M</td>
-<td>≈56 days</td>
+<td>$8.8M (2 venues)</td>
+<td>$9.5M</td>
+<td>$0.50M</td>
+<td>≈52 days</td>
 </tr>
 <tr>
 <td>HTX</td>
 <td>TRX</td>
 <td><mark class="r">47%</mark></td>
 <td>$3.2B (<mark class="r">69% staked</mark>)</td>
-<td>$56.7M (ten venues; HTX itself $2.8M)</td>
-<td>$393.2M</td>
-<td>$17.3M (ten venues)</td>
-<td>≈8 days</td>
+<td>$73.1M (10 venues; HTX itself $2.7M)</td>
+<td>$397.3M</td>
+<td>$18.3M (ten venues)</td>
+<td>≈44 days</td>
 </tr>
 <tr>
 <td>HTX</td>
 <td>HTX token</td>
 <td>5.7%</td>
 <td>$0.37B</td>
-<td>$11.3M (six venues; HTX itself $11.2M)</td>
-<td>$14.0M</td>
-<td>$0.35M (six venues)</td>
-<td>≈26 days</td>
+<td>$27.5M (6 venues; only HTX has volume)</td>
+<td>$31.0M</td>
+<td>$0.40M (six venues)</td>
+<td>≈14 days</td>
 </tr>
 </tbody>
 </table></div>
 <p><strong>How to read</strong></p>
 <ul>
-<li>Days-to-sell is misleading on its own and must be read with the share: Binance's BNB would take about 25 days at market-wide volume (about 240 days on its home pair alone), and BNB is only 15% of reserves with 74% in hard assets, which is not a problem; Bitfinex's LEO is 33% of reserves and would take about 31,500 days (the same on both bases, about 86 years), and only when both hold is realisability a problem. <strong>The "reserve value" of an affiliated token is price times quantity, not money that can be realised</strong> — true for every exchange.</li>
-<li>TRX is the most actively traded of these tokens (market-wide 24h $393M, ten sampled venues $57M, perpetual open interest $238M), about 8 days to sell at market-wide volume or 56 days across the ten venues; HTX's realisability issue is not TRX volume but <strong>its share of reserves (47% + 5.7%) and the 69% staked</strong>. Bitfinex's LEO is 33% with the other 61% in BTC; Binance's BNB is 15% with the other 73% in BTC, ETH and stablecoins.</li>
+<li>Days-to-sell is misleading on its own and must be read with the share: Binance's BNB would take about 164 days, and BNB is only 15% of reserves with 74% in hard assets, which is not a problem; Bitfinex's LEO is 33% of reserves and would take about 31,500 days (about 86 years, the same on both bases), and only when both hold is realisability a problem. <strong>The "reserve value" of an affiliated token is price times quantity, not money that can be realised</strong> — true for every exchange.</li>
+<li>Why the market-wide basis is reference only: of CoinGecko's TRX volume, the ten major venues account for 16%; the largest contributors are FameEX (12%), WhiteBIT (7%) and Phemex (6.5%), with Binance at only 7%. Of BNB's market-wide volume, major venues account for 27%, Binance 19%, the rest from P2B, CoinUp, BTCC, XT and similar. In both cases the bulk of the market-wide figure sits on venues this report does not check individually. TRX takes about 44 days at the major-venue 30-day average (about 8 on the market-wide basis); HTX's realisability issue is not TRX volume but <strong>its share of reserves (47% + 5.7%) and the 69% staked</strong>. Bitfinex's LEO is 33% with the other 61% in BTC; Binance's BNB is 15% with the other 73% in BTC, ETH and stablecoins.</li>
 <li>To judge an exchange's ability to pay under stress, mark affiliated tokens to tradable volume rather than market price, then look at hard-asset (BTC / ETH / stablecoin) coverage of liabilities. On that basis (§5 table): Binance and OKX remain ≥100%; HTX's hard-asset coverage is under half.</li>
 </ul>
 <h2 id="9-reproduce">9. Reproduce</h2>
@@ -1561,5 +1561,5 @@ python3 tools/por_fetch.py                                                      
 <p>This page is a compilation and cross-check of public data. It is not investment advice and makes no claim about any institution's solvency. All liability-side figures are self-reported by the exchanges and cannot be verified by this report. Every statement here is limited to publicly verifiable data; not finding an asset on the published addresses does not mean the asset does not exist.</p>
 
 </main>
-<footer><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="../archive/">Version archive</a></span><span>Page built 2026-09-05 10:41 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></footer>
+<footer><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="../archive/">Version archive</a></span><span>Page built 2026-09-06 02:56 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></footer>
 </div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

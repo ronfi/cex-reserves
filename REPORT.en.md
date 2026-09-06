@@ -217,23 +217,23 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 
 ### 4.4 The three criteria, exchange by exchange (exchanges with affiliated ≥10%, plus those publishing per-coin liabilities)
 
-| Exchange | ① Affiliated = bulk of reserves | ② Holding ÷ market-wide 24h volume (days to sell all, §8) | ③ Liability side (§5) |
+| Exchange | ① Affiliated = bulk of reserves | ② Holding ÷ major-venue 30-day avg volume (days to sell all, §8) | ③ Liability side (§5) |
 |---|---|---|---|
-| HTX | <mark class="r">**Yes** (77% vs hard assets 20%)</mark> | TRX ≈8 days, HTX token ≈26 days | Publishes per-coin liabilities; **19% of reserves with a custodian not disclosed on the page, own-wallet USDT covers 5.8% of liabilities** (§6.2) |
+| HTX | <mark class="r">**Yes** (77% vs hard assets 20%)</mark> | TRX ≈44 days, HTX token ≈14 days | Publishes per-coin liabilities; **19% of reserves with a custodian not disclosed on the page, own-wallet USDT covers 5.8% of liabilities** (§6.2) |
 | Bitfinex | No (32% vs 66%) | LEO ≈31,500 days | No PoR page, liabilities unpublished |
-| KuCoin | No (16% vs 59%) | KCS ≈175 days | Ratio only, 110% |
+| KuCoin | No (16% vs 59%) | KCS ≈94 days | Ratio only, 110% |
 | SwissBorg | No (15% vs 63%) | Not measured | No PoR page |
-| Binance | No (15% vs 74%) | BNB ≈25 days | Publishes per-coin liabilities; own wallets ÷ liabilities 100.9% |
-| Gate | No (14% vs 54%) | GT ≈550 days | Ratio only, 127% |
+| Binance | No (15% vs 74%) | BNB ≈164 days | Publishes per-coin liabilities; own wallets ÷ liabilities 100.9% |
+| Gate | No (14% vs 54%) | GT ≈1,260 days | Ratio only, 127% |
 | MEXC | No (11% vs 66%) | Not measured | Ratio only, 141% |
 | OKX | No (4% vs 86%) | Not measured | Publishes per-coin liabilities, 103.0% |
 
 **How to read**
 
 - ① holds for one exchange only.
-- ② on its own does not rank danger: days-to-sell runs from single digits to tens of thousands and must be read with ①; the higher the affiliated share and the thinner the volume, the more the reserves shrink once marked to tradable volume.
+- ② on its own does not rank danger: days-to-sell runs from a couple of weeks to tens of thousands of days and must be read with ①; the higher the affiliated share and the thinner the volume, the more the reserves shrink once marked to tradable volume.
 - ③ Only Binance, OKX and HTX publish per-coin liabilities; the rest either give a single ratio or have no PoR page.
-- No exchange in the top 20 meets all three at once; the closest is HTX: ① holds, ② about 8 days to sell (TRX is the most actively traded of these tokens), ③ liabilities are published but a fifth of reserves sit with a custodian not disclosed on the page. The differences from FTX: TRX has a market-wide order book and FTT did not; HTX publishes a liability sheet and FTX did not. The similarity: reserve value is a function of the price of its own family of tokens.
+- No exchange in the top 20 meets all three at once; the closest is HTX: ① holds, ② about 44 days to sell (TRX is the most actively traded of these tokens), ③ liabilities are published but a fifth of reserves sit with a custodian not disclosed on the page. The differences from FTX: TRX has a market-wide order book and FTT did not; HTX publishes a liability sheet and FTX did not. The similarity: reserve value is a function of the price of its own family of tokens.
 
 ## 5. Official PoR side by side (each exchange's page, 2026-08-01 snapshot; red = third-party custody >10% of reserves or own wallets ÷ liabilities <100%, the §10 trigger rules)
 
@@ -339,24 +339,24 @@ BTCTRON is the "BTC" Poloniex issued on Tron in 2020; HTX's PoR books it as BTC-
 
 The above records what we could **not find** on Poloniex\'s published addresses and PoR page: no asset marked as BTCTRON reserve. Collateral may exist in undisclosed addresses; on-chain search cannot rule that out.
 
-## 8. Realisability of affiliated tokens: reserve holdings ÷ 24h volume (measured 2026-09-05; red = affiliated share >30% or staked share >50%, the §2/§10 rules)
+## 8. Realisability of affiliated tokens: reserve holdings ÷ 30-day average daily volume (measured 2026-09-06; red = affiliated share >30% or staked share >50%, the §2/§10 rules)
 
-In §2 every exchange's "affiliated token" enters reserves at market price. This section asks the same question of each: **if it had to be sold, how much can the market absorb per day?** Uniform reading: the reserve holding of the token divided by 24h volume, giving the number of days needed to sell it all at the current daily volume. Volume is given on two bases: **home / sampled venues** = the spot pair's 24h volume from each venue's public market API (primary; one home pair for platform tokens, ten venues summed for TRX, six for the HTX token), and **market-wide** = the token's volume across all listed venues as recorded by CoinGecko (⚠ third party, includes venues suspected of wash trading); days are computed on the market-wide basis and are therefore an optimistic lower bound. ±2% depth (dollar amount fillable at once) is listed for reference. Script `tools/affiliated_liquidity.py`, readings in `data/affiliated_liquidity_2026-09-05.json`; holdings are the §2 reads of 09-04.
+In §2 every exchange's "affiliated token" enters reserves at market price. This section asks the same question of each: **if it had to be sold, how much can the market absorb per day?** Uniform reading: the reserve holding of the token divided by the **average daily volume over the last 30 complete days** (single-day volume swings widely; the 30-day average is steadier), giving the days needed to sell it all at that pace. Volume is given on two bases: **major venues** = the spot pair's daily klines summed across whichever of Binance, OKX, Bybit, KuCoin, Gate, Bitget, Kraken, HTX, MEXC and Bitfinex list the pair (primary; venue count in the table); **market-wide** = the token's volume across all listed venues as recorded by CoinGecko (⚠ third party, venues not individually checked). Days are computed on the major-venue basis; the market-wide figure is reference only, because its bulk usually comes from venues outside the major ten (see reading). ±2% depth (dollar amount fillable at once) is listed for reference. Script `tools/affiliated_liquidity.py`, readings in `data/affiliated_liquidity_2026-09-06.json`; holdings are the §2 reads of 09-04.
 
-| Exchange | Token | Share | Reserve holding | Home / sampled-venue 24h volume | Market-wide 24h volume (CoinGecko ⚠) | ±2% depth (sampled venues) | Holding ÷ market-wide 24h volume (days to sell all) |
+| Exchange | Token | Share | Reserve holding | Major-venue 30-day avg daily volume (venues) | CoinGecko market-wide 30-day avg (⚠) | ±2% depth (major venues) | Holding ÷ major-venue 30-day avg (days to sell all) |
 |---|---|---|---|---|---|---|---|
-| Binance | BNB | 15% | $24.4B | $100.3M (Binance) | $978.9M | $10.7M | ≈25 days |
-| Bitfinex | LEO | <mark class="r">33%</mark> | $6.3B | $0.09M (Bitfinex) | $0.2M | $0.07M | ≈31,500 days |
-| Gate | GT | 14% | $0.88B | $0.84M (Gate) | $1.6M | $0.10M | ≈550 days |
-| KuCoin | KCS | 15% | $0.49B | $0.50M (KuCoin) | $2.8M | $0.05M | ≈175 days |
-| Bitget | BGB | 8% | $0.46B | $7.5M (Bitget) | $8.2M | $0.39M | ≈56 days |
-| HTX | TRX | <mark class="r">47%</mark> | $3.2B (<mark class="r">69% staked</mark>) | $56.7M (ten venues; HTX itself $2.8M) | $393.2M | $17.3M (ten venues) | ≈8 days |
-| HTX | HTX token | 5.7% | $0.37B | $11.3M (six venues; HTX itself $11.2M) | $14.0M | $0.35M (six venues) | ≈26 days |
+| Binance | BNB | 15% | $24.4B | $148.9M (8 venues) | $904.8M | $19.4M | ≈164 days |
+| Bitfinex | LEO | <mark class="r">33%</mark> | $6.3B | $0.2M (2 venues) | $0.3M | $0.45M | ≈31,500 days |
+| Gate | GT | 14% | $0.88B | $0.7M (1 venue) | $1.9M | $0.07M | ≈1,260 days |
+| KuCoin | KCS | 15% | $0.49B | $5.2M (2 venues) | $12.8M | $0.06M | ≈94 days |
+| Bitget | BGB | 8% | $0.46B | $8.8M (2 venues) | $9.5M | $0.50M | ≈52 days |
+| HTX | TRX | <mark class="r">47%</mark> | $3.2B (<mark class="r">69% staked</mark>) | $73.1M (10 venues; HTX itself $2.7M) | $397.3M | $18.3M (ten venues) | ≈44 days |
+| HTX | HTX token | 5.7% | $0.37B | $27.5M (6 venues; only HTX has volume) | $31.0M | $0.40M (six venues) | ≈14 days |
 
 **How to read**
 
-- Days-to-sell is misleading on its own and must be read with the share: Binance's BNB would take about 25 days at market-wide volume (about 240 days on its home pair alone), and BNB is only 15% of reserves with 74% in hard assets, which is not a problem; Bitfinex's LEO is 33% of reserves and would take about 31,500 days (the same on both bases, about 86 years), and only when both hold is realisability a problem. **The "reserve value" of an affiliated token is price times quantity, not money that can be realised** — true for every exchange.
-- TRX is the most actively traded of these tokens (market-wide 24h $393M, ten sampled venues $57M, perpetual open interest $238M), about 8 days to sell at market-wide volume or 56 days across the ten venues; HTX's realisability issue is not TRX volume but **its share of reserves (47% + 5.7%) and the 69% staked**. Bitfinex's LEO is 33% with the other 61% in BTC; Binance's BNB is 15% with the other 73% in BTC, ETH and stablecoins.
+- Days-to-sell is misleading on its own and must be read with the share: Binance's BNB would take about 164 days, and BNB is only 15% of reserves with 74% in hard assets, which is not a problem; Bitfinex's LEO is 33% of reserves and would take about 31,500 days (about 86 years, the same on both bases), and only when both hold is realisability a problem. **The "reserve value" of an affiliated token is price times quantity, not money that can be realised** — true for every exchange.
+- Why the market-wide basis is reference only: of CoinGecko's TRX volume, the ten major venues account for 16%; the largest contributors are FameEX (12%), WhiteBIT (7%) and Phemex (6.5%), with Binance at only 7%. Of BNB's market-wide volume, major venues account for 27%, Binance 19%, the rest from P2B, CoinUp, BTCC, XT and similar. In both cases the bulk of the market-wide figure sits on venues this report does not check individually. TRX takes about 44 days at the major-venue 30-day average (about 8 on the market-wide basis); HTX's realisability issue is not TRX volume but **its share of reserves (47% + 5.7%) and the 69% staked**. Bitfinex's LEO is 33% with the other 61% in BTC; Binance's BNB is 15% with the other 73% in BTC, ETH and stablecoins.
 - To judge an exchange's ability to pay under stress, mark affiliated tokens to tradable volume rather than market price, then look at hard-asset (BTC / ETH / stablecoin) coverage of liabilities. On that basis (§5 table): Binance and OKX remain ≥100%; HTX's hard-asset coverage is under half.
 
 ## 9. Reproduce
