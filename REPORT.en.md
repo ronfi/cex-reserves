@@ -6,9 +6,10 @@
 
 ## 0. Summary
 
-1. Among top exchanges, **HTX is the only one holding all four kinds of affiliated assets**: a platform token (HTX token), an affiliated stablecoin (USDD), self-issued wrapped coins (BTC-TRC20, HBTC), and JustLend yield receipts (stUSDT/jUSDD). Every other exchange has at most one kind (classification and the three FTX criteria in §4).
-2. **HTX reports reserve ratios "all above 100%", but on the on-chain-verifiable basis: own-wallet USDT covers only 4.8% of liabilities, BTC 42%, ETH 25%; 18.1% of total reserves sit with an undisclosed "third-party custodian", and 47% is TRX, 69% of which is staked.**
-3. Binance / OKX reserves reconcile on the ETH chain at 95–99%; Bitfinex, Gate, KuCoin and Gemini at 98–101%; all eleven reconcile on the BTC chain (difference ≤1.0%). Every exchange self-reports a reserve ratio above 100%; this report can only verify the part that is readable on chain, and each exchange's verifiable share is in §3.
+1. **The distribution: of the 20 exchanges, 18 hold under 20% of reserves in affiliated tokens, and only two are above 30% — the highest at 78%, the next at 32%.** Eight hold none at all; **across the twelve that do, the median is 13%** (⚠ caliber: counting the eight zeros as well, the median across all 20 is 2.5% — the two medians are not the same thing, and a citation must say which). Exchange by exchange in §4.2.
+2. Among top exchanges, **HTX is the only one holding all four kinds of affiliated assets**: a platform token (HTX token), an affiliated stablecoin (USDD), self-issued wrapped coins (BTC-TRC20, HBTC), and JustLend yield receipts (stUSDT/jUSDD). Every other exchange has at most one kind (classification and the three FTX criteria in §4).
+3. **HTX reports reserve ratios "all above 100%", but on the on-chain-verifiable basis: own-wallet USDT covers only 4.8% of liabilities, BTC 42%, ETH 25%; 18.1% of total reserves sit with an undisclosed "third-party custodian", and 47.5% is TRX, 69% of which is staked.** (self-reported figures are the 2026-09-01 page snapshot; on-chain figures are direct reads of 09-07)
+4. Binance / OKX reserves reconcile on the ETH chain at 95–99%; Bitfinex, Gate, KuCoin and Gemini at 98–101%; all eleven reconcile on the BTC chain (difference ≤1.0%). Every exchange self-reports a reserve ratio above 100%; this report can only verify the part that is readable on chain, and each exchange's verifiable share is in §3.
 
 ## 1. Method: three data layers, trust only the bottom one
 
