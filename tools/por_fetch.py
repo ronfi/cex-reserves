@@ -34,16 +34,13 @@ def bitget():
     return dict(source=base + '{queryTotalReserveAmount,queryPlatformReserveDetail}(POST)', snapshot=snap, audit_id=d['auditId'], total_ratio=d['totalReserveRatio'], coins=coins)
 
 def kucoin():
-    t = get('https://www.kucoin.com/proof-of-reserves').text
-    j = json.loads(re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', t, re.S).group(1))
-    ir = j['props']['pageProps']['initialReserve']
+    """2026-09-07 起页面 __NEXT_DATA__.initialReserve 为空,改用页面自用接口(路径出自 proof-of-reserves 页的 JS chunk)。"""
+    ir = get('https://www.kucoin.com/_api/asset-front/proof-of-reserves/asset-reserve').json()['data']
     coins = {x['currency']: dict(users=float(x['userAsset']), wallet=float(x['walletAsset']), ratio=x.get('reserveRate')) for x in ir['reserveAsset']}
     snap = next((v for k, v in ir.items() if re.search(r'time|date', k, re.I) and not isinstance(v, (list, dict))), None)
-    if snap is None:
-        m = re.search(r'Based on data at ([0-9/ :]+ UTC[+-]\d+)', t); snap = m.group(1) if m else None
     if isinstance(snap, (int, float)) or (isinstance(snap, str) and snap.isdigit()):
         snap = datetime.datetime.fromtimestamp(int(snap) / 1000, datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
-    return dict(source='https://www.kucoin.com/proof-of-reserves(__NEXT_DATA__.initialReserve)', snapshot=snap, coins=coins)
+    return dict(source='https://www.kucoin.com/_api/asset-front/proof-of-reserves/asset-reserve', snapshot=snap, coins=coins)
 
 def gate():
     d = get('https://www.gate.io/api/web/v1/bill/audit/lastSnapshot').json()['data']

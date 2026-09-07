@@ -81,7 +81,7 @@ def read_eth_address(a):
     j = get_json(f'{BS}/addresses/{a}')
     if j is None:
         return None
-    nat = 0.0
+    nat = 0.0; units = 0.0; px = 0.0
     try:
         units = int(j.get('coin_balance') or 0) / 1e18; px = float(j.get('exchange_rate') or 0); nat = units * px
     except Exception:
@@ -104,7 +104,7 @@ def read_eth_address(a):
                 toks[sym] += v * float(er)
             elif v > 0:
                 unpriced += 1
-    return nat, dict(toks), unpriced
+    return nat, dict(toks), unpriced, units, px
 
 def read_eth(ex, addrs, prev_failed=None, sleep=0.15):
     agg = defaultdict(float); failed = []; per = {}
@@ -114,7 +114,7 @@ def read_eth(ex, addrs, prev_failed=None, sleep=0.15):
         if r is None:
             failed.append(a); log(f'  {ex} ✗ {a}')
         else:
-            nat, toks, unp = r
+            nat, toks, unp, units, px = r
             agg['ETH'] += nat
             for s, v in toks.items():
                 agg[s] += v

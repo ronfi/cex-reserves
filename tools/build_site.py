@@ -5,7 +5,7 @@ import re, sys, html as H, datetime
 from pathlib import Path
 import markdown
 ROOT = Path(__file__).resolve().parent.parent
-DATA_AS_OF = '2026-09-04 22:30 UTC'   # 数据截至(每周刷新时改这里)
+DATA_AS_OF = '2026-09-07 01:08 UTC'   # 数据截至(每周刷新时改这里)
 SUPPORT_ON_PAGE = False   # 页面是否展示打赏折叠区;False 时页脚只留一行指向 DONATE.md(防假冒提示保留)
 
 LANG = {
