@@ -27,11 +27,15 @@ def _day(s):
 def por(ex, coin):
     """各所官方 PoR 自报:(用户, 钱包, 快照日) 或 None。来源 data/por_<date>.json(tools/por_fetch.py 抓取 + data/por_manual.json 人工登记)。"""
     key = 'binance' if ex == 'binance-cex' else ex
+    if key == 'htx':
+        # 🔴 HTX 优先用页面快照:页面同时给出负债与储备且同一快照日;GitHub CSV 只有储备侧
+        # 且比页面晚约 11 天 —— 两者混用会让一个单元格里出现两个快照日的数(tools/htx_por_page.py)。
+        pg = _POR.get('htx_page') or {}
+        c = ((pg.get('coins') or {}).get(coin)) or ((pg.get('usds') or {}).get(coin))
+        if c: return (c.get('users'), c.get('wallet'), _day(pg.get('snapshot')))
     e = _POR.get(key) or {}; c = (e.get('coins') or {}).get(coin)
     if not c: return None
-    users = c.get('users')
-    if users is None and key == 'htx': users = (((_POR.get('htx_liabilities') or {}).get('coins') or {}).get(coin) or {}).get('users')
-    return (users, c.get('wallet'), _day(e.get('snapshot')))
+    return (c.get('users'), c.get('wallet'), _day(e.get('snapshot')))
 def por_cell(ex, coin, scale=1, fmt='{:,.0f}'):
     x = por(ex, coin)
     if not x: return '—'
@@ -41,8 +45,8 @@ def por_cell(ex, coin, scale=1, fmt='{:,.0f}'):
 POR_BTC = {ex: por(ex, 'BTC') for ex in ORDER if por(ex, 'BTC')}
 REASON_TRX = {'zh': {'gate': 'DefiLlama-Adapters 清单 11 址不是页面全部钱包(Gate 未公布 TRX 地址)'}, 'en': {'gate': 'the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)'}}[LANG]
 REASON = {  # 直读 ÷ 自报钱包 偏离 >5% 时的原因(两种语言);没有原因的不写
- 'zh': {'gate': 'DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址)', 'bitget': '适配器 19 址不是页面全部钱包;页面钱包含 BSC/Lightning 等链 535 枚', 'htx': '自报钱包含 BTC-TRC20 10,399 + 托管 1,689 + BTC-SOL/jWBTC 175;原生 8,209 vs 直读 +2%', 'bybit': '新闻稿快照 07-23 vs 直读 09-04'},
- 'en': {'gate': 'the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)', 'bitget': 'the 19-address adapter list is not every wallet on the page; page wallets include 535 BTC on BSC/Lightning etc.', 'htx': 'reported wallet includes BTC-TRC20 10,399 + custody 1,689 + BTC-SOL/jWBTC 175; native 8,209 vs direct read +2%', 'bybit': 'press-release snapshot 07-23 vs direct read 09-04'},
+ 'zh': {'gate': 'DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址)', 'bitget': '适配器 19 址不是页面全部钱包;页面钱包含 BSC/Lightning 等链 535 枚', 'htx': '自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-07 链上 10,331 枚,扣除后约 8,232,与本表直读 8,292 差 +0.7%', 'bybit': '新闻稿快照 07-23 vs 直读 09-04'},
+ 'en': {'gate': 'the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)', 'bitget': 'the 19-address adapter list is not every wallet on the page; page wallets include 535 BTC on BSC/Lightning etc.', 'htx': 'reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,331 on chain 09-07, leaving ~8,232 against the 8,292 read here, +0.7%', 'bybit': 'press-release snapshot 07-23 vs direct read 09-04'},
 }[LANG]
 btcpx = r['binance-cex']['llama']['Bitcoin'] / r['binance-cex']['btc']['btc']  # 用币安行反推聚合器计价
 out = []

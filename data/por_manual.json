@@ -1,5 +1,144 @@
 {
- "binance": {"source": "官方 PoR 页面另存快照(页面有反爬挑战,接口未公开,需人工另存)", "snapshot": "2026-08-01T00:00:00Z", "coins": {"BTC": {"users": 656644.187, "wallet": 658293.119, "exchange": 652719.342, "custody": 5573.777}, "ETH": {"users": null, "wallet": 3991221}}},
- "htx_liabilities": {"source": "官方 PoR 页面另存快照(负债侧只在页面;储备侧由 GitHub CSV 自动取)", "snapshot": "2026-08-01T00:00:00Z", "coins": {"BTC": {"users": 19933}, "ETH": {"users": 122077}, "USDT": {"users": 926300000}}},
- "bybit": {"source": "Bybit 月度 PoR 新闻稿(prnewswire,2026-07-23;页面接口未找到)", "snapshot": "2026-07-23(press)", "coins": {"BTC": {"users": 56438, "wallet": 59064}}}
+ "binance": {
+  "source": "官方 PoR 页面另存快照(页面有反爬挑战,接口未公开,需人工另存)",
+  "snapshot": "2026-08-01T00:00:00Z",
+  "coins": {
+   "BTC": {
+    "users": 656644.187,
+    "wallet": 658293.119,
+    "exchange": 652719.342,
+    "custody": 5573.777
+   },
+   "ETH": {
+    "users": null,
+    "wallet": 3991221
+   }
+  }
+ },
+ "bybit": {
+  "source": "Bybit 月度 PoR 新闻稿(prnewswire,2026-07-23;页面接口未找到)",
+  "snapshot": "2026-07-23(press)",
+  "coins": {
+   "BTC": {
+    "users": 56438,
+    "wallet": 59064
+   }
+  }
+ },
+ "htx_page": {
+  "source": "HTX 官方 PoR 页面另存快照(负债与储备同页同快照日;GitHub CSV 的储备侧比页面晚约 11 天,故不混用)",
+  "snapshot": "2026-09-01T00:00:00+08:00",
+  "priced_at": "2026-09-01",
+  "prices": {
+   "BTC": 77439.0,
+   "ETH": 2418.57,
+   "TRX": 0.3223,
+   "XRP": 1.3518,
+   "DOGE": 0.08167,
+   "SOL": 100.0,
+   "USDT": 1.0,
+   "USDC": 1.0,
+   "USDS": 1.0,
+   "U": 1.0,
+   "USDD": 1.0,
+   "USDs": 1.0,
+   "HTX": 1.68e-06
+  },
+  "usd": {
+   "users": 6027804399.195341,
+   "wallet": 6369816289.396608,
+   "custody": 1154381512.7729719,
+   "exchange": 5215432257.053635
+  },
+  "coins": {
+   "BTC": {
+    "users": 19498.0,
+    "wallet": 20252.0,
+    "exchange": 18563.0,
+    "custody": 1689.0,
+    "ratio": 104
+   },
+   "ETH": {
+    "users": 114984.0,
+    "wallet": 116757.0,
+    "exchange": 29213.0,
+    "custody": 87543.0,
+    "ratio": 102
+   },
+   "TRX": {
+    "users": 8619916900.0,
+    "wallet": 9384209885.0,
+    "exchange": 9384209885.0,
+    "custody": 0.0,
+    "ratio": 109
+   },
+   "USDs": {
+    "users": 972882754.0,
+    "wallet": 993067131.0,
+    "exchange": 181899225.0,
+    "custody": 811167905.0,
+    "ratio": 102
+   },
+   "HTX": {
+    "users": 226381194270185.0,
+    "wallet": 232059560281011.0,
+    "exchange": 231757796434003.0,
+    "custody": 301763847007.0,
+    "ratio": 103
+   },
+   "XRP": {
+    "users": 26203123.0,
+    "wallet": 27381853.0,
+    "exchange": 27381853.0,
+    "custody": 0.0,
+    "ratio": 104
+   },
+   "DOGE": {
+    "users": 416649509.0,
+    "wallet": 422760583.0,
+    "exchange": 422760583.0,
+    "custody": 0.0,
+    "ratio": 101
+   },
+   "SOL": {
+    "users": 389504.0,
+    "wallet": 401370.0,
+    "exchange": 399536.0,
+    "custody": 1833.0,
+    "ratio": 103
+   }
+  },
+  "usds": {
+   "USDT": {
+    "users": 872301196.0,
+    "exchange": 41457761.0,
+    "custody": 546870102.0,
+    "wallet": 588327863.0
+   },
+   "USDC": {
+    "users": 34130979.0,
+    "exchange": 972000.0,
+    "custody": 239429886.0,
+    "wallet": 240401886.0
+   },
+   "USDS": {
+    "users": 538373.0,
+    "exchange": 360949.0,
+    "custody": 0.0,
+    "wallet": 360949.0
+   },
+   "U": {
+    "users": 2606355.0,
+    "exchange": 14984999.0,
+    "custody": 17919966.0,
+    "wallet": 32904965.0
+   },
+   "USDD": {
+    "users": 63305850.0,
+    "exchange": 124123515.0,
+    "custody": 6947950.0,
+    "wallet": 131071465.0
+   }
+  }
+ }
 }
