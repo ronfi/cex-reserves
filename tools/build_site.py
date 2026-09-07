@@ -52,7 +52,7 @@ html[lang=en] .mast h1,html[lang=en] h2{font-family:"Noto Serif",Georgia,"Times 
 .mast .meta{color:var(--ink2);font-size:13px;display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
 .mast .lang{margin-left:auto;display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--paper);font-size:13px;line-height:1}.mast .lang a,.mast .lang span{padding:7px 12px;border:0;font-weight:600;color:var(--ink2)}.mast .lang a:hover{color:var(--stamp);background:var(--paper2)}.mast .lang .on{background:var(--stamp);color:#fff}
 .mast code{font:12.5px/1.4 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:2px 7px;border-radius:4px}
-.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 70px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 56px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
 nav.toc{position:sticky;top:18px;align-self:start;font-size:13px;line-height:1.5}
 nav.toc .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
 nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}nav.toc li a{display:block;padding:4px 0 4px 12px;color:var(--ink2);border:0;margin-left:-1px;border-left:2px solid transparent}nav.toc li a:hover{color:var(--ink);border-left-color:var(--stamp)}
@@ -87,8 +87,9 @@ details.fold>summary::before{content:"▸ ";color:var(--ink2)}details.fold[open]
 code{font:12.5px/1.5 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:1px 5px;border-radius:3px}
 pre{background:var(--code);padding:12px 14px;border-radius:5px;overflow-x:auto;font-size:12.5px;line-height:1.6}pre code{background:none;padding:0}
 hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
-footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid var(--rule);color:var(--ink2);font-size:12.5px;display:flex;flex-wrap:wrap;gap:8px 22px}
-@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:18px}nav.toc{position:static}nav.toc ol{display:flex;flex-wrap:wrap;gap:4px 14px;border:0}nav.toc li a{padding:2px 0;border:0}.legend{display:none}}
+.site-foot{border-top:1px solid var(--rule);background:var(--paper2);position:relative;z-index:2}
+.foot-in{max-width:1180px;margin:0 auto;padding:18px 24px;color:var(--ink2);font-size:12.5px;display:flex;flex-wrap:wrap;gap:8px 22px;line-height:1.7}
+@media (max-width:900px){.foot-in{padding:16px 20px}.wrap{grid-template-columns:1fr;gap:18px}nav.toc{position:static}nav.toc ol{display:flex;flex-wrap:wrap;gap:4px 14px;border:0}nav.toc li a{padding:2px 0;border:0}.legend{display:none}}
 """
 
 DONATE = [  # 与 DONATE.md(main 分支,唯一权威源)逐字一致
@@ -154,8 +155,9 @@ def build(lang):
 {body}
 {support_html}
 </main>
-<footer><span>{T['source']}: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="{T['archive_href']}">{T['archive']}</a></span><span>{T['built']} {built}</span><span>{T['license']}</span>{support_line}<span id="busuanzi_container_page_pv" style="display:none">{T['pv']}</span></footer>
-</div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>"""
+</div>
+<footer class="site-foot"><div class="foot-in"><span>{T['source']}: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="{T['archive_href']}">{T['archive']}</a></span><span>{T['built']} {built}</span><span>{T['license']}</span>{support_line}<span id="busuanzi_container_page_pv" style="display:none">{T['pv']}</span></div></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>"""
     out = ROOT / T['out']; out.parent.mkdir(parents=True, exist_ok=True); out.write_text(html, encoding='utf8')
     if '--archive' in sys.argv:
         d = DATA_AS_OF[:10]; arch = ROOT / 'docs' / 'archive'; arch.mkdir(exist_ok=True)
