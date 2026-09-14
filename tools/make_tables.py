@@ -45,8 +45,8 @@ def por_cell(ex, coin, scale=1, fmt='{:,.0f}'):
 POR_BTC = {ex: por(ex, 'BTC') for ex in ORDER if por(ex, 'BTC')}
 REASON_TRX = {'zh': {'gate': 'DefiLlama-Adapters 清单 11 址不是页面全部钱包(Gate 未公布 TRX 地址)'}, 'en': {'gate': 'the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)'}}[LANG]
 REASON = {  # 直读 ÷ 自报钱包 偏离 >5% 时的原因(两种语言);没有原因的不写
- 'zh': {'gate': 'DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址)', 'bitget': '适配器 19 址不是页面全部钱包;页面钱包含 BSC/Lightning 等链 535 枚', 'htx': '自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-07 链上 10,331 枚,扣除后约 8,232,与本表直读 8,292 差 +0.7%', 'bybit': '新闻稿快照 07-23 vs 直读 09-04'},
- 'en': {'gate': 'the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)', 'bitget': 'the 19-address adapter list is not every wallet on the page; page wallets include 535 BTC on BSC/Lightning etc.', 'htx': 'reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,331 on chain 09-07, leaving ~8,232 against the 8,292 read here, +0.7%', 'bybit': 'press-release snapshot 07-23 vs direct read 09-04'},
+ 'zh': {'gate': 'DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址)', 'bitget': '适配器 19 址不是页面全部钱包;页面钱包含 BSC/Lightning 等链 535 枚', 'htx': '自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-14 链上 10,334 枚,扣除后约 8,229,与本表直读 8,203 差 −0.3%', 'bybit': '新闻稿快照 07-23 vs 直读 09-14'},
+ 'en': {'gate': 'the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)', 'bitget': 'the 19-address adapter list is not every wallet on the page; page wallets include 535 BTC on BSC/Lightning etc.', 'htx': 'reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,334 on chain 09-14, leaving ~8,229 against the 8,203 read here, −0.3%', 'bybit': 'press-release snapshot 07-23 vs direct read 09-14'},
 }[LANG]
 btcpx = r['binance-cex']['llama']['Bitcoin'] / r['binance-cex']['btc']['btc']  # 用币安行反推聚合器计价
 out = []
