@@ -981,7 +981,9 @@
     "3KUwtHc5UhWQ76z6WrZRQHHVTZMuUWiZcU",
     "3MdofQ2ouxom9MzC9kKazGUShoL5R3cVLG",
     "3NnoMUQnURz29QLJcvQ5Xy6ztgJ4TYmqY3",
-    "3Nu84pbqfcfaFztQ74qc9ni2PH5HGM1bzS"
+    "3Nu84pbqfcfaFztQ74qc9ni2PH5HGM1bzS",
+    "3PSEjhkUQDGRNDPWqAcPhy9tEY6g6AHgPN",
+    "33FyMfJMRnqNvQiPDvE13L9cRHaEAXQziE"
    ],
    "tron": [
     "TAa8e7U7seCy7NcZ52xYVQXXybFfwvsUxz",
@@ -1013,7 +1015,8 @@
     "TYPUgo9ZtYk34XgBHbCHJCaoYZ5RejhhVD",
     "TYiQTHtgLo6KX6hYgbKLJsTbWK5hu9X5MG",
     "TZHW3PJe6VoyV8NWAaeukqWNRe3bVU7u8n"
-   ]
+   ],
+   "btc_sync_note": "2026-09-21 同步上游 helper/bitcoin-book/index.js:新增 2 址(3PSEjhk… 3,000.05 + 33FyMfJ… 2,000.03 = 5,000.08 BTC)。本地清单此前落后上游,导致直读 vs 聚合器出现 -13.9% 伪偏离。"
   },
   "bitfinex": {
    "source": "bitfinex/index.js",

@@ -1,0 +1,3482 @@
+{
+ "_meta": {
+  "read_at": "2026-09-21T00:02:39Z",
+  "script": "tools/por_fetch.py"
+ },
+ "okx": {
+  "source": "https://www.okx.com/proof-of-reserves(静态页文本)",
+  "snapshot": "Aug 2026",
+  "edition": "46",
+  "coins": {
+   "BTC": {
+    "users": 134399.0,
+    "wallet": 148552.0,
+    "exchange": 142323.0,
+    "custody": 6229.0,
+    "ratio": 111
+   },
+   "ETH": {
+    "users": 1725703.0,
+    "wallet": 1749426.0,
+    "exchange": 1712935.0,
+    "custody": 36491.0,
+    "ratio": 101
+   },
+   "USDT": {
+    "users": 8117615080.0,
+    "wallet": 8636749871.0,
+    "exchange": 8506792258.0,
+    "custody": 129957613.0,
+    "ratio": 106
+   },
+   "USDC": {
+    "users": 1661975912.0,
+    "wallet": 1671317865.0,
+    "exchange": 1540741714.0,
+    "custody": 130576151.0,
+    "ratio": 101
+   },
+   "XRP": {
+    "users": 213566925.0,
+    "wallet": 230496831.0,
+    "exchange": 228286047.0,
+    "custody": 2210784.0,
+    "ratio": 108
+   },
+   "DOGE": {
+    "users": 5962736521.0,
+    "wallet": 6028429257.0,
+    "exchange": 5888460854.0,
+    "custody": 139968403.0,
+    "ratio": 101
+   },
+   "SOL": {
+    "users": 7319486.0,
+    "wallet": 7607854.0,
+    "exchange": 7516611.0,
+    "custody": 91243.0,
+    "ratio": 104
+   },
+   "OKB": {
+    "users": 19710464.0,
+    "wallet": 19749228.0,
+    "exchange": 19733283.0,
+    "custody": 15945.0,
+    "ratio": 100
+   }
+  }
+ },
+ "bitget": {
+  "source": "https://www.bitget.com/v1/bill/proof/assets/public/{queryTotalReserveAmount,queryPlatformReserveDetail}(POST)",
+  "snapshot": "2026-09-15T16:00:00Z",
+  "audit_id": "Au2026091600",
+  "total_ratio": 135,
+  "coins": {
+   "LINK": {
+    "users": 1764969.64893076,
+    "wallet": 2312879.41053556,
+    "by_chain": {
+     "Ethereum": 2312879.41053556
+    }
+   },
+   "BTC": {
+    "users": 27656.58608108,
+    "wallet": 36778.663378640005,
+    "by_chain": {
+     "BITCOIN": 35498.26919304,
+     "Binance Smart Chain": 1261.39944489,
+     "Lightning Network": 18.84226305,
+     "MEZO": 0.09920398,
+     "Merlin Chain": 0.05327368
+    }
+   },
+   "USDT": {
+    "users": 1195470630.3659751,
+    "wallet": 1198662755.3015707,
+    "by_chain": {
+     "APTOS": 22990382.290002,
+     "AVAX C": 22746570.992263,
+     "Arbitrum One": 16843409.806591,
+     "Binance Smart Chain": 372400993.82187057,
+     "Ethereum": 390383497.678377,
+     "Morph": 1770458.648901,
+     "Optimism": 13654708.954761,
+     "Plasma": 24095994.655222,
+     "Polygon": 26000558.944981,
+     "Solana": 12076898.627322,
+     "The Open Network": 41110642.83769,
+     "Tron": 254588638.04359
+    }
+   },
+   "ETH": {
+    "users": 121426.72957775,
+    "wallet": 193902.36299884,
+    "by_chain": {
+     "Alienxchain": 0.30045946,
+     "Arbitrum One": 15378.48826851,
+     "BASE": 13956.38887082,
+     "Binance Smart Chain": 17670.34168305,
+     "Blast": 143.23131931,
+     "Eclipse": 8.91172081,
+     "Ethereum": 137096.25689313,
+     "Fuel": 99.7635323,
+     "Gensyn": 2.00626567,
+     "Katana": 5.01887379,
+     "LINEA": 114.40412153,
+     "MEGA": 1.99993432,
+     "Manta NetWork": 14.75616763,
+     "Metal DAO L2": 0.53108482,
+     "Mode": 0.49604506,
+     "Morph": 2070.39038537,
+     "Optimism": 3515.82649026,
+     "Robinhood Chain": 527.8547522,
+     "SCROLL": 1686.22466047,
+     "Starknet": 1448.97449757,
+     "World Chain": 5.46599197,
+     "Zircuit": 12.79397031,
+     "zkSync Era": 141.93701048
+    }
+   },
+   "LTC": {
+    "users": 175088.93150178,
+    "wallet": 220004.97517583,
+    "by_chain": {
+     "Litecoin": 220004.97517583
+    }
+   },
+   "USDC": {
+    "users": 101760545.80279124,
+    "wallet": 142286760.6431324,
+    "by_chain": {
+     "APTOS": 4296460.800193,
+     "AVAX C": 11819037.785659,
+     "Arbitrum One": 14777120.989106,
+     "BASE": 11235802.134363,
+     "Binance Smart Chain": 22123822.21596274,
+     "Ethereum": 48961698.785601,
+     "Monad": 3105525.478578,
+     "Morph": 3970334.853298,
+     "Optimism": 565629.1384,
+     "Polygon": 7240978.206196,
+     "SEIEVM": 2298286.479178,
+     "SONIC": 3169754.440092,
+     "Solana": 8721667.106623,
+     "ZKFair": 642.22988264
+    }
+   },
+   "NEAR": {
+    "users": 4063503.12373402,
+    "wallet": 7381014.78879776,
+    "by_chain": {
+     "NEAR Protocol": 7381014.78879776
+    }
+   },
+   "USDGO": {
+    "users": 348278534.88655734,
+    "wallet": 753880874.402734,
+    "by_chain": {
+     "Solana": 753880874.402734
+    }
+   },
+   "DOGE": {
+    "users": 397642576.10534173,
+    "wallet": 565664822.3476162,
+    "by_chain": {
+     "Dogecoin": 565664822.3476162
+    }
+   },
+   "HYPE": {
+    "users": 755818.50484226,
+    "wallet": 1081991.10652563,
+    "by_chain": {
+     "HYPEREVM": 807368.4344948,
+     "hyperliquid": 274622.67203083
+    }
+   },
+   "ONDO": {
+    "users": 40536892.5533537,
+    "wallet": 49292822.37514502,
+    "by_chain": {
+     "Ethereum": 49292822.37514502
+    }
+   },
+   "XAUT": {
+    "users": 2668.43063248,
+    "wallet": 13770.830027,
+    "by_chain": {
+     "Ethereum": 13770.830027
+    }
+   },
+   "PI": {
+    "users": 141623430.0860251,
+    "wallet": 156080174.2561779,
+    "by_chain": {
+     "Pi Network": 156080174.2561779
+    }
+   },
+   "BNB": {
+    "users": 78493.20837454,
+    "wallet": 96139.25061455,
+    "by_chain": {
+     "Binance Smart Chain": 95762.26309086,
+     "Matchain": 10.01611427,
+     "opBNB": 366.97140942
+    }
+   },
+   "XRP": {
+    "users": 66812233.12247244,
+    "wallet": 103647934.923141,
+    "by_chain": {
+     "XRP Ledger": 103647934.923141
+    }
+   },
+   "SOL": {
+    "users": 760105.57035506,
+    "wallet": 1336289.46923161,
+    "by_chain": {
+     "Solana": 1336289.46923161
+    }
+   },
+   "SUI": {
+    "users": 24245141.19493591,
+    "wallet": 37272399.81066674,
+    "by_chain": {
+     "SUI": 37272399.81066674
+    }
+   },
+   "ADA": {
+    "users": 60686235.31510438,
+    "wallet": 98376682.267034,
+    "by_chain": {
+     "Cardano": 98376682.267034
+    }
+   },
+   "TAO": {
+    "users": 74184.93474909,
+    "wallet": 106152.97206799,
+    "by_chain": {
+     "Bittensor": 106152.97206799
+    }
+   }
+  }
+ },
+ "kucoin": {
+  "source": "https://www.kucoin.com/_api/asset-front/proof-of-reserves/asset-reserve",
+  "snapshot": "2026-08-31T15:59:59Z",
+  "coins": {
+   "BTC": {
+    "users": 7441.07463644,
+    "wallet": 7985.08950235,
+    "ratio": "107"
+   },
+   "ETH": {
+    "users": 101663.51574276,
+    "wallet": 118497.31864643,
+    "ratio": "117"
+   },
+   "USDT": {
+    "users": 955212901.2563115,
+    "wallet": 1059361226.9397036,
+    "ratio": "111"
+   },
+   "USDC": {
+    "users": 85019097.80608137,
+    "wallet": 104658369.83260728,
+    "ratio": "123"
+   }
+  }
+ },
+ "gate": {
+  "source": "https://www.gate.io/api/web/v1/bill/audit/lastSnapshot",
+  "snapshot": "2026-09-13 00:00:00",
+  "total_ratio": "117.26%",
+  "coins": {
+   "PENGU": {
+    "users": 409985441.622067,
+    "wallet": 410317394.0,
+    "exchange": 410317394.0,
+    "custody": 0.0
+   },
+   "WIF": {
+    "users": 9159135.668841,
+    "wallet": 9545732.0,
+    "exchange": 9545732.0,
+    "custody": 0.0
+   },
+   "RUNE": {
+    "users": 1198769.25856,
+    "wallet": 1223290.0,
+    "exchange": 1223290.0,
+    "custody": 0.0
+   },
+   "COMP": {
+    "users": 27143.643576,
+    "wallet": 27331.0,
+    "exchange": 27331.0,
+    "custody": 0.0
+   },
+   "QQQON": {
+    "users": 1024.746414,
+    "wallet": 1034.24,
+    "exchange": 1034.24,
+    "custody": 0.0
+   },
+   "WENSOL": {
+    "users": 66599641749.6536,
+    "wallet": 66628505032.0,
+    "exchange": 66628505032.0,
+    "custody": 0.0
+   },
+   "TAKE": {
+    "users": 92326022.954848,
+    "wallet": 92620713.0,
+    "exchange": 92620713.0,
+    "custody": 0.0
+   },
+   "PROM": {
+    "users": 284298.6116,
+    "wallet": 288091.0,
+    "exchange": 288091.0,
+    "custody": 0.0
+   },
+   "TAO": {
+    "users": 66576.616635,
+    "wallet": 67555.0,
+    "exchange": 67555.0,
+    "custody": 0.0
+   },
+   "EVAA": {
+    "users": 6899922.051078,
+    "wallet": 7296588.0,
+    "exchange": 7296588.0,
+    "custody": 0.0
+   },
+   "SPK": {
+    "users": 23454035.20204,
+    "wallet": 23481772.0,
+    "exchange": 23481772.0,
+    "custody": 0.0
+   },
+   "LIT": {
+    "users": 1228754.145345,
+    "wallet": 1286583.0,
+    "exchange": 1286583.0,
+    "custody": 0.0
+   },
+   "SKYAI": {
+    "users": 382622413.725033,
+    "wallet": 390631251.0,
+    "exchange": 390631251.0,
+    "custody": 0.0
+   },
+   "HOT": {
+    "users": 1211893442.354722,
+    "wallet": 1225026033.0,
+    "exchange": 1225026033.0,
+    "custody": 0.0
+   },
+   "FLUID": {
+    "users": 272872.561236,
+    "wallet": 337739.0,
+    "exchange": 337739.0,
+    "custody": 0.0
+   },
+   "DOGS": {
+    "users": 12442063659.464363,
+    "wallet": 12445670412.0,
+    "exchange": 12445670412.0,
+    "custody": 0.0
+   },
+   "OMI": {
+    "users": 7411379380.736736,
+    "wallet": 7519528350.0,
+    "exchange": 7519528350.0,
+    "custody": 0.0
+   },
+   "AIA": {
+    "users": 119344160.989682,
+    "wallet": 120356998.0,
+    "exchange": 120356998.0,
+    "custody": 0.0
+   },
+   "BAN": {
+    "users": 483220861.517497,
+    "wallet": 487010015.0,
+    "exchange": 487010015.0,
+    "custody": 0.0
+   },
+   "0G": {
+    "users": 2566492.878779,
+    "wallet": 3288565.0,
+    "exchange": 3288565.0,
+    "custody": 0.0
+   },
+   "CRCLX": {
+    "users": 100109.473672,
+    "wallet": 100110.0,
+    "exchange": 100110.0,
+    "custody": 0.0
+   },
+   "GRASS": {
+    "users": 7037348.239765,
+    "wallet": 7052544.0,
+    "exchange": 7052544.0,
+    "custody": 0.0
+   },
+   "MOODENG": {
+    "users": 27665590.818653,
+    "wallet": 29633669.0,
+    "exchange": 29633669.0,
+    "custody": 0.0
+   },
+   "XPL": {
+    "users": 21316476.03664,
+    "wallet": 21371524.0,
+    "exchange": 21371524.0,
+    "custody": 0.0
+   },
+   "NEAR": {
+    "users": 5828865.078288,
+    "wallet": 5967709.0,
+    "exchange": 5967709.0,
+    "custody": 0.0
+   },
+   "HSK": {
+    "users": 42870528.300442,
+    "wallet": 42931819.0,
+    "exchange": 42931819.0,
+    "custody": 0.0
+   },
+   "牛来": {
+    "users": 48379685.489336,
+    "wallet": 48411472.0,
+    "exchange": 48411472.0,
+    "custody": 0.0
+   },
+   "ZBCN": {
+    "users": 871294043.760731,
+    "wallet": 876050291.0,
+    "exchange": 876050291.0,
+    "custody": 0.0
+   },
+   "QKC": {
+    "users": 288169705.024081,
+    "wallet": 292186764.0,
+    "exchange": 292186764.0,
+    "custody": 0.0
+   },
+   "HEMI": {
+    "users": 57857722.093041,
+    "wallet": 58038747.0,
+    "exchange": 58038747.0,
+    "custody": 0.0
+   },
+   "ARKM": {
+    "users": 11342100.723956,
+    "wallet": 11364948.0,
+    "exchange": 11364948.0,
+    "custody": 0.0
+   },
+   "NVDAX": {
+    "users": 4742.809962,
+    "wallet": 5087.0,
+    "exchange": 5087.0,
+    "custody": 0.0
+   },
+   "TX": {
+    "users": 285975874.423381,
+    "wallet": 289580042.0,
+    "exchange": 289580042.0,
+    "custody": 0.0
+   },
+   "ETHW": {
+    "users": 4590957.465532,
+    "wallet": 4591033.0,
+    "exchange": 4591033.0,
+    "custody": 0.0
+   },
+   "ALEO": {
+    "users": 145009569.634589,
+    "wallet": 146125381.0,
+    "exchange": 146125381.0,
+    "custody": 0.0
+   },
+   "PAAL": {
+    "users": 85914535.532504,
+    "wallet": 86426846.0,
+    "exchange": 86426846.0,
+    "custody": 0.0
+   },
+   "MANA": {
+    "users": 7825221.61792,
+    "wallet": 8191574.0,
+    "exchange": 8191574.0,
+    "custody": 0.0
+   },
+   "FLOKI": {
+    "users": 271739507643.54013,
+    "wallet": 282778000000.0,
+    "exchange": 282778000000.0,
+    "custody": 0.0
+   },
+   "AO": {
+    "users": 393527.982846,
+    "wallet": 408150.0,
+    "exchange": 408150.0,
+    "custody": 0.0
+   },
+   "KDA": {
+    "users": 112571403.928013,
+    "wallet": 112744268.0,
+    "exchange": 112744268.0,
+    "custody": 0.0
+   },
+   "F": {
+    "users": 143298088.487782,
+    "wallet": 144008970.0,
+    "exchange": 144008970.0,
+    "custody": 0.0
+   },
+   "ENJ": {
+    "users": 15793559.115333,
+    "wallet": 16054795.0,
+    "exchange": 16054795.0,
+    "custody": 0.0
+   },
+   "AVAX": {
+    "users": 1221130.937819,
+    "wallet": 1233378.0,
+    "exchange": 1233378.0,
+    "custody": 0.0
+   },
+   "SAND": {
+    "users": 12422970.30696,
+    "wallet": 47408634.0,
+    "exchange": 47408634.0,
+    "custody": 0.0
+   },
+   "PENDLE": {
+    "users": 1500455.869978,
+    "wallet": 1506681.0,
+    "exchange": 1506681.0,
+    "custody": 0.0
+   },
+   "XNY": {
+    "users": 577375229.164152,
+    "wallet": 590068966.0,
+    "exchange": 590068966.0,
+    "custody": 0.0
+   },
+   "SYRUP": {
+    "users": 13332285.523177,
+    "wallet": 13391147.0,
+    "exchange": 13391147.0,
+    "custody": 0.0
+   },
+   "KSM": {
+    "users": 105374.274824,
+    "wallet": 107453.0,
+    "exchange": 107453.0,
+    "custody": 0.0
+   },
+   "ELF": {
+    "users": 63131842.064841,
+    "wallet": 63145832.0,
+    "exchange": 63145832.0,
+    "custody": 0.0
+   },
+   "CKB": {
+    "users": 1320800675.82253,
+    "wallet": 1327348542.0,
+    "exchange": 1327348542.0,
+    "custody": 0.0
+   },
+   "ZK": {
+    "users": 82584156.790313,
+    "wallet": 82839352.0,
+    "exchange": 82839352.0,
+    "custody": 0.0
+   },
+   "KAIA": {
+    "users": 17218006.581739,
+    "wallet": 17233462.0,
+    "exchange": 17233462.0,
+    "custody": 0.0
+   },
+   "THETA": {
+    "users": 8280544.198234,
+    "wallet": 8376483.0,
+    "exchange": 8376483.0,
+    "custody": 0.0
+   },
+   "RED": {
+    "users": 2441389.877102,
+    "wallet": 2553115.0,
+    "exchange": 2553115.0,
+    "custody": 0.0
+   },
+   "HTX": {
+    "users": 502391357477.10834,
+    "wallet": 502931000000.0,
+    "exchange": 502931000000.0,
+    "custody": 0.0
+   },
+   "O": {
+    "users": 3485040.714565,
+    "wallet": 3553456.0,
+    "exchange": 3553456.0,
+    "custody": 0.0
+   },
+   "SPCX": {
+    "users": 105635.90373,
+    "wallet": 106691.35,
+    "exchange": 106691.35,
+    "custody": 0.0
+   },
+   "USAT": {
+    "users": 1006518.542728,
+    "wallet": 1007474.0,
+    "exchange": 1007474.0,
+    "custody": 0.0
+   },
+   "NMR": {
+    "users": 69458.775621,
+    "wallet": 69564.0,
+    "exchange": 69564.0,
+    "custody": 0.0
+   },
+   "GENIUS": {
+    "users": 2061459.379482,
+    "wallet": 2065696.0,
+    "exchange": 2065696.0,
+    "custody": 0.0
+   },
+   "CROWN": {
+    "users": 2298314.484343,
+    "wallet": 2310588.0,
+    "exchange": 2310588.0,
+    "custody": 0.0
+   },
+   "MELANIA": {
+    "users": 19189331.486353,
+    "wallet": 19319285.0,
+    "exchange": 19319285.0,
+    "custody": 0.0
+   },
+   "PLUME": {
+    "users": 96864594.749042,
+    "wallet": 97182795.0,
+    "exchange": 97182795.0,
+    "custody": 0.0
+   },
+   "DGAI": {
+    "users": 14425023.91913,
+    "wallet": 14511715.0,
+    "exchange": 14511715.0,
+    "custody": 0.0
+   },
+   "WKC": {
+    "users": 22068929166192.438,
+    "wallet": 22253400000000.0,
+    "exchange": 22253400000000.0,
+    "custody": 0.0
+   },
+   "USDPT": {
+    "users": 6974663.548584,
+    "wallet": 7463709.0,
+    "exchange": 7463709.0,
+    "custody": 0.0
+   },
+   "PI": {
+    "users": 320112904.019311,
+    "wallet": 320122933.0,
+    "exchange": 320122933.0,
+    "custody": 0.0
+   },
+   "XCN": {
+    "users": 253644015.317766,
+    "wallet": 291589992.0,
+    "exchange": 291589992.0,
+    "custody": 0.0
+   },
+   "ICP": {
+    "users": 2059576.489941,
+    "wallet": 2064573.0,
+    "exchange": 2064573.0,
+    "custody": 0.0
+   },
+   "FORM": {
+    "users": 2831894.211239,
+    "wallet": 3097201.0,
+    "exchange": 3097201.0,
+    "custody": 0.0
+   },
+   "CGPT": {
+    "users": 33124700.462154,
+    "wallet": 33130843.0,
+    "exchange": 33130843.0,
+    "custody": 0.0
+   },
+   "USUAL": {
+    "users": 36917578.498011,
+    "wallet": 43997089.0,
+    "exchange": 43997089.0,
+    "custody": 0.0
+   },
+   "SC": {
+    "users": 1092415282.345291,
+    "wallet": 1116936241.0,
+    "exchange": 1116936241.0,
+    "custody": 0.0
+   },
+   "PONS": {
+    "users": 57984471.187291,
+    "wallet": 58119813.0,
+    "exchange": 58119813.0,
+    "custody": 0.0
+   },
+   "BTS": {
+    "users": 396384220.106761,
+    "wallet": 405695991.0,
+    "exchange": 405695991.0,
+    "custody": 0.0
+   },
+   "HYPE": {
+    "users": 701139.997344,
+    "wallet": 701217.0,
+    "exchange": 701217.0,
+    "custody": 0.0
+   },
+   "XT": {
+    "users": 835733.412827,
+    "wallet": 835751.0,
+    "exchange": 835751.0,
+    "custody": 0.0
+   },
+   "BABY": {
+    "users": 98049010.156965,
+    "wallet": 105270244.0,
+    "exchange": 105270244.0,
+    "custody": 0.0
+   },
+   "BANANAS31": {
+    "users": 299942950.737157,
+    "wallet": 302506077.0,
+    "exchange": 302506077.0,
+    "custody": 0.0
+   },
+   "FUN": {
+    "users": 47164592.017292,
+    "wallet": 47188179.0,
+    "exchange": 47188179.0,
+    "custody": 0.0
+   },
+   "TURBO": {
+    "users": 1557930572.437029,
+    "wallet": 1649805760.0,
+    "exchange": 1649805760.0,
+    "custody": 0.0
+   },
+   "WEMIX": {
+    "users": 35545701.111085,
+    "wallet": 36077454.0,
+    "exchange": 36077454.0,
+    "custody": 0.0
+   },
+   "PNUT": {
+    "users": 13384136.945462,
+    "wallet": 14215253.0,
+    "exchange": 14215253.0,
+    "custody": 0.0
+   },
+   "TSLAX": {
+    "users": 4295.807827,
+    "wallet": 4438.0,
+    "exchange": 4438.0,
+    "custody": 0.0
+   },
+   "SHIB": {
+    "users": 4476073446258.723,
+    "wallet": 4642540000000.0,
+    "exchange": 4642540000000.0,
+    "custody": 0.0
+   },
+   "ALCH": {
+    "users": 236940095.028678,
+    "wallet": 237331712.0,
+    "exchange": 237331712.0,
+    "custody": 0.0
+   },
+   "GPS": {
+    "users": 94056190.66828,
+    "wallet": 95833618.0,
+    "exchange": 95833618.0,
+    "custody": 0.0
+   },
+   "FUNTOKEN": {
+    "users": 2818572565.820215,
+    "wallet": 2819887706.0,
+    "exchange": 2819887706.0,
+    "custody": 0.0
+   },
+   "UAI": {
+    "users": 15398570.532879,
+    "wallet": 15411424.0,
+    "exchange": 15411424.0,
+    "custody": 0.0
+   },
+   "BBT": {
+    "users": 56011895.613768,
+    "wallet": 57518675.0,
+    "exchange": 57518675.0,
+    "custody": 0.0
+   },
+   "FOREST": {
+    "users": 15333837.181247,
+    "wallet": 15341484.0,
+    "exchange": 15341484.0,
+    "custody": 0.0
+   },
+   "GEOD": {
+    "users": 12157008.7131,
+    "wallet": 12278578.08,
+    "exchange": 12278578.08,
+    "custody": 0.0
+   },
+   "AIO": {
+    "users": 36623900.448831,
+    "wallet": 37055179.0,
+    "exchange": 37055179.0,
+    "custody": 0.0
+   },
+   "MUBARAK": {
+    "users": 67292087.049534,
+    "wallet": 95328216.0,
+    "exchange": 95328216.0,
+    "custody": 0.0
+   },
+   "MON": {
+    "users": 103493104.877212,
+    "wallet": 103532531.0,
+    "exchange": 103532531.0,
+    "custody": 0.0
+   },
+   "METIS": {
+    "users": 357600.434939,
+    "wallet": 372086.0,
+    "exchange": 372086.0,
+    "custody": 0.0
+   },
+   "WLFI": {
+    "users": 112859523.230596,
+    "wallet": 113444498.0,
+    "exchange": 113444498.0,
+    "custody": 0.0
+   },
+   "APEPE": {
+    "users": 3205087551630.04,
+    "wallet": 3207130000000.0,
+    "exchange": 3207130000000.0,
+    "custody": 0.0
+   },
+   "IDOL": {
+    "users": 213067029.5879,
+    "wallet": 214280415.0,
+    "exchange": 214280415.0,
+    "custody": 0.0
+   },
+   "EGLD": {
+    "users": 117439.206904,
+    "wallet": 120257.0,
+    "exchange": 120257.0,
+    "custody": 0.0
+   },
+   "ALPH": {
+    "users": 17287186.841205,
+    "wallet": 17347828.0,
+    "exchange": 17347828.0,
+    "custody": 0.0
+   },
+   "我踏马来了": {
+    "users": 288409437.256185,
+    "wallet": 288411593.0,
+    "exchange": 288411593.0,
+    "custody": 0.0
+   },
+   "AT": {
+    "users": 3736207.885823,
+    "wallet": 3792005.0,
+    "exchange": 3792005.0,
+    "custody": 0.0
+   },
+   "ATOM": {
+    "users": 1736645.136682,
+    "wallet": 1926099.0,
+    "exchange": 1926099.0,
+    "custody": 0.0
+   },
+   "USDE": {
+    "users": 1057693.185926,
+    "wallet": 2944232.0,
+    "exchange": 2944232.0,
+    "custody": 0.0
+   },
+   "LEO": {
+    "users": 88980.28672,
+    "wallet": 121974.0,
+    "exchange": 121974.0,
+    "custody": 0.0
+   },
+   "H": {
+    "users": 152440105.251255,
+    "wallet": 155645773.0,
+    "exchange": 155645773.0,
+    "custody": 0.0
+   },
+   "ZIG": {
+    "users": 41675808.918382,
+    "wallet": 41879888.0,
+    "exchange": 41879888.0,
+    "custody": 0.0
+   },
+   "WPAY": {
+    "users": 11196848.900646,
+    "wallet": 11197452.0,
+    "exchange": 11197452.0,
+    "custody": 0.0
+   },
+   "A": {
+    "users": 14700942.808084,
+    "wallet": 14741165.0,
+    "exchange": 14741165.0,
+    "custody": 0.0
+   },
+   "TWT": {
+    "users": 1809101.901917,
+    "wallet": 1831686.0,
+    "exchange": 1831686.0,
+    "custody": 0.0
+   },
+   "CRCLON": {
+    "users": 19060.14049,
+    "wallet": 19437.0,
+    "exchange": 19437.0,
+    "custody": 0.0
+   },
+   "WOJAK": {
+    "users": 17477065189698.775,
+    "wallet": 17638500000000.0,
+    "exchange": 17638500000000.0,
+    "custody": 0.0
+   },
+   "ALU": {
+    "users": 218922280.943621,
+    "wallet": 218957967.0,
+    "exchange": 218957967.0,
+    "custody": 0.0
+   },
+   "SEI": {
+    "users": 32538307.692154,
+    "wallet": 33554792.0,
+    "exchange": 33554792.0,
+    "custody": 0.0
+   },
+   "CFG": {
+    "users": 16082146.128882,
+    "wallet": 16398839.0,
+    "exchange": 16398839.0,
+    "custody": 0.0
+   },
+   "CHZ": {
+    "users": 57315678.676733,
+    "wallet": 57940638.0,
+    "exchange": 57940638.0,
+    "custody": 0.0
+   },
+   "ENA": {
+    "users": 47851895.471989,
+    "wallet": 47959550.0,
+    "exchange": 47959550.0,
+    "custody": 0.0
+   },
+   "DOGELONMARS": {
+    "users": 26486215133905.9,
+    "wallet": 27649700000000.0,
+    "exchange": 27649700000000.0,
+    "custody": 0.0
+   },
+   "US": {
+    "users": 324172365.162503,
+    "wallet": 324383238.0,
+    "exchange": 324383238.0,
+    "custody": 0.0
+   },
+   "PEOPLE": {
+    "users": 199990009.092481,
+    "wallet": 200939792.0,
+    "exchange": 200939792.0,
+    "custody": 0.0
+   },
+   "KITE": {
+    "users": 10931209.659471,
+    "wallet": 11789541.0,
+    "exchange": 11789541.0,
+    "custody": 0.0
+   },
+   "TRB": {
+    "users": 37133.998328,
+    "wallet": 39124.0,
+    "exchange": 39124.0,
+    "custody": 0.0
+   },
+   "ROSE": {
+    "users": 81232184.59935,
+    "wallet": 81337742.0,
+    "exchange": 81337742.0,
+    "custody": 0.0
+   },
+   "NOS": {
+    "users": 3088839.105817,
+    "wallet": 3106561.0,
+    "exchange": 3106561.0,
+    "custody": 0.0
+   },
+   "FB": {
+    "users": 6403472.346534,
+    "wallet": 6420008.0,
+    "exchange": 6420008.0,
+    "custody": 0.0
+   },
+   "龙虾": {
+    "users": 164335897.382196,
+    "wallet": 164356419.0,
+    "exchange": 164356419.0,
+    "custody": 0.0
+   },
+   "AIN": {
+    "users": 120488170.164198,
+    "wallet": 121939929.0,
+    "exchange": 121939929.0,
+    "custody": 0.0
+   },
+   "BGSC": {
+    "users": 2792127383.902332,
+    "wallet": 2834626088.0,
+    "exchange": 2834626088.0,
+    "custody": 0.0
+   },
+   "APE": {
+    "users": 18700811.775226,
+    "wallet": 18804956.0,
+    "exchange": 18804956.0,
+    "custody": 0.0
+   },
+   "STRK": {
+    "users": 43339501.041631,
+    "wallet": 43386457.0,
+    "exchange": 43386457.0,
+    "custody": 0.0
+   },
+   "MITO": {
+    "users": 33242628.514282,
+    "wallet": 36396824.0,
+    "exchange": 36396824.0,
+    "custody": 0.0
+   },
+   "AAVE": {
+    "users": 74641.102538,
+    "wallet": 76718.0,
+    "exchange": 76718.0,
+    "custody": 0.0
+   },
+   "PEIPEI": {
+    "users": 66285552669167.96,
+    "wallet": 66300000000000.0,
+    "exchange": 66300000000000.0,
+    "custody": 0.0
+   },
+   "STBL": {
+    "users": 87720622.219184,
+    "wallet": 88116851.0,
+    "exchange": 88116851.0,
+    "custody": 0.0
+   },
+   "MEME": {
+    "users": 939585449.641514,
+    "wallet": 960570462.0,
+    "exchange": 960570462.0,
+    "custody": 0.0
+   },
+   "KCT": {
+    "users": 4736934079.05383,
+    "wallet": 4777493123.0,
+    "exchange": 4777493123.0,
+    "custody": 0.0
+   },
+   "GRT": {
+    "users": 37403205.663862,
+    "wallet": 38272694.0,
+    "exchange": 38272694.0,
+    "custody": 0.0
+   },
+   "SLC": {
+    "users": 2937836638.060471,
+    "wallet": 2937934765.0,
+    "exchange": 2937934765.0,
+    "custody": 0.0
+   },
+   "PEPE": {
+    "users": 4216271197203.4937,
+    "wallet": 4311930000000.0,
+    "exchange": 4311930000000.0,
+    "custody": 0.0
+   },
+   "CPOOL": {
+    "users": 27081158.560841,
+    "wallet": 28337283.0,
+    "exchange": 28337283.0,
+    "custody": 0.0
+   },
+   "BNKR": {
+    "users": 1792299244.581024,
+    "wallet": 1800661873.0,
+    "exchange": 1800661873.0,
+    "custody": 0.0
+   },
+   "NPC": {
+    "users": 173566905.80192,
+    "wallet": 174193282.0,
+    "exchange": 174193282.0,
+    "custody": 0.0
+   },
+   "TBK": {
+    "users": 8669143.521963,
+    "wallet": 8672640.0,
+    "exchange": 8672640.0,
+    "custody": 0.0
+   },
+   "USDT": {
+    "users": 795691836.200645,
+    "wallet": 909080049.0,
+    "exchange": 909080049.0,
+    "custody": 0.0
+   },
+   "ZEREBRO": {
+    "users": 34795422.200901,
+    "wallet": 35725536.0,
+    "exchange": 35725536.0,
+    "custody": 0.0
+   },
+   "SKY": {
+    "users": 13783704.581943,
+    "wallet": 14263879.0,
+    "exchange": 14263879.0,
+    "custody": 0.0
+   },
+   "ONDO": {
+    "users": 39405781.888447,
+    "wallet": 39580150.0,
+    "exchange": 39580150.0,
+    "custody": 0.0
+   },
+   "ACH": {
+    "users": 109335513.414087,
+    "wallet": 112546975.0,
+    "exchange": 112546975.0,
+    "custody": 0.0
+   },
+   "RATS": {
+    "users": 309019388330.2707,
+    "wallet": 322420000000.0,
+    "exchange": 322420000000.0,
+    "custody": 0.0
+   },
+   "CCD": {
+    "users": 324231169.170176,
+    "wallet": 340370046.0,
+    "exchange": 340370046.0,
+    "custody": 0.0
+   },
+   "HANA": {
+    "users": 233344978.058059,
+    "wallet": 238140140.0,
+    "exchange": 238140140.0,
+    "custody": 0.0
+   },
+   "AKE": {
+    "users": 156718438.922658,
+    "wallet": 156832008.0,
+    "exchange": 156832008.0,
+    "custody": 0.0
+   },
+   "ERG": {
+    "users": 4902621.762216,
+    "wallet": 4975761.0,
+    "exchange": 4975761.0,
+    "custody": 0.0
+   },
+   "BROCCOLI": {
+    "users": 44643209.746972,
+    "wallet": 52926226.0,
+    "exchange": 52926226.0,
+    "custody": 0.0
+   },
+   "APT": {
+    "users": 3449116.555937,
+    "wallet": 3451668.0,
+    "exchange": 3451668.0,
+    "custody": 0.0
+   },
+   "MBG": {
+    "users": 12271708.666243,
+    "wallet": 12297257.0,
+    "exchange": 12297257.0,
+    "custody": 0.0
+   },
+   "SAPIEN": {
+    "users": 12528375.872934,
+    "wallet": 12767139.0,
+    "exchange": 12767139.0,
+    "custody": 0.0
+   },
+   "ONT": {
+    "users": 9603473.747579,
+    "wallet": 9988538.0,
+    "exchange": 9988538.0,
+    "custody": 0.0
+   },
+   "KEKIUS": {
+    "users": 114489058.773385,
+    "wallet": 114489210.0,
+    "exchange": 114489210.0,
+    "custody": 0.0
+   },
+   "MAGMA": {
+    "users": 8574888.014759,
+    "wallet": 8794857.0,
+    "exchange": 8794857.0,
+    "custody": 0.0
+   },
+   "WAVES": {
+    "users": 1971898.357307,
+    "wallet": 1973752.0,
+    "exchange": 1973752.0,
+    "custody": 0.0
+   },
+   "PAXG": {
+    "users": 1749.334641,
+    "wallet": 1766.49,
+    "exchange": 1766.49,
+    "custody": 0.0
+   },
+   "IO": {
+    "users": 9496032.491484,
+    "wallet": 9789009.0,
+    "exchange": 9789009.0,
+    "custody": 0.0
+   },
+   "SNX": {
+    "users": 2097847.523415,
+    "wallet": 2108829.0,
+    "exchange": 2108829.0,
+    "custody": 0.0
+   },
+   "RACA": {
+    "users": 61276225945.66402,
+    "wallet": 61291176622.0,
+    "exchange": 61291176622.0,
+    "custody": 0.0
+   },
+   "BLUE": {
+    "users": 48711858.22296,
+    "wallet": 48794647.0,
+    "exchange": 48794647.0,
+    "custody": 0.0
+   },
+   "PIEVERSE": {
+    "users": 15557236.876864,
+    "wallet": 15654150.0,
+    "exchange": 15654150.0,
+    "custody": 0.0
+   },
+   "BOME": {
+    "users": 2654121462.856941,
+    "wallet": 2738311690.0,
+    "exchange": 2738311690.0,
+    "custody": 0.0
+   },
+   "ALLO": {
+    "users": 9237438.652949,
+    "wallet": 9238248.0,
+    "exchange": 9238248.0,
+    "custody": 0.0
+   },
+   "ASTER": {
+    "users": 23236153.441246,
+    "wallet": 23241271.0,
+    "exchange": 23241271.0,
+    "custody": 0.0
+   },
+   "AIDOGE": {
+    "users": 3.709860000068032e+16,
+    "wallet": 3.73e+16,
+    "exchange": 3.73e+16,
+    "custody": 0.0
+   },
+   "TAG": {
+    "users": 4083541678.434458,
+    "wallet": 4129861035.0,
+    "exchange": 4129861035.0,
+    "custody": 0.0
+   },
+   "MSTRX": {
+    "users": 9681.126207,
+    "wallet": 9685.0,
+    "exchange": 9685.0,
+    "custody": 0.0
+   },
+   "哈基米": {
+    "users": 56517772.928222,
+    "wallet": 56564545.0,
+    "exchange": 56564545.0,
+    "custody": 0.0
+   },
+   "VELO": {
+    "users": 502332670.602851,
+    "wallet": 503719728.0,
+    "exchange": 503719728.0,
+    "custody": 0.0
+   },
+   "SPX": {
+    "users": 6258143.151433,
+    "wallet": 6286305.0,
+    "exchange": 6286305.0,
+    "custody": 0.0
+   },
+   "NUMI": {
+    "users": 38724277.466617,
+    "wallet": 39150332.0,
+    "exchange": 39150332.0,
+    "custody": 0.0
+   },
+   "ALIGN": {
+    "users": 109255141.55784,
+    "wallet": 124099501.0,
+    "exchange": 124099501.0,
+    "custody": 0.0
+   },
+   "XEM": {
+    "users": 1296960543.831719,
+    "wallet": 1302100671.0,
+    "exchange": 1302100671.0,
+    "custody": 0.0
+   },
+   "KOMA": {
+    "users": 246096856.712117,
+    "wallet": 282298560.0,
+    "exchange": 282298560.0,
+    "custody": 0.0
+   },
+   "BLESS": {
+    "users": 279775092.146071,
+    "wallet": 286553003.0,
+    "exchange": 286553003.0,
+    "custody": 0.0
+   },
+   "MEGA": {
+    "users": 29565579.242475,
+    "wallet": 29568560.0,
+    "exchange": 29568560.0,
+    "custody": 0.0
+   },
+   "FTT": {
+    "users": 2546641.260687,
+    "wallet": 2554146.0,
+    "exchange": 2554146.0,
+    "custody": 0.0
+   },
+   "PHA": {
+    "users": 28160698.276397,
+    "wallet": 28561518.0,
+    "exchange": 28561518.0,
+    "custody": 0.0
+   },
+   "OP": {
+    "users": 17449136.757364,
+    "wallet": 17460479.0,
+    "exchange": 17460479.0,
+    "custody": 0.0
+   },
+   "SCR": {
+    "users": 20809078.39238,
+    "wallet": 20818164.0,
+    "exchange": 20818164.0,
+    "custody": 0.0
+   },
+   "JTO": {
+    "users": 2018922.994874,
+    "wallet": 2022041.0,
+    "exchange": 2022041.0,
+    "custody": 0.0
+   },
+   "AIXBT": {
+    "users": 23378864.744668,
+    "wallet": 24497733.0,
+    "exchange": 24497733.0,
+    "custody": 0.0
+   },
+   "GRIN": {
+    "users": 46417016.548026,
+    "wallet": 48913802.0,
+    "exchange": 48913802.0,
+    "custody": 0.0
+   },
+   "BERA": {
+    "users": 3074470.504415,
+    "wallet": 3454557.0,
+    "exchange": 3454557.0,
+    "custody": 0.0
+   },
+   "BTR": {
+    "users": 42812839.37457,
+    "wallet": 43659784.0,
+    "exchange": 43659784.0,
+    "custody": 0.0
+   },
+   "AZTEC": {
+    "users": 30104685.683468,
+    "wallet": 31101074.0,
+    "exchange": 31101074.0,
+    "custody": 0.0
+   },
+   "ULTIMA": {
+    "users": 514.606356,
+    "wallet": 519.14,
+    "exchange": 519.14,
+    "custody": 0.0
+   },
+   "DESO": {
+    "users": 329633.17782,
+    "wallet": 332929.33,
+    "exchange": 332929.33,
+    "custody": 0.0
+   },
+   "CLANKER": {
+    "users": 59317.619898,
+    "wallet": 59405.0,
+    "exchange": 59405.0,
+    "custody": 0.0
+   },
+   "AR": {
+    "users": 1419019.492126,
+    "wallet": 1423616.0,
+    "exchange": 1423616.0,
+    "custody": 0.0
+   },
+   "WRX": {
+    "users": 85678618.248796,
+    "wallet": 85756392.0,
+    "exchange": 85756392.0,
+    "custody": 0.0
+   },
+   "SPCXX": {
+    "users": 5529.438341,
+    "wallet": 5615.0,
+    "exchange": 5615.0,
+    "custody": 0.0
+   },
+   "BR": {
+    "users": 64062812.560652,
+    "wallet": 64470271.0,
+    "exchange": 64470271.0,
+    "custody": 0.0
+   },
+   "AIOT": {
+    "users": 30568217.555872,
+    "wallet": 30581701.0,
+    "exchange": 30581701.0,
+    "custody": 0.0
+   },
+   "RBNT": {
+    "users": 372334694.367265,
+    "wallet": 372350791.0,
+    "exchange": 372350791.0,
+    "custody": 0.0
+   },
+   "CP": {
+    "users": 102728169.882967,
+    "wallet": 108697865.0,
+    "exchange": 108697865.0,
+    "custody": 0.0
+   },
+   "ACX": {
+    "users": 11617017.467444,
+    "wallet": 11652744.0,
+    "exchange": 11652744.0,
+    "custody": 0.0
+   },
+   "ESPORTS": {
+    "users": 29014246.610047,
+    "wallet": 29281884.0,
+    "exchange": 29281884.0,
+    "custody": 0.0
+   },
+   "CTC": {
+    "users": 7953026.173326,
+    "wallet": 7986940.0,
+    "exchange": 7986940.0,
+    "custody": 0.0
+   },
+   "GALA": {
+    "users": 520468024.177583,
+    "wallet": 524412097.0,
+    "exchange": 524412097.0,
+    "custody": 0.0
+   },
+   "SLX": {
+    "users": 5753831.135664,
+    "wallet": 7131329.0,
+    "exchange": 7131329.0,
+    "custody": 0.0
+   },
+   "AE": {
+    "users": 66307797.491138,
+    "wallet": 68038950.0,
+    "exchange": 68038950.0,
+    "custody": 0.0
+   },
+   "TIA": {
+    "users": 3784087.74379,
+    "wallet": 3803495.0,
+    "exchange": 3803495.0,
+    "custody": 0.0
+   },
+   "BOX": {
+    "users": 21805316.715432,
+    "wallet": 21827715.0,
+    "exchange": 21827715.0,
+    "custody": 0.0
+   },
+   "ORDI": {
+    "users": 834779.521932,
+    "wallet": 894217.0,
+    "exchange": 894217.0,
+    "custody": 0.0
+   },
+   "JST": {
+    "users": 5928712.351744,
+    "wallet": 6671598.0,
+    "exchange": 6671598.0,
+    "custody": 0.0
+   },
+   "CFX": {
+    "users": 91747188.369645,
+    "wallet": 92891013.0,
+    "exchange": 92891013.0,
+    "custody": 0.0
+   },
+   "DOGE": {
+    "users": 2119089293.158629,
+    "wallet": 2273696842.0,
+    "exchange": 2273696842.0,
+    "custody": 0.0
+   },
+   "WIN": {
+    "users": 10582916038.170515,
+    "wallet": 10845037159.0,
+    "exchange": 10845037159.0,
+    "custody": 0.0
+   },
+   "OPENAI": {
+    "users": 10093.145465,
+    "wallet": 10193.93,
+    "exchange": 10193.93,
+    "custody": 0.0
+   },
+   "VSN": {
+    "users": 9648076.847091,
+    "wallet": 9652522.0,
+    "exchange": 9652522.0,
+    "custody": 0.0
+   },
+   "SOON": {
+    "users": 23495385.281732,
+    "wallet": 25673754.0,
+    "exchange": 25673754.0,
+    "custody": 0.0
+   },
+   "IRON": {
+    "users": 9100629.168025,
+    "wallet": 9852583.0,
+    "exchange": 9852583.0,
+    "custody": 0.0
+   },
+   "FLOW": {
+    "users": 17505512.711817,
+    "wallet": 17689357.0,
+    "exchange": 17689357.0,
+    "custody": 0.0
+   },
+   "DCR": {
+    "users": 42613.219679,
+    "wallet": 43039.13,
+    "exchange": 43039.13,
+    "custody": 0.0
+   },
+   "XRP": {
+    "users": 50570914.754996,
+    "wallet": 58508158.0,
+    "exchange": 58508158.0,
+    "custody": 0.0
+   },
+   "BCH": {
+    "users": 46504.809885,
+    "wallet": 48593.0,
+    "exchange": 48593.0,
+    "custody": 0.0
+   },
+   "WXT": {
+    "users": 449992234.336166,
+    "wallet": 450911687.0,
+    "exchange": 450911687.0,
+    "custody": 0.0
+   },
+   "UP": {
+    "users": 5513843.67477,
+    "wallet": 5530977.0,
+    "exchange": 5530977.0,
+    "custody": 0.0
+   },
+   "BSV": {
+    "users": 529938.857276,
+    "wallet": 537489.0,
+    "exchange": 537489.0,
+    "custody": 0.0
+   },
+   "USDC": {
+    "users": 63558616.763893,
+    "wallet": 85163553.0,
+    "exchange": 85163553.0,
+    "custody": 0.0
+   },
+   "KAVA": {
+    "users": 7909098.164876,
+    "wallet": 8941825.0,
+    "exchange": 8941825.0,
+    "custody": 0.0
+   },
+   "USTC": {
+    "users": 101294531.575818,
+    "wallet": 105011887.0,
+    "exchange": 105011887.0,
+    "custody": 0.0
+   },
+   "VVV": {
+    "users": 370722.752117,
+    "wallet": 374606.0,
+    "exchange": 374606.0,
+    "custody": 0.0
+   },
+   "SSV": {
+    "users": 253393.357115,
+    "wallet": 253395.0,
+    "exchange": 253395.0,
+    "custody": 0.0
+   },
+   "POKT": {
+    "users": 74523968.47794,
+    "wallet": 75289049.0,
+    "exchange": 75289049.0,
+    "custody": 0.0
+   },
+   "B2": {
+    "users": 7979213.704138,
+    "wallet": 8025103.0,
+    "exchange": 8025103.0,
+    "custody": 0.0
+   },
+   "AVNT": {
+    "users": 4608445.795156,
+    "wallet": 4611713.0,
+    "exchange": 4611713.0,
+    "custody": 0.0
+   },
+   "FARTCOIN": {
+    "users": 70772347.715621,
+    "wallet": 70806579.0,
+    "exchange": 70806579.0,
+    "custody": 0.0
+   },
+   "ENS": {
+    "users": 173050.854891,
+    "wallet": 177832.0,
+    "exchange": 177832.0,
+    "custody": 0.0
+   },
+   "SUT": {
+    "users": 5183335.35399,
+    "wallet": 5183355.0,
+    "exchange": 5183355.0,
+    "custody": 0.0
+   },
+   "SQD": {
+    "users": 26433764.038646,
+    "wallet": 26616295.0,
+    "exchange": 26616295.0,
+    "custody": 0.0
+   },
+   "IMX": {
+    "users": 5917229.325752,
+    "wallet": 5955016.0,
+    "exchange": 5955016.0,
+    "custody": 0.0
+   },
+   "MY": {
+    "users": 20114935.339267,
+    "wallet": 20115139.0,
+    "exchange": 20115139.0,
+    "custody": 0.0
+   },
+   "MSTRON": {
+    "users": 11534.655262,
+    "wallet": 11754.0,
+    "exchange": 11754.0,
+    "custody": 0.0
+   },
+   "GOAT": {
+    "users": 33255431.109609,
+    "wallet": 36146415.0,
+    "exchange": 36146415.0,
+    "custody": 0.0
+   },
+   "OPEN": {
+    "users": 4074661.361186,
+    "wallet": 4347925.0,
+    "exchange": 4347925.0,
+    "custody": 0.0
+   },
+   "NEO": {
+    "users": 637007.566488,
+    "wallet": 1053208.0,
+    "exchange": 1053208.0,
+    "custody": 0.0
+   },
+   "ORCA": {
+    "users": 301608.675182,
+    "wallet": 308342.0,
+    "exchange": 308342.0,
+    "custody": 0.0
+   },
+   "DOT": {
+    "users": 8507158.855989,
+    "wallet": 11306727.0,
+    "exchange": 11306727.0,
+    "custody": 0.0
+   },
+   "AIR": {
+    "users": 111303618.978113,
+    "wallet": 112812719.0,
+    "exchange": 112812719.0,
+    "custody": 0.0
+   },
+   "STX": {
+    "users": 5077698.896634,
+    "wallet": 5853694.0,
+    "exchange": 5853694.0,
+    "custody": 0.0
+   },
+   "ENSO": {
+    "users": 420769.664331,
+    "wallet": 455475.0,
+    "exchange": 455475.0,
+    "custody": 0.0
+   },
+   "S": {
+    "users": 31000209.879886,
+    "wallet": 32419789.0,
+    "exchange": 32419789.0,
+    "custody": 0.0
+   },
+   "Q": {
+    "users": 252973370.470447,
+    "wallet": 260818593.0,
+    "exchange": 260818593.0,
+    "custody": 0.0
+   },
+   "NIL": {
+    "users": 10616469.619009,
+    "wallet": 10618699.0,
+    "exchange": 10618699.0,
+    "custody": 0.0
+   },
+   "DATA": {
+    "users": 2386778.145311,
+    "wallet": 2429589.0,
+    "exchange": 2429589.0,
+    "custody": 0.0
+   },
+   "AIC": {
+    "users": 31347458.259011,
+    "wallet": 32901217.0,
+    "exchange": 32901217.0,
+    "custody": 0.0
+   },
+   "USDD": {
+    "users": 3049231.572425,
+    "wallet": 3454962.0,
+    "exchange": 3454962.0,
+    "custody": 0.0
+   },
+   "OORT": {
+    "users": 252354119.863977,
+    "wallet": 252357778.0,
+    "exchange": 252357778.0,
+    "custody": 0.0
+   },
+   "XDC": {
+    "users": 110914048.359145,
+    "wallet": 112185652.0,
+    "exchange": 112185652.0,
+    "custody": 0.0
+   },
+   "ARC": {
+    "users": 208253902.421409,
+    "wallet": 215223233.0,
+    "exchange": 215223233.0,
+    "custody": 0.0
+   },
+   "GOOGLON": {
+    "users": 1981.49587,
+    "wallet": 2031.0,
+    "exchange": 2031.0,
+    "custody": 0.0
+   },
+   "PIPPIN": {
+    "users": 292244645.067836,
+    "wallet": 315314056.0,
+    "exchange": 315314056.0,
+    "custody": 0.0
+   },
+   "CNPY": {
+    "users": 3511367.831267,
+    "wallet": 4407838.0,
+    "exchange": 4407838.0,
+    "custody": 0.0
+   },
+   "MERL": {
+    "users": 28908105.090161,
+    "wallet": 29751617.0,
+    "exchange": 29751617.0,
+    "custody": 0.0
+   },
+   "GOMINING": {
+    "users": 1287971.407612,
+    "wallet": 1347295.0,
+    "exchange": 1347295.0,
+    "custody": 0.0
+   },
+   "TRADOOR": {
+    "users": 3002817.338541,
+    "wallet": 3044439.0,
+    "exchange": 3044439.0,
+    "custody": 0.0
+   },
+   "PTB": {
+    "users": 4843927714.001782,
+    "wallet": 5000585092.0,
+    "exchange": 5000585092.0,
+    "custody": 0.0
+   },
+   "UNI": {
+    "users": 4216090.206858,
+    "wallet": 4222137.0,
+    "exchange": 4222137.0,
+    "custody": 0.0
+   },
+   "COTI": {
+    "users": 47004584.500984,
+    "wallet": 47198861.0,
+    "exchange": 47198861.0,
+    "custody": 0.0
+   },
+   "BICO": {
+    "users": 19556388.189506,
+    "wallet": 27012251.0,
+    "exchange": 27012251.0,
+    "custody": 0.0
+   },
+   "XPR": {
+    "users": 355804851.82817,
+    "wallet": 713769047.0,
+    "exchange": 713769047.0,
+    "custody": 0.0
+   },
+   "MINA": {
+    "users": 9342973.428576,
+    "wallet": 9420498.0,
+    "exchange": 9420498.0,
+    "custody": 0.0
+   },
+   "GOOGLX": {
+    "users": 2515.868331,
+    "wallet": 2540.15,
+    "exchange": 2540.15,
+    "custody": 0.0
+   },
+   "FLIP": {
+    "users": 1349636.704857,
+    "wallet": 1349875.0,
+    "exchange": 1349875.0,
+    "custody": 0.0
+   },
+   "USELESS": {
+    "users": 62575631.347171,
+    "wallet": 62596698.0,
+    "exchange": 62596698.0,
+    "custody": 0.0
+   },
+   "KAS": {
+    "users": 744195634.628243,
+    "wallet": 745099211.0,
+    "exchange": 745099211.0,
+    "custody": 0.0
+   },
+   "SUN": {
+    "users": 30558595.290612,
+    "wallet": 31004903.0,
+    "exchange": 31004903.0,
+    "custody": 0.0
+   },
+   "VET": {
+    "users": 263691877.22449,
+    "wallet": 267930161.0,
+    "exchange": 267930161.0,
+    "custody": 0.0
+   },
+   "SATS": {
+    "users": 118610400692800.17,
+    "wallet": 124000000000000.0,
+    "exchange": 124000000000000.0,
+    "custody": 0.0
+   },
+   "CROSS": {
+    "users": 7038119.900559,
+    "wallet": 7111101.0,
+    "exchange": 7111101.0,
+    "custody": 0.0
+   },
+   "CAKE": {
+    "users": 1661688.230265,
+    "wallet": 1690663.0,
+    "exchange": 1690663.0,
+    "custody": 0.0
+   },
+   "AVAAI": {
+    "users": 297173101.423025,
+    "wallet": 309396263.0,
+    "exchange": 309396263.0,
+    "custody": 0.0
+   },
+   "VIRTUAL": {
+    "users": 6536159.50562,
+    "wallet": 6815627.0,
+    "exchange": 6815627.0,
+    "custody": 0.0
+   },
+   "TOSHI": {
+    "users": 7112841723.131652,
+    "wallet": 7161526612.0,
+    "exchange": 7161526612.0,
+    "custody": 0.0
+   },
+   "MANTA": {
+    "users": 10250503.685282,
+    "wallet": 10315608.0,
+    "exchange": 10315608.0,
+    "custody": 0.0
+   },
+   "BIO": {
+    "users": 37900728.13573,
+    "wallet": 42107327.0,
+    "exchange": 42107327.0,
+    "custody": 0.0
+   },
+   "STABLE": {
+    "users": 43774522.888926,
+    "wallet": 46075362.0,
+    "exchange": 46075362.0,
+    "custody": 0.0
+   },
+   "ETC": {
+    "users": 1599027.055656,
+    "wallet": 1664908.0,
+    "exchange": 1664908.0,
+    "custody": 0.0
+   },
+   "BTW": {
+    "users": 43060503.110669,
+    "wallet": 43211458.0,
+    "exchange": 43211458.0,
+    "custody": 0.0
+   },
+   "BNB": {
+    "users": 47750.159783,
+    "wallet": 73863.0,
+    "exchange": 73863.0,
+    "custody": 0.0
+   },
+   "ARB": {
+    "users": 33785215.438172,
+    "wallet": 34117312.0,
+    "exchange": 34117312.0,
+    "custody": 0.0
+   },
+   "ZEST": {
+    "users": 25190648.795653,
+    "wallet": 25427039.0,
+    "exchange": 25427039.0,
+    "custody": 0.0
+   },
+   "PYTH": {
+    "users": 28095214.468417,
+    "wallet": 28138366.0,
+    "exchange": 28138366.0,
+    "custody": 0.0
+   },
+   "USDG": {
+    "users": 798608.652124,
+    "wallet": 2375960.0,
+    "exchange": 2375960.0,
+    "custody": 0.0
+   },
+   "ANTFUN": {
+    "users": 23255453.204699,
+    "wallet": 23258582.0,
+    "exchange": 23258582.0,
+    "custody": 0.0
+   },
+   "ABT": {
+    "users": 6563914.274887,
+    "wallet": 6696084.0,
+    "exchange": 6696084.0,
+    "custody": 0.0
+   },
+   "CC": {
+    "users": 30673206.764982,
+    "wallet": 33992636.0,
+    "exchange": 33992636.0,
+    "custody": 0.0
+   },
+   "SIREN": {
+    "users": 34340243.812566,
+    "wallet": 34468479.0,
+    "exchange": 34468479.0,
+    "custody": 0.0
+   },
+   "CRO": {
+    "users": 73101353.901431,
+    "wallet": 75547786.0,
+    "exchange": 75547786.0,
+    "custody": 0.0
+   },
+   "STG": {
+    "users": 2926643.652096,
+    "wallet": 2931936.0,
+    "exchange": 2931936.0,
+    "custody": 0.0
+   },
+   "YFII": {
+    "users": 14977.194936,
+    "wallet": 15000.0,
+    "exchange": 15000.0,
+    "custody": 0.0
+   },
+   "YB": {
+    "users": 8195138.520491,
+    "wallet": 8372144.0,
+    "exchange": 8372144.0,
+    "custody": 0.0
+   },
+   "ETHFI": {
+    "users": 4236257.198145,
+    "wallet": 4242039.0,
+    "exchange": 4242039.0,
+    "custody": 0.0
+   },
+   "NEIRO": {
+    "users": 6542673600.96069,
+    "wallet": 6551877061.0,
+    "exchange": 6551877061.0,
+    "custody": 0.0
+   },
+   "MSFTON": {
+    "users": 905.569424,
+    "wallet": 925.0,
+    "exchange": 925.0,
+    "custody": 0.0
+   },
+   "ESP": {
+    "users": 4665152.314604,
+    "wallet": 5001437.0,
+    "exchange": 5001437.0,
+    "custody": 0.0
+   },
+   "CASHCAT": {
+    "users": 15859649.422428,
+    "wallet": 15876191.0,
+    "exchange": 15876191.0,
+    "custody": 0.0
+   },
+   "BTC": {
+    "users": 21166.437574,
+    "wallet": 25466.0,
+    "exchange": 25466.0,
+    "custody": 0.0
+   },
+   "W": {
+    "users": 63780264.397827,
+    "wallet": 64922772.0,
+    "exchange": 64922772.0,
+    "custody": 0.0
+   },
+   "TOKEN": {
+    "users": 421126002.321162,
+    "wallet": 421144351.0,
+    "exchange": 421144351.0,
+    "custody": 0.0
+   },
+   "HT": {
+    "users": 2870341.297025,
+    "wallet": 3176553.0,
+    "exchange": 3176553.0,
+    "custody": 0.0
+   },
+   "RSR": {
+    "users": 337801271.556562,
+    "wallet": 338522184.0,
+    "exchange": 338522184.0,
+    "custody": 0.0
+   },
+   "REZ": {
+    "users": 105935934.938932,
+    "wallet": 106271449.0,
+    "exchange": 106271449.0,
+    "custody": 0.0
+   },
+   "CSPR": {
+    "users": 485505630.69793,
+    "wallet": 487324860.0,
+    "exchange": 487324860.0,
+    "custody": 0.0
+   },
+   "SUPRA": {
+    "users": 2239704406.439714,
+    "wallet": 2260730851.0,
+    "exchange": 2260730851.0,
+    "custody": 0.0
+   },
+   "ADA": {
+    "users": 84063442.515991,
+    "wallet": 84098664.0,
+    "exchange": 84098664.0,
+    "custody": 0.0
+   },
+   "WET": {
+    "users": 9256782.933398,
+    "wallet": 9409443.0,
+    "exchange": 9409443.0,
+    "custody": 0.0
+   },
+   "SUI": {
+    "users": 31174478.957201,
+    "wallet": 31183770.0,
+    "exchange": 31183770.0,
+    "custody": 0.0
+   },
+   "DYDX": {
+    "users": 9045341.338758,
+    "wallet": 9414137.0,
+    "exchange": 9414137.0,
+    "custody": 0.0
+   },
+   "1INCH": {
+    "users": 6541481.921197,
+    "wallet": 6882761.0,
+    "exchange": 6882761.0,
+    "custody": 0.0
+   },
+   "SUSHI": {
+    "users": 4053415.334385,
+    "wallet": 4242625.0,
+    "exchange": 4242625.0,
+    "custody": 0.0
+   },
+   "LINEA": {
+    "users": 301032865.225948,
+    "wallet": 303169896.0,
+    "exchange": 303169896.0,
+    "custody": 0.0
+   },
+   "VXT": {
+    "users": 81391183.163602,
+    "wallet": 82662594.0,
+    "exchange": 82662594.0,
+    "custody": 0.0
+   },
+   "KMNO": {
+    "users": 25551366.14361,
+    "wallet": 25599882.0,
+    "exchange": 25599882.0,
+    "custody": 0.0
+   },
+   "AERO": {
+    "users": 7935119.213544,
+    "wallet": 8077267.0,
+    "exchange": 8077267.0,
+    "custody": 0.0
+   },
+   "STOC": {
+    "users": 3958032.087956,
+    "wallet": 3958378.0,
+    "exchange": 3958378.0,
+    "custody": 0.0
+   },
+   "PINGO": {
+    "users": 31446372.277222,
+    "wallet": 31672081.0,
+    "exchange": 31672081.0,
+    "custody": 0.0
+   },
+   "SUPE": {
+    "users": 208144567.871145,
+    "wallet": 217811181.0,
+    "exchange": 217811181.0,
+    "custody": 0.0
+   },
+   "BB": {
+    "users": 64579167.493267,
+    "wallet": 65512358.0,
+    "exchange": 65512358.0,
+    "custody": 0.0
+   },
+   "INJ": {
+    "users": 798073.015127,
+    "wallet": 801563.0,
+    "exchange": 801563.0,
+    "custody": 0.0
+   },
+   "RLS": {
+    "users": 216832083.070538,
+    "wallet": 218508249.0,
+    "exchange": 218508249.0,
+    "custody": 0.0
+   },
+   "LUNA": {
+    "users": 10064989.340119,
+    "wallet": 10796256.0,
+    "exchange": 10796256.0,
+    "custody": 0.0
+   },
+   "GHO": {
+    "users": 5660338.263478,
+    "wallet": 5957027.0,
+    "exchange": 5957027.0,
+    "custody": 0.0
+   },
+   "DENT": {
+    "users": 9235599345.959457,
+    "wallet": 9235717580.0,
+    "exchange": 9235717580.0,
+    "custody": 0.0
+   },
+   "ZAMA": {
+    "users": 17645425.295019,
+    "wallet": 18273202.0,
+    "exchange": 18273202.0,
+    "custody": 0.0
+   },
+   "WBTC": {
+    "users": 78.588883,
+    "wallet": 83.0,
+    "exchange": 83.0,
+    "custody": 0.0
+   },
+   "ZORA": {
+    "users": 51751364.097672,
+    "wallet": 51822055.0,
+    "exchange": 51822055.0,
+    "custody": 0.0
+   },
+   "BONE": {
+    "users": 16048719.531252,
+    "wallet": 16085525.0,
+    "exchange": 16085525.0,
+    "custody": 0.0
+   },
+   "ATS": {
+    "users": 11497812.22588,
+    "wallet": 11506650.0,
+    "exchange": 11506650.0,
+    "custody": 0.0
+   },
+   "AXS": {
+    "users": 734379.466419,
+    "wallet": 738899.0,
+    "exchange": 738899.0,
+    "custody": 0.0
+   },
+   "AIOZ": {
+    "users": 16125395.21726,
+    "wallet": 16388588.0,
+    "exchange": 16388588.0,
+    "custody": 0.0
+   },
+   "BRETT": {
+    "users": 274076503.740046,
+    "wallet": 281353966.0,
+    "exchange": 281353966.0,
+    "custody": 0.0
+   },
+   "LUNC": {
+    "users": 64253877070.78639,
+    "wallet": 66263792505.0,
+    "exchange": 66263792505.0,
+    "custody": 0.0
+   },
+   "ZIL": {
+    "users": 195095137.184575,
+    "wallet": 207097685.0,
+    "exchange": 207097685.0,
+    "custody": 0.0
+   },
+   "TBC": {
+    "users": 1431256.629309,
+    "wallet": 1431754.0,
+    "exchange": 1431754.0,
+    "custody": 0.0
+   },
+   "PEAQ": {
+    "users": 94600523.36598,
+    "wallet": 94799783.0,
+    "exchange": 94799783.0,
+    "custody": 0.0
+   },
+   "PUMPBTC": {
+    "users": 58484451.333546,
+    "wallet": 60012642.0,
+    "exchange": 60012642.0,
+    "custody": 0.0
+   },
+   "HNT": {
+    "users": 2649433.857462,
+    "wallet": 2667019.0,
+    "exchange": 2667019.0,
+    "custody": 0.0
+   },
+   "GROK": {
+    "users": 845745086.818347,
+    "wallet": 846564579.0,
+    "exchange": 846564579.0,
+    "custody": 0.0
+   },
+   "CHILLGUY": {
+    "users": 75157198.914397,
+    "wallet": 84434074.0,
+    "exchange": 84434074.0,
+    "custody": 0.0
+   },
+   "GO4": {
+    "users": 3513157.748189,
+    "wallet": 3513359.0,
+    "exchange": 3513359.0,
+    "custody": 0.0
+   },
+   "CYS": {
+    "users": 10244626.893717,
+    "wallet": 10976882.0,
+    "exchange": 10976882.0,
+    "custody": 0.0
+   },
+   "ACU": {
+    "users": 24178943.083157,
+    "wallet": 24445187.0,
+    "exchange": 24445187.0,
+    "custody": 0.0
+   },
+   "JASMY": {
+    "users": 594829554.124455,
+    "wallet": 663373193.0,
+    "exchange": 663373193.0,
+    "custody": 0.0
+   },
+   "CRV": {
+    "users": 9394728.553057,
+    "wallet": 9412719.0,
+    "exchange": 9412719.0,
+    "custody": 0.0
+   },
+   "DOOD": {
+    "users": 276874062.262771,
+    "wallet": 279289245.0,
+    "exchange": 279289245.0,
+    "custody": 0.0
+   },
+   "SHX": {
+    "users": 557317174.023168,
+    "wallet": 577288273.0,
+    "exchange": 577288273.0,
+    "custody": 0.0
+   },
+   "MOG": {
+    "users": 9471997438200.96,
+    "wallet": 9717670000000.0,
+    "exchange": 9717670000000.0,
+    "custody": 0.0
+   },
+   "FIL": {
+    "users": 20284119.753111,
+    "wallet": 20654854.0,
+    "exchange": 20654854.0,
+    "custody": 0.0
+   },
+   "SAGA": {
+    "users": 42760943.631183,
+    "wallet": 61682179.0,
+    "exchange": 61682179.0,
+    "custody": 0.0
+   },
+   "LIGHT": {
+    "users": 30210815.45376,
+    "wallet": 32951566.0,
+    "exchange": 32951566.0,
+    "custody": 0.0
+   },
+   "GRAM": {
+    "users": 5320185.570182,
+    "wallet": 6984391.0,
+    "exchange": 6984391.0,
+    "custody": 0.0
+   },
+   "QQQX": {
+    "users": 1197.45252,
+    "wallet": 1221.0,
+    "exchange": 1221.0,
+    "custody": 0.0
+   },
+   "CORE": {
+    "users": 45336968.041047,
+    "wallet": 45686583.0,
+    "exchange": 45686583.0,
+    "custody": 0.0
+   },
+   "MNT": {
+    "users": 6650403.910777,
+    "wallet": 6739223.0,
+    "exchange": 6739223.0,
+    "custody": 0.0
+   },
+   "GRIFFAIN": {
+    "users": 215479816.787008,
+    "wallet": 226413269.0,
+    "exchange": 226413269.0,
+    "custody": 0.0
+   },
+   "MET": {
+    "users": 2177748.951369,
+    "wallet": 2179597.0,
+    "exchange": 2179597.0,
+    "custody": 0.0
+   },
+   "GF": {
+    "users": 390537648.537794,
+    "wallet": 413687218.0,
+    "exchange": 413687218.0,
+    "custody": 0.0
+   },
+   "BEAT": {
+    "users": 93114654.841522,
+    "wallet": 93742038.0,
+    "exchange": 93742038.0,
+    "custody": 0.0
+   },
+   "XYM": {
+    "users": 272175413.469381,
+    "wallet": 272604594.0,
+    "exchange": 272604594.0,
+    "custody": 0.0
+   },
+   "USD1": {
+    "users": 555551088.335807,
+    "wallet": 556459679.0,
+    "exchange": 556459679.0,
+    "custody": 0.0
+   },
+   "TRUST": {
+    "users": 8154334.626812,
+    "wallet": 8212143.0,
+    "exchange": 8212143.0,
+    "custody": 0.0
+   },
+   "LAB": {
+    "users": 115601345.697515,
+    "wallet": 119530627.0,
+    "exchange": 119530627.0,
+    "custody": 0.0
+   },
+   "FLOCK": {
+    "users": 11703402.651111,
+    "wallet": 13449418.0,
+    "exchange": 13449418.0,
+    "custody": 0.0
+   },
+   "CRCLG": {
+    "users": 32036.118581,
+    "wallet": 32356.36,
+    "exchange": 32356.36,
+    "custody": 0.0
+   },
+   "UB": {
+    "users": 114131780.112847,
+    "wallet": 114624606.0,
+    "exchange": 114624606.0,
+    "custody": 0.0
+   },
+   "SUPER": {
+    "users": 5628183.026527,
+    "wallet": 5742164.0,
+    "exchange": 5742164.0,
+    "custody": 0.0
+   },
+   "NFT": {
+    "users": 3408758451651.181,
+    "wallet": 3537300000000.0,
+    "exchange": 3537300000000.0,
+    "custody": 0.0
+   },
+   "IAG": {
+    "users": 20771838.721207,
+    "wallet": 22059824.0,
+    "exchange": 22059824.0,
+    "custody": 0.0
+   },
+   "DKA": {
+    "users": 218954150.282213,
+    "wallet": 220093589.0,
+    "exchange": 220093589.0,
+    "custody": 0.0
+   },
+   "BANK": {
+    "users": 22383864.962763,
+    "wallet": 24923405.0,
+    "exchange": 24923405.0,
+    "custody": 0.0
+   },
+   "AKT": {
+    "users": 8121499.059496,
+    "wallet": 8146246.0,
+    "exchange": 8146246.0,
+    "custody": 0.0
+   },
+   "MCAT": {
+    "users": 1620446.800501,
+    "wallet": 3846794.0,
+    "exchange": 3846794.0,
+    "custody": 0.0
+   },
+   "HBAR": {
+    "users": 49732859.268069,
+    "wallet": 51950807.0,
+    "exchange": 51950807.0,
+    "custody": 0.0
+   },
+   "RAY": {
+    "users": 1893604.42576,
+    "wallet": 1897495.0,
+    "exchange": 1897495.0,
+    "custody": 0.0
+   },
+   "IOTA": {
+    "users": 26150556.693974,
+    "wallet": 28222694.0,
+    "exchange": 28222694.0,
+    "custody": 0.0
+   },
+   "RSC": {
+    "users": 10087285.753688,
+    "wallet": 10087322.0,
+    "exchange": 10087322.0,
+    "custody": 0.0
+   },
+   "EDGEX": {
+    "users": 1488809.384456,
+    "wallet": 1488908.0,
+    "exchange": 1488908.0,
+    "custody": 0.0
+   },
+   "DEEP": {
+    "users": 43183543.561858,
+    "wallet": 43200663.0,
+    "exchange": 43200663.0,
+    "custody": 0.0
+   },
+   "KONET": {
+    "users": 19920506.321409,
+    "wallet": 20227117.0,
+    "exchange": 20227117.0,
+    "custody": 0.0
+   },
+   "GUSD": {
+    "users": 204680702.32307,
+    "wallet": 319859810.0,
+    "exchange": 319859810.0,
+    "custody": 0.0
+   },
+   "BUY": {
+    "users": 73606753.103791,
+    "wallet": 73741509.0,
+    "exchange": 73741509.0,
+    "custody": 0.0
+   },
+   "COINON": {
+    "users": 2479.036917,
+    "wallet": 2562.0,
+    "exchange": 2562.0,
+    "custody": 0.0
+   },
+   "TA": {
+    "users": 61151468.945907,
+    "wallet": 69056826.0,
+    "exchange": 69056826.0,
+    "custody": 0.0
+   },
+   "A47": {
+    "users": 378285446.457251,
+    "wallet": 378920241.0,
+    "exchange": 378920241.0,
+    "custody": 0.0
+   },
+   "SKR": {
+    "users": 50549762.996144,
+    "wallet": 50773879.0,
+    "exchange": 50773879.0,
+    "custody": 0.0
+   },
+   "RAIN": {
+    "users": 36170620.844757,
+    "wallet": 36379309.0,
+    "exchange": 36379309.0,
+    "custody": 0.0
+   },
+   "DBR": {
+    "users": 27793610.557845,
+    "wallet": 27845216.0,
+    "exchange": 27845216.0,
+    "custody": 0.0
+   },
+   "SWARMS": {
+    "users": 341495011.333376,
+    "wallet": 367009605.0,
+    "exchange": 367009605.0,
+    "custody": 0.0
+   },
+   "FET": {
+    "users": 25858985.180717,
+    "wallet": 26774893.0,
+    "exchange": 26774893.0,
+    "custody": 0.0
+   },
+   "CTR": {
+    "users": 106605843.630529,
+    "wallet": 106627286.0,
+    "exchange": 106627286.0,
+    "custody": 0.0
+   },
+   "CHIP": {
+    "users": 25198909.579001,
+    "wallet": 25199154.0,
+    "exchange": 25199154.0,
+    "custody": 0.0
+   },
+   "ATH": {
+    "users": 333839761.325123,
+    "wallet": 334019546.0,
+    "exchange": 334019546.0,
+    "custody": 0.0
+   },
+   "ACP": {
+    "users": 138185568.039441,
+    "wallet": 138185939.0,
+    "exchange": 138185939.0,
+    "custody": 0.0
+   },
+   "SPYX": {
+    "users": 824.745387,
+    "wallet": 832.24,
+    "exchange": 832.24,
+    "custody": 0.0
+   },
+   "QTUM": {
+    "users": 731944.936222,
+    "wallet": 775115.0,
+    "exchange": 775115.0,
+    "custody": 0.0
+   },
+   "LPT": {
+    "users": 291186.749967,
+    "wallet": 314840.0,
+    "exchange": 314840.0,
+    "custody": 0.0
+   },
+   "BELIEVE": {
+    "users": 337468654.253898,
+    "wallet": 337968217.0,
+    "exchange": 337968217.0,
+    "custody": 0.0
+   },
+   "ARIA": {
+    "users": 39349913.968245,
+    "wallet": 40191748.0,
+    "exchange": 40191748.0,
+    "custody": 0.0
+   },
+   "LTC": {
+    "users": 518621.159625,
+    "wallet": 577360.0,
+    "exchange": 577360.0,
+    "custody": 0.0
+   },
+   "XTZ": {
+    "users": 3021893.360808,
+    "wallet": 4806588.0,
+    "exchange": 4806588.0,
+    "custody": 0.0
+   },
+   "GT": {
+    "users": 83479946.091933,
+    "wallet": 109645689.0,
+    "exchange": 109645689.0,
+    "custody": 0.0
+   },
+   "EIGEN": {
+    "users": 4439005.875208,
+    "wallet": 4442807.0,
+    "exchange": 4442807.0,
+    "custody": 0.0
+   },
+   "REKTCOIN": {
+    "users": 4667555078643.174,
+    "wallet": 5418550000000.0,
+    "exchange": 5418550000000.0,
+    "custody": 0.0
+   },
+   "JUP": {
+    "users": 7350279.737899,
+    "wallet": 9381600.0,
+    "exchange": 9381600.0,
+    "custody": 0.0
+   },
+   "LINK": {
+    "users": 1771787.266207,
+    "wallet": 1789512.0,
+    "exchange": 1789512.0,
+    "custody": 0.0
+   },
+   "DRV": {
+    "users": 16184536.288507,
+    "wallet": 16329882.0,
+    "exchange": 16329882.0,
+    "custody": 0.0
+   },
+   "ASTR": {
+    "users": 84367767.183996,
+    "wallet": 128323400.0,
+    "exchange": 128323400.0,
+    "custody": 0.0
+   },
+   "TUT": {
+    "users": 53373069.311712,
+    "wallet": 53402513.0,
+    "exchange": 53402513.0,
+    "custody": 0.0
+   },
+   "INTCG": {
+    "users": 4556.228917,
+    "wallet": 4601.0,
+    "exchange": 4601.0,
+    "custody": 0.0
+   },
+   "TSLAON": {
+    "users": 1476.059995,
+    "wallet": 1531.0,
+    "exchange": 1531.0,
+    "custody": 0.0
+   },
+   "DEXE": {
+    "users": 492739.852488,
+    "wallet": 492855.0,
+    "exchange": 492855.0,
+    "custody": 0.0
+   },
+   "FLUX": {
+    "users": 8678853.762183,
+    "wallet": 8800469.0,
+    "exchange": 8800469.0,
+    "custody": 0.0
+   },
+   "NVDAON": {
+    "users": 2224.54463,
+    "wallet": 2388.0,
+    "exchange": 2388.0,
+    "custody": 0.0
+   },
+   "MORPHO": {
+    "users": 613207.57286,
+    "wallet": 614236.0,
+    "exchange": 614236.0,
+    "custody": 0.0
+   },
+   "DRIFT": {
+    "users": 37990769.560372,
+    "wallet": 38053024.0,
+    "exchange": 38053024.0,
+    "custody": 0.0
+   },
+   "INX": {
+    "users": 310540899.379017,
+    "wallet": 316434317.0,
+    "exchange": 316434317.0,
+    "custody": 0.0
+   },
+   "TRUMP": {
+    "users": 4391823.436283,
+    "wallet": 4412640.0,
+    "exchange": 4412640.0,
+    "custody": 0.0
+   },
+   "SLVON": {
+    "users": 44844.18935,
+    "wallet": 45292.44,
+    "exchange": 45292.44,
+    "custody": 0.0
+   },
+   "ZRO": {
+    "users": 2112191.456365,
+    "wallet": 2113340.0,
+    "exchange": 2113340.0,
+    "custody": 0.0
+   },
+   "QCOMG": {
+    "users": 2920.17002,
+    "wallet": 2949.2,
+    "exchange": 2949.2,
+    "custody": 0.0
+   },
+   "HUMA": {
+    "users": 17973234.332721,
+    "wallet": 21229905.0,
+    "exchange": 21229905.0,
+    "custody": 0.0
+   },
+   "DOG": {
+    "users": 11321582033.475529,
+    "wallet": 11369991155.0,
+    "exchange": 11369991155.0,
+    "custody": 0.0
+   },
+   "M": {
+    "users": 3192519.088364,
+    "wallet": 3193162.0,
+    "exchange": 3193162.0,
+    "custody": 0.0
+   },
+   "RENDER": {
+    "users": 2650496.138805,
+    "wallet": 2737756.0,
+    "exchange": 2737756.0,
+    "custody": 0.0
+   },
+   "BONK": {
+    "users": 618908084110.0176,
+    "wallet": 627528000000.0,
+    "exchange": 627528000000.0,
+    "custody": 0.0
+   },
+   "VATRENI": {
+    "users": 1838808.123691,
+    "wallet": 1839352.0,
+    "exchange": 1839352.0,
+    "custody": 0.0
+   },
+   "ORDER": {
+    "users": 11314221.777185,
+    "wallet": 11479452.0,
+    "exchange": 11479452.0,
+    "custody": 0.0
+   },
+   "ALGO": {
+    "users": 31315975.831948,
+    "wallet": 32400561.0,
+    "exchange": 32400561.0,
+    "custody": 0.0
+   },
+   "AB": {
+    "users": 699439837.816969,
+    "wallet": 700137966.0,
+    "exchange": 700137966.0,
+    "custody": 0.0
+   },
+   "USD": {
+    "users": 759449.54379,
+    "wallet": 43901988.0,
+    "exchange": 43901988.0,
+    "custody": 0.0
+   },
+   "NOT": {
+    "users": 1300786887.762305,
+    "wallet": 1325172269.0,
+    "exchange": 1325172269.0,
+    "custody": 0.0
+   },
+   "ETH": {
+    "users": 350840.61168,
+    "wallet": 433589.0,
+    "exchange": 433589.0,
+    "custody": 0.0
+   },
+   "SAFE": {
+    "users": 5130589.91806,
+    "wallet": 5144856.0,
+    "exchange": 5144856.0,
+    "custody": 0.0
+   },
+   "WLD": {
+    "users": 19110192.592084,
+    "wallet": 19346217.0,
+    "exchange": 19346217.0,
+    "custody": 0.0
+   },
+   "NIGHT": {
+    "users": 155414830.2501,
+    "wallet": 156004868.0,
+    "exchange": 156004868.0,
+    "custody": 0.0
+   },
+   "BABYDOGE": {
+    "users": 1.2892627687157672e+16,
+    "wallet": 1.38e+16,
+    "exchange": 1.38e+16,
+    "custody": 0.0
+   },
+   "PUMP": {
+    "users": 1797265003.884232,
+    "wallet": 1831830221.0,
+    "exchange": 1831830221.0,
+    "custody": 0.0
+   },
+   "GWEI": {
+    "users": 24432370.01101,
+    "wallet": 24479143.0,
+    "exchange": 24479143.0,
+    "custody": 0.0
+   },
+   "JELLYJELLY": {
+    "users": 355689557.65154,
+    "wallet": 361194892.0,
+    "exchange": 361194892.0,
+    "custody": 0.0
+   },
+   "EVER": {
+    "users": 237518378.013758,
+    "wallet": 238275001.0,
+    "exchange": 238275001.0,
+    "custody": 0.0
+   },
+   "SNT": {
+    "users": 65654083.787099,
+    "wallet": 69323488.0,
+    "exchange": 69323488.0,
+    "custody": 0.0
+   },
+   "SOPH": {
+    "users": 81636201.115144,
+    "wallet": 81791929.0,
+    "exchange": 81791929.0,
+    "custody": 0.0
+   },
+   "QNT": {
+    "users": 40191.436415,
+    "wallet": 40196.0,
+    "exchange": 40196.0,
+    "custody": 0.0
+   },
+   "POL": {
+    "users": 29896250.446904,
+    "wallet": 29917298.0,
+    "exchange": 29917298.0,
+    "custody": 0.0
+   },
+   "POPCAT": {
+    "users": 25234309.109927,
+    "wallet": 25928213.0,
+    "exchange": 25928213.0,
+    "custody": 0.0
+   },
+   "XLM": {
+    "users": 32296600.511344,
+    "wallet": 35450676.0,
+    "exchange": 35450676.0,
+    "custody": 0.0
+   },
+   "XPIN": {
+    "users": 6884718873.874125,
+    "wallet": 6886592874.0,
+    "exchange": 6886592874.0,
+    "custody": 0.0
+   },
+   "QUBIC": {
+    "users": 16524318512473.838,
+    "wallet": 16628500000000.0,
+    "exchange": 16628500000000.0,
+    "custody": 0.0
+   },
+   "COW": {
+    "users": 2179111.788822,
+    "wallet": 2184071.0,
+    "exchange": 2184071.0,
+    "custody": 0.0
+   },
+   "SOL": {
+    "users": 992101.668809,
+    "wallet": 1008383.0,
+    "exchange": 1008383.0,
+    "custody": 0.0
+   },
+   "MARSCOIN": {
+    "users": 44303571.802138,
+    "wallet": 44345402.0,
+    "exchange": 44345402.0,
+    "custody": 0.0
+   },
+   "FF": {
+    "users": 154021575.641579,
+    "wallet": 162774468.0,
+    "exchange": 162774468.0,
+    "custody": 0.0
+   },
+   "BTT": {
+    "users": 3313449079076.0713,
+    "wallet": 3321510000000.0,
+    "exchange": 3321510000000.0,
+    "custody": 0.0
+   },
+   "TRAC": {
+    "users": 1507019.874393,
+    "wallet": 1536403.0,
+    "exchange": 1536403.0,
+    "custody": 0.0
+   },
+   "P": {
+    "users": 16567647.557574,
+    "wallet": 16572807.0,
+    "exchange": 16572807.0,
+    "custody": 0.0
+   },
+   "NAORIS": {
+    "users": 91539103.787432,
+    "wallet": 92950868.0,
+    "exchange": 92950868.0,
+    "custody": 0.0
+   },
+   "XCH": {
+    "users": 1063522.200671,
+    "wallet": 1076900.0,
+    "exchange": 1076900.0,
+    "custody": 0.0
+   },
+   "TRX": {
+    "users": 58687774.108273,
+    "wallet": 179500729.0,
+    "exchange": 179500729.0,
+    "custody": 0.0
+   },
+   "SNDKG": {
+    "users": 785.859918,
+    "wallet": 792.0,
+    "exchange": 792.0,
+    "custody": 0.0
+   },
+   "COINX": {
+    "users": 5005.156837,
+    "wallet": 5180.0,
+    "exchange": 5180.0,
+    "custody": 0.0
+   },
+   "B": {
+    "users": 62763584.972676,
+    "wallet": 65005901.0,
+    "exchange": 65005901.0,
+    "custody": 0.0
+   },
+   "COAI": {
+    "users": 7896277.152978,
+    "wallet": 8079333.0,
+    "exchange": 8079333.0,
+    "custody": 0.0
+   },
+   "XAUT": {
+    "users": 6280.27197,
+    "wallet": 6359.0,
+    "exchange": 6359.0,
+    "custody": 0.0
+   },
+   "ON": {
+    "users": 26537576.955961,
+    "wallet": 28220384.0,
+    "exchange": 28220384.0,
+    "custody": 0.0
+   },
+   "KGEN": {
+    "users": 26306803.698979,
+    "wallet": 26852161.0,
+    "exchange": 26852161.0,
+    "custody": 0.0
+   },
+   "SNEK": {
+    "users": 1814435091.174354,
+    "wallet": 1820828688.0,
+    "exchange": 1820828688.0,
+    "custody": 0.0
+   },
+   "FHE": {
+    "users": 82832177.352394,
+    "wallet": 93816382.0,
+    "exchange": 93816382.0,
+    "custody": 0.0
+   },
+   "LDO": {
+    "users": 4957848.146133,
+    "wallet": 5141805.0,
+    "exchange": 5141805.0,
+    "custody": 0.0
+   },
+   "PONKE": {
+    "users": 19930487.461771,
+    "wallet": 19962984.0,
+    "exchange": 19962984.0,
+    "custody": 0.0
+   },
+   "MYX": {
+    "users": 37869627.14488,
+    "wallet": 37904529.0,
+    "exchange": 37904529.0,
+    "custody": 0.0
+   },
+   "QANX": {
+    "users": 96458237.360814,
+    "wallet": 104734351.0,
+    "exchange": 104734351.0,
+    "custody": 0.0
+   },
+   "ORAI": {
+    "users": 1399854.453032,
+    "wallet": 1406222.0,
+    "exchange": 1406222.0,
+    "custody": 0.0
+   },
+   "OKB": {
+    "users": 86804.769835,
+    "wallet": 88044.0,
+    "exchange": 88044.0,
+    "custody": 0.0
+   },
+   "MAVIA": {
+    "users": 24550070.767168,
+    "wallet": 24908279.0,
+    "exchange": 24908279.0,
+    "custody": 0.0
+   },
+   "RLUSD": {
+    "users": 1500905.767612,
+    "wallet": 1517503.0,
+    "exchange": 1517503.0,
+    "custody": 0.0
+   },
+   "VELVET": {
+    "users": 31711444.891068,
+    "wallet": 32151023.0,
+    "exchange": 32151023.0,
+    "custody": 0.0
+   },
+   "TAIKO": {
+    "users": 10053133.402159,
+    "wallet": 10069614.0,
+    "exchange": 10069614.0,
+    "custody": 0.0
+   },
+   "BAS": {
+    "users": 691475355.913893,
+    "wallet": 695039464.0,
+    "exchange": 695039464.0,
+    "custody": 0.0
+   },
+   "SKHYNIXG": {
+    "users": 2494.532195,
+    "wallet": 2518.94,
+    "exchange": 2518.94,
+    "custody": 0.0
+   },
+   "DEP": {
+    "users": 612761617.26402,
+    "wallet": 638005967.0,
+    "exchange": 638005967.0,
+    "custody": 0.0
+   },
+   "DOS": {
+    "users": 5840960.472748,
+    "wallet": 6837976.0,
+    "exchange": 6837976.0,
+    "custody": 0.0
+   },
+   "ELIZAOS": {
+    "users": 2965544031.771315,
+    "wallet": 2966746500.0,
+    "exchange": 2966746500.0,
+    "custody": 0.0
+   },
+   "FLR": {
+    "users": 219183382.154583,
+    "wallet": 222573006.0,
+    "exchange": 222573006.0,
+    "custody": 0.0
+   },
+   "ALT": {
+    "users": 68616763.43865,
+    "wallet": 69102741.0,
+    "exchange": 69102741.0,
+    "custody": 0.0
+   }
+  }
+ },
+ "mexc": {
+  "source": "https://www.mexc.com/api/assetbussiness/asset/merkle/stock_info",
+  "snapshot": "2026-09-09T16:00:00Z",
+  "coins": {
+   "BTC": {
+    "users": 4106.57142939,
+    "wallet": 12202.12719193,
+    "ratio": 2.9713
+   },
+   "ETH": {
+    "users": 53243.97655207,
+    "wallet": 58917.59629816,
+    "ratio": 1.1065
+   },
+   "USDT": {
+    "users": 1526526878.3849247,
+    "wallet": 1818202910.2389755,
+    "ratio": 1.191
+   },
+   "USDC": {
+    "users": 269894125.2545465,
+    "wallet": 299925929.7720275,
+    "ratio": 1.1112
+   }
+  }
+ },
+ "htx": {
+  "source": "GitHub huobiapi/Tool-Node.js-VerifyAddress snapshot/huobi_por.csv(仅储备侧;负债侧需页面)",
+  "snapshot": "2026-09-08T14:57:30Z",
+  "coins": {
+   "BTC": {
+    "users": null,
+    "wallet": 20252.35
+   },
+   "DOGE": {
+    "users": null,
+    "wallet": 422760583.18
+   },
+   "ETH": {
+    "users": null,
+    "wallet": 116757.07
+   },
+   "HTX": {
+    "users": null,
+    "wallet": 232059560281012.0
+   },
+   "SOL": {
+    "users": null,
+    "wallet": 401370.12
+   },
+   "TRX": {
+    "users": null,
+    "wallet": 9384209885.72
+   },
+   "XRP": {
+    "users": null,
+    "wallet": 27381853.73
+   },
+   "USDC": {
+    "users": null,
+    "wallet": 240401886.12
+   },
+   "U": {
+    "users": null,
+    "wallet": 32904965.5
+   },
+   "USDT": {
+    "users": null,
+    "wallet": 588327863.6
+   },
+   "USDS": {
+    "users": null,
+    "wallet": 360949.9
+   },
+   "USDD": {
+    "users": null,
+    "wallet": 131071466.44
+   }
+  }
+ },
+ "binance": {
+  "source": "官方 PoR 页面另存快照(页面有反爬挑战,接口未公开,需人工另存)",
+  "snapshot": "2026-08-01T00:00:00Z",
+  "coins": {
+   "BTC": {
+    "users": 656644.187,
+    "wallet": 658293.119,
+    "exchange": 652719.342,
+    "custody": 5573.777
+   },
+   "ETH": {
+    "users": null,
+    "wallet": 3991221
+   }
+  }
+ },
+ "bybit": {
+  "source": "Bybit 月度 PoR 新闻稿(prnewswire,2026-07-23;页面接口未找到)",
+  "snapshot": "2026-07-23(press)",
+  "coins": {
+   "BTC": {
+    "users": 56438,
+    "wallet": 59064
+   }
+  }
+ },
+ "htx_page": {
+  "source": "HTX 官方 PoR 页面另存快照(负债与储备同页同快照日;GitHub CSV 的储备侧比页面晚约 11 天,故不混用)",
+  "snapshot": "2026-09-01T00:00:00+08:00",
+  "priced_at": "2026-09-01",
+  "prices": {
+   "BTC": 77439.0,
+   "ETH": 2418.57,
+   "TRX": 0.3223,
+   "XRP": 1.3518,
+   "DOGE": 0.08167,
+   "SOL": 100.0,
+   "USDT": 1.0,
+   "USDC": 1.0,
+   "USDS": 1.0,
+   "U": 1.0,
+   "USDD": 1.0,
+   "USDs": 1.0,
+   "HTX": 1.68e-06
+  },
+  "usd": {
+   "users": 6027804399.195341,
+   "wallet": 6369816289.396608,
+   "custody": 1154381512.7729719,
+   "exchange": 5215432257.053635
+  },
+  "coins": {
+   "BTC": {
+    "users": 19498.0,
+    "wallet": 20252.0,
+    "exchange": 18563.0,
+    "custody": 1689.0,
+    "ratio": 104
+   },
+   "ETH": {
+    "users": 114984.0,
+    "wallet": 116757.0,
+    "exchange": 29213.0,
+    "custody": 87543.0,
+    "ratio": 102
+   },
+   "TRX": {
+    "users": 8619916900.0,
+    "wallet": 9384209885.0,
+    "exchange": 9384209885.0,
+    "custody": 0.0,
+    "ratio": 109
+   },
+   "USDs": {
+    "users": 972882754.0,
+    "wallet": 993067131.0,
+    "exchange": 181899225.0,
+    "custody": 811167905.0,
+    "ratio": 102
+   },
+   "HTX": {
+    "users": 226381194270185.0,
+    "wallet": 232059560281011.0,
+    "exchange": 231757796434003.0,
+    "custody": 301763847007.0,
+    "ratio": 103
+   },
+   "XRP": {
+    "users": 26203123.0,
+    "wallet": 27381853.0,
+    "exchange": 27381853.0,
+    "custody": 0.0,
+    "ratio": 104
+   },
+   "DOGE": {
+    "users": 416649509.0,
+    "wallet": 422760583.0,
+    "exchange": 422760583.0,
+    "custody": 0.0,
+    "ratio": 101
+   },
+   "SOL": {
+    "users": 389504.0,
+    "wallet": 401370.0,
+    "exchange": 399536.0,
+    "custody": 1833.0,
+    "ratio": 103
+   }
+  },
+  "usds": {
+   "USDT": {
+    "users": 872301196.0,
+    "exchange": 41457761.0,
+    "custody": 546870102.0,
+    "wallet": 588327863.0
+   },
+   "USDC": {
+    "users": 34130979.0,
+    "exchange": 972000.0,
+    "custody": 239429886.0,
+    "wallet": 240401886.0
+   },
+   "USDS": {
+    "users": 538373.0,
+    "exchange": 360949.0,
+    "custody": 0.0,
+    "wallet": 360949.0
+   },
+   "U": {
+    "users": 2606355.0,
+    "exchange": 14984999.0,
+    "custody": 17919966.0,
+    "wallet": 32904965.0
+   },
+   "USDD": {
+    "users": 63305850.0,
+    "exchange": 124123515.0,
+    "custody": 6947950.0,
+    "wallet": 131071465.0
+   }
+  }
+ }
+}

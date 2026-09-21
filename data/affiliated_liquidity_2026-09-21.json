@@ -1,0 +1,401 @@
+{
+ "_meta": {
+  "read_at": "2026-09-21T00:02:57Z",
+  "script": "tools/affiliated_liquidity.py",
+  "note": "主流所 = 各所公开行情接口的现货对:24h 成交额、近 30 个完整日的日均成交额(日 K 线)、±2% 盘口深度(一手;未上市的所记 error 跳过);全市场 = CoinGecko total_volume 与 market_chart 30 日均值(⚠ 第三方,含所有上市场所,不逐所核)"
+ },
+ "BNB": {
+  "venues": [
+   {
+    "venue": "Binance",
+    "pair": "BNBUSDT",
+    "vol_24h_usd": 91727011.58303,
+    "vol_30d_avg_usd": 110455437.01631667,
+    "depth2_usd": 8702398.38085,
+    "mid": 774.865
+   },
+   {
+    "venue": "Bybit",
+    "pair": "BNBUSDT",
+    "vol_24h_usd": 5428205.2691895,
+    "vol_30d_avg_usd": 7000663.179566733,
+    "depth2_usd": 781711.63852,
+    "mid": 774.8499999999999
+   },
+   {
+    "venue": "KuCoin",
+    "pair": "BNB-USDT",
+    "vol_24h_usd": 38113487.593413554,
+    "vol_30d_avg_usd": 7402046.524519675,
+    "depth2_usd": 270311.31689280004,
+    "mid": 774.73
+   },
+   {
+    "venue": "Gate",
+    "pair": "BNB_USDT",
+    "vol_24h_usd": 13119636.0027,
+    "vol_30d_avg_usd": 15079756.129492285,
+    "depth2_usd": 2133528.3279,
+    "mid": 774.3499999999999
+   },
+   {
+    "venue": "MEXC",
+    "pair": "BNBUSDT",
+    "vol_24h_usd": 18444498.63,
+    "vol_30d_avg_usd": 22283305.006333333,
+    "depth2_usd": 2348947.6310980003,
+    "mid": 775.185
+   },
+   {
+    "venue": "Bitget",
+    "pair": "BNBUSDT",
+    "vol_24h_usd": 1818535.1189,
+    "vol_30d_avg_usd": 2196506.4592326,
+    "depth2_usd": 3383615.329695,
+    "mid": 775.085
+   },
+   {
+    "venue": "HTX",
+    "pair": "bnbusdt",
+    "vol_24h_usd": 1757611.8002333802,
+    "vol_30d_avg_usd": 3252430.639424208,
+    "depth2_usd": 484125.74066256086,
+    "mid": 775.65
+   },
+   {
+    "venue": "Kraken",
+    "pair": "BNBUSD",
+    "vol_24h_usd": 1384300.878586,
+    "vol_30d_avg_usd": 1999921.2205296967,
+    "depth2_usd": 1236991.46245,
+    "mid": 775.16
+   }
+  ],
+  "home": "Binance",
+  "venues_listed": 8,
+  "venues_vol_sum": 171793286.87605244,
+  "venues_vol30_sum": 169670066.1754152,
+  "venues_depth2_sum": 19341629.82806836,
+  "market_vol_24h_usd": 1011787268,
+  "market_vol_30d_avg_usd": 1079520955.1366694,
+  "market_cap_usd": 102829538216,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ },
+ "LEO": {
+  "venues": [
+   {
+    "venue": "Bitfinex",
+    "pair": "tLEOUSD",
+    "vol_24h_usd": 43316.802872918335,
+    "vol_30d_avg_usd": 125726.82459109851,
+    "depth2_usd": 66735.0196320651,
+    "mid": 8.9155
+   },
+   {
+    "venue": "Gate",
+    "pair": "LEO_USDT",
+    "vol_24h_usd": 663.68939,
+    "vol_30d_avg_usd": 13129.111170333334,
+    "depth2_usd": 1008.14429,
+    "mid": 8.9285
+   },
+   {
+    "venue": "KuCoin",
+    "pair": "LEO-USDT",
+    "error": "'NoneType' object is not subscriptable"
+   },
+   {
+    "venue": "MEXC",
+    "pair": "LEOUSDT",
+    "error": "HTTP Error 400: "
+   },
+   {
+    "venue": "Bitget",
+    "pair": "LEOUSDT",
+    "error": "HTTP Error 400: "
+   }
+  ],
+  "home": "Bitfinex",
+  "venues_listed": 2,
+  "venues_vol_sum": 43980.492262918335,
+  "venues_vol30_sum": 138855.93576143184,
+  "venues_depth2_sum": 67743.1639220651,
+  "market_vol_24h_usd": 137507,
+  "market_vol_30d_avg_usd": 206789.04502959532,
+  "market_cap_usd": 8211051360,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ },
+ "GT": {
+  "venues": [
+   {
+    "venue": "Gate",
+    "pair": "GT_USDT",
+    "vol_24h_usd": 875429.3841127858,
+    "vol_30d_avg_usd": 932263.2349529148,
+    "depth2_usd": 127206.1691,
+    "mid": 10.445
+   },
+   {
+    "venue": "MEXC",
+    "pair": "GTUSDT",
+    "error": "HTTP Error 400: "
+   },
+   {
+    "venue": "KuCoin",
+    "pair": "GT-USDT",
+    "error": "'NoneType' object is not subscriptable"
+   },
+   {
+    "venue": "Bitget",
+    "pair": "GTUSDT",
+    "error": "HTTP Error 400: "
+   }
+  ],
+  "home": "Gate",
+  "venues_listed": 1,
+  "venues_vol_sum": 875429.3841127858,
+  "venues_vol30_sum": 932263.2349529148,
+  "venues_depth2_sum": 127206.1691,
+  "market_vol_24h_usd": 1652131,
+  "market_vol_30d_avg_usd": 2590835.312316082,
+  "market_cap_usd": 1112694943,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ },
+ "KCS": {
+  "venues": [
+   {
+    "venue": "KuCoin",
+    "pair": "KCS-USDT",
+    "vol_24h_usd": 35063854.48668735,
+    "vol_30d_avg_usd": 6564488.679161509,
+    "depth2_usd": 72822.23270729999,
+    "mid": 7.2135
+   },
+   {
+    "venue": "Gate",
+    "pair": "KCS_USDT",
+    "error": "HTTP Error 400: "
+   },
+   {
+    "venue": "MEXC",
+    "pair": "KCSUSDT",
+    "vol_24h_usd": 58729.2833,
+    "vol_30d_avg_usd": 55481.43117333333,
+    "depth2_usd": 10890.699637000002,
+    "mid": 7.2221
+   },
+   {
+    "venue": "Bitget",
+    "pair": "KCSUSDT",
+    "error": "HTTP Error 400: "
+   }
+  ],
+  "home": "KuCoin",
+  "venues_listed": 2,
+  "venues_vol_sum": 35122583.769987345,
+  "venues_vol30_sum": 6619970.110334842,
+  "venues_depth2_sum": 83712.93234429999,
+  "market_vol_24h_usd": 38138156,
+  "market_vol_30d_avg_usd": 15525163.409941006,
+  "market_cap_usd": 987677734,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ },
+ "BGB": {
+  "venues": [
+   {
+    "venue": "Bitget",
+    "pair": "BGBUSDT",
+    "vol_24h_usd": 10245719.9148,
+    "vol_30d_avg_usd": 10343998.589121602,
+    "depth2_usd": 422525.46664288,
+    "mid": 2.01505
+   },
+   {
+    "venue": "Gate",
+    "pair": "BGB_USDT",
+    "error": "HTTP Error 400: "
+   },
+   {
+    "venue": "MEXC",
+    "pair": "BGBUSDT",
+    "vol_24h_usd": 81999.96338,
+    "vol_30d_avg_usd": 90418.487331,
+    "depth2_usd": 21708.9483777,
+    "mid": 2.01505
+   },
+   {
+    "venue": "KuCoin",
+    "pair": "BGB-USDT",
+    "error": "'NoneType' object is not subscriptable"
+   },
+   {
+    "venue": "HTX",
+    "pair": "bgbusdt",
+    "error": "'tick'"
+   }
+  ],
+  "home": "Bitget",
+  "venues_listed": 2,
+  "venues_vol_sum": 10327719.878179999,
+  "venues_vol30_sum": 10434417.076452602,
+  "venues_depth2_sum": 444234.41502058,
+  "market_vol_24h_usd": 10970473,
+  "market_vol_30d_avg_usd": 11387374.385117479,
+  "market_cap_usd": 1407417918,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ },
+ "TRX": {
+  "venues": [
+   {
+    "venue": "HTX",
+    "pair": "trxusdt",
+    "vol_24h_usd": 16259923.113019548,
+    "vol_30d_avg_usd": 12792234.56794809,
+    "depth2_usd": 681133.1710981453,
+    "mid": 0.34298649999999997
+   },
+   {
+    "venue": "Binance",
+    "pair": "TRXUSDT",
+    "vol_24h_usd": 34558739.8348,
+    "vol_30d_avg_usd": 31384046.173912667,
+    "depth2_usd": 2833925.03582,
+    "mid": 0.34295
+   },
+   {
+    "venue": "OKX",
+    "pair": "TRX-USDT",
+    "vol_24h_usd": 5566597.190815517,
+    "vol_30d_avg_usd": 6874443.325692711,
+    "depth2_usd": 797857.8900025742,
+    "mid": 0.34292500000000004
+   },
+   {
+    "venue": "KuCoin",
+    "pair": "TRX-USDT",
+    "vol_24h_usd": 4885108.261716,
+    "vol_30d_avg_usd": 2387239.5465660165,
+    "depth2_usd": 380114.946891,
+    "mid": 0.34295
+   },
+   {
+    "venue": "Bybit",
+    "pair": "TRXUSDT",
+    "vol_24h_usd": 2370132.7151607,
+    "vol_30d_avg_usd": 2989631.3096628934,
+    "depth2_usd": 722194.449426,
+    "mid": 0.34285
+   },
+   {
+    "venue": "MEXC",
+    "pair": "TRXUSDT",
+    "vol_24h_usd": 6976407.4344,
+    "vol_30d_avg_usd": 6389919.234873334,
+    "depth2_usd": 5233106.088022999,
+    "mid": 0.34285
+   },
+   {
+    "venue": "Gate",
+    "pair": "TRX_USDT",
+    "vol_24h_usd": 3530231.61065,
+    "vol_30d_avg_usd": 3836706.6152678183,
+    "depth2_usd": 1829092.97037,
+    "mid": 0.34285
+   },
+   {
+    "venue": "Kraken",
+    "pair": "TRXUSD",
+    "vol_24h_usd": 1423251.7620072064,
+    "vol_30d_avg_usd": 1251109.284041182,
+    "depth2_usd": 1410852.88597625,
+    "mid": 0.34279950000000003
+   },
+   {
+    "venue": "Bitget",
+    "pair": "TRXUSDT",
+    "vol_24h_usd": 1630210.3737,
+    "vol_30d_avg_usd": 1880385.9151924516,
+    "depth2_usd": 1782791.918336928,
+    "mid": 0.34289499999999995
+   },
+   {
+    "venue": "Bitfinex",
+    "pair": "tTRXUSD",
+    "vol_24h_usd": 242662.1036008835,
+    "vol_30d_avg_usd": 141448.42633171397,
+    "depth2_usd": 654940.4461376788,
+    "mid": 0.34299
+   }
+  ],
+  "home": "HTX",
+  "venues_listed": 10,
+  "venues_vol_sum": 77443264.39986986,
+  "venues_vol30_sum": 69927164.39948888,
+  "venues_depth2_sum": 16326009.802081576,
+  "market_vol_24h_usd": 442898844,
+  "market_vol_30d_avg_usd": 416907150.92954177,
+  "market_cap_usd": 32526220574,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ },
+ "HTX": {
+  "venues": [
+   {
+    "venue": "HTX",
+    "pair": "htxusdt",
+    "vol_24h_usd": 4389088.655995708,
+    "vol_30d_avg_usd": 29712667.546417907,
+    "depth2_usd": 314536.4058352565,
+    "mid": 1.7155e-06
+   },
+   {
+    "venue": "Bybit",
+    "pair": "HTXUSDT",
+    "vol_24h_usd": 919.5408169828,
+    "vol_30d_avg_usd": 14061.668405799672,
+    "depth2_usd": 18932.6327930491,
+    "mid": 1.7255e-06
+   },
+   {
+    "venue": "MEXC",
+    "pair": "HTXUSDT",
+    "vol_24h_usd": 55795.037764176,
+    "vol_30d_avg_usd": 56045.1686507967,
+    "depth2_usd": 13970.031640627,
+    "mid": 1.7204999999999999e-06
+   },
+   {
+    "venue": "Gate",
+    "pair": "HTX_USDT",
+    "vol_24h_usd": 9522.1821644296,
+    "vol_30d_avg_usd": 5576.877707476,
+    "depth2_usd": 20726.629273895902,
+    "mid": 1.7127e-06
+   },
+   {
+    "venue": "Bitget",
+    "pair": "HTXUSDT",
+    "vol_24h_usd": 7780.82,
+    "vol_30d_avg_usd": 2491.000513847784,
+    "depth2_usd": 10348.452851840211,
+    "mid": 1.708e-06
+   },
+   {
+    "venue": "KuCoin",
+    "pair": "HTX-USDT",
+    "vol_24h_usd": 4433.644366465,
+    "vol_30d_avg_usd": 2591.2592709934,
+    "depth2_usd": 14187.4529227389,
+    "mid": 1.709e-06
+   }
+  ],
+  "home": "HTX",
+  "venues_listed": 6,
+  "venues_vol_sum": 4467539.8811077615,
+  "venues_vol30_sum": 29793433.52096682,
+  "venues_depth2_sum": 392701.60531740764,
+  "market_vol_24h_usd": 7429755,
+  "market_vol_30d_avg_usd": 33252848.338241633,
+  "market_cap_usd": 1541628057,
+  "coingecko_updated": "2026-09-21T00:00:00.000Z"
+ }
+}
