@@ -1,19 +1,29 @@
 {
  "binance": {
   "source": "官方 PoR 页面另存快照(页面有反爬挑战,接口未公开,需人工另存)",
-  "snapshot": "2026-08-01T00:00:00Z",
+  "snapshot": "2026-09-01T00:00:00Z",
   "coins": {
    "BTC": {
-    "users": 656644.187,
-    "wallet": 658293.119,
-    "exchange": 652719.342,
-    "custody": 5573.777
+    "users": 682355.564,
+    "wallet": 683448.518,
+    "exchange": 673676.807,
+    "custody": 9771.711
    },
    "ETH": {
-    "users": null,
-    "wallet": 3991221
+    "users": 3982738.635,
+    "wallet": 3982772.99
    }
-  }
+  },
+  "prev_snapshot": {
+   "snapshot": "2026-08-01T00:00:00Z",
+   "BTC": {
+    "users": 682355.564,
+    "wallet": 683448.518,
+    "exchange": 673676.807,
+    "custody": 9771.711
+   }
+  },
+  "note_20260924": "09-01 期来自官方 PoR 页面人工另存;同批下载的地址 xlsx 只有表头无数据行,地址清单未更新"
  },
  "bybit": {
   "source": "Bybit 月度 PoR 新闻稿(prnewswire,2026-07-23;页面接口未找到)",
