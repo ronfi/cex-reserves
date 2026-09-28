@@ -45,10 +45,13 @@ def por_cell(ex, coin, scale=1, fmt='{:,.0f}'):
 POR_BTC = {ex: por(ex, 'BTC') for ex in ORDER if por(ex, 'BTC')}
 REASON_TRX = {'zh': {'gate': 'DefiLlama-Adapters 清单 11 址不是页面全部钱包(Gate 未公布 TRX 地址)'}, 'en': {'gate': 'the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)'}}[LANG]
 REASON = {  # 直读 ÷ 自报钱包 偏离 >5% 时的原因(两种语言);没有原因的不写
- 'zh': {'gate': 'DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址)', 'bitget': '适配器清单 2026-09-21 由 19 址同步为 21 址(补 3PSEjhk…/33FyMfJ… 共 5,000 枚)后偏离由 -16.2% 收敛至 -2.6%;残差为页面钱包含 BSC/Lightning 等链', 'htx': '自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-14 链上 10,334 枚,扣除后约 8,229,与本表直读 8,203 差 −0.3%', 'bybit': '新闻稿快照 07-23 vs 直读 09-14'},
- 'en': {'gate': 'the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)', 'bitget': 'the adapter list was synced from 19 to 21 addresses on 2026-09-21 (adding 3PSEjhk… / 33FyMfJ…, 5,000 BTC), narrowing the gap from -16.2% to -2.6%; the residual is page wallets on BSC/Lightning and other chains', 'htx': 'reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,334 on chain 09-14, leaving ~8,229 against the 8,203 read here, −0.3%', 'bybit': 'press-release snapshot 07-23 vs direct read 09-14'},
+ 'zh': {'gate': 'DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址)', 'bitget': '适配器清单 2026-09-21 由 19 址同步为 21 址(补 3PSEjhk…/33FyMfJ… 共 5,000 枚)后偏离由 -16.2% 收敛至 -2.6%;残差为页面钱包含 BSC/Lightning 等链', 'htx': '自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-14 链上 10,334 枚,扣除后约 8,229,与本表直读 8,203 差 −0.3%', 'bybit': '新闻稿快照 07-23 vs 直读 09-14', 'binance-cex': '快照 09-01 vs 直读 09-28,相隔 27 天;自报钱包含第三方托管 9,772 枚;本表 63 址较上周同清单净减约 1.2 万枚(§0)'},
+ 'en': {'gate': 'the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)', 'bitget': 'the adapter list was synced from 19 to 21 addresses on 2026-09-21 (adding 3PSEjhk… / 33FyMfJ…, 5,000 BTC), narrowing the gap from -16.2% to -2.6%; the residual is page wallets on BSC/Lightning and other chains', 'htx': 'reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,334 on chain 09-14, leaving ~8,229 against the 8,203 read here, −0.3%', 'bybit': 'press-release snapshot 07-23 vs direct read 09-14', 'binance-cex': 'snapshot Sep 1 vs direct read Sep 28, 27 days apart; reported wallets include 9,772 BTC with third-party custodians; on a like-for-like list the direct read fell about 12k BTC this week (§0)'},
 }[LANG]
-btcpx = r['binance-cex']['llama']['Bitcoin'] / r['binance-cex']['btc']['btc']  # 用币安行反推聚合器计价
+# 聚合器计价 = 各所「聚合器美元 ÷ 直读枚数」的中位数。2026-09-28 前用币安单行反推:币安官方清单增址而本地未同步时,
+# 反推价偏高 1.7%,其余各所整体显示 +1.7% 假偏差;取中位数后单所清单差异不再传染全表
+import statistics
+btcpx = statistics.median(r[e]['llama']['Bitcoin'] / r[e]['btc']['btc'] for e in r if e != '_meta' and r[e].get('btc', {}).get('btc') and r[e].get('llama', {}).get('Bitcoin'))
 out = []
 out.append(S['h31'])
 out.append(S['t31'])
