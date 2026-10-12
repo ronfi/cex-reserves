@@ -3,9 +3,9 @@
 <meta name="description" content="头部加密交易所储备的链上核查:公布地址的 BTC/ETH/Tron 直读、官方 PoR 页面对照、聚合器口径规则;各所异常按同一读法标出并附核验方法。全部数字可用仓库脚本复现。">
 <meta name="robots" content="index,follow,max-image-preview:large"><meta name="keywords" content="交易所储备核查, 储备证明, Proof of Reserves, PoR, 链上直读, 交易所储备, Binance, OKX, HTX, Bitfinex, DefiLlama, 加密货币交易所, 储备率">
 <link rel="canonical" href="https://ronfi.github.io/cex-reserves/"><link rel="alternate" hreflang="zh-CN" href="https://ronfi.github.io/cex-reserves/"><link rel="alternate" hreflang="en" href="https://ronfi.github.io/cex-reserves/en/"><link rel="alternate" hreflang="x-default" href="https://ronfi.github.io/cex-reserves/"><link rel="alternate" type="application/rss+xml" title="CEX Reserves versions" href="https://ronfi.github.io/cex-reserves/feed.xml">
-<meta property="og:type" content="article"><meta property="og:site_name" content="CEX Reserves"><meta property="og:locale" content="zh_CN"><meta property="og:title" content="头部交易所储备核查 · CEX Reserves"><meta property="og:description" content="读链,不读公告。前 20 名交易所的链上储备核查,每个数字可复现。"><meta property="og:url" content="https://ronfi.github.io/cex-reserves/"><meta property="og:image" content="https://ronfi.github.io/cex-reserves/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:modified_time" content="2026-10-05">
+<meta property="og:type" content="article"><meta property="og:site_name" content="CEX Reserves"><meta property="og:locale" content="zh_CN"><meta property="og:title" content="头部交易所储备核查 · CEX Reserves"><meta property="og:description" content="读链,不读公告。前 20 名交易所的链上储备核查,每个数字可复现。"><meta property="og:url" content="https://ronfi.github.io/cex-reserves/"><meta property="og:image" content="https://ronfi.github.io/cex-reserves/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:modified_time" content="2026-10-12">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="头部交易所储备核查 · CEX Reserves"><meta name="twitter:description" content="读链,不读公告。前 20 名交易所的链上储备核查,每个数字可复现。"><meta name="twitter:image" content="https://ronfi.github.io/cex-reserves/og.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "name": "CEX Reserves", "url": "https://ronfi.github.io/cex-reserves/", "inLanguage": ["zh-CN", "en"]}, {"@type": "Dataset", "name": "头部交易所储备核查 · CEX Reserves", "description": "头部加密交易所储备的链上核查:公布地址的 BTC/ETH/Tron 直读、官方 PoR 页面对照、聚合器口径规则;各所异常按同一读法标出并附核验方法。全部数字可用仓库脚本复现。", "url": "https://ronfi.github.io/cex-reserves/", "inLanguage": "zh-CN", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "isAccessibleForFree": true, "dateModified": "2026-10-05", "keywords": ["交易所储备核查", "储备证明", "Proof of Reserves", "PoR", "链上直读", "交易所储备", "Binance", "OKX", "HTX", "Bitfinex", "DefiLlama", "加密货币交易所", "储备率"], "creator": {"@type": "Organization", "name": "CEX Reserves", "url": "https://github.com/ronfi/cex-reserves"}, "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://github.com/ronfi/cex-reserves/tree/main/data"}], "sameAs": "https://github.com/ronfi/cex-reserves"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "name": "CEX Reserves", "url": "https://ronfi.github.io/cex-reserves/", "inLanguage": ["zh-CN", "en"]}, {"@type": "Dataset", "name": "头部交易所储备核查 · CEX Reserves", "description": "头部加密交易所储备的链上核查:公布地址的 BTC/ETH/Tron 直读、官方 PoR 页面对照、聚合器口径规则;各所异常按同一读法标出并附核验方法。全部数字可用仓库脚本复现。", "url": "https://ronfi.github.io/cex-reserves/", "inLanguage": "zh-CN", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "isAccessibleForFree": true, "dateModified": "2026-10-12", "keywords": ["交易所储备核查", "储备证明", "Proof of Reserves", "PoR", "链上直读", "交易所储备", "Binance", "OKX", "HTX", "Bitfinex", "DefiLlama", "加密货币交易所", "储备率"], "creator": {"@type": "Organization", "name": "CEX Reserves", "url": "https://github.com/ronfi/cex-reserves"}, "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://github.com/ronfi/cex-reserves/tree/main/data"}], "sameAs": "https://github.com/ronfi/cex-reserves"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&family=Noto+Sans+SC:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -62,13 +62,13 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 .foot-in{max-width:1180px;margin:0 auto;padding:18px 24px;color:var(--ink2);font-size:12.5px;display:flex;flex-wrap:wrap;gap:8px 22px;line-height:1.7}
 @media (max-width:900px){.foot-in{padding:16px 20px}.wrap{grid-template-columns:1fr;gap:18px}nav.toc{position:static}nav.toc ol{display:flex;flex-wrap:wrap;gap:4px 14px;border:0}nav.toc li a{padding:2px 0;border:0}.legend{display:none}}
 </style></head><body>
-<header class="mast"><div class="mast-in"><h1>头部交易所储备核查 · 2026-10</h1><nav class="lang" aria-label="language"><span class="on" lang="zh-CN">中文</span><a href="en/" hreflang="en" lang="en">English</a></nav><div class="meta"><span>数据截至 2026-10-05 00:22 UTC</span><span>每周一 00:00 UTC(北京时间 08:00)更新</span><span>复现 <code>python3 tools/cex_reserves_verify.py --chain all</code></span><span><a href="https://github.com/ronfi/cex-reserves">源码与数据</a></span></div></div></header>
+<header class="mast"><div class="mast-in"><h1>头部交易所储备核查 · 2026-10</h1><nav class="lang" aria-label="language"><span class="on" lang="zh-CN">中文</span><a href="en/" hreflang="en" lang="en">English</a></nav><div class="meta"><span>数据截至 2026-10-12 00:24 UTC</span><span>每周一 00:00 UTC(北京时间 08:00)更新</span><span>复现 <code>python3 tools/cex_reserves_verify.py --chain all</code></span><span><a href="https://github.com/ronfi/cex-reserves">源码与数据</a></span></div></div></header>
 <div class="wrap">
 <nav class="toc" aria-label="目录"><div class="lbl">目录</div><ol><li><a href="#0-摘要">0. 摘要</a></li><li><a href="#1-方法-三层数据-只信最底层">1. 方法:三层数据,只信最底层</a></li><li><a href="#2-全景-链上储备前-20-名-defillama-公开地址口径-读取于-2026-09-14-01-08-utc">2. 全景:链上储备前 20 名(DefiLlama 公开地址口径,读取于 2026-09-14 01:08 UTC)</a></li><li><a href="#3-公布地址链上直读对账-本报告主判据">3. 公布地址链上直读对账(本报告主判据)</a></li><li><a href="#4-关联币占储备的比重-ftx-的三项结构性前提与各所对照">4. 关联币占储备的比重:FTX 的三项结构性前提与各所对照</a></li><li><a href="#5-官方-por-横向-各所页面-快照日各异-见-所-列-第三方托管占储备-10-仅自有钱包-负债-100-标红-与-10-触发规则一致">5. 官方 PoR 横向(各所页面,快照日各异,见"所"列;第三方托管占储备 &gt;10%、仅自有钱包 ÷ 负债 &lt;100% 标红,与 §10 触发规则一致)</a></li><li><a href="#6-与自报口径的差异-按所">6. 与自报口径的差异(按所)</a></li><li><a href="#7-poloniex-与-btc-trc20-btctron-htx-储备中与-poloniex-关联的部分">7. Poloniex 与 BTC-TRC20(BTCTRON):HTX 储备中与 Poloniex 关联的部分</a></li><li><a href="#8-关联币可变现性-储备中的持仓-30-日均日成交-2026-09-14-实测-关联币占储备-30-质押占比-50-标红-与-2-10-规则一致">8. 关联币可变现性:储备中的持仓 ÷ 30 日均日成交(2026-09-14 实测;关联币占储备 &gt;30%、质押占比 &gt;50% 标红,与 §2/§10 规则一致)</a></li><li><a href="#9-复现">9. 复现</a></li><li><a href="#10-监控指标-同一组指标-逐所读">10. 监控指标(同一组指标,逐所读)</a></li></ol>
 <div class="legend"><div><span class="ok">绿</span>与聚合器对上(规则见各表标题)</div><div><mark class="r">红</mark>超过各表标题声明的阈值</div><div><mark class="n">黄 *</mark>口径差,表下有注</div></div></nav>
 <main>
 <blockquote>
-<p>各表标题另有各自的读取时间。全部数字可用本仓库 <code>tools/cex_reserves_verify.py</code> 重新读取;输出快照在 <code>data/cex_reserves_2026-10-05.json</code>。
+<p>各表标题另有各自的读取时间。全部数字可用本仓库 <code>tools/cex_reserves_verify.py</code> 重新读取;输出快照在 <code>data/cex_reserves_2026-10-12.json</code>。
 口径纪律:<strong>链上直读 &gt; 官方 PoR 页面 &gt; 公开聚合器 &gt; 媒体</strong>。前三类进表;媒体只作线索,标 ⚠,不进表。
 本页不对任何交易所的偿付能力作判断,只呈现可核验的事实,以及各来源之间的差异。<strong>非投资建议。</strong></p>
 </blockquote>
@@ -77,8 +77,8 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <li><strong>关联币占储备的分布:20 家里 18 家低于 20%,只有两家超过三成 —— 最高 78%,其次 32%。</strong> 8 家完全没有关联币;<strong>有关联币的 12 家,中位数 13%</strong>(⚠ 口径:若把 8 家零值一并计入,20 家的中位数是 2.5% —— 两个中位数不是一回事,引用时须说明是哪一个)。逐所见 §4.2。</li>
 <li>头部交易所里,<strong>同时具备四类关联资产的只有 HTX</strong>:平台币(HTX 币)、关联稳定币(USDD)、自发包装币(BTC-TRC20、HBTC)、JustLend 生息凭证(stUSDT/jUSDD)。其余各所最多一种(分类与 FTX 三条判据见 §4)。</li>
 <li><strong>HTX 自报储备率"均超 100%",但按链上可核口径:USDT 自有钱包只覆盖负债的 4.8%,BTC 42%,ETH 25%;总储备的 18.1% 在不披露身份的"第三方托管",47.5% 是 TRX 且其中 69% 处于质押。</strong>(自报数为 2026-09-01 页面快照,链上数为 09-14 直读)</li>
-<li><strong>BTC 链(11 所):10 所直读与聚合器差 ≤0.6%</strong>(Binance / Bitfinex / Bybit / Gate / Bitget / MEXC / Crypto.com 在 0.1% 以内;Gemini / Deribit / Bitstamp −0.6%);例外 HTX +1.3%(清单口径,§3.1)。本周两所按官方现行清单同步:<strong>Binance 63→64 址</strong>(官方 PoR 地址端点新列 <code>36yB51gU…</code>,09-28 建、持 60 枚)、<strong>Bitstamp 196→229 址</strong>(官网 wallet_transparency 10-04 更新,新增 52、移除 19;新增址持 2,821 枚,移除址仅余 20 枚)。<strong>ETH 链覆盖率</strong>:Binance 100%、Bitfinex 101%、Gemini 101%、KuCoin 103%、OKX 97%、Gate 116%、HTX 124%、<mark class="r">Bitget 78%</mark>(本周新出现的差异项,§3.2)、Bitstamp 47%*(&gt;100% 表示直读多于聚合器,口径差见 §3 表注)。各所均自报储备率 &gt;100%;本报告只能核验其中可在链上读到的部分,各所可核比例见 §3。</li>
-<li><strong>本周变动(枚数口径,同一地址清单前后比;09-28 → 10-05;同期币安 BTC +2.4%、ETH +1.4%)</strong>:BTC <strong>Bitget −6,165(−17.4%;09-28 起分阶段恢复提币,见第 6 条)</strong>、<strong>Deribit −3,026(−6.8%)</strong>、Binance −1,973(−0.3%,63 址口径)、Bitstamp −911(−3.9%,两周都在的 177 址口径)、Bybit −524;<strong>Bitfinex +3,002(+2.0%)</strong>、Crypto.com +779(+3.5%)。以太坊主网原生 ETH:<strong>Bitfinex +74,523(+24.2%,同期该所 XAUT −$217M、ETH +$215M,美元合计基本不变)</strong>、Binance −33,301(−1.1%)、OKX +21,285(+2.1%)、Bitget −4,787(−5.2%)。稳定币:Binance 以太坊 USDT −223.6M / USDC −389.5M、USDT-TRC20 −168.7M;OKX 以太坊 USDT −186.7M;Bitget 以太坊 USDT −68.6M 而 USDT-TRC20 +84.2M(跨链调仓,合计 +15.6M);Bitfinex 以太坊 USDT +61.5M、TRC20 +40.1M。</li>
+<li><strong>BTC 链(11 所):10 所直读与聚合器差 ≤0.3%</strong>(Binance / Bitfinex / Bybit / Gate / Bitget / MEXC / Gemini / Deribit / Crypto.com / Bitstamp);例外 HTX +1.3%(清单口径,§3.1)。本周 Binance 官方 PoR 地址端点仍为 64 址(与本地一致);<strong>Bitstamp 官网清单再次大改:229 → 502 址</strong>(10-11 更新;新增 345、移除 72;与 09-21 的 507 址清单只有 236 址重合),按现行清单直读 39,410 枚,聚合器同步为 39,478(−0.2%)。<strong>ETH 链覆盖率</strong>:Binance 100%、Bitfinex 101%、Gemini 102%、KuCoin 103%、OKX 97%、Gate 120%、HTX 124%、<mark class="r">Bitget 78%</mark>、Bitstamp 48%*(&gt;100% 表示直读多于聚合器,口径差见 §3 表注)。各所均自报储备率 &gt;100%;本报告只能核验其中可在链上读到的部分,各所可核比例见 §3。</li>
+<li><strong>本周变动(枚数口径,同一地址清单前后比;10-05 → 10-12;同期币安 BTC −3.2%、ETH −7.0%)</strong>:BTC <strong>Binance −12,063(−1.9%,64 址口径)</strong>、Deribit −1,404(−3.4%)、Gate −131、HTX −102;<strong>Bitfinex +4,917(+3.2%)</strong>、Bitget +829(+2.8%)、Bitstamp +738(+3.2%,两周都在的 157 址口径)、Bybit +342。以太坊主网原生 ETH:<strong>Bitfinex +149,938(+39.2%;同期该所以太坊 ETH +$310M、USDT −$175M、LEO −$40M)</strong>、<strong>OKX +89,686(+8.6%)</strong>、Binance −44,825(−1.5%;同期 WBETH −$584M)、Bitget −6,986(−8.1%)、KuCoin +2,791。稳定币:Binance USDT-TRC20 <strong>+507.3M</strong>、以太坊 USDT −491.6M(跨链调仓,合计约 +15.7M);OKX 以太坊 USDC −177.0M / USDT −148.0M;Bitfinex 以太坊 USDT −175.0M、TRC20 −52.2M;Gate 以太坊 USDT +149.0M。</li>
 <li><strong>Bitget 事件(公开记录)</strong>:2026-09-24 18:31 UTC,Bitget 公告热/温钱包出现异常转出,官方初估约 $3.516 亿,提现全面暂停(CEO X 帖 <a href="https://x.com/GracyBitget/status/2103235655879074084">https://x.com/GracyBitget/status/2103235655879074084</a>)。链上可核部分:同一接收地址 <code>0x770b10b273fc44fe9197d6bf20f145c2e98463ee</code> 自 Bitget 公布地址收走约 $1.73 亿(以太坊 ETH 24,595 / USDT 34.75M / USDC 12.85M / XAUT 3,000 盎司;Arbitrum USDT0 19.67M;Avalanche AVAX 821,012 + USDC 8.2M;BSC BNB 12,719);Tron 与 BTC 公布地址未见同一去向的转出。本周 Bitget 以太坊主网 ETH −18,221 枚、USDT −154.5M、USDC −8.8M,三个转出地址均在本方清单内;扣除上述转出后 ETH(+6,374)与 USDC(+4.1M)为净增,USDT 仍净减约 120M。<strong>这一行本周的下降不作正常资金流解读</strong>;本报告不对事件定性,也不对转出方作归属。 <strong>后续(公开记录)</strong>:Bitget 官方 X 公告漏洞"已识别并修复"、提币按阶段恢复(<a href="https://x.com/bitget/status/2103695497458557342">https://x.com/bitget/status/2103695497458557342</a>);据报道 BTC 提币 09-28 08:00 UTC 起恢复,ETH 09-29、USDT 09-30,其余币种与法币、P2P 定于 10-02;报道中的损失金额更新为约 $3.875 亿 ⚠(媒体口径,未见官方逐项)。本周 Bitget BTC 直读 −6,165 枚,与其 09-29 期官方 PoR 钱包 29,100 枚同量级(§3.1,直读 29,247,+0.5%);本报告不对事件定性,也不对转出方作归属。</li>
 </ol>
 <h2 id="1-方法-三层数据-只信最底层">1. 方法:三层数据,只信最底层</h2>
@@ -124,7 +124,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <p>"关联币"= 交易所或其控制人发行的资产;红标规则统一为 <strong>关联币占储备 &gt;30%</strong>。</p>
 </li>
 <li>"1 年净流量"= 储备变动剔除币价效应后的残差(正 = 净流入);币价基准按币安日线:BTC -28.0%、ETH -42.9%、稳定币 0、关联币/其他 −40% 近似。</li>
-<li>⚠ Bitstamp 行为聚合器读数。Bitstamp 官网地址清单(wallet_transparency,10-04 更新)本周由 196 址变为 229 址(新增 52、移除 19;perPage 100/50 两种分页全集一致),本报告 2026-10-05 按现行清单直读 <strong>25,552 BTC</strong>(229 址、0 失败,聚合器 25,700,−0.6%,§3.1);两周都在的 177 址同口径 23,642 → 22,731 枚 <strong>−911(−3.9%)</strong>;新增 52 址持 2,821 枚,移除的 19 址仅余 20 枚,本报告不再计入,也不对清单变动原因作推断。</li>
+<li>⚠ Bitstamp 行为聚合器读数。Bitstamp 官网地址清单(wallet_transparency,10-11 更新)本周由 229 址变为 <strong>502 址</strong>(新增 345、移除 72;perPage 100/50 两种分页全集一致),与 09-21 的 507 址清单只重合 236 址——该清单四周内 507 → 196 → 229 → 502 反复。本报告 2026-10-12 按现行清单直读 <strong>39,410 BTC</strong>(502 址、0 失败;聚合器 39,478,−0.2%,聚合器同样随官网清单变动);两周都在的 157 址同口径 23,115 → 23,853 枚 <strong>+738(+3.2%)</strong>;新增 345 址持 15,557 枚(306 址非零),移除的 72 址仅余 0.36 枚。⇒ <strong>该所 BTC 总数的周变动(25,552 → 39,410)几乎全部来自清单口径,不是资金流</strong>;本报告不对清单变动原因作推断。</li>
 </ul>
 <div class="tbl"><table>
 <thead>
@@ -351,7 +351,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <li>HTX 其余是 18% BTC(其中一半是 §7.2 的 BTC-TRC20)与 2% ETH;聚合器地址集上没有稳定币。稳定币为 0 的还有 Gemini、Bitstamp、Robinhood,本身不构成差异项;HTX 官方 PoR 清单自有 USDT 的读数见 §6.2。</li>
 </ul>
 <h2 id="3-公布地址链上直读对账-本报告主判据">3. 公布地址链上直读对账(本报告主判据)</h2>
-<p>§2 是聚合器口径;本节是<strong>本报告自己读链</strong>:拿各所公布的地址(官方 PoR 清单或DefiLlama-Adapters源码,见 <code>tools/cex_addresses.json</code>),逐地址读 BTC / ETH 全资产 / Tron,再与聚合器对账。<strong>表由 <code>tools/make_tables.py</code> 从 <code>data/cex_reserves_2026-10-05.json</code> 生成</strong>,每个地址的读数与失败记录都在该文件里。</p>
+<p>§2 是聚合器口径;本节是<strong>本报告自己读链</strong>:拿各所公布的地址(官方 PoR 清单或DefiLlama-Adapters源码,见 <code>tools/cex_addresses.json</code>),逐地址读 BTC / ETH 全资产 / Tron,再与聚合器对账。<strong>表由 <code>tools/make_tables.py</code> 从 <code>data/cex_reserves_2026-10-12.json</code> 生成</strong>,每个地址的读数与失败记录都在该文件里。</p>
 <h3 id="3-1-btc-链-mempool-space-直读-vs-聚合器-差值-1-绿-5-红">3.1 BTC 链(mempool.space 直读 vs 聚合器;差值 ≤1% 绿、&gt;5% 红)</h3>
 <div class="tbl"><table>
 <thead>
@@ -369,17 +369,17 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>Binance</td>
 <td>64/64</td>
-<td>639,779</td>
-<td>639,582</td>
-<td><span class="ok">+0.0%</span></td>
+<td>627,716</td>
+<td>627,830</td>
+<td><span class="ok">-0.0%</span></td>
 <td>682,356 / 683,449(09-01)</td>
-<td><mark class="r">-6.4%</mark>(快照 09-01 vs 直读 10-05,相隔 34 天;自报钱包含第三方托管 9,772 枚;同 63 址清单较上周净减约 1,900 枚(§0))</td>
+<td><mark class="r">-8.2%</mark>(快照 09-01 vs 直读 10-12,相隔 41 天(10 月期官方尚未发布);自报钱包含第三方托管 9,772 枚;同 64 址清单较上周净减约 1.2 万枚(§0))</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
 <td>3/3</td>
-<td>152,984</td>
-<td>152,948</td>
+<td>157,901</td>
+<td>157,897</td>
 <td><span class="ok">+0.0%</span></td>
 <td>—</td>
 <td>—</td>
@@ -387,81 +387,81 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>Bybit</td>
 <td>25/25</td>
-<td>57,095</td>
-<td>57,095</td>
-<td><span class="ok">-0.0%</span></td>
+<td>57,437</td>
+<td>57,415</td>
+<td><span class="ok">+0.0%</span></td>
 <td>56,438 / 59,064(07-23)</td>
-<td>-3.3%</td>
+<td>-2.8%</td>
 </tr>
 <tr>
 <td>Gate</td>
 <td>13/13</td>
-<td>18,830</td>
-<td>18,814</td>
-<td><span class="ok">+0.1%</span></td>
+<td>18,699</td>
+<td>18,649</td>
+<td><span class="ok">+0.3%</span></td>
 <td>21,166 / 25,466(09-13)</td>
-<td><mark class="r">-26.1%</mark>(DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址))</td>
+<td><mark class="r">-26.6%</mark>(DefiLlama-Adapters清单 13 址不是页面全部钱包(Gate 未公布 BTC 地址))</td>
 </tr>
 <tr>
 <td>Bitget</td>
 <td>21/21</td>
-<td>29,247</td>
-<td>29,252</td>
+<td>30,076</td>
+<td>30,077</td>
 <td><span class="ok">-0.0%</span></td>
 <td>20,532 / 29,100(09-29)</td>
-<td>+0.5%</td>
+<td>+3.4%</td>
 </tr>
 <tr>
 <td>MEXC</td>
 <td>34/34</td>
-<td>11,691</td>
-<td>11,688</td>
-<td><span class="ok">+0.0%</span></td>
-<td>4,107 / 12,202(09-09)</td>
-<td>-4.2%</td>
+<td>11,729</td>
+<td>11,749</td>
+<td><span class="ok">-0.2%</span></td>
+<td>4,221 / 12,403(10-08)</td>
+<td><mark class="r">-5.4%</mark>(DefiLlama-Adapters 清单 34 址不是页面全部钱包;自报 10-08 期)</td>
 </tr>
 <tr>
 <td>Gemini</td>
 <td>4/4</td>
-<td>56,247</td>
-<td>56,608</td>
-<td><span class="ok">-0.6%</span></td>
+<td>56,184</td>
+<td>56,183</td>
+<td><span class="ok">+0.0%</span></td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Deribit</td>
 <td>17/17</td>
-<td>41,716</td>
-<td>41,981</td>
-<td><span class="ok">-0.6%</span></td>
+<td>40,311</td>
+<td>40,380</td>
+<td><span class="ok">-0.2%</span></td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>HTX</td>
 <td>11/11</td>
-<td>8,104</td>
-<td>8,002</td>
+<td>8,003</td>
+<td>7,902</td>
 <td>+1.3%</td>
 <td>19,498 / 20,252(09-01)</td>
-<td><mark class="r">-60.0%</mark>(自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-14 链上 10,334 枚,扣除后约 8,229,与本表直读 8,203 差 −0.3%)</td>
+<td><mark class="r">-60.5%</mark>(自报钱包 20,252 = 交易所钱包 18,563 + 托管 1,689;交易所钱包含 BTC-TRC20,09-14 链上 10,334 枚,扣除后约 8,229,与本表直读 8,203 差 −0.3%)</td>
 </tr>
 <tr>
 <td>Crypto.com</td>
 <td>8/8</td>
-<td>22,849</td>
-<td>22,840</td>
+<td>22,768</td>
+<td>22,768</td>
 <td><span class="ok">+0.0%</span></td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Bitstamp</td>
-<td>229/229</td>
-<td>25,552</td>
-<td>25,700</td>
-<td><span class="ok">-0.6%</span></td>
+<td>502/502</td>
+<td>39,410</td>
+<td>39,478</td>
+<td><span class="ok">-0.2%</span></td>
 <td>—</td>
 <td>—</td>
 </tr>
@@ -469,7 +469,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </table></div>
 <p><strong>读法</strong></p>
 <ul>
-<li><strong>十所差 ≤0.6%,HTX +1.3%</strong>,聚合器的 BTC 数可直接引用。本周两所先按官方现行清单同步:Binance 按其官方 PoR 地址端点补 1 址(63→64;新址持 60 枚,影响 &lt;0.01%),Bitstamp 按其官网清单改为 229 址(若仍用 196 址旧清单,本方 22,746 枚,较聚合器少 11.5%)。</li>
+<li><strong>十所差 ≤0.3%,HTX +1.3%</strong>,聚合器的 BTC 数可直接引用。本周 Binance 官方地址端点与本地一致(64 址);Bitstamp 按其官网清单改为 502 址(若沿用上周 229 址清单,本方 23,853 枚,较聚合器少 40%)。</li>
 <li>聚合器 BTC 列由"聚合器美元 ÷ 计价"折回枚数。计价原用币安单行反推,币安清单与聚合器不一致时会使其余各所整体偏移(本周补址前为 +1.7%);自 09-28 起改用各所反推价的中位数。</li>
 <li>HTX 的行是DefiLlama-Adapters清单 11 址;其官方 PoR 清单为 7 址,链上 7,884 枚(§6.2)。</li>
 <li>Gate 清单里曾混入 3 个以 <code>3P</code> 开头的字符串,两个 BTC 浏览器均 404;解码后它们不是比特币地址(35 字符、校验失败),而是 DefiLlama-Adapters <code>waves</code> 段里的 Waves 链地址(Waves 主网地址恰以 3P 开头),本报告抽取时按前缀误归为 BTC。已剔除,并在脚本里加入地址合法性校验。</li>
@@ -495,81 +495,81 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>Binance</td>
 <td>37 + 锁仓 2</td>
-<td>$71.72B</td>
-<td>$71.72B</td>
-<td>$71.65B</td>
+<td>$69.95B</td>
+<td>$69.95B</td>
+<td>$69.82B</td>
 <td><span class="ok">100%</span></td>
 <td>0</td>
-<td>3,048,604</td>
+<td>3,003,779</td>
 <td>3,982,739 / 3,982,773(09-01)</td>
-<td>-23%</td>
+<td>-25%</td>
 </tr>
 <tr>
 <td>OKX</td>
 <td>323</td>
-<td>$13.94B</td>
-<td>$13.94B</td>
-<td>$14.36B</td>
+<td>$13.58B</td>
+<td>$13.58B</td>
+<td>$14.03B</td>
 <td><span class="ok">97%</span></td>
 <td>0</td>
-<td>1,043,651</td>
+<td>1,133,338</td>
 <td>1,785,866 / 1,796,024(2026-09)</td>
-<td>-42%</td>
+<td>-37%</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
 <td>9</td>
-<td>$7.57B</td>
-<td>$7.57B</td>
-<td>$7.50B</td>
+<td>$7.68B</td>
+<td>$7.68B</td>
+<td>$7.63B</td>
 <td><span class="ok">101%</span></td>
 <td>0</td>
-<td>382,458</td>
+<td>532,396</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Gate</td>
 <td>91</td>
-<td>$4.18B</td>
-<td>$4.18B</td>
-<td>$3.60B</td>
-<td><mark class="r">116%</mark></td>
+<td>$4.20B</td>
+<td>$4.20B</td>
+<td>$3.51B</td>
+<td><mark class="r">120%</mark></td>
 <td>0</td>
-<td>165,136</td>
+<td>165,583</td>
 <td>350,841 / 433,589(09-13)</td>
 <td>-62%</td>
 </tr>
 <tr>
 <td>Bitget</td>
 <td>80</td>
-<td>$0.99B</td>
-<td>$0.99B</td>
-<td>$1.28B</td>
+<td>$0.97B</td>
+<td>$0.97B</td>
+<td>$1.24B</td>
 <td><mark class="r">78%</mark></td>
 <td>0</td>
-<td>86,399</td>
+<td>79,413</td>
 <td>166,080 / 182,424(09-29)</td>
-<td>-53%</td>
+<td>-56%</td>
 </tr>
 <tr>
 <td>Gemini</td>
 <td>5</td>
-<td>$0.94B</td>
-<td>$0.94B</td>
-<td>$0.93B</td>
-<td><span class="ok">101%</span></td>
+<td>$0.87B</td>
+<td>$0.87B</td>
+<td>$0.86B</td>
+<td><span class="ok">102%</span></td>
 <td>0</td>
-<td>289,307</td>
+<td>287,685</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>HTX</td>
 <td>57</td>
-<td>$0.22B</td>
-<td>$0.17B</td>
-<td>$0.14B</td>
+<td>$0.21B</td>
+<td>$0.16B</td>
+<td>$0.13B</td>
 <td><mark class="r">124%</mark></td>
 <td>0</td>
 <td>11,116</td>
@@ -579,24 +579,24 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>KuCoin</td>
 <td>96</td>
-<td>$1.76B</td>
-<td>$1.76B</td>
-<td>$1.72B</td>
+<td>$1.70B</td>
+<td>$1.70B</td>
+<td>$1.66B</td>
 <td><span class="ok">103%</span></td>
 <td>0</td>
-<td>88,332</td>
+<td>91,123</td>
 <td>99,132 / 115,905(09-30)</td>
-<td>-24%</td>
+<td>-21%</td>
 </tr>
 <tr>
 <td>Bitstamp</td>
-<td>62</td>
-<td>$0.57B</td>
-<td>$0.57B</td>
-<td>$1.19B</td>
-<td><mark class="n">47%*</mark></td>
+<td>63</td>
+<td>$0.54B</td>
+<td>$0.54B</td>
+<td>$1.12B</td>
+<td><mark class="n">48%*</mark></td>
 <td>0</td>
-<td>139,694</td>
+<td>141,382</td>
 <td>—</td>
 <td>—</td>
 </tr>
@@ -604,10 +604,10 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </table></div>
 <p><strong>读法</strong></p>
 <ul>
-<li><strong>五所 97–103%</strong>(Binance / OKX / Bitfinex / Gemini / KuCoin),聚合器可引用;HTX 124% 见下;Gate 116%(上周 115%)直读高于聚合器约 $0.58B,差额构成本报告仍未核 ⚠(本周该行 AAVE +$60M、GT −$34M、USDS +$22M);<strong>Bitget 78%(上周 99%)为本周新差异项</strong>:直读 $0.99B 低于聚合器 $1.28B,本周直读端以太坊 USDT −$68.6M、UNI −$24.2M、ENA −$23.3M、XAUT −$14.3M,聚合器端尚未同幅下降,差额构成未核 ⚠;Bitstamp 另注。</li>
+<li><strong>五所 97–103%</strong>(Binance / OKX / Bitfinex / Gemini / KuCoin),聚合器可引用;HTX 124% 见下;<strong>Gate 120%</strong>(上周 116%)直读高于聚合器约 $0.69B,本周该行以太坊 USDT +$149M、USDS −$72M,差额构成仍未核 ⚠;<strong>Bitget 78%</strong>(连续第二周,直读 $0.97B vs 聚合器 $1.24B),差额构成未核 ⚠;Bitstamp 另注。</li>
 <li>HTX 全资产直读 $0.22B 高于聚合器 $0.12B,差额恰为 USDD $45M + HBTC $42M;聚合器不计交易所自发或关联资产(§1 规则),同口径后为 108%。</li>
-<li>Bitget 行 09-28 的 ETH 与稳定币下降包含 09-24 事件中自其公布地址的转出(§0 第 6 条,公开记录);本周(09-28 → 10-05)为提币分阶段恢复期,下降同样不作正常资金流解读。</li>
-<li>* Bitstamp 47%:口径差,不是地址差。DefiLlama 把以 Bitstamp 提款地址为凭证的信标链质押 ETH(≈23.3 万,验证者 8,011 个)全部计入 Bitstamp 储备;本报告不计,原因是质押 ETH 不在任何公布地址的余额上,且四个提款地址里两个不在 Bitstamp 公布的清单内,归属依据只有聚合器自己的地址表。加回这部分后两边对上。独立核法见 <code>tools/beacon_validators.py</code>(§9)。</li>
+<li>Bitget 行 09-28 的 ETH 与稳定币下降包含 09-24 事件中自其公布地址的转出(§0 第 6 条,公开记录);09-28 → 10-12 为提币恢复期,本周原生 ETH 再 −6,986 枚,同样不作正常资金流解读。</li>
+<li>* Bitstamp 48%:口径差,不是地址差。DefiLlama 把以 Bitstamp 提款地址为凭证的信标链质押 ETH(≈23.3 万,验证者 8,011 个)全部计入 Bitstamp 储备;本报告不计,原因是质押 ETH 不在任何公布地址的余额上,且四个提款地址里两个不在 Bitstamp 公布的清单内,归属依据只有聚合器自己的地址表。加回这部分后两边对上。独立核法见 <code>tools/beacon_validators.py</code>(§9)。</li>
 <li>Binance 行含锚定代币锁仓 2 址($12.3B),不是用户资产。"锚定代币锁仓"指 Binance 为其在 BNB Chain 上发行的 Binance-Peg 代币(BSC 版 USDT、USDC、ETH 等)在以太坊主网锁定的原生抵押品,负债方是这些锚定币的持有人,而非交易所客户;地址来自 Binance 的 lockinfo 端点,不在其 PoR 清单内;已向聚合器提出拆分提案(DefiLlama-Adapters PR #20885,维护者已关闭未合并)。</li>
 <li>"失败地址"全部为 0(OKX 一址补读后清零)。</li>
 <li>末列为各所官方 PoR 自报的 ETH(用户 / 钱包,快照日各异),口径是<strong>全链 ETH</strong>(含 L2、质押凭证与托管),与本表以太坊主网美元读数不是同一口径,只作参照,不算差值。</li>
@@ -631,9 +631,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>Binance</td>
 <td>25</td>
-<td>2,374M</td>
+<td>2,297M</td>
 <td>0M</td>
-<td>1,228.9M</td>
+<td>1,736.2M</td>
 <td>—</td>
 <td>—</td>
 <td>32,308M / 33,248M(09-01)</td>
@@ -641,9 +641,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>OKX</td>
 <td>23</td>
-<td>210M</td>
+<td>213M</td>
 <td>485M</td>
-<td>288.1M</td>
+<td>295.4M</td>
 <td>—</td>
 <td>—</td>
 <td>8,493M / 8,953M(2026-09)</td>
@@ -651,9 +651,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>Bitfinex</td>
 <td>2</td>
-<td>15M</td>
+<td>14M</td>
 <td>42M</td>
-<td>151.7M</td>
+<td>99.4M</td>
 <td>—</td>
 <td>—</td>
 <td>—</td>
@@ -663,9 +663,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>11</td>
 <td>12M</td>
 <td>84M</td>
-<td>67.1M</td>
+<td>75.9M</td>
 <td>59M / 180M(09-13)</td>
-<td><mark class="r">-46.5%</mark>(DefiLlama-Adapters 清单 11 址不是页面全部钱包(Gate 未公布 TRX 地址))</td>
+<td><mark class="r">-46.6%</mark>(DefiLlama-Adapters 清单 11 址不是页面全部钱包(Gate 未公布 TRX 地址))</td>
 <td>796M / 909M(09-13)</td>
 </tr>
 <tr>
@@ -673,7 +673,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>29</td>
 <td>4M</td>
 <td>0M</td>
-<td>319.6M</td>
+<td>310.0M</td>
 <td>—</td>
 <td>—</td>
 <td>1,181M / 1,269M(09-29)</td>
@@ -681,19 +681,19 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tr>
 <td>HTX</td>
 <td>18</td>
-<td>2,995M</td>
+<td>2,988M</td>
 <td>6,733M</td>
 <td>0.0M</td>
 <td>8,620M / 9,384M(09-01)</td>
-<td>+3.7%</td>
+<td>+3.6%</td>
 <td>872M / 588M(09-01)</td>
 </tr>
 <tr>
 <td>KuCoin</td>
 <td>24</td>
-<td>13M</td>
+<td>11M</td>
 <td>58M</td>
-<td>109.4M</td>
+<td>109.6M</td>
 <td>—</td>
 <td>—</td>
 <td>965M / 1,057M(09-30)</td>
@@ -702,11 +702,11 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </table></div>
 <p><strong>读法</strong></p>
 <ul>
-<li><strong>聚合器不可引用。</strong> 它漏计 USDT-TRC20(Bitget 公布地址持 320M,聚合器记 0),其 <code>eth_getBalance</code> 读法也不含质押中的 TRX。</li>
+<li><strong>聚合器不可引用。</strong> 它漏计 USDT-TRC20(Bitget 公布地址持 310M,聚合器记 0),其 <code>eth_getBalance</code> 读法也不含质押中的 TRX。</li>
 <li>Tron 的"冻结"(freeze)是其官方术语,指把 TRX 质押给网络换取带宽、能量与投票权:所有权不变、可随时发起解押、解押后 14 天到账;它不是借贷抵押,也不是被平台或司法冻结。本报告统一写"质押"。质押有四个去处:V1 质押、V2 自持质押、<strong>委托给他址的质押</strong>(TRX 仍归本址)、解押队列;表中"质押中"四项全计。OKX 的 4.85 亿、Poloniex 的 2,400 万都是委托质押,只读 <code>balance + frozenV2</code> 会看不到(§7.1)。</li>
 <li>HTX 表中 18 个 Tron 地址是DefiLlama-Adapters清单里的 TRX 冷钱包,上面没有 USDT 属正常;<strong>HTX 官方 PoR 的 USDT-TRC20 另有 5 个地址</strong>:08-01 快照 13.24M,09-14 链上 <mark class="r">1.91M</mark>(低于用户 USDT 负债的 1%,§10 规则;<code>TK86…</code> 的 11.33M 已转空);USDT-ERC20 1 址 1.05M → 0。用户 USDT 负债 926M 的其余部分在"ThirdParty"(§6.2)。</li>
 <li>末两列为各所官方 PoR 自报的 TRX 与 USDT(用户 / 钱包);USDT 是<strong>全链合计</strong>(ERC20 + TRC20 + 其他链),本表 USDT-TRC20 只是其中一条链,故不算差值。HTX 的 TRX 自报钱包 9,384M(09-01)与本表 18 址 9,747M(可用 + 质押,09-14)同量级;其 USDT 自报钱包 588M 中 547M 在"ThirdParty"(93%,§6.2)。</li>
-<li>"直读 TRX − 自报钱包":直读 TRX(可用 + 质押)与自报 TRX 钱包同链同口径,可直接比,按 §3.1 规则超过 5% 标红并注明原因。Gate −46.5% 是地址集差(DefiLlama-Adapters 清单 11 址,Gate 未公布 TRX 地址);HTX +3.7%。USDT 不算差值,因自报为全链合计。</li>
+<li>"直读 TRX − 自报钱包":直读 TRX(可用 + 质押)与自报 TRX 钱包同链同口径,可直接比,按 §3.1 规则超过 5% 标红并注明原因。Gate −46.5% 是地址集差(DefiLlama-Adapters 清单 11 址,Gate 未公布 TRX 地址);HTX +3.6%。USDT 不算差值,因自报为全链合计。</li>
 </ul>
 <h2 id="4-关联币占储备的比重-ftx-的三项结构性前提与各所对照">4. 关联币占储备的比重:FTX 的三项结构性前提与各所对照</h2>
 <h3 id="4-1-ftx-的结构性前提是什么-公开报道级-仅作判据来源">4.1 FTX 的结构性前提是什么(⚠ 公开报道级,仅作判据来源)</h3>
@@ -979,7 +979,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>MEXC</td>
 <td>否(11% vs 68%)</td>
 <td>未测</td>
-<td>仅公布比率 141%</td>
+<td>仅公布比率(10-08:BTC 294% / USDT 122%)</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -1051,9 +1051,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>—</td>
 </tr>
 <tr>
-<td>MEXC(09-09)</td>
+<td>MEXC(10-08)</td>
 <td>—</td>
-<td>141%</td>
+<td>逐币 BTC 294% / USDT 122%(总比率页面本期未取到)</td>
 <td>无托管栏</td>
 <td>—</td>
 </tr>
@@ -1572,5 +1572,5 @@ python3 tools/por_fetch.py                                                      
 
 </main>
 </div>
-<footer class="site-foot"><div class="foot-in"><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="archive/">历次版本存档</a></span><span>页面生成 2026-10-05 00:31 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span>支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)</span></div></footer>
+<footer class="site-foot"><div class="foot-in"><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="archive/">历次版本存档</a></span><span>页面生成 2026-10-12 01:20 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span>支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)</span></div></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
