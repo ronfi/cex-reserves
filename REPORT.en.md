@@ -1,6 +1,6 @@
 # Top Exchange Reserves Check · 2026-10
 
-> Each table heading carries its own read time. Every number can be re-read with `tools/cex_reserves_verify.py` in this repository; the output snapshot is `data/cex_reserves_2026-10-12.json`.
+> Each table heading carries its own read time. Every number can be re-read with `tools/cex_reserves_verify.py` in this repository; the output snapshot is `data/cex_reserves_2026-10-19.json`.
 > Source discipline: **direct on-chain read > official PoR page > public aggregator > media**. The first three go into tables; media is used only as a lead, marked ⚠, and never tabulated.
 > This page makes no judgement about any exchange's solvency; it presents verifiable facts and the differences between sources. **Not investment advice.**
 
@@ -9,8 +9,8 @@
 1. **The distribution: of the 20 exchanges, 18 hold under 20% of reserves in affiliated tokens, and only two are above 30% — the highest at 78%, the next at 32%.** Eight hold none at all; **across the twelve that do, the median is 13%** (⚠ caliber: counting the eight zeros as well, the median across all 20 is 2.5% — the two medians are not the same thing, and a citation must say which). Exchange by exchange in §4.2.
 2. Among top exchanges, **HTX is the only one holding all four kinds of affiliated assets**: a platform token (HTX token), an affiliated stablecoin (USDD), self-issued wrapped coins (BTC-TRC20, HBTC), and JustLend yield receipts (stUSDT/jUSDD). Every other exchange has at most one kind (classification and the three FTX criteria in §4).
 3. **HTX reports reserve ratios "all above 100%", but on the on-chain-verifiable basis: own-wallet USDT covers only 4.8% of liabilities, BTC 42%, ETH 25%; 18.1% of total reserves sit with an undisclosed "third-party custodian", and 47.5% is TRX, 69% of which is staked.** (self-reported figures are the 2026-09-01 page snapshot; on-chain figures are direct reads of 09-14)
-4. **BTC chain (11 exchanges): 10 reconcile within ≤0.3%** between the direct read and the aggregator (Binance / Bitfinex / Bybit / Gate / Bitget / MEXC / Gemini / Deribit / Crypto.com / Bitstamp); the exception is HTX at +1.3% (list basis, §3.1). Binance's official PoR address endpoint is unchanged at 64 addresses (matching the local list); **Bitstamp's website list changed sharply again: 229 → 502 addresses** (updated Oct 11; 345 added, 72 removed; only 236 overlap with the 507-address list of Sep 21); on the current list the direct read is 39,410 BTC and the aggregator, which follows the same list, shows 39,478 (−0.2%). **ETH-chain coverage**: Binance 100%, Bitfinex 101%, Gemini 102%, KuCoin 103%, OKX 97%, Gate 120%, HTX 124%, <mark class="r">Bitget 78%</mark>, Bitstamp 48%* (>100% means the direct read exceeds the aggregator; caliber differences in the §3 table notes). Every exchange self-reports reserve ratios above 100%; this report can verify only the part readable on chain, and §3 shows how much that is for each exchange.
-5. **This week's changes (in coin units, same address list before and after; Oct 5 → Oct 12; over the same period Binance BTC −3.2%, ETH −7.0%)**: BTC **Binance −12,063 (−1.9%, 64-address basis)**, Deribit −1,404 (−3.4%), Gate −131, HTX −102; **Bitfinex +4,917 (+3.2%)**, Bitget +829 (+2.8%), Bitstamp +738 (+3.2%, on the 157 addresses present both weeks), Bybit +342. Native ETH on Ethereum mainnet: **Bitfinex +149,938 (+39.2%; over the same week its Ethereum ETH +$310M, USDT −$175M, LEO −$40M)**, **OKX +89,686 (+8.6%)**, Binance −44,825 (−1.5%; WBETH −$584M over the same week), Bitget −6,986 (−8.1%), KuCoin +2,791. Stablecoins: Binance USDT-TRC20 **+507.3M** and Ethereum USDT −491.6M (a cross-chain shift, net about +15.7M); OKX Ethereum USDC −177.0M / USDT −148.0M; Bitfinex Ethereum USDT −175.0M, TRC20 −52.2M; Gate Ethereum USDT +149.0M.
+4. **BTC chain (11 exchanges): 10 reconcile within ≤0.2%** between the direct read and the aggregator (Binance / Bitfinex / Bybit / Gate / Bitget / MEXC / Gemini / Deribit / Crypto.com / Bitstamp); the exception is HTX at +0.9% (list basis, §3.1). Binance's official PoR address endpoint is unchanged at 64 BTC / 37 ETH addresses (matching the local list; one of the 38 ETH entries is a duplicate); **Bitstamp's website list changed sharply again: 502 → 561 addresses** (updated Oct 17; 289 added, 230 removed, 272 present both weeks; over five weeks 507 → 196 → 229 → 502 → 561); on the current list the direct read is 39,526 BTC and the aggregator, which follows the same list, shows 39,546 (−0.1%). **ETH-chain coverage**: Binance 100%, Bitfinex 102%, Gemini 102%, KuCoin 101%, OKX 97%, Gate 124%, HTX 122%, <mark class="r">Bitget 75%</mark>, Bitstamp 48%* (>100% means the direct read exceeds the aggregator; caliber differences in the §3 table notes). Every exchange self-reports reserve ratios above 100%; this report can verify only the part readable on chain, and §3 shows how much that is for each exchange.
+5. **This week's changes (in coin units, same address list before and after; Oct 12 → Oct 19; over the same period Binance BTC −2.0%, ETH −5.0%)**: BTC **Binance +6,729 (+1.1%, 64-address basis)**, Deribit +541 (+1.3%), Gate +430 (+2.3%), Bybit +301; Bitget −474 (−1.6%), Bitfinex −276, Gemini −275, Crypto.com −132; **Bitstamp −2,280 (−6.7%) on the 272 addresses present both weeks**, but +117 (+0.3%) in total on the current 561-address list — the gap is wallet rotation: the 230 removed addresses are now empty (about 5,325 BTC on Oct 12) and the 289 added ones hold 7,722 BTC (§2 note). Native ETH on Ethereum mainnet: **Bitfinex +58,198 (+10.9%; over the same week its Ethereum USDT +$212M, LEO +$79M, USDF +$75M)**, **OKX −42,663 (−3.8%)**, **Gate +15,193 (+9.2%)**, Binance +12,868 (+0.4%; WBETH −$570M over the same week), Bitstamp −1,955, Gemini −1,440. Stablecoins: Bitget USDT-TRC20 −88.9M and Ethereum USDT +38.2M; Gate Ethereum USDT +83.2M, TRC20 +50.0M; Binance USDT-TRC20 +51.4M, Ethereum USD1 −131.0M / RLUSD +115.5M / USDC −90.1M; KuCoin Ethereum USDT +47.6M; OKX Ethereum USDT +40.9M / USDC +40.3M. ⚠ Dollar figures are distorted by price (Binance's Ethereum ETH −$359M in dollars but +12,868 in coins); this item uses coin counts throughout.
 6. **Bitget incident (public record)**: at 18:31 UTC on 2026-09-24 Bitget announced abnormal outflows from hot/warm wallets, with an initial official estimate of about $351.6M, and suspended all withdrawals (CEO post on X: <https://x.com/GracyBitget/status/2103235655879074084>). The part verifiable on chain: one receiving address, `0x770b10b273fc44fe9197d6bf20f145c2e98463ee`, took about $173M from Bitget's published addresses (Ethereum ETH 24,595 / USDT 34.75M / USDC 12.85M / XAUT 3,000 oz; Arbitrum USDT0 19.67M; Avalanche AVAX 821,012 + USDC 8.2M; BSC BNB 12,719); no outflows to the same destination were seen from the published Tron or BTC addresses. This week Bitget's Ethereum-mainnet ETH fell 18,221, USDT 154.5M and USDC 8.8M; all three source addresses are on this report's list. Net of those outflows, ETH (+6,374) and USDC (+4.1M) rose, while USDT still fell by about 120M. **This row's decline this week is not to be read as ordinary fund flow**; this report does not characterise the incident or attribute the outflows. **Follow-up (public record)**: Bitget announced on X that the vulnerability "has been identified and remediated" and that withdrawals would resume in phases (<https://x.com/bitget/status/2103695497458557342>); per reports, BTC withdrawals resumed at 08:00 UTC on Sep 28, ETH on Sep 29, USDT on Sep 30, with other tokens, fiat and P2P set for Oct 2; reported losses were updated to about $387.5M ⚠ (media figure; no official itemisation seen). Bitget's BTC direct read fell 6,165 this week, in line with the 29,100 BTC wallet figure in its Sep 29 official PoR (§3.1: direct read 29,247, +0.5%); this report does not characterise the incident or attribute the outflows.
 
 ## 1. Method: three data layers, trust only the bottom one
@@ -35,7 +35,7 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 - "Affiliated token" = an asset issued by the exchange or its controller; the uniform red rule is **affiliated tokens >30% of reserves**.
 - "1-year net flow" = the residual change in reserves after removing price effects (positive = net inflow); price baseline from Binance daily closes: BTC −28.0%, ETH −42.9%, stablecoins 0, affiliated/other ≈ −40%.
-- ⚠ The Bitstamp row is the aggregator's read. Bitstamp's published address list (wallet_transparency, updated Oct 11) changed this week from 229 to **502 addresses** (345 added, 72 removed; the full sets match under perPage 100 and 50), overlapping the Sep 21 list of 507 in only 236 addresses — over four weeks the list has gone 507 → 196 → 229 → 502. This report's read on 2026-10-12 against the current list is **39,410 BTC** (502 addresses, 0 failures; aggregator 39,478, −0.2%, the aggregator also follows the website list). On the 157 addresses present both weeks: 23,115 → 23,853, **+738 (+3.2%)**; the 345 added addresses hold 15,557 BTC (306 non-zero), the 72 removed ones only 0.36. ⇒ **This exchange's week-on-week change in total BTC (25,552 → 39,410) comes almost entirely from the list, not from fund flows**; this report makes no inference about why the list changed.
+- ⚠ The Bitstamp row is the aggregator's read. Bitstamp's published address list (wallet_transparency, updated Oct 17) changed this week from 502 to **561 addresses** (289 added, 230 removed, 272 present both weeks; the full sets match under perPage 100 and 50) — over five weeks the list has gone 507 → 196 → 229 → 502 → 561. This report's read on 2026-10-19 against the current list is **39,526 BTC** (561 addresses, 0 failures; aggregator 39,546, −0.1%, the aggregator also follows the website list), **+117 (+0.3%)** on last week's 39,410 on the old list; on the 272 addresses present both weeks: 34,084 → 31,805, **−2,280 (−6.7%)**; the 230 removed addresses are now empty (about 5,325 BTC on Oct 12) and the 289 added ones hold 7,722 BTC. ⇒ **Coins moved from old addresses to new ones and the exchange's total is essentially unchanged; the fall on the addresses present both weeks is one half of a rotation, not an outflow**; this report makes no inference about why the list changed.
 
 | # | Exchange | On-chain reserves | BTC | ETH | Stablecoins | Affiliated | 1-yr net flow |
 |---|---|---|---|---|---|---|---|
@@ -76,21 +76,21 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 | Exchange | Addresses (read/total) | Direct BTC | Aggregator BTC | Diff | PoR BTC: users / wallets (snapshot) | Direct − PoR wallets |
 |---|---|---|---|---|---|---|
-| Binance | 64/64 | 627,716 | 627,830 | <span class="ok">-0.0%</span> | 682,356 / 683,449(09-01) | <mark class="r">-8.2%</mark>(snapshot Sep 1 vs direct read Oct 12, 41 days apart (the October snapshot is not yet published); reported wallets include 9,772 BTC with third-party custodians; on the like-for-like 64-address list the direct read fell about 12k BTC this week (§0)) |
-| Bitfinex | 3/3 | 157,901 | 157,897 | <span class="ok">+0.0%</span> | — | — |
-| Bybit | 25/25 | 57,437 | 57,415 | <span class="ok">+0.0%</span> | 56,438 / 59,064(07-23) | -2.8% |
-| Gate | 13/13 | 18,699 | 18,649 | <span class="ok">+0.3%</span> | 21,166 / 25,466(09-13) | <mark class="r">-26.6%</mark>(the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)) |
-| Bitget | 21/21 | 30,076 | 30,077 | <span class="ok">-0.0%</span> | 20,532 / 29,100(09-29) | +3.4% |
-| MEXC | 34/34 | 11,729 | 11,749 | <span class="ok">-0.2%</span> | 4,221 / 12,403(10-08) | <mark class="r">-5.4%</mark>(the 34-address DefiLlama-Adapters list is not every wallet on the page; reported figure is the Oct 8 snapshot) |
-| Gemini | 4/4 | 56,184 | 56,183 | <span class="ok">+0.0%</span> | — | — |
-| Deribit | 17/17 | 40,311 | 40,380 | <span class="ok">-0.2%</span> | — | — |
-| HTX | 11/11 | 8,003 | 7,902 | +1.3% | 19,498 / 20,252(09-01) | <mark class="r">-60.5%</mark>(reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,334 on chain 09-14, leaving ~8,229 against the 8,203 read here, −0.3%) |
-| Crypto.com | 8/8 | 22,768 | 22,768 | <span class="ok">+0.0%</span> | — | — |
-| Bitstamp | 502/502 | 39,410 | 39,478 | <span class="ok">-0.2%</span> | — | — |
+| Binance | 64/64 | 634,445 | 634,464 | <span class="ok">-0.0%</span> | 682,356 / 683,449(09-01) | <mark class="r">-7.2%</mark>(snapshot Sep 1 vs direct read Oct 19, 48 days apart (no October snapshot seen as of Oct 19); reported wallets include 9,772 BTC with third-party custodians; on the like-for-like 64-address list the direct read rose about 6,700 BTC this week (§0)) |
+| Bitfinex | 3/3 | 157,626 | 157,626 | <span class="ok">-0.0%</span> | — | — |
+| Bybit | 25/25 | 57,738 | 57,738 | <span class="ok">+0.0%</span> | 56,438 / 59,064(07-23) | -2.2% |
+| Gate | 13/13 | 19,129 | 19,093 | <span class="ok">+0.2%</span> | 21,166 / 25,466(09-13) | <mark class="r">-24.9%</mark>(the 13-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)) |
+| Bitget | 21/21 | 29,602 | 29,604 | <span class="ok">-0.0%</span> | 20,532 / 29,100(09-29) | +1.7% |
+| MEXC | 34/34 | 11,770 | 11,770 | <span class="ok">+0.0%</span> | 4,221 / 12,403(10-08) | <mark class="r">-5.1%</mark>(the 34-address DefiLlama-Adapters list is not every wallet on the page; reported figure is the Oct 8 snapshot) |
+| Gemini | 4/4 | 55,909 | 55,902 | <span class="ok">+0.0%</span> | — | — |
+| Deribit | 17/17 | 40,852 | 40,852 | <span class="ok">-0.0%</span> | — | — |
+| HTX | 11/11 | 8,009 | 7,939 | <span class="ok">+0.9%</span> | 19,498 / 20,252(09-01) | <mark class="r">-60.5%</mark>(reported wallets 20,252 = exchange 18,563 + custody 1,689; the exchange figure includes BTC-TRC20, 10,338 on chain 10-19, leaving ~8,225 against the 8,009 read here, −2.6%) |
+| Crypto.com | 8/8 | 22,637 | 22,637 | <span class="ok">-0.0%</span> | — | — |
+| Bitstamp | 561/561 | 39,526 | 39,546 | <span class="ok">-0.0%</span> | — | — |
 
 **How to read**
 
-- **Ten reconcile within ≤0.3%, HTX at +1.3%**; the aggregator's BTC figures can be cited directly. Binance's official address endpoint matches the local list this week (64 addresses); Bitstamp moved to the 502 addresses on its website list (on last week's 229-address list this report would read 23,853 BTC, 40% below the aggregator).
+- **Ten reconcile within ≤0.2%, HTX at +0.9%**; the aggregator's BTC figures can be cited directly. Binance's official address endpoint matches the local list this week (64 addresses); Bitstamp moved to the 561 addresses on its website list (on last week's 502-address list this report would read 31,805 BTC, 20% below the aggregator).
 - The aggregator BTC column converts the aggregator's dollars back to coins with a price. That price used to be inferred from the Binance row alone, so any mismatch between Binance's list and the aggregator's shifted every other exchange (+1.7% this week before the sync); from Sep 28 it is the median of the prices inferred across exchanges.
 - The HTX row is the DefiLlama-Adapters's 11-address list; its official PoR list has 7 addresses holding 7,884 BTC on chain (§6.2).
 - The Gate list once contained 3 strings starting with `3P` that returned 404 on both BTC explorers; decoded, they are not Bitcoin addresses (35 characters, checksum fails) but Waves-chain addresses from the `waves` section of the DefiLlama-Adapters (Waves mainnet addresses happen to start with 3P), mis-sorted into BTC by prefix when this report extracted them. They are removed, and the script now validates addresses.
@@ -100,21 +100,21 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 | Exchange | Addresses | All-asset read | Aggregator-caliber read | Aggregator | Coverage | Failed | Direct native ETH | PoR ETH: users / wallets (snapshot) | Direct native − PoR wallets |
 |---|---|---|---|---|---|---|---|---|---|
-| Binance | 37 + lock 2 | $69.95B | $69.95B | $69.82B | <span class="ok">100%</span> | 0 | 3,003,779 | 3,982,739 / 3,982,773(09-01) | -25% |
-| OKX | 323 | $13.58B | $13.58B | $14.03B | <span class="ok">97%</span> | 0 | 1,133,338 | 1,785,866 / 1,796,024(2026-09) | -37% |
-| Bitfinex | 9 | $7.68B | $7.68B | $7.63B | <span class="ok">101%</span> | 0 | 532,396 | — | — |
-| Gate | 91 | $4.20B | $4.20B | $3.51B | <mark class="r">120%</mark> | 0 | 165,583 | 350,841 / 433,589(09-13) | -62% |
-| Bitget | 80 | $0.97B | $0.97B | $1.24B | <mark class="r">78%</mark> | 0 | 79,413 | 166,080 / 182,424(09-29) | -56% |
-| Gemini | 5 | $0.87B | $0.87B | $0.86B | <span class="ok">102%</span> | 0 | 287,685 | — | — |
-| HTX | 57 | $0.21B | $0.16B | $0.13B | <mark class="r">124%</mark> | 0 | 11,116 | 114,984 / 116,757(09-01) | -90% |
-| KuCoin | 96 | $1.70B | $1.70B | $1.66B | <span class="ok">103%</span> | 0 | 91,123 | 99,132 / 115,905(09-30) | -21% |
-| Bitstamp | 63 | $0.54B | $0.54B | $1.12B | <mark class="n">48%*</mark> | 0 | 141,382 | — | — |
+| Binance | 37 + lock 2 | $68.14B | $68.14B | $68.22B | <span class="ok">100%</span> | 0 | 3,016,647 | 3,982,739 / 3,982,773(09-01) | -24% |
+| OKX | 323 | $13.30B | $13.30B | $13.70B | <span class="ok">97%</span> | 0 | 1,090,674 | 1,862,025 / 1,866,714(2026-10) | -42% |
+| Bitfinex | 9 | $8.08B | $8.08B | $7.93B | <span class="ok">102%</span> | 0 | 590,594 | — | — |
+| Gate | 91 | $4.14B | $4.14B | $3.33B | <mark class="r">124%</mark> | 0 | 180,776 | 350,841 / 433,589(09-13) | -58% |
+| Bitget | 80 | $0.97B | $0.97B | $1.29B | <mark class="r">75%</mark> | 0 | 79,427 | 166,080 / 182,424(09-29) | -56% |
+| Gemini | 5 | $0.82B | $0.82B | $0.80B | <span class="ok">102%</span> | 0 | 286,244 | — | — |
+| HTX | 57 | $0.20B | $0.15B | $0.13B | <mark class="r">122%</mark> | 0 | 11,117 | 114,984 / 116,757(09-01) | -90% |
+| KuCoin | 96 | $1.67B | $1.67B | $1.65B | <span class="ok">101%</span> | 0 | 91,950 | 99,132 / 115,905(09-30) | -21% |
+| Bitstamp | 63 | $0.50B | $0.50B | $1.05B | <mark class="n">48%*</mark> | 0 | 139,427 | — | — |
 
 **How to read**
 
-- **Five exchanges at 97–103%** (Binance / OKX / Bitfinex / Gemini / KuCoin); the aggregator can be cited. HTX 124% is covered below; **Gate 120%** (116% last week) reads about $0.69B above the aggregator — this week the row moved Ethereum USDT +$149M and USDS −$72M — and the composition of the gap is still unverified ⚠; **Bitget 78%** (second week running; direct $0.97B vs aggregator $1.24B), composition unverified ⚠. Bitstamp is noted separately.
-- HTX's all-asset read of $0.22B exceeds the aggregator's $0.12B; the gap is exactly USDD $45M + HBTC $42M. The aggregator excludes exchange-issued or affiliated assets (§1 rules); on the same caliber it is 108%.
-- The Bitget row's fall in ETH and stablecoins on Sep 28 includes the outflows from its published addresses in the Sep 24 incident (§0 item 6, public record); Sep 28 → Oct 12 is the withdrawal-resumption period, and this week's further fall of 6,986 native ETH is likewise not to be read as ordinary fund flows.
+- **Five exchanges at 97–102%** (Binance / OKX / Bitfinex / Gemini / KuCoin); the aggregator can be cited. HTX 122% is covered below; **Gate 124%** (120% last week) reads $4.14B against the aggregator's $3.33B, about $0.81B above — this week the row moved Ethereum USDT +$83M, GHO +$54M, USDS +$36M, GT −$116M and AAVE −$62M — and the composition of the gap is still unverified ⚠; **Bitget 75%** (below 80% for a third week; direct $0.97B vs aggregator $1.29B), composition unverified ⚠. Bitstamp is noted separately.
+- HTX's all-asset read of $0.20B exceeds the aggregator's $0.13B; after removing exchange-issued or affiliated assets (USDD $44.8M + HBTC $1.5M, §1 rules) the same-caliber read is $0.15B, **still 122%**, and the remaining ~$28M gap is unverified ⚠. Correction: this item previously said "the gap is exactly USDD $45M + HBTC $42M; 108% on the same caliber". The HBTC $42M was a September figure; from the Oct 5 snapshot onward HBTC was only $1.5–2.9M, so that sentence had been stale since Oct 5.
+- The Bitget row's fall in ETH and stablecoins on Sep 28 includes the outflows from its published addresses in the Sep 24 incident (§0 item 6, public record); Sep 28 → Oct 12 was the withdrawal-resumption period; this week (Oct 12 → Oct 19) native ETH is +13, essentially flat, with Ethereum USDT +$38M and TRC20 USDT −$89M.
 - \* Bitstamp 48%: a caliber difference, not an address difference. DefiLlama counts all Beacon-chain staked ETH whose withdrawal credentials point to Bitstamp addresses (≈233k ETH, 8,011 validators) as Bitstamp reserves; this report does not, because staked ETH sits on no published address's balance, and two of the four withdrawal addresses are not on Bitstamp's published list, so the attribution rests on the aggregator's own address table alone. Adding that part back, the two sides reconcile. Independent check: `tools/beacon_validators.py` (§9).
 - The Binance row includes 2 pegged-token lock addresses ($12.3B), not customer assets. "Pegged-token lock" means the native collateral Binance locks on Ethereum mainnet for the Binance-Peg tokens it issues on BNB Chain (BSC versions of USDT, USDC, ETH, etc.); the liability side is the holders of those pegged tokens, not exchange customers. The addresses come from Binance's lockinfo endpoint and are not on its PoR list; a proposal to split them out has been filed with the aggregator (DefiLlama-Adapters PR #20885, closed unmerged by maintainers).
 - "Failed addresses" are all 0 (one OKX address cleared after a retry).
@@ -125,21 +125,21 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 | Exchange | Addresses | TRX available | TRX staked | USDT-TRC20 | PoR TRX: users / wallets | Direct TRX − PoR wallets | PoR USDT (all chains): users / wallets |
 |---|---|---|---|---|---|---|---|
-| Binance | 25 | 2,297M | 0M | 1,736.2M | — | — | 32,308M / 33,248M(09-01) |
-| OKX | 23 | 213M | 485M | 295.4M | — | — | 8,493M / 8,953M(2026-09) |
-| Bitfinex | 2 | 14M | 42M | 99.4M | — | — | — |
-| Gate | 11 | 12M | 84M | 75.9M | 59M / 180M(09-13) | <mark class="r">-46.6%</mark>(the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)) | 796M / 909M(09-13) |
-| Bitget | 29 | 4M | 0M | 310.0M | — | — | 1,181M / 1,269M(09-29) |
-| HTX | 18 | 2,988M | 6,733M | 0.0M | 8,620M / 9,384M(09-01) | +3.6% | 872M / 588M(09-01) |
-| KuCoin | 24 | 11M | 58M | 109.6M | — | — | 965M / 1,057M(09-30) |
+| Binance | 25 | 2,410M | 0M | 1,787.5M | — | — | 32,308M / 33,248M(09-01) |
+| OKX | 23 | 214M | 491M | 291.2M | — | — | 8,742M / 9,213M(2026-10) |
+| Bitfinex | 2 | 15M | 42M | 105.3M | — | — | — |
+| Gate | 11 | 13M | 84M | 125.9M | 59M / 180M(09-13) | <mark class="r">-45.9%</mark>(the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)) | 796M / 909M(09-13) |
+| Bitget | 29 | 4M | 0M | 221.1M | — | — | 1,181M / 1,269M(09-29) |
+| HTX | 18 | 3,044M | 6,733M | 0.0M | 8,620M / 9,384M(09-01) | +4.2% | 872M / 588M(09-01) |
+| KuCoin | 24 | 13M | 58M | 96.1M | — | — | 965M / 1,057M(09-30) |
 
 **How to read**
 
-- **The aggregator cannot be cited here.** It misses USDT-TRC20 (Bitget's published addresses hold 310M, the aggregator records 0), and its `eth_getBalance` read excludes staked TRX.
+- **The aggregator cannot be cited here.** It misses USDT-TRC20 (Bitget's published addresses held 221M on Oct 19, the aggregator records 0), and its `eth_getBalance` read excludes staked TRX.
 - Tron's "freeze" is its official term for staking TRX with the network in exchange for bandwidth, energy and votes: ownership is unchanged, unstaking can be started at any time and lands 14 days later; it is neither loan collateral nor a platform or judicial freeze. This report says "staked" throughout. Staked TRX can be in four places: V1 stake, V2 self-held stake, **stake delegated to other addresses** (the TRX still belongs to the address), and the unstaking queue; the "TRX staked" column counts all four. OKX's 485M and Poloniex's 24M are delegated stake, invisible if you only read `balance + frozenV2` (§7.1).
 - HTX's 18 Tron addresses in the table are the DefiLlama-Adapters's TRX cold wallets; holding no USDT there is normal. **HTX's official PoR has 5 separate USDT-TRC20 addresses**: 13.24M in the 08-01 snapshot, <mark class="r">1.91M</mark> on chain on 09-14 (below 1% of the user USDT liability, the §10 rule; the 11.33M on `TK86…` has been emptied); the single USDT-ERC20 address went 1.05M → 0. The rest of the 926M user USDT liability sits in "ThirdParty" (§6.2).
 - The last two columns are each exchange's self-reported TRX and USDT (users / wallets); USDT is the **all-chain total** (ERC20 + TRC20 + others) while this table's USDT-TRC20 is one chain, so no difference is computed. HTX's reported TRX wallets of 9,384M (09-01) are in the same range as this table's 9,747M across 18 addresses (available + staked, 09-14); of its reported 588M USDT wallets, 547M sit in "ThirdParty" (93%, §6.2).
-- "Direct TRX − PoR wallets": direct TRX (available + staked) and the reported TRX wallet are the same chain and caliber, so they compare directly; over 5% is red with the reason, as in §3.1. Gate −46.5% is an address-set difference (the 11-address DefiLlama-Adapters list; Gate publishes no TRX addresses); HTX +3.6%. No difference is computed for USDT because the reported figure is all-chain.
+- "Direct TRX − PoR wallets": direct TRX (available + staked) and the reported TRX wallet are the same chain and caliber, so they compare directly; over 5% is red with the reason, as in §3.1. Gate −45.9% is an address-set difference (the 11-address DefiLlama-Adapters list; Gate publishes no TRX addresses); HTX +4.2%. No difference is computed for USDT because the reported figure is all-chain.
 
 ## 4. Affiliated tokens as a share of reserves: FTX's three structural preconditions, exchange by exchange
 
@@ -231,7 +231,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | Binance | No (16% vs 72%) | BNB ≈177 days | Publishes per-coin liabilities; own wallets ÷ liabilities 100.1% (Sep 1) |
 | Gate | No (15% vs 53%) | GT ≈1,430 days | Ratio only, 117% (Sep 13) |
 | MEXC | No (11% vs 68%) | Not measured | Ratios only (Oct 8: BTC 294% / USDT 122%) |
-| OKX | No (5% vs 86%) | Not measured | Publishes per-coin liabilities; own wallets ÷ liabilities 101.7% (Sep) |
+| OKX | No (5% vs 86%) | Not measured | Publishes per-coin liabilities; own wallets ÷ liabilities 102.2% (Oct 2) |
 
 **How to read**
 
@@ -245,7 +245,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | Exchange | User liabilities | Reported reserves | Third-party custody share | **Own wallets ÷ liabilities** |
 |---|---|---|---|---|
 | Binance (Sep 1) | $141.2B | $143.3B | 1.4% | 100.1% |
-| OKX (47 assets, Sep) | $31.3B | $32.9B | 3.6% | 101.7% |
+| OKX (22 reserve coins, Oct 2) | $34.3B | $36.2B | 3.0% | 102.2% |
 | HTX (09-01) | $6.03B | $6.37B | <mark class="r">**18.1%** (custodian undisclosed)</mark> | <mark class="r">**86.5%**</mark> |
 | Gate (Sep 13) | — | 117.26% | no custody column | — |
 | Bitget (Sep 29) | — | 131% (USDT 107.5%: wallets 1,268.6M / users 1,180.6M) | no custody column | — |
@@ -253,7 +253,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | MEXC (Oct 8) | — | per coin: BTC 294% / USDT 122% (total ratio not captured this period) | no custody column | — |
 | Kraken | — | ratio only | — | — |
 
-- USD values use the Binance close at each snapshot time (OKB at the OKX quote); liabilities and reserves in one snapshot share the same prices, so the ratios do not depend on price. Binance Sep 1 vs Aug 1: user BTC liabilities 656,644 → 682,356 (+25,711), custody share 0.9% → 1.4%, own wallets ÷ liabilities 100.9% → 100.1%. The OKX September edition is read from its official API (47 assets; the previous edition used the 21 assets on the page); BTC user liabilities 134,399 → 139,865, BTC ratio 111% → 109%.
+- USD values use the Binance close at each snapshot time (OKB at the OKX quote); liabilities and reserves in one snapshot share the same prices, so the ratios do not depend on price. Binance Sep 1 vs Aug 1: user BTC liabilities 656,644 → 682,356 (+25,711), custody share 0.9% → 1.4%, own wallets ÷ liabilities 100.9% → 100.1%. The OKX October edition (no. 48, snapshot Oct 2 16:00 UTC, audit ID 502260945) is read from the data embedded in its official page (22 reserve coins, with liabilities counted over those 22; dollars at the Oct 2 daily OKX quote, ELF has no quote and is excluded); BTC user liabilities 139,865 → 142,810, BTC ratio 109% → 110%. ⚠ The "47 assets" recorded for the previous edition is a different basis from this edition's 22, the source of the difference is unverified, and the two editions' dollar totals should not be differenced directly. No Binance October edition seen as of Oct 19 (this report's fetch is blocked by the page's anti-bot check, so this could not be confirmed directly); the table keeps the Sep 1 edition.
 - Correction: this table previously showed Binance Aug 1 as $127.9B liabilities / $130.3B reserves, which left out ETH (about $9.6B). Including ETH at the original Sep 2 prices it is $137.5B / $139.9B; both ratios are unchanged.
 
 ## 6. Discrepancies with self-reported figures (by exchange)
