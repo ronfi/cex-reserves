@@ -17,6 +17,13 @@ def bal(a):
             if r.status_code == 404: return 0.0
         except Exception: pass
         time.sleep(2 * (i + 1))
+    # 2026-10-26:Blockscout 对大户地址(Binance 0x28c6… / 0xf977…)反复超时 ⇒ 兜底走公共 JSON-RPC eth_getBalance(同一链上余额,只是读取通道不同)
+    for u in ('https://ethereum-rpc.publicnode.com', 'https://eth.llamarpc.com', 'https://cloudflare-eth.com'):
+        try:
+            r = cr.post(u, json={'jsonrpc': '2.0', 'id': 1, 'method': 'eth_getBalance', 'params': [a, 'latest']}, timeout=30)
+            v = r.json().get('result')
+            if v: return int(v, 16) / 1e18
+        except Exception: pass
     return None
 for ex in exs:
     tot = 0.0; fail = []

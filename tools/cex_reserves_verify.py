@@ -320,7 +320,11 @@ def main():
                     for s, v in e['by_token'].items():
                         if s not in old.get('platform_direct', {}):
                             old['by_token'][s] = old['by_token'].get(s, 0) + v
-                    old['total_usd'] = sum(old['by_token'].values()); e = old
+                    for s, v in e.get('excluded_for_llama', {}).items():
+                        old.setdefault('excluded_for_llama', {})[s] = old.get('excluded_for_llama', {}).get(s, 0) + v
+                    old['total_usd'] = sum(old['by_token'].values())
+                    # 2026-10-26:补读合并后必须同步重算聚合器口径,否则沿用补读前的旧值(Binance ETH 覆盖率曾因此显示 64%)
+                    old['total_usd_llama_caliber'] = old['total_usd'] - sum(old.get('excluded_for_llama', {}).values()); e = old
                 r['eth'] = e
                 ll = r['llama']['Ethereum'] or 0
                 log(f'   {ex} ETH 直读 ${e["total_usd"]/1e9:.2f}B(聚合器口径 ${e["total_usd_llama_caliber"]/1e9:.2f}B)| 聚合器 ${ll/1e9:.2f}B | 覆盖 {e["total_usd_llama_caliber"]/ll*100 if ll else 0:.0f}% | 失败 {len(e["failed"])}')
