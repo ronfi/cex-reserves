@@ -225,7 +225,15 @@ def read_trc20(ex, addrs, contract, dec, sleep=1.2):
 def llama_chain_tvls(ex):
     j = get_json(f'https://api.llama.fi/protocol/{LLAMA_SLUG.get(ex, ex)}') or {}
     ct = j.get('currentChainTvls', {})
-    return {'Ethereum': ct.get('Ethereum'), 'Bitcoin': ct.get('Bitcoin'), 'Tron': ct.get('Tron'), 'total': sum(v for k, v in ct.items() if '-' not in k) if ct else None}
+    # 2026-11-02:聚合器 currentChainTvls 自 10-26 后把各所自有代币单列为 '<链>-OwnTokens'(如 Bitfinex 以太坊 LEO),'Ethereum' 不再含之。
+    # 为与此前各期同口径(链上全部公布地址资产),各链值 = 该链 + 该链-OwnTokens;单列部分另存 '<链>_own_tokens' 备查。
+    out = {}
+    for ch in ('Ethereum', 'Bitcoin', 'Tron'):
+        v = ct.get(ch); own = ct.get(f'{ch}-OwnTokens')
+        out[ch] = (v or 0) + own if own is not None else v
+        if own is not None: out[f'{ch}_own_tokens'] = own
+    out['total'] = sum(v for k, v in ct.items() if '-' not in k) if ct else None
+    return out
 
 # ---------------- 地址刷新 ----------------
 def refresh_addresses(A):
