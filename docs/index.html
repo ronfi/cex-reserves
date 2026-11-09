@@ -372,8 +372,8 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>629,247</td>
 <td>631,035</td>
 <td><span class="ok">-0.3%</span></td>
-<td>682,356 / 683,449(09-01)</td>
-<td><mark class="r">-7.9%</mark>(快照 09-01 vs 直读 11-09,相隔 69 天(10 月、11 月期截至 11-09 本方未能确认发布);自报钱包含第三方托管 9,772 枚;官方地址端点本周 72 → 84 址,新增 12 址持 7,487 枚)</td>
+<td>685,524 / 685,732(11-04)</td>
+<td><mark class="r">-8.2%</mark>(自报 11-04 期 vs 直读 11-09,相隔 5 天;自报钱包含第三方托管 8,324 枚;官方地址端点本周 72 → 84 址,新增 12 址持 7,487 枚;公布地址之外的部分本方读不到)</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
@@ -501,8 +501,8 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td><span class="ok">100%</span></td>
 <td>0</td>
 <td>2,723,243</td>
-<td>3,982,739 / 3,982,773(09-01)</td>
-<td>-32%</td>
+<td>3,446,090 / 3,446,615(11-04)</td>
+<td>-21%</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -612,7 +612,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <li>Binance 行含锚定代币锁仓 2 址($12.3B),不是用户资产。"锚定代币锁仓"指 Binance 为其在 BNB Chain 上发行的 Binance-Peg 代币(BSC 版 USDT、USDC、ETH 等)在以太坊主网锁定的原生抵押品,负债方是这些锚定币的持有人,而非交易所客户;地址来自 Binance 的 lockinfo 端点,不在其 PoR 清单内;已向聚合器提出拆分提案(DefiLlama-Adapters PR #20885,维护者已关闭未合并)。</li>
 <li>"失败地址"全部为 0(Binance ETH 两址补读三次后清零)。Binance 两个大户地址(0x28c6… / 0xf977…)在 Blockscout 常规端点反复超时:原生 ETH 兜底改由公共以太坊 RPC <code>eth_getBalance</code> 读取;代币余额本周改用同源 Blockscout <code>token-balances</code> 端点加长超时重读(同一数据源,只是超时参数不同)。</li>
 <li>末列为各所官方 PoR 自报的 ETH(用户 / 钱包,快照日各异),口径是<strong>全链 ETH</strong>(含 L2、质押凭证与托管),与本表以太坊主网美元读数不是同一口径,只作参照,不算差值。</li>
-<li>新增的"直读原生 ETH"只计以太坊主网地址上的原生 ETH(不含 stETH 等凭证与 L2),脚本 <code>tools/eth_native_units.py</code>,09-05 补读;自报 ETH 钱包是<strong>全链口径</strong>(含 L2、质押凭证与托管),所以"直读原生 − 自报钱包"普遍为负,只作参照,不按 §3.1 的红标规则判。例:HTX 09-01 自报钱包 116,757 中托管 87,543、交易所钱包 29,213(页面只分这两栏;分链构成只在 GitHub 快照 CSV 上,该 CSV 仍停在 08-01,见 §6.2 第 8 条),与直读 11,116 在同一量级;Binance −32% 与 OKX −41% 主要是页面含多链与地址集不同(Binance 另有快照相隔 69 天;OKX 为 11 月期)。</li>
+<li>新增的"直读原生 ETH"只计以太坊主网地址上的原生 ETH(不含 stETH 等凭证与 L2),脚本 <code>tools/eth_native_units.py</code>,09-05 补读;自报 ETH 钱包是<strong>全链口径</strong>(含 L2、质押凭证与托管),所以"直读原生 − 自报钱包"普遍为负,只作参照,不按 §3.1 的红标规则判。例:HTX 09-01 自报钱包 116,757 中托管 87,543、交易所钱包 29,213(页面只分这两栏;分链构成只在 GitHub 快照 CSV 上,该 CSV 仍停在 08-01,见 §6.2 第 8 条),与直读 11,116 在同一量级;Binance −21% 与 OKX −41% 主要是页面含多链与地址集不同(Binance 自报为 11-04 期,相隔 5 天;OKX 为 11 月期)。</li>
 </ul>
 <h3 id="3-3-tron-链-trongrid-getaccount-含四项质押-usdt-trc20-直读">3.3 Tron 链(trongrid <code>getaccount</code> 含四项质押 + USDT-TRC20 直读)</h3>
 <div class="tbl"><table>
@@ -637,7 +637,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>1,323.3M</td>
 <td>—</td>
 <td>—</td>
-<td>32,308M / 33,248M(09-01)</td>
+<td>25,227M / 25,618M(11-04)</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -968,7 +968,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <td>Binance</td>
 <td>否(16% vs 72%)</td>
 <td>BNB ≈177 天</td>
-<td>公布逐币负债,仅自有钱包 ÷ 负债 100.1%(09-01)</td>
+<td>公布逐币负债,仅自有钱包 ÷ 负债 <mark class="r">99.6%</mark>(11-04;09-01 为 100.1%)</td>
 </tr>
 <tr>
 <td>Gate</td>
@@ -1010,11 +1010,11 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </thead>
 <tbody>
 <tr>
-<td>Binance(09-01)</td>
-<td>$141.2B</td>
-<td>$143.3B</td>
-<td>1.4%</td>
-<td>100.1%</td>
+<td>Binance(11-04)</td>
+<td>$132.6B</td>
+<td>$133.7B</td>
+<td>1.3%</td>
+<td><mark class="r">99.6%</mark></td>
 </tr>
 <tr>
 <td>OKX(21 种储备币,10-31)</td>
@@ -1068,7 +1068,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </tbody>
 </table></div>
 <ul>
-<li>美元按快照时点币安收盘价折算(OKB 用 OKX 报价),同一快照内负债与储备同价,比率不受币价影响。Binance 09-01 期较 08-01 期:用户 BTC 负债 656,644 → 682,356 枚(+25,711),托管占比 0.9% → 1.4%,仅自有钱包 ÷ 负债 100.9% → 100.1%。OKX 11 月期(第 49 期,快照 10-31 16:00 UTC,auditId 508756245)由官方页面内嵌数据读取(21 种储备币,按这 21 种计负债;美元按 10-31 日线 OKX 报价,全部有报价),BTC 用户负债 142,810 → 156,609 枚(+13,799),BTC 比率 110% → 108%、ETH 100% → 101%、USDT 105% → 106%;仅自有钱包 ÷ 负债 102.2% → 101.5%,托管占储备 3.0% → 3.6%;⚠ 10 月期为 22 种、本期 21 种(少 ELF 一种),两期美元总额不宜直接相减。Binance 10 月、11 月期截至 11-09 本方仍未能确认是否发布(本方抓取被页面反爬拦截,未能直接确认),本表沿用 09-01 期。</li>
+<li>美元按快照时点币安收盘价折算(OKB 用 OKX 报价),同一快照内负债与储备同价,比率不受币价影响。Binance 11-04 期(页面 Audit Time 2026-11-04 00:00 UTC、BTC 区块 974457;人工另存页面快照,本方解析 8 种展示资产;美元按 11-03 币安日线收盘)较 09-01 期:用户 BTC 负债 682,356 → 685,524 枚(+3,168),用户 ETH 负债 3,982,739 → 3,446,090 枚(−536,649,−13.5%),用户 USDT 负债 32,308M → 25,227M(−7,081M,−21.9%);托管占比 1.4% → 1.3%(BTC 托管 9,772 → 8,324 枚、ETH 146,323 → 61,375 枚);<strong>仅自有钱包 ÷ 负债 100.1% → 99.6%</strong>(逐币:BTC 98.8%、ETH 98.2%、SOL 98.5%、XRP 98.8%、USDT 100.3%、BNB 100.3%、USD1 100.5%、USDC 102.6%;页面自报含托管的比率 BTC 100.03%、ETH 100.02%、USDT 101.55%),首次低于 100%,按本表规则标红——差额是第三方托管部分,不是缺口。页面历史清单显示 10-01 与 10-31 另有两期,本方未另存,不入表。OKX 11 月期(第 49 期,快照 10-31 16:00 UTC,auditId 508756245)由官方页面内嵌数据读取(21 种储备币,按这 21 种计负债;美元按 10-31 日线 OKX 报价,全部有报价),BTC 用户负债 142,810 → 156,609 枚(+13,799),BTC 比率 110% → 108%、ETH 100% → 101%、USDT 105% → 106%;仅自有钱包 ÷ 负债 102.2% → 101.5%,托管占储备 3.0% → 3.6%;⚠ 10 月期为 22 种、本期 21 种(少 ELF 一种),两期美元总额不宜直接相减。更正:上周写"Binance 10 月、11 月期未能确认是否发布",实为本方抓取被反爬拦截;页面显示 10-01、10-31、11-04 三期均已发布。</li>
 <li>更正:本表 Binance 08-01 期原记负债 $127.9B / 储备 $130.3B 漏计 ETH(约 $9.6B);按原 09-02 价含 ETH 应为 $137.5B / $139.9B,两项比率不变。</li>
 </ul>
 <h2 id="6-与自报口径的差异-按所">6. 与自报口径的差异(按所)</h2>
@@ -1573,5 +1573,5 @@ python3 tools/por_fetch.py                                                      
 
 </main>
 </div>
-<footer class="site-foot"><div class="foot-in"><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="archive/">历次版本存档</a></span><span>页面生成 2026-11-09 02:44 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span>支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)</span></div></footer>
+<footer class="site-foot"><div class="foot-in"><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="archive/">历次版本存档</a></span><span>页面生成 2026-11-09 08:30 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span>支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)</span></div></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

@@ -372,8 +372,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>629,247</td>
 <td>631,035</td>
 <td><span class="ok">-0.3%</span></td>
-<td>682,356 / 683,449(09-01)</td>
-<td><mark class="r">-7.9%</mark>(snapshot Sep 1 vs direct read Nov 9, 69 days apart (October and November snapshots could not be confirmed as of Nov 9); reported wallets include 9,772 BTC with third-party custodians; the official address endpoint went from 72 to 84 addresses this week, the 12 new ones holding 7,487 BTC)</td>
+<td>685,524 / 685,732(11-04)</td>
+<td><mark class="r">-8.2%</mark>(reported Nov 4 snapshot vs direct read Nov 9, 5 days apart; reported wallets include 8,324 BTC with third-party custodians; the official address endpoint went from 72 to 84 addresses this week, the 12 new ones holding 7,487 BTC; whatever sits outside the published addresses cannot be read here)</td>
 </tr>
 <tr>
 <td>Bitfinex</td>
@@ -501,8 +501,8 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td><span class="ok">100%</span></td>
 <td>0</td>
 <td>2,723,243</td>
-<td>3,982,739 / 3,982,773(09-01)</td>
-<td>-32%</td>
+<td>3,446,090 / 3,446,615(11-04)</td>
+<td>-21%</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -612,7 +612,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <li>The Binance row includes 2 pegged-token lock addresses ($12.3B), not customer assets. "Pegged-token lock" means the native collateral Binance locks on Ethereum mainnet for the Binance-Peg tokens it issues on BNB Chain (BSC versions of USDT, USDC, ETH, etc.); the liability side is the holders of those pegged tokens, not exchange customers. The addresses come from Binance's lockinfo endpoint and are not on its PoR list; a proposal to split them out has been filed with the aggregator (DefiLlama-Adapters PR #20885, closed unmerged by maintainers).</li>
 <li>"Failed addresses" are all 0 (the two Binance ETH addresses cleared after a third retry). For two large Binance addresses (0x28c6… / 0xf977…) Blockscout's regular endpoints repeatedly timed out: the native ETH falls back to a public Ethereum RPC <code>eth_getBalance</code>, and this week the token balances were re-read from the same Blockscout <code>token-balances</code> endpoint with a longer timeout (same data source, different timeout setting).</li>
 <li>The last column is each exchange's self-reported ETH (users / wallets, snapshot dates vary). Its caliber is <strong>ETH across all chains</strong> (L2s, staking receipts and custody included), not the same as this table's Ethereum-mainnet dollar read, so it is shown for reference only and no difference is computed.</li>
-<li>The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script <code>tools/eth_native_units.py</code>, read 09-05; the PoR ETH wallet figure is <strong>all-chain</strong> (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 116,757 wallet ETH (09-01), 87,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,116 read directly; Binance −32% and OKX −41% mostly reflect multi-chain pages and differing address sets (for Binance, also a snapshot 69 days old; OKX is the November edition).</li>
+<li>The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script <code>tools/eth_native_units.py</code>, read 09-05; the PoR ETH wallet figure is <strong>all-chain</strong> (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 116,757 wallet ETH (09-01), 87,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,116 read directly; Binance −21% and OKX −41% mostly reflect multi-chain pages and differing address sets (Binance's figure is the Nov 4 edition, 5 days apart; OKX is the November edition).</li>
 </ul>
 <h3 id="3-3-tron-chain-trongrid-getaccount-with-four-staking-buckets-direct-usdt-trc20-read">3.3 Tron chain (trongrid <code>getaccount</code> with four staking buckets + direct USDT-TRC20 read)</h3>
 <div class="tbl"><table>
@@ -637,7 +637,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>1,323.3M</td>
 <td>—</td>
 <td>—</td>
-<td>32,308M / 33,248M(09-01)</td>
+<td>25,227M / 25,618M(11-04)</td>
 </tr>
 <tr>
 <td>OKX</td>
@@ -968,7 +968,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <td>Binance</td>
 <td>No (16% vs 72%)</td>
 <td>BNB ≈177 days</td>
-<td>Publishes per-coin liabilities; own wallets ÷ liabilities 100.1% (Sep 1)</td>
+<td>Publishes per-coin liabilities; own wallets ÷ liabilities <mark class="r">99.6%</mark> (Nov 4; 100.1% on Sep 1)</td>
 </tr>
 <tr>
 <td>Gate</td>
@@ -1010,11 +1010,11 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 </thead>
 <tbody>
 <tr>
-<td>Binance (Sep 1)</td>
-<td>$141.2B</td>
-<td>$143.3B</td>
-<td>1.4%</td>
-<td>100.1%</td>
+<td>Binance (Nov 4)</td>
+<td>$132.6B</td>
+<td>$133.7B</td>
+<td>1.3%</td>
+<td><mark class="r">99.6%</mark></td>
 </tr>
 <tr>
 <td>OKX (21 reserve coins, Oct 31)</td>
@@ -1068,7 +1068,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 </tbody>
 </table></div>
 <ul>
-<li>USD values use the Binance close at each snapshot time (OKB at the OKX quote); liabilities and reserves in one snapshot share the same prices, so the ratios do not depend on price. Binance Sep 1 vs Aug 1: user BTC liabilities 656,644 → 682,356 (+25,711), custody share 0.9% → 1.4%, own wallets ÷ liabilities 100.9% → 100.1%. The OKX November edition (no. 49, snapshot Oct 31 16:00 UTC, auditId 508756245) is read from the data embedded in the official page (21 reserve coins, liabilities counted on those 21; USD at the Oct 31 OKX daily quote, all priced): BTC user liabilities 142,810 → 156,609 (+13,799), BTC ratio 110% → 108%, ETH 100% → 101%, USDT 105% → 106%; own wallets ÷ liabilities 102.2% → 101.5%, custody share of reserves 3.0% → 3.6%; ⚠ the October edition covered 22 coins and this one 21 (ELF dropped), so the two editions' dollar totals should not be differenced directly. No Binance October or November edition confirmed as of Nov 9 (this report's fetch is blocked by the page's anti-bot check, so this could not be confirmed directly); the table keeps the Sep 1 edition.</li>
+<li>USD values use the Binance close at each snapshot time (OKB at the OKX quote); liabilities and reserves in one snapshot share the same prices, so the ratios do not depend on price. Binance Nov 4 edition (page audit time 2026-11-04 00:00 UTC, BTC block 974457; page snapshot saved manually, 8 displayed assets parsed here; USD at the Binance Nov 3 daily close) vs Sep 1: user BTC liabilities 682,356 → 685,524 (+3,168), user ETH liabilities 3,982,739 → 3,446,090 (−536,649, −13.5%), user USDT liabilities 32,308M → 25,227M (−7,081M, −21.9%); custody share 1.4% → 1.3% (BTC custody 9,772 → 8,324, ETH 146,323 → 61,375); <strong>own wallets ÷ liabilities 100.1% → 99.6%</strong> (per coin: BTC 98.8%, ETH 98.2%, SOL 98.5%, XRP 98.8%, USDT 100.3%, BNB 100.3%, USD1 100.5%, USDC 102.6%; the page's own ratios including custody are BTC 100.03%, ETH 100.02%, USDT 101.55%), below 100% for the first time and therefore red under this table's rule — the gap is the third-party-custody portion, not a shortfall. The page's history also lists Oct 1 and Oct 31 editions, which were not saved and are not tabulated. The OKX November edition (no. 49, snapshot Oct 31 16:00 UTC, auditId 508756245) is read from the data embedded in the official page (21 reserve coins, liabilities counted on those 21; USD at the Oct 31 OKX daily quote, all priced): BTC user liabilities 142,810 → 156,609 (+13,799), BTC ratio 110% → 108%, ETH 100% → 101%, USDT 105% → 106%; own wallets ÷ liabilities 102.2% → 101.5%, custody share of reserves 3.0% → 3.6%; ⚠ the October edition covered 22 coins and this one 21 (ELF dropped), so the two editions' dollar totals should not be differenced directly. Correction: last week this note said the Binance October and November editions could not be confirmed; the fetch was simply blocked by the anti-bot check, and the page shows Oct 1, Oct 31 and Nov 4 editions were all published.</li>
 <li>Correction: this table previously showed Binance Aug 1 as $127.9B liabilities / $130.3B reserves, which left out ETH (about $9.6B). Including ETH at the original Sep 2 prices it is $137.5B / $139.9B; both ratios are unchanged.</li>
 </ul>
 <h2 id="6-discrepancies-with-self-reported-figures-by-exchange">6. Discrepancies with self-reported figures (by exchange)</h2>
@@ -1573,5 +1573,5 @@ python3 tools/por_fetch.py                                                      
 
 </main>
 </div>
-<footer class="site-foot"><div class="foot-in"><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="./">Version archive</a></span><span>Page built 2026-11-09 02:44 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></div></footer>
+<footer class="site-foot"><div class="foot-in"><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="./">Version archive</a></span><span>Page built 2026-11-09 08:30 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></div></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

@@ -76,7 +76,7 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 | Exchange | Addresses (read/total) | Direct BTC | Aggregator BTC | Diff | PoR BTC: users / wallets (snapshot) | Direct − PoR wallets |
 |---|---|---|---|---|---|---|
-| Binance | 84/84 | 629,247 | 631,035 | <span class="ok">-0.3%</span> | 682,356 / 683,449(09-01) | <mark class="r">-7.9%</mark>(snapshot Sep 1 vs direct read Nov 9, 69 days apart (October and November snapshots could not be confirmed as of Nov 9); reported wallets include 9,772 BTC with third-party custodians; the official address endpoint went from 72 to 84 addresses this week, the 12 new ones holding 7,487 BTC) |
+| Binance | 84/84 | 629,247 | 631,035 | <span class="ok">-0.3%</span> | 685,524 / 685,732(11-04) | <mark class="r">-8.2%</mark>(reported Nov 4 snapshot vs direct read Nov 9, 5 days apart; reported wallets include 8,324 BTC with third-party custodians; the official address endpoint went from 72 to 84 addresses this week, the 12 new ones holding 7,487 BTC; whatever sits outside the published addresses cannot be read here) |
 | Bitfinex | 3/3 | 159,393 | 159,651 | <span class="ok">-0.2%</span> | — | — |
 | Bybit | 27/27 | 69,290 | 69,208 | <span class="ok">+0.1%</span> | 56,438 / 59,064(07-23) | <mark class="r">+17.3%</mark>(press-release snapshot 07-23 vs direct read 11-09) |
 | Gate | 15/15 | 20,133 | 20,148 | <span class="ok">-0.1%</span> | 21,157 / 25,727(10-18) | <mark class="r">-21.7%</mark>(the 14-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no BTC addresses)) |
@@ -100,7 +100,7 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 
 | Exchange | Addresses | All-asset read | Aggregator-caliber read | Aggregator | Coverage | Failed | Direct native ETH | PoR ETH: users / wallets (snapshot) | Direct native − PoR wallets |
 |---|---|---|---|---|---|---|---|---|---|
-| Binance | 50 + lock 2 | $54.90B | $54.90B | $54.70B | <span class="ok">100%</span> | 0 | 2,723,243 | 3,982,739 / 3,982,773(09-01) | -32% |
+| Binance | 50 + lock 2 | $54.90B | $54.90B | $54.70B | <span class="ok">100%</span> | 0 | 2,723,243 | 3,446,090 / 3,446,615(11-04) | -21% |
 | OKX | 323 | $12.61B | $12.61B | $12.93B | <span class="ok">97%</span> | 0 | 1,128,438 | 1,916,904 / 1,926,698(2026-11) | -41% |
 | Bitfinex | 9 | $8.04B | $8.04B | $7.93B | <span class="ok">101%</span> | 0 | 615,207 | — | — |
 | Gate | 91 | $3.53B | $3.53B | $3.12B | <mark class="r">113%</mark> | 0 | 172,716 | 362,785 / 449,042(10-18) | -62% |
@@ -120,13 +120,13 @@ Sample rule: **the top 20 by on-chain assets on the DefiLlama CEX board**, no di
 - The Binance row includes 2 pegged-token lock addresses ($12.3B), not customer assets. "Pegged-token lock" means the native collateral Binance locks on Ethereum mainnet for the Binance-Peg tokens it issues on BNB Chain (BSC versions of USDT, USDC, ETH, etc.); the liability side is the holders of those pegged tokens, not exchange customers. The addresses come from Binance's lockinfo endpoint and are not on its PoR list; a proposal to split them out has been filed with the aggregator (DefiLlama-Adapters PR #20885, closed unmerged by maintainers).
 - "Failed addresses" are all 0 (the two Binance ETH addresses cleared after a third retry). For two large Binance addresses (0x28c6… / 0xf977…) Blockscout's regular endpoints repeatedly timed out: the native ETH falls back to a public Ethereum RPC `eth_getBalance`, and this week the token balances were re-read from the same Blockscout `token-balances` endpoint with a longer timeout (same data source, different timeout setting).
 - The last column is each exchange's self-reported ETH (users / wallets, snapshot dates vary). Its caliber is **ETH across all chains** (L2s, staking receipts and custody included), not the same as this table's Ethereum-mainnet dollar read, so it is shown for reference only and no difference is computed.
-- The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script `tools/eth_native_units.py`, read 09-05; the PoR ETH wallet figure is **all-chain** (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 116,757 wallet ETH (09-01), 87,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,116 read directly; Binance −32% and OKX −41% mostly reflect multi-chain pages and differing address sets (for Binance, also a snapshot 69 days old; OKX is the November edition).
+- The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script `tools/eth_native_units.py`, read 09-05; the PoR ETH wallet figure is **all-chain** (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 116,757 wallet ETH (09-01), 87,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,116 read directly; Binance −21% and OKX −41% mostly reflect multi-chain pages and differing address sets (Binance's figure is the Nov 4 edition, 5 days apart; OKX is the November edition).
 
 ### 3.3 Tron chain (trongrid `getaccount` with four staking buckets + direct USDT-TRC20 read)
 
 | Exchange | Addresses | TRX available | TRX staked | USDT-TRC20 | PoR TRX: users / wallets | Direct TRX − PoR wallets | PoR USDT (all chains): users / wallets |
 |---|---|---|---|---|---|---|---|
-| Binance | 37 | 2,430M | 0M | 1,323.3M | — | — | 32,308M / 33,248M(09-01) |
+| Binance | 37 | 2,430M | 0M | 1,323.3M | — | — | 25,227M / 25,618M(11-04) |
 | OKX | 23 | 221M | 491M | 109.6M | — | — | 7,956M / 8,467M(2026-11) |
 | Bitfinex | 2 | 15M | 42M | 258.6M | — | — | — |
 | Gate | 11 | 16M | 84M | 94.3M | 60M / 180M(10-18) | <mark class="r">-44.4%</mark>(the 11-address DefiLlama-Adapters list is not every wallet on the page (Gate publishes no TRX addresses)) | 833M / 930M(10-18) |
@@ -229,7 +229,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | Bitfinex | No (32% vs 68%) | LEO ≈26,700 days | No PoR page, liabilities unpublished |
 | KuCoin | No (15% vs 59%) | KCS ≈96 days | Per-coin ratios only (Oct 31: USDT 110%) |
 | SwissBorg | No (15% vs 63%) | Not measured | No PoR page |
-| Binance | No (16% vs 72%) | BNB ≈177 days | Publishes per-coin liabilities; own wallets ÷ liabilities 100.1% (Sep 1) |
+| Binance | No (16% vs 72%) | BNB ≈177 days | Publishes per-coin liabilities; own wallets ÷ liabilities <mark class="r">99.6%</mark> (Nov 4; 100.1% on Sep 1) |
 | Gate | No (15% vs 53%) | GT ≈1,430 days | Ratio only, 118.5% (Oct 18) |
 | MEXC | No (11% vs 68%) | Not measured | Ratios only (Oct 8: BTC 294% / USDT 122%) |
 | OKX | No (5% vs 86%) | Not measured | Publishes per-coin liabilities; own wallets ÷ liabilities 101.5% (Oct 31) |
@@ -245,7 +245,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 
 | Exchange | User liabilities | Reported reserves | Third-party custody share | **Own wallets ÷ liabilities** |
 |---|---|---|---|---|
-| Binance (Sep 1) | $141.2B | $143.3B | 1.4% | 100.1% |
+| Binance (Nov 4) | $132.6B | $133.7B | 1.3% | <mark class="r">99.6%</mark> |
 | OKX (21 reserve coins, Oct 31) | $32.4B | $34.1B | 3.6% | 101.5% |
 | HTX (09-01) | $6.03B | $6.37B | <mark class="r">**18.1%** (custodian undisclosed)</mark> | <mark class="r">**86.5%**</mark> |
 | Gate (Oct 18) | — | 118.49% | no custody column | — |
@@ -254,7 +254,7 @@ The table above is arranged by exchange; below is arranged by asset, one block p
 | MEXC (Oct 8) | — | per coin: BTC 294% / USDT 122% (total ratio not captured this period) | no custody column | — |
 | Kraken | — | ratio only | — | — |
 
-- USD values use the Binance close at each snapshot time (OKB at the OKX quote); liabilities and reserves in one snapshot share the same prices, so the ratios do not depend on price. Binance Sep 1 vs Aug 1: user BTC liabilities 656,644 → 682,356 (+25,711), custody share 0.9% → 1.4%, own wallets ÷ liabilities 100.9% → 100.1%. The OKX November edition (no. 49, snapshot Oct 31 16:00 UTC, auditId 508756245) is read from the data embedded in the official page (21 reserve coins, liabilities counted on those 21; USD at the Oct 31 OKX daily quote, all priced): BTC user liabilities 142,810 → 156,609 (+13,799), BTC ratio 110% → 108%, ETH 100% → 101%, USDT 105% → 106%; own wallets ÷ liabilities 102.2% → 101.5%, custody share of reserves 3.0% → 3.6%; ⚠ the October edition covered 22 coins and this one 21 (ELF dropped), so the two editions' dollar totals should not be differenced directly. No Binance October or November edition confirmed as of Nov 9 (this report's fetch is blocked by the page's anti-bot check, so this could not be confirmed directly); the table keeps the Sep 1 edition.
+- USD values use the Binance close at each snapshot time (OKB at the OKX quote); liabilities and reserves in one snapshot share the same prices, so the ratios do not depend on price. Binance Nov 4 edition (page audit time 2026-11-04 00:00 UTC, BTC block 974457; page snapshot saved manually, 8 displayed assets parsed here; USD at the Binance Nov 3 daily close) vs Sep 1: user BTC liabilities 682,356 → 685,524 (+3,168), user ETH liabilities 3,982,739 → 3,446,090 (−536,649, −13.5%), user USDT liabilities 32,308M → 25,227M (−7,081M, −21.9%); custody share 1.4% → 1.3% (BTC custody 9,772 → 8,324, ETH 146,323 → 61,375); **own wallets ÷ liabilities 100.1% → 99.6%** (per coin: BTC 98.8%, ETH 98.2%, SOL 98.5%, XRP 98.8%, USDT 100.3%, BNB 100.3%, USD1 100.5%, USDC 102.6%; the page's own ratios including custody are BTC 100.03%, ETH 100.02%, USDT 101.55%), below 100% for the first time and therefore red under this table's rule — the gap is the third-party-custody portion, not a shortfall. The page's history also lists Oct 1 and Oct 31 editions, which were not saved and are not tabulated. The OKX November edition (no. 49, snapshot Oct 31 16:00 UTC, auditId 508756245) is read from the data embedded in the official page (21 reserve coins, liabilities counted on those 21; USD at the Oct 31 OKX daily quote, all priced): BTC user liabilities 142,810 → 156,609 (+13,799), BTC ratio 110% → 108%, ETH 100% → 101%, USDT 105% → 106%; own wallets ÷ liabilities 102.2% → 101.5%, custody share of reserves 3.0% → 3.6%; ⚠ the October edition covered 22 coins and this one 21 (ELF dropped), so the two editions' dollar totals should not be differenced directly. Correction: last week this note said the Binance October and November editions could not be confirmed; the fetch was simply blocked by the anti-bot check, and the page shows Oct 1, Oct 31 and Nov 4 editions were all published.
 - Correction: this table previously showed Binance Aug 1 as $127.9B liabilities / $130.3B reserves, which left out ETH (about $9.6B). Including ETH at the original Sep 2 prices it is $137.5B / $139.9B; both ratios are unchanged.
 
 ## 6. Discrepancies with self-reported figures (by exchange)
