@@ -613,7 +613,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <li>The Binance row includes 2 pegged-token lock addresses ($11.9B), not customer assets. "Pegged-token lock" means the native collateral Binance locks on Ethereum mainnet for the Binance-Peg tokens it issues on BNB Chain (BSC versions of USDT, USDC, ETH, etc.); the liability side is the holders of those pegged tokens, not exchange customers. The addresses come from Binance's lockinfo endpoint and are not on its PoR list; a proposal to split them out has been filed with the aggregator (DefiLlama-Adapters PR #20885, closed unmerged by maintainers).</li>
 <li>"Failed addresses" are all 0, but this week that is the result after a re-read: Blockscout's address endpoint (<code>/addresses/{a}</code>) kept timing out for 118 addresses across 9 exchanges (the first read and the 72 retries that followed all failed), while the <code>token-balances</code> endpoint of the same source worked. Native ETH for those addresses was read from a public Ethereum RPC <code>eth_getBalance</code> instead, priced at the ETH price from Blockscout <code>/stats</code> ($1,723.33 at 08:51 UTC), and token balances were still read from <code>token-balances</code>; the address list is recorded in the snapshot under <code>_meta.eth_native_rpc_fallback_1123</code>. The first read ran 00:02–05:45 UTC and the re-read 08:51–09:16 UTC, so read times within one table differ by up to about 9 hours ⚠. This week the "Direct native ETH" column is taken from the per-address units of the main read; <code>tools/eth_native_units.py</code> was not run separately. One entry in the ETH network list of Binance's official endpoint is not in Ethereum address format (it does not start with 0x) and was left out of this report's list.</li>
 <li>The last column is each exchange's self-reported ETH (users / wallets, snapshot dates vary). Its caliber is <strong>ETH across all chains</strong> (L2s, staking receipts and custody included), not the same as this table's Ethereum-mainnet dollar read, so it is shown for reference only and no difference is computed.</li>
-<li>The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script <code>tools/eth_native_units.py</code>, read 09-05; the PoR ETH wallet figure is <strong>all-chain</strong> (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 116,757 wallet ETH (09-01), 87,525 is custody and 29,158 stETH, with only 1,504 native mainnet ETH (its GitHub snapshot CSV), the same order as the 11,116 read directly; Binance −22% and OKX −43% mostly reflect multi-chain pages and differing address sets (Binance's figure is the Nov 4 edition, 19 days apart; OKX is the November edition).</li>
+<li>The added "Direct native ETH" column counts only native ETH on Ethereum-mainnet addresses (no stETH-type receipts, no L2), script <code>tools/eth_native_units.py</code>, read 09-05; the PoR ETH wallet figure is <strong>all-chain</strong> (L2s, staking receipts and custody included), so "Direct native − PoR wallets" is generally negative, shown for reference only and not judged by the §3.1 red rule. Example: of HTX's reported 116,757 wallet ETH (09-01), 87,543 is custody and 29,213 is stETH with no native mainnet ETH line (its 09-01 GitHub snapshot CSV; the 11-01 version shows stETH 29,334 + native ETH 284, §6.2 item 4), the same order as the 11,116 read directly; Binance −22% and OKX −43% mostly reflect multi-chain pages and differing address sets (Binance's figure is the Nov 4 edition, 19 days apart; OKX is the November edition).</li>
 </ul>
 <h3 id="3-3-tron-chain-trongrid-getaccount-with-four-staking-buckets-direct-usdt-trc20-read">3.3 Tron chain (trongrid <code>getaccount</code> with four staking buckets + direct USDT-TRC20 read)</h3>
 <div class="tbl"><table>
@@ -917,7 +917,7 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 </tr>
 <tr>
 <td>Size and holdings (primary)</td>
-<td>73% of HTX's own-wallet USDT is stUSDT (39.55M; ⚠ that composition is from the 08-01 per-chain snapshot, HTX has not published the 09-01 per-chain data, §6.2); Poloniex snapshot sUSDS 912.6M, stETH 247.8k (§7); Binance WBETH $8.4B; the aEthUSDT pool on chain 09-03: total supply ≈$2.95B, cash in pool $236M, utilisation 92% (<a href="https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a">https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a</a>)</td>
+<td>about 95% of HTX's own-wallet USDT is stUSDT (09-01 GitHub snapshot: 39.55M ÷ 41.46M; 11-01 version: 35.85M ÷ 37.76M; §6.2); Poloniex snapshot sUSDS 912.6M, stETH 247.8k (§7); Binance WBETH $8.4B; the aEthUSDT pool on chain 09-03: total supply ≈$2.95B, cash in pool $236M, utilisation 92% (<a href="https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a">https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a</a>)</td>
 </tr>
 <tr>
 <td>Verifiability</td>
@@ -1112,39 +1112,39 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 <tbody>
 <tr>
 <td>1</td>
-<td><strong>Own-wallet USDT covers only 4.8% of liabilities; 93% of USDT reserves sit in third-party custody</strong></td>
-<td>09-01 page: liabilities 872.3M; own wallets <strong>41.46M</strong> (÷ liabilities = 4.8%); custody 546.87M (93% of USDT reserves). ⚠ The per-chain composition of own wallets (08-01: USDT-TRC20 13.24M + USDT-ERC20 1.05M + stUSDT 39.55M, i.e. 73% JustLend receipts) exists only in the GitHub CSV, which has no 09-01 version yet. The 5 official USDT-TRC20 addresses on chain 09-14: <strong>1.91M</strong></td>
-<td>HTX PoR page "USDs" breakdown; GitHub snapshot CSV; <code>--chain tron --ex htx</code> (<code>tron_por</code> item)</td>
+<td><strong>Own-wallet USDT covers only 4.8% of liabilities (09-01); 93% of USDT reserves sit in third-party custody; reserve-side USDT fell to 236M at 11-01</strong></td>
+<td>09-01 page: liabilities 872.3M; own wallets <strong>41.46M</strong> (÷ liabilities = 4.8%); custody 546.87M (93% of USDT reserves). Per-chain composition of own wallets (09-01 GitHub CSV): USDT-TRC20 1.91M + stUSDT 39.55M, i.e. 95% JustLend receipts. <strong>11-01 CSV (pushed 11-10, reserve side only)</strong>: USDT total 235.71M (588.33M at 09-01, −60%) = USDT-TRC20 1.91M + stUSDT 35.85M + ThirdParty 197.95M (84%). ⚠ The 11-01 liabilities exist only on the official page, which this report has not obtained for that period, so no 11-01 coverage ratio is computed. The official USDT-TRC20 addresses on chain 11-23: <strong>1.91M</strong></td>
+<td>HTX PoR page "USDs" breakdown (09-01 saved copy); GitHub snapshot CSV (09-01 and 11-01 versions); <code>--chain tron --ex htx</code> (<code>tron_por</code> item)</td>
 </tr>
 <tr>
 <td>2</td>
-<td><strong>18.1% of reserves in third-party custody whose custodian is not disclosed on the page</strong></td>
-<td>Category added 2026-06-01; at 09-01 it holds USDT 546.9M, USDC 239.4M, ETH 87,543, BTC 1,689, USDD 6.9M, U 17.9M, SOL 1,833 and 301.8bn HTX; Binance 0.9% and OKX 2.6% on the same basis</td>
-<td>HTX PoR page "Custodial Wallets" column</td>
+<td><strong>18.1% of reserves in third-party custody whose custodian is not disclosed on the page (09-01); about 15.7% at 11-01 on this report's own pricing</strong></td>
+<td>Category added 2026-06-01; at 09-01 it holds USDT 546.9M, USDC 239.4M, ETH 87,543, BTC 1,689, USDD 6.9M, U 17.9M, SOL 1,833 and 301.8bn HTX; Binance 0.9% and OKX 2.6% on the same basis. <strong>ThirdParty rows in the 11-01 CSV</strong>: USDT 197.95M, USDC 352.40M (99.9% of the 352.66M USDC reserve), ETH 80,835, BTC 1,678, USDD 10.04M, U 26.90M, SOL 385,644 (1,833 at 09-01; only 1,144 SOL left in exchange wallets at 11-01) and 517.8bn HTX. Priced at Binance hourly opens of 10-31 16:00 UTC (HTX token at HTX's daily open), ThirdParty is about $0.94B of about $5.96B in reserves ≈ <strong>15.7%</strong> (this report's pricing, not a page figure ⚠)</td>
+<td>HTX PoR page "Custodial Wallets" column (09-01); GitHub snapshot CSV (11-01 version)</td>
 </tr>
 <tr>
 <td>3</td>
-<td><strong>51% of BTC reserves is Poloniex-issued BTC-TRC20, with no corresponding collateral found in the published addresses or the PoR page (on-chain search cannot rule it out)</strong></td>
-<td>09-01 reported BTC 20,252 = exchange wallets 18,563 + custody 1,689; BTC-TRC20 on chain 09-14 is <strong>10,334 = 51% of reported reserves</strong>; the 11 published addresses read 8,203 native = <strong>42.1%</strong> of the 19,498 user liability</td>
-<td><code>--chain btc,tron --ex htx</code>; BTC-TRC20 in §7.2</td>
+<td><strong>About half of BTC reserves is Poloniex-issued BTC-TRC20 (51% at 09-01, 52.6% at 11-01), with no corresponding collateral found in the published addresses or the PoR page (on-chain search cannot rule it out)</strong></td>
+<td>09-01 reported BTC 20,252 = exchange wallets 18,563 + custody 1,689; BTC-TRC20 on chain 09-14 was 10,334 = 51% of reported reserves; the 11 published addresses read 8,203 native = <strong>42.1%</strong> of the 19,498 user liability. <strong>11-01 CSV</strong>: BTC total 19,711.79 = native BTC 7,498.83 + BTC-TRC20 <strong>10,365.93 (52.6%)</strong> + jWBTC 89 + BTC on Solana 80 + ThirdParty 1,678.04. On chain 11-23: BTC-TRC20 10,331, native BTC on the 7 official addresses 7,461</td>
+<td><code>--chain btc,tron --ex htx</code>; GitHub snapshot CSV; BTC-TRC20 in §7.2</td>
 </tr>
 <tr>
 <td>4</td>
-<td><strong>75.0% of ETH reserves in custody, 25.0% verifiable on chain</strong></td>
-<td>09-01 page: users 114,984 / HTX 116,757 / exchange wallets 29,213 / custody 87,543; the 11 PoR addresses on chain 09-14 read <strong>$67.4M</strong> (native ETH only 61.6, the rest stETH-type receipts)</td>
-<td><code>--chain eth --ex htx</code> (<code>eth_por</code> item)</td>
+<td><strong>About three quarters of ETH reserves in custody (75.0% at 09-01, 73.2% at 11-01); the exchange wallets are almost entirely stETH</strong></td>
+<td>09-01 page: users 114,984 / HTX 116,757 / exchange wallets 29,213 / custody 87,543; the same-day CSV shows the 29,213 in exchange wallets is all stETH. <strong>11-01 CSV</strong>: ETH total 110,453.18 = stETH 29,334.18 + native ETH 283.90 + ThirdParty 80,835.10. The 11 PoR addresses on chain 11-23 read <strong>$57.2M</strong> (stETH $50.7M; native ETH 134)</td>
+<td><code>--chain eth --ex htx</code> (<code>eth_por</code> item); GitHub snapshot CSV</td>
 </tr>
 <tr>
 <td>5</td>
-<td><strong>TRX is 47% of reserves, 69% staked, and the whole market's order book cannot absorb 1% of it</strong></td>
-<td>18 addresses hold 9.75B TRX = 10.3% of supply (3.01B available + 6.73B staked, 69% staked, read 09-14); the 09-01 user TRX liability is 8.62B ⇒ <strong>35%</strong> payable at once; ±2% spot depth across ten venues $17.6M in total, HTX holding $3.2B</td>
-<td>trongrid <code>getaccount</code>; each venue's depth API</td>
+<td><strong>TRX is 47% of reserves (09-01; about 49% at 11-01 on this report's pricing), 69% staked, and the whole market's order book cannot absorb 1% of it</strong></td>
+<td>18 addresses hold 9.76B TRX (3.03B available + 6.73B staked, 69% staked, read 11-23; 9.75B = 10.3% of supply on 09-14); the 11-01 CSV reports TRX 9,384.2M = TRX 8,461.8M + jsTRX 922.5M (essentially the same as 9,384.2M at 09-01); the 09-01 user TRX liability is 8.62B ⇒ <strong>35%</strong> payable at once; ±2% spot depth across ten venues $17.6M in total, HTX holding $3.2B (measured 09-14, §8)</td>
+<td>trongrid <code>getaccount</code>; GitHub snapshot CSV; each venue's depth API</td>
 </tr>
 <tr>
 <td>6</td>
-<td><strong>The HTX platform token is 6.1% of reserves; the self-reported exchange wallets equal 23.2% of its supply, and it trades only on HTX</strong></td>
-<td>Tron mainnet totalSupply <strong>999.99 trillion</strong> (contract read 2026-09-07); the 09-01 page reports <strong>231.76 trillion in exchange wallets = 23.2% of supply</strong>, plus 301.8bn in custody — consistent with the "about 23% self-held" figure, and it confirms that last period's "18 addresses hold 2.31 trillion" was an order-of-magnitude slip (2.31/1000 = 0.23%, off by 100×), now withdrawn. ⚠ The 23.2% is <strong>self-reported</strong>; the holding addresses are still not in this report's TRX cold-wallet list and the per-address on-chain check is not done. Not listed on Binance/OKX, daily volume on the five listing venues $0–50k; no perpetuals on nine venues</td>
-<td>Tron JSON-RPC; each venue's market API</td>
+<td><strong>The HTX platform token is 6.1% of reserves (09-01); the self-reported exchange wallets equal 23.2% of its supply, and it trades only on HTX</strong></td>
+<td>Tron mainnet totalSupply <strong>999.99 trillion</strong> (contract read 2026-09-07); the 09-01 page reports <strong>231.76 trillion in exchange wallets = 23.2% of supply</strong>, plus 301.8bn in custody — consistent with the "about 23% self-held" figure, and it confirms that last period's "18 addresses hold 2.31 trillion" was an order-of-magnitude slip (2.31/1000 = 0.23%, off by 100×), now withdrawn. <strong>11-01 CSV</strong>: HTX token total 222.28 trillion (−4.2% from 232.06 trillion at 09-01) = HTX-TRC20 221.76 trillion + ThirdParty 517.8bn; the HTX-ERC20 row of the 09-01 version (386.1bn) no longer exists in the 11-01 version. totalSupply was not re-read this time ⚠. ⚠ These shares are <strong>self-reported</strong>; the holding addresses are still not in this report's TRX cold-wallet list and the per-address on-chain check is not done. Not listed on Binance/OKX, daily volume on the five listing venues $0–50k; no perpetuals on nine venues</td>
+<td>Tron JSON-RPC; GitHub snapshot CSV; each venue's market API</td>
 </tr>
 <tr>
 <td>7</td>
@@ -1154,9 +1154,9 @@ This page makes no judgement about any exchange's solvency; it presents verifiab
 </tr>
 <tr>
 <td>8</td>
-<td>Page is internally consistent, but less than half is verifiable — and this period one cross-source is missing</td>
-<td>The 09-01 page reports BTC / ETH ratios of 104% / 102%; the share provably "that coin" on chain is <strong>42.5% / 25.0%</strong>. ⚠ <strong>The page-vs-GitHub cell-by-cell check cannot be done this period</strong>: <code>huobi_por.csv</code> still carries the 08-01 snapshot (HTX pushes it about 11 days after each snapshot — the 08-01 file landed on 08-12), so the 09-01 file is expected around 09-12; last period's four figures did match cell by cell</td>
-<td>§3 and §5 of this report</td>
+<td>Page and GitHub snapshot match cell by cell, but less than half is verifiable on chain; the latest period lacks the liability side</td>
+<td>The 09-01 page reports BTC / ETH ratios of 104% / 102%; the share provably "that coin" on chain is <strong>42.5% / 25.0%</strong>. <strong>Page-vs-GitHub cell-by-cell check (09-01 period)</strong>: BTC 20,252 / 20,252.35, ETH 116,757 / 116,757.07, TRX 9,384,209,885 / 9,384,209,885.72, USDT 588,327,863 / 588,327,863.60, and the HTX token, XRP, DOGE and SOL — all eight match. <strong>Correction</strong>: this item and item 1 previously said that <code>huobi_por.csv</code> on GitHub "still carries the 08-01 snapshot"; that stopped being true on 09-07 — HTX pushed the 09-01 version on 09-07/09-08, the 10-01 version on 10-14 and the 11-01 version on 11-10 (commit message <code>upgrade merkle_proof_20261101</code>); this report only rewrote the section on 11-23. ⚠ The GitHub CSV carries the reserve side only; liabilities and reserve ratios for 11-01 exist only on the official page, which this report has not obtained for that period, so <strong>the 11-01 reserve ratio and "own wallets ÷ liabilities" cannot be computed</strong></td>
+<td>§3 and §5 of this report; commit history of GitHub <code>huobiapi/Tool-Node.js-VerifyAddress</code></td>
 </tr>
 </tbody>
 </table></div>
@@ -1574,5 +1574,5 @@ python3 tools/por_fetch.py                                                      
 
 </main>
 </div>
-<footer class="site-foot"><div class="foot-in"><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="./">Version archive</a></span><span>Page built 2026-11-23 09:32 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></div></footer>
+<footer class="site-foot"><div class="foot-in"><span>Source and data: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="./">Version archive</a></span><span>Page built 2026-11-23 10:25 UTC</span><span>Content CC BY-NC-ND 4.0 · scripts MIT</span><span>Support: use only the addresses in <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md (main branch)</a>, and no address seen anywhere else</span><span id="busuanzi_container_page_pv" style="display:none"><span id="busuanzi_value_page_pv"></span> page views (counted by the third-party busuanzi script)</span></div></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

@@ -613,7 +613,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <li>Binance 行含锚定代币锁仓 2 址($11.9B),不是用户资产。"锚定代币锁仓"指 Binance 为其在 BNB Chain 上发行的 Binance-Peg 代币(BSC 版 USDT、USDC、ETH 等)在以太坊主网锁定的原生抵押品,负债方是这些锚定币的持有人,而非交易所客户;地址来自 Binance 的 lockinfo 端点,不在其 PoR 清单内;已向聚合器提出拆分提案(DefiLlama-Adapters PR #20885,维护者已关闭未合并)。</li>
 <li>"失败地址"全部为 0,但本周是补读之后的结果:Blockscout 的地址端点(<code>/addresses/{a}</code>)对 9 所共 118 个地址持续超时(首读与随后 72 次重试均失败),同源的 <code>token-balances</code> 端点正常。这些地址的原生 ETH 改由公共以太坊 RPC <code>eth_getBalance</code> 读取,计价取 Blockscout <code>/stats</code> 的 ETH 价($1,723.33,08:51 UTC),代币余额仍读 <code>token-balances</code>;地址名单记在快照 <code>_meta.eth_native_rpc_fallback_1123</code>。首读 00:02–05:45 UTC,补读 08:51–09:16 UTC,同一张表内各地址的读取时刻最多相差约 9 小时 ⚠。本周"直读原生 ETH"列取自主读数的逐址枚数,未另跑 <code>tools/eth_native_units.py</code>。Binance 官方端点 ETH 网络清单中有 1 条不是以太坊地址格式(非 0x 开头),未纳入本方清单。</li>
 <li>末列为各所官方 PoR 自报的 ETH(用户 / 钱包,快照日各异),口径是<strong>全链 ETH</strong>(含 L2、质押凭证与托管),与本表以太坊主网美元读数不是同一口径,只作参照,不算差值。</li>
-<li>新增的"直读原生 ETH"只计以太坊主网地址上的原生 ETH(不含 stETH 等凭证与 L2),脚本 <code>tools/eth_native_units.py</code>,09-05 补读;自报 ETH 钱包是<strong>全链口径</strong>(含 L2、质押凭证与托管),所以"直读原生 − 自报钱包"普遍为负,只作参照,不按 §3.1 的红标规则判。例:HTX 09-01 自报钱包 116,757 中托管 87,543、交易所钱包 29,213(页面只分这两栏;分链构成只在 GitHub 快照 CSV 上,该 CSV 仍停在 08-01,见 §6.2 第 8 条),与直读 11,116 在同一量级;Binance −22% 与 OKX −43% 主要是页面含多链与地址集不同(Binance 自报为 11-04 期,相隔 19 天;OKX 为 11 月期)。</li>
+<li>新增的"直读原生 ETH"只计以太坊主网地址上的原生 ETH(不含 stETH 等凭证与 L2),脚本 <code>tools/eth_native_units.py</code>,09-05 补读;自报 ETH 钱包是<strong>全链口径</strong>(含 L2、质押凭证与托管),所以"直读原生 − 自报钱包"普遍为负,只作参照,不按 §3.1 的红标规则判。例:HTX 09-01 自报钱包 116,757 中托管 87,543、交易所钱包 29,213(页面只分这两栏;分链构成见 GitHub 快照 CSV:09-01 版交易所钱包 29,213 全部是 stETH,11-01 版为 stETH 29,334 + 原生 ETH 284,§6.2 第 4 条),与直读 11,116 在同一量级;Binance −22% 与 OKX −43% 主要是页面含多链与地址集不同(Binance 自报为 11-04 期,相隔 19 天;OKX 为 11 月期)。</li>
 </ul>
 <h3 id="3-3-tron-链-trongrid-getaccount-含四项质押-usdt-trc20-直读">3.3 Tron 链(trongrid <code>getaccount</code> 含四项质押 + USDT-TRC20 直读)</h3>
 <div class="tbl"><table>
@@ -917,7 +917,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </tr>
 <tr>
 <td>规模与持有(一手)</td>
-<td>HTX 自有钱包 USDT 中 73% 是 stUSDT(39.55M;⚠ 该构成来自 08-01 的分链快照,09-01 的分链数据 HTX 尚未发布,§6.2);Poloniex 快照 sUSDS 912.6M、stETH 247.8k(§7);Binance WBETH $8.4B;aEthUSDT 池 09-03 链上:总供给 ≈$29.5 亿、池内现金 $2.36 亿、利用率 92%(<a href="https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a">https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a</a>)</td>
+<td>HTX 自有钱包 USDT 中约 95% 是 stUSDT(09-01 版 GitHub 快照:39.55M ÷ 41.46M;11-01 版:35.85M ÷ 37.76M;§6.2);Poloniex 快照 sUSDS 912.6M、stETH 247.8k(§7);Binance WBETH $8.4B;aEthUSDT 池 09-03 链上:总供给 ≈$29.5 亿、池内现金 $2.36 亿、利用率 92%(<a href="https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a">https://etherscan.io/token/0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a</a>)</td>
 </tr>
 <tr>
 <td>可核性</td>
@@ -1112,39 +1112,39 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 <tbody>
 <tr>
 <td>1</td>
-<td><strong>USDT 自有钱包只覆盖负债 4.8%,93% 的 USDT 储备在第三方托管</strong></td>
-<td>09-01 页面:负债 872.3M;自有钱包 <strong>41.46M</strong>(÷ 负债 = 4.8%);托管 546.87M(占 USDT 储备 93%)。⚠ 自有钱包的分链构成(08-01:USDT-TRC20 13.24M + USDT-ERC20 1.05M + stUSDT 39.55M,即 73% 是 JustLend 凭证)只在 GitHub CSV 上,09-01 版尚未发布。官方 USDT-TRC20 5 址链上 09-14:<strong>1.91M</strong></td>
-<td>HTX PoR 页 "USDs" 明细;GitHub 快照 CSV;<code>--chain tron --ex htx</code>(<code>tron_por</code> 项)</td>
+<td><strong>USDT 自有钱包只覆盖负债 4.8%(09-01),93% 的 USDT 储备在第三方托管;11-01 储备侧 USDT 总量降到 2.36 亿</strong></td>
+<td>09-01 页面:负债 872.3M;自有钱包 <strong>41.46M</strong>(÷ 负债 = 4.8%);托管 546.87M(占 USDT 储备 93%)。自有钱包的分链构成(09-01 版 GitHub CSV):USDT-TRC20 1.91M + stUSDT 39.55M,即 95% 是 JustLend 凭证。<strong>11-01 版 CSV(11-10 推送,只有储备侧)</strong>:USDT 合计 235.71M(09-01 为 588.33M,−60%)= USDT-TRC20 1.91M + stUSDT 35.85M + ThirdParty 197.95M(占 84%)。⚠ 11-01 的负债侧只在官方页面上,本报告未取得该期页面,故不计算 11-01 的覆盖率。官方 USDT-TRC20 地址链上 11-23:<strong>1.91M</strong></td>
+<td>HTX PoR 页 "USDs" 明细(09-01 另存);GitHub 快照 CSV(09-01、11-01 两版);<code>--chain tron --ex htx</code>(<code>tron_por</code> 项)</td>
 </tr>
 <tr>
 <td>2</td>
-<td><strong>18.1% 储备在托管方未在页面披露的第三方托管</strong></td>
-<td>2026-06-01 起新设类别;09-01 含 USDT 546.9M、USDC 239.4M、ETH 87,543、BTC 1,689、USDD 6.9M、U 17.9M、SOL 1,833、HTX 币 3,018 亿枚;Binance 同口径 0.9%、OKX 2.6%</td>
-<td>HTX PoR 页 "Custodial Wallets" 栏</td>
+<td><strong>18.1% 储备在托管方未在页面披露的第三方托管(09-01);11-01 储备侧按本方计价约 15.7%</strong></td>
+<td>2026-06-01 起新设类别;09-01 含 USDT 546.9M、USDC 239.4M、ETH 87,543、BTC 1,689、USDD 6.9M、U 17.9M、SOL 1,833、HTX 币 3,018 亿枚;Binance 同口径 0.9%、OKX 2.6%。<strong>11-01 版 CSV 的 ThirdParty 行</strong>:USDT 197.95M、USDC 352.40M(USDC 储备 352.66M 的 99.9%)、ETH 80,835、BTC 1,678、USDD 10.04M、U 26.90M、SOL 385,644(09-01 为 1,833;11-01 交易所钱包 SOL 只剩 1,144)、HTX 币 5,178 亿枚。按币安 10-31 16:00 UTC 小时开盘价(HTX 币用 HTX 日线开盘价)折算,ThirdParty 约 $0.94B ÷ 储备约 $5.96B ≈ <strong>15.7%</strong>(本方计价,非页面数 ⚠)</td>
+<td>HTX PoR 页 "Custodial Wallets" 栏(09-01);GitHub 快照 CSV(11-01 版)</td>
 </tr>
 <tr>
 <td>3</td>
-<td><strong>BTC 储备 51% 是 Poloniex 发行的 BTC-TRC20,公布地址与 PoR 页面上未发现对应抵押物(链上检索不能证否)</strong></td>
-<td>09-01 自报 BTC 20,252 = 交易所钱包 18,563 + 托管 1,689;BTC-TRC20 链上 09-14 为 <strong>10,334 枚 = 自报储备的 51%</strong>;11 个公布地址直读原生 8,203 = 用户负债 19,498 的 <strong>42.1%</strong></td>
-<td><code>--chain btc,tron --ex htx</code>;BTC-TRC20 见 §7.2</td>
+<td><strong>BTC 储备约一半是 Poloniex 发行的 BTC-TRC20(09-01 为 51%,11-01 为 52.6%),公布地址与 PoR 页面上未发现对应抵押物(链上检索不能证否)</strong></td>
+<td>09-01 自报 BTC 20,252 = 交易所钱包 18,563 + 托管 1,689;BTC-TRC20 链上 09-14 为 10,334 枚 = 自报储备的 51%;11 个公布地址直读原生 8,203 = 用户负债 19,498 的 <strong>42.1%</strong>。<strong>11-01 版 CSV</strong>:BTC 合计 19,711.79 = 原生 BTC 7,498.83 + BTC-TRC20 <strong>10,365.93(52.6%)</strong> + jWBTC 89 + Solana 链 BTC 80 + ThirdParty 1,678.04。链上 11-23:BTC-TRC20 10,331 枚,官方 7 址原生 BTC 7,461 枚</td>
+<td><code>--chain btc,tron --ex htx</code>;GitHub 快照 CSV;BTC-TRC20 见 §7.2</td>
 </tr>
 <tr>
 <td>4</td>
-<td><strong>ETH 储备 75.0% 在托管,链上可核 25.0%</strong></td>
-<td>09-01 页面:用户 114,984 / HTX 116,757 / 交易所钱包 29,213 / 托管 87,543;PoR 11 址链上 09-14 读到 <strong>$67.4M</strong>(其中原生 ETH 仅 61.6 枚,余为 stETH 等凭证)</td>
-<td><code>--chain eth --ex htx</code>(<code>eth_por</code> 项)</td>
+<td><strong>ETH 储备约四分之三在托管(09-01 为 75.0%,11-01 为 73.2%),交易所钱包里几乎全是 stETH</strong></td>
+<td>09-01 页面:用户 114,984 / HTX 116,757 / 交易所钱包 29,213 / 托管 87,543;同日 CSV 显示交易所钱包 29,213 全部是 stETH。<strong>11-01 版 CSV</strong>:ETH 合计 110,453.18 = stETH 29,334.18 + 原生 ETH 283.90 + ThirdParty 80,835.10。PoR 11 址链上 11-23 读到 <strong>$57.2M</strong>(其中 stETH $50.7M,原生 ETH 134 枚)</td>
+<td><code>--chain eth --ex htx</code>(<code>eth_por</code> 项);GitHub 快照 CSV</td>
 </tr>
 <tr>
 <td>5</td>
-<td><strong>TRX 占储备 47%,69% 质押中,而全市场盘口装不下它的 1%</strong></td>
-<td>18 址持 9.75B TRX = 供给 10.3%(可用 3.01B + 质押中 6.73B,质押占 69%,09-14 直读);09-01 用户 TRX 负债 8.62B ⇒ 即时可付 <strong>35%</strong>;十所现货 ±2% 深度合计 $17.6M,HTX 持仓 $3.2B</td>
-<td>trongrid <code>getaccount</code>;各所深度接口</td>
+<td><strong>TRX 占储备 47%(09-01;11-01 按本方计价约 49%),69% 质押中,而全市场盘口装不下它的 1%</strong></td>
+<td>18 址持 9.76B TRX(可用 3.03B + 质押中 6.73B,质押占 69%,11-23 直读;09-14 为 9.75B = 供给 10.3%);11-01 版 CSV 自报 TRX 9,384.2M = TRX 8,461.8M + jsTRX 922.5M(与 09-01 的 9,384.2M 基本相同);09-01 用户 TRX 负债 8.62B ⇒ 即时可付 <strong>35%</strong>;十所现货 ±2% 深度合计 $17.6M,HTX 持仓 $3.2B(09-14 实测,§8)</td>
+<td>trongrid <code>getaccount</code>;GitHub 快照 CSV;各所深度接口</td>
 </tr>
 <tr>
 <td>6</td>
-<td><strong>平台币 HTX 计入储备 6.1%,自报交易所钱包等于其供给的 23.2%,仅本所有成交</strong></td>
-<td>Tron 主链 totalSupply <strong>999.99 万亿枚</strong>(2026-09-07 合约直读);09-01 页面自报交易所钱包 <strong>231.76 万亿枚 = 供给的 23.2%</strong>,另托管 3,018 亿枚 —— 这与上期"自持约 23%"一致,同时确认上期"18 址持 2.31 万亿"是量级笔误(2.31/1000 = 0.23%,差 100 倍),已撤回。⚠ 该 23.2% 为<strong>自报</strong>,持币地址仍不在本报告的 TRX 冷钱包清单内,链上逐址核对未完成;Binance/OKX 未上市,五家挂牌所日成交 $0–5 万;九所无永续</td>
-<td>Tron JSON-RPC;各所行情接口</td>
+<td><strong>平台币 HTX 计入储备 6.1%(09-01),自报交易所钱包等于其供给的 23.2%,仅本所有成交</strong></td>
+<td>Tron 主链 totalSupply <strong>999.99 万亿枚</strong>(2026-09-07 合约直读);09-01 页面自报交易所钱包 <strong>231.76 万亿枚 = 供给的 23.2%</strong>,另托管 3,018 亿枚 —— 这与上期"自持约 23%"一致,同时确认上期"18 址持 2.31 万亿"是量级笔误(2.31/1000 = 0.23%,差 100 倍),已撤回。<strong>11-01 版 CSV</strong>:HTX 币合计 222.28 万亿枚(较 09-01 的 232.06 万亿 −4.2%)= HTX-TRC20 221.76 万亿 + ThirdParty 5,178 亿;09-01 版里的 HTX-ERC20 一行(3,861 亿枚)在 11-01 版中已不存在。totalSupply 本次未重读 ⚠。⚠ 上述占比为<strong>自报</strong>,持币地址仍不在本报告的 TRX 冷钱包清单内,链上逐址核对未完成;Binance/OKX 未上市,五家挂牌所日成交 $0–5 万;九所无永续</td>
+<td>Tron JSON-RPC;GitHub 快照 CSV;各所行情接口</td>
 </tr>
 <tr>
 <td>7</td>
@@ -1154,9 +1154,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 </tr>
 <tr>
 <td>8</td>
-<td>页面自洽,但可核部分不到一半;本期还少了一条交叉源</td>
-<td>09-01 页面 BTC / ETH 储备率 104% / 102%,链上能证明"确实是那个币"的部分分别为 <strong>42.5% / 25.0%</strong>。⚠ <strong>本期无法做"页面 ↔ GitHub 快照逐格核对"</strong>:GitHub 的 <code>huobi_por.csv</code> 仍是 08-01 快照(HTX 一贯在快照后约 11 天推送,08-01 版是 08-12 推的),09-01 版预计 09-12 前后;上期(08-01)四个数逐格对上</td>
-<td>本报告 §3、§5</td>
+<td>页面与 GitHub 快照逐格对得上,但链上可核部分不到一半;最新一期缺负债侧</td>
+<td>09-01 页面 BTC / ETH 储备率 104% / 102%,链上能证明"确实是那个币"的部分分别为 <strong>42.5% / 25.0%</strong>。<strong>页面 ↔ GitHub 快照逐格核对(09-01 期)</strong>:BTC 20,252 / 20,252.35、ETH 116,757 / 116,757.07、TRX 9,384,209,885 / 9,384,209,885.72、USDT 588,327,863 / 588,327,863.60、HTX 币、XRP、DOGE、SOL 八项全部一致。<strong>更正</strong>:此前本条与第 1 条写"GitHub 的 <code>huobi_por.csv</code> 仍停在 08-01 快照",该表述自 09-07 起已不成立——HTX 在 09-07/09-08 推送了 09-01 版,10-14 推送 10-01 版,11-10 推送 11-01 版(提交信息 <code>upgrade merkle_proof_20261101</code>);本报告直到 11-23 才据此改写。⚠ GitHub CSV 只有储备侧;11-01 期的负债与储备率只在官方页面上,本报告未取得该期页面,<strong>11-01 期的储备率与"仅自有钱包 ÷ 负债"无法计算</strong></td>
+<td>本报告 §3、§5;GitHub <code>huobiapi/Tool-Node.js-VerifyAddress</code> 提交记录</td>
 </tr>
 </tbody>
 </table></div>
@@ -1574,5 +1574,5 @@ python3 tools/por_fetch.py                                                      
 
 </main>
 </div>
-<footer class="site-foot"><div class="foot-in"><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="./">历次版本存档</a></span><span>页面生成 2026-11-23 09:32 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span>支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)</span></div></footer>
+<footer class="site-foot"><div class="foot-in"><span>源码与数据: <a href="https://github.com/ronfi/cex-reserves">github.com/ronfi/cex-reserves</a></span><span><a href="./">历次版本存档</a></span><span>页面生成 2026-11-23 10:25 UTC</span><span>内容 CC BY-NC-ND 4.0 · 脚本 MIT</span><span>支持本项目:地址只以 <a href="https://github.com/ronfi/cex-reserves/blob/main/DONATE.md">DONATE.md(main 分支)</a>为准,其他地方看到的地址请勿使用</span><span id="busuanzi_container_page_pv" style="display:none">本页访问 <span id="busuanzi_value_page_pv"></span> 次(计数由第三方脚本 busuanzi 提供)</span></div></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
